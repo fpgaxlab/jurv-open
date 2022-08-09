@@ -1,0 +1,65 @@
+# A gitignore for Altera Quartus and Xilinx Vivado.
+
+
+# ignore Quartus generated folders
+*_sim/
+db/
+greybox_tmp/
+incremental_db/
+simulation/
+# testbench
+timing/
+
+# ignore Quartus generated files
+*_generation_script*
+*_inst.vhd
+*.bak
+*.cmp
+*.done
+*.eqn
+*.hex
+*.html
+*.jdi
+*.mif
+*.pin
+*.pof
+*.ptf.*
+*.qar
+*.qarlog
+*.qws
+*.rbf
+*.rpt
+*.sld
+*.smsg
+*.sof
+*.sopc_builder
+*.summary
+*_description.txt
+*~
+*example*
+*sopc_*
+# The generated PLL specification file
+PLLJ_PLLSPE_INFO.txt
+
+# ignore Vivado generated folders
+.Xil/
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+
+# ignore Vivado generated files
+*.jou
+*.log
+
+
+# Need to keep all HDL files and timing constraint files
+# !*.vhd
+# !*.v  
+# !*.vh  
+# !*.sv  
+# !*.svh
+# !*.sdc
+# !*.tcl
