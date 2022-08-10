@@ -26,10 +26,12 @@ module LabBoard_TOP(
     // Logic level settings of actual component
     // The logic level when the actual button is loosened
     localparam ButtonReleaseLevel = {N_BTN{1'b0}}; 
-    // The logical level of the lit segment of actual component
+    // Logic level of the lit segment of actual component
     localparam LightLevelOfSevenSeg = {8{1'b0}}; 
-    // The logical level when the actual LED is not lit   
+    // Logic level when the actual LED is not lit   
     localparam DarkLevelOfLED = {N_LED{1'b0}};       
+    // Logic level when the switch is turned down
+    localparam DownLevelOfSwitch = {N_SW{1'b0}};
 
     // Actual components connected to virtual components
     assign LEDR[15:0] = vLED[15:0] ^ DarkLevelOfLED[15:0];
@@ -41,9 +43,7 @@ module LabBoard_TOP(
     wire CLK_50M, CLK_10M, CLK_1M;
     pll clock_pll(
         .inclk0 (CLOCK_50),
-        .c0 (CLK_50M), //50MHz
-        .c1 (CLK_10M), //10MHz
-        .c2 (CLK_1M)   //1MHz
+        .c0 (CLK_10M)  //10MHz
     );
     wire CLOCK = CLK_10M; 
 

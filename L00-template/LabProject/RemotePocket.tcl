@@ -17,6 +17,9 @@ set_global_assignment -name GENERATE_RBF_FILE ON
 set_global_assignment -name ON_CHIP_BITSTREAM_DECOMPRESSION OFF
 set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
 
+# 并行编译可使用的最大处理器数
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+
 #复位引脚  
 # RESET按键
 set_location_assignment PIN_110  -to RESET_N
@@ -48,8 +51,6 @@ set_location_assignment	PIN_55	-to LEDR[12]
 set_location_assignment	PIN_58	-to LEDR[13]
 set_location_assignment	PIN_59	-to LEDR[14]
 set_location_assignment	PIN_60	-to LEDR[15]
-#set_location_assignment	PIN_L9	-to LEDR[16]
-#set_location_assignment	PIN_K9	-to LEDR[17]
 
 set_location_assignment	PIN_65	-to LEDG[0]
 set_location_assignment	PIN_66	-to LEDG[1]
@@ -59,7 +60,6 @@ set_location_assignment	PIN_69	-to LEDG[4]
 set_location_assignment	PIN_70	-to LEDG[5]
 set_location_assignment	PIN_71	-to LEDG[6]
 set_location_assignment	PIN_72	-to LEDG[7]
-#set_location_assignment	PIN_L16	-to LEDG[8]
 
 #按键对应的引脚
 set_location_assignment	PIN_34	 -to KEY[0]
@@ -67,55 +67,38 @@ set_location_assignment	PIN_33	 -to KEY[1]
 set_location_assignment	PIN_32   -to KEY[2]
 set_location_assignment	PIN_31   -to KEY[3]
 
-set_location_assignment	PIN_30   -to SW[0]
-set_location_assignment	PIN_28   -to SW[1]
-set_location_assignment	PIN_11   -to SW[2]
-set_location_assignment	PIN_10   -to SW[3]
-set_location_assignment	PIN_7    -to SW[4]
-set_location_assignment	PIN_3    -to SW[5]
-set_location_assignment	PIN_2    -to SW[6]
-set_location_assignment	PIN_1    -to SW[7]
-#set_location_assignment	PIN_E11  -to SW[8]
-#set_location_assignment	PIN_C14  -to SW[9]
-#set_location_assignment	PIN_D14  -to SW[10]
-#set_location_assignment	PIN_F11  -to SW[11]
-#set_location_assignment	PIN_F13  -to SW[12]
-#set_location_assignment	PIN_F14  -to SW[13]
-#set_location_assignment	PIN_F9   -to SW[14]
-#set_location_assignment	PIN_G11  -to SW[15]
-#set_location_assignment	PIN_J11  -to SW[16]
-#set_location_assignment	PIN_J12  -to SW[17]
+#开关对应的引脚
+# set_location_assignment	PIN_30   -to SW[0]
+# set_location_assignment	PIN_28   -to SW[1]
+# set_location_assignment	PIN_11   -to SW[2]
+# set_location_assignment	PIN_10   -to SW[3]
+# set_location_assignment	PIN_7    -to SW[4]
+# set_location_assignment	PIN_3    -to SW[5]
+# set_location_assignment	PIN_2    -to SW[6]
+# set_location_assignment	PIN_1    -to SW[7]
 
 #数码管对应的引脚
 #数码管7段+小数点
-set_location_assignment	PIN_98	-to SEG[0]
-set_location_assignment	PIN_99	-to SEG[1]
-set_location_assignment	PIN_100	-to SEG[2]
-set_location_assignment	PIN_101	-to SEG[3]
-set_location_assignment	PIN_103	-to SEG[4]
-set_location_assignment	PIN_104	-to SEG[5]
-set_location_assignment	PIN_105	-to SEG[6]
-set_location_assignment	PIN_106	-to SEG[7]
-
-#set_location_assignment	PIN_G1	-to DISP1_SEG[0]
-#set_location_assignment	PIN_F1	-to DISP1_SEG[1]
-#set_location_assignment	PIN_B3	-to DISP1_SEG[2]
-#set_location_assignment	PIN_B1	-to DISP1_SEG[3]
-#set_location_assignment	PIN_C2	-to DISP1_SEG[4]
-#set_location_assignment	PIN_F2	-to DISP1_SEG[5]
-#set_location_assignment	PIN_G2	-to DISP1_SEG[6]
-#set_location_assignment	PIN_A2	-to DISP1_SEG[7]
+# set_location_assignment	PIN_98	-to SEG[0]
+# set_location_assignment	PIN_99	-to SEG[1]
+# set_location_assignment	PIN_100	-to SEG[2]
+# set_location_assignment	PIN_101	-to SEG[3]
+# set_location_assignment	PIN_103	-to SEG[4]
+# set_location_assignment	PIN_104	-to SEG[5]
+# set_location_assignment	PIN_105	-to SEG[6]
+# set_location_assignment	PIN_106	-to SEG[7]
 
 #8位数码管的8个控制位
-set_location_assignment	PIN_73	-to SEL[0]
-set_location_assignment	PIN_74	-to SEL[1]
-set_location_assignment	PIN_75  -to SEL[2]
-set_location_assignment	PIN_76	-to SEL[3]
-set_location_assignment	PIN_84	-to SEL[4] 
-set_location_assignment	PIN_85	-to SEL[5]
-set_location_assignment	PIN_86	-to SEL[6]
-set_location_assignment	PIN_87	-to SEL[7]
+# set_location_assignment	PIN_73	-to SEL[0]
+# set_location_assignment	PIN_74	-to SEL[1]
+# set_location_assignment	PIN_75  -to SEL[2]
+# set_location_assignment	PIN_76	-to SEL[3]
+# set_location_assignment	PIN_84	-to SEL[4] 
+# set_location_assignment	PIN_85	-to SEL[5]
+# set_location_assignment	PIN_86	-to SEL[6]
+# set_location_assignment	PIN_87	-to SEL[7]
 
+# 弱上拉
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTMS
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTDI
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTDO
