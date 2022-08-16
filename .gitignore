@@ -9,6 +9,7 @@ incremental_db/
 simulation/
 # testbench
 timing/
+output/
 
 # ignore Quartus generated files
 *_generation_script*
@@ -27,8 +28,8 @@ timing/
 *.qar
 *.qarlog
 *.qws
-*.rbf
-*.rpt
+# *.rbf
+# *.rpt
 *.sld
 *.smsg
 *.sof
