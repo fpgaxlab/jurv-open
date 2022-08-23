@@ -1,6 +1,7 @@
 .data
     .word 1,3,5,7,9
 .text
+    lui x3, 0x10000
     add x9, x3, x0  
     add x10, x0, x0 
     add x11, x0, x0 
