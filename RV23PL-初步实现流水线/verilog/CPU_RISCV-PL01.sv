@@ -191,17 +191,17 @@ module CPU
         wd.WD13 = aluOut_ex;
         wd.WD12 = immData_id;
         wd.WD11 = regReadData1_id;
-        wd.WD10 = instr_if;
-        wd.WD9  = nextPC;          
-        wd.WD8  = aluOut_mem;      
-        wd.WD7  = immData_ex;      
-        wd.WD6  = regReadData1_ex; 
-        wd.WD5  = ra2;             
-        wd.WD4  = ra1;             
+        wd.WD10 = instr_id;
+        wd.WD9  = aluOut_mem;               
+        wd.WD8  = immData_ex;      
+        wd.WD7  = regReadData1_ex; 
+        wd.WD6  = ra2;             
+        wd.WD5  = ra1;             
+        wd.WD4  = regWriteData_wb;        
         wd.WD3  = wa_wb;           
-        wd.WD2  = instr_id;        
-        wd.WD1  = pc_if;           
-        wd.WD0  = regWriteData_wb;
+        wd.WD2  = instr_if;        
+        wd.WD1  = pc_if;    
+        wd.WD0  = nextPC;
     end
     
     // 调试器部分，请勿修改！
