@@ -1,0 +1,103 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2020  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+# Date created = 12:18:15  August 21, 2022
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		RV_Pocket_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE6E22C8
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:18:15  AUGUST 21, 2022"
+set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
+set_global_assignment -name VERILOG_FILE RV_Pocket.v
+set_global_assignment -name VERILOG_FILE ../common/WatchChain.sv
+set_global_assignment -name QIP_FILE ../common/pll.qip
+set_global_assignment -name QIP_FILE ../common/GlobalCLK.qip
+set_global_assignment -name QXP_FILE ../common/JuTAG_RISCV.qxp
+set_global_assignment -name SDC_FILE RemotePocket.sdc
+set_global_assignment -name TOP_LEVEL_ENTITY RV_Pocket
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name ENABLE_INIT_DONE_OUTPUT OFF
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED"
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DATA0_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DATA1_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_FLASH_NCE_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DCLK_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY ./output
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_global_assignment -name ON_CHIP_BITSTREAM_DECOMPRESSION OFF
+set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+set_location_assignment PIN_110 -to RESET_N
+set_location_assignment PIN_125 -to JTCK
+set_location_assignment PIN_127 -to JTMS
+set_location_assignment PIN_120 -to JTDI
+set_location_assignment PIN_119 -to JTDO
+set_location_assignment PIN_88 -to CLOCK_50
+set_location_assignment PIN_38 -to LEDR[0]
+set_location_assignment PIN_39 -to LEDR[1]
+set_location_assignment PIN_42 -to LEDR[2]
+set_location_assignment PIN_43 -to LEDR[3]
+set_location_assignment PIN_44 -to LEDR[4]
+set_location_assignment PIN_46 -to LEDR[5]
+set_location_assignment PIN_49 -to LEDR[6]
+set_location_assignment PIN_50 -to LEDR[7]
+set_location_assignment PIN_51 -to LEDR[8]
+set_location_assignment PIN_52 -to LEDR[9]
+set_location_assignment PIN_53 -to LEDR[10]
+set_location_assignment PIN_54 -to LEDR[11]
+set_location_assignment PIN_55 -to LEDR[12]
+set_location_assignment PIN_58 -to LEDR[13]
+set_location_assignment PIN_59 -to LEDR[14]
+set_location_assignment PIN_60 -to LEDR[15]
+set_location_assignment PIN_65 -to LEDG[0]
+set_location_assignment PIN_66 -to LEDG[1]
+set_location_assignment PIN_67 -to LEDG[2]
+set_location_assignment PIN_68 -to LEDG[3]
+set_location_assignment PIN_69 -to LEDG[4]
+set_location_assignment PIN_70 -to LEDG[5]
+set_location_assignment PIN_71 -to LEDG[6]
+set_location_assignment PIN_72 -to LEDG[7]
+set_location_assignment PIN_34 -to KEY[0]
+set_location_assignment PIN_33 -to KEY[1]
+set_location_assignment PIN_32 -to KEY[2]
+set_location_assignment PIN_31 -to KEY[3]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTMS
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTDI
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTDO
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"

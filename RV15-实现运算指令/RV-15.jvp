@@ -1,0 +1,1034 @@
+{
+	"name": "单周期 RISC-V 运算指令",
+	"description": "",
+	"flag": "jsonvirtualpanel",
+	"version": "1.2.4",
+	"components": [
+		{
+			"description": "",
+			"index": 0,
+			"key": 0,
+			"position": {
+				"x": -152,
+				"y": 123
+			},
+			"type": "text",
+			"value": "Instruction"
+		},
+		{
+			"description": "NextPC",
+			"index": 0,
+			"key": 1,
+			"position": {
+				"x": -378,
+				"y": -105
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "PC",
+			"index": 1,
+			"key": 2,
+			"position": {
+				"x": -297,
+				"y": -105
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "Instruction",
+			"index": 2,
+			"key": 3,
+			"position": {
+				"x": -168,
+				"y": -105
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "WA",
+			"index": 3,
+			"key": 4,
+			"position": {
+				"x": -100,
+				"y": -107
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 5,
+				"color": "gray",
+				"data": "00",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "RegWriteData",
+			"index": 4,
+			"key": 5,
+			"position": {
+				"x": 16,
+				"y": -176
+			},
+			"type": "data",
+			"value": {
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false,
+				"bitWidth": 32
+			}
+		},
+		{
+			"description": "RA1",
+			"index": 5,
+			"key": 6,
+			"position": {
+				"x": -100,
+				"y": -79
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 5,
+				"color": "gray",
+				"data": "00",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "RA2",
+			"index": 6,
+			"key": 7,
+			"position": {
+				"x": -100,
+				"y": -51
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 5,
+				"color": "gray",
+				"data": "00",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "RD1",
+			"index": 7,
+			"key": 8,
+			"position": {
+				"x": 16,
+				"y": -139
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "RD2/MDI",
+			"index": 8,
+			"key": 9,
+			"position": {
+				"x": 40,
+				"y": -101
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": true
+			}
+		},
+		{
+			"description": "Immediate",
+			"index": 9,
+			"key": 10,
+			"position": {
+				"x": 1,
+				"y": 6
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "RegWrite",
+			"index": 0,
+			"key": 11,
+			"position": {
+				"x": -52,
+				"y": 123
+			},
+			"type": "signal",
+			"value": {
+				"data": "0",
+				"color": "gray",
+				"isVertical": false,
+				"bitWidth": 1,
+				"placement": "top"
+			}
+		},
+		{
+			"description": "ImmToALU",
+			"index": 1,
+			"key": 12,
+			"position": {
+				"x": 65,
+				"y": 122
+			},
+			"type": "signal",
+			"value": {
+				"data": "0",
+				"color": "gray",
+				"isVertical": false,
+				"bitWidth": 1,
+				"placement": "top"
+			}
+		},
+		{
+			"description": "JUBSI",
+			"index": 2,
+			"key": 13,
+			"position": {
+				"x": -89,
+				"y": 123
+			},
+			"type": "signal",
+			"value": {
+				"data": "00000",
+				"color": "gray",
+				"isVertical": false,
+				"bitWidth": 5,
+				"placement": "top"
+			}
+		},
+		{
+			"description": "ALUop",
+			"index": 3,
+			"key": 14,
+			"position": {
+				"x": 157,
+				"y": 123
+			},
+			"type": "signal",
+			"value": {
+				"data": "0000",
+				"color": "gray",
+				"isVertical": false,
+				"bitWidth": 4,
+				"placement": "top"
+			}
+		}
+	],
+	"buttonChainLength": 20,
+	"switchChainLength": 36,
+	"ledChainLength": 36,
+	"sstubeChainLength": 64,
+	"backgroundSize": {
+		"x": 1019,
+		"y": 479
+	},
+	"backgroundImage": "data:image/png;base64,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",
+	"switchSize": {
+		"x": 22,
+		"y": 44
+	},
+	"buttonSize": {
+		"x": 32,
+		"y": 32
+	},
+	"ledSize": {
+		"x": 16,
+		"y": 16
+	},
+	"sstubeSize": {
+		"x": 20,
+		"y": 30
+	},
+	"textFontSize": 12,
+	"dataFontSize": 10,
+	"signalFontSize": 12,
+	"panelSize": {
+		"x": 1019,
+		"y": 479
+	},
+	"cpu": {
+		"busInfo": {
+			"nodeInfo": [],
+			"numberofbus": 0,
+			"numberofsegment": 0
+		},
+		"cpuInfo": {
+			"cpuCM": "0/4",
+			"cpuFunction": "reset/MIS",
+			"cpuMM": "0/4/32/32",
+			"cpuWindow": "MM/IM/runlog",
+			"pathWidth": 5,
+			"tracking": [
+				-1,
+				1,
+				-1
+			]
+		},
+		"cpuName": "RISC-V",
+		"cpuVersion": "1.2.3",
+		"dataPathInfo": [
+			{
+				"key": 0,
+				"linePath": [],
+				"lineWidth": null
+			},
+			{
+				"key": 1,
+				"linePath": [
+					{
+						"x": 50,
+						"y": 149
+					},
+					{
+						"x": 65,
+						"y": 149
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 2,
+				"linePath": [
+					{
+						"x": 52,
+						"y": 309
+					},
+					{
+						"x": 52,
+						"y": 175
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 3,
+				"linePath": [
+					{
+						"x": 52,
+						"y": 175
+					},
+					{
+						"x": 65,
+						"y": 175
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 4,
+				"linePath": [
+					{
+						"x": 91,
+						"y": 160
+					},
+					{
+						"x": 102,
+						"y": 160
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 5,
+				"linePath": [
+					{
+						"x": 345,
+						"y": 140
+					},
+					{
+						"x": 400,
+						"y": 140
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 6,
+				"linePath": [
+					{
+						"x": 400,
+						"y": 140
+					},
+					{
+						"x": 400,
+						"y": 261
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 7,
+				"linePath": [
+					{
+						"x": 400,
+						"y": 261
+					},
+					{
+						"x": 417,
+						"y": 261
+					}
+				],
+				"lineWidth": 4
+			},
+			{
+				"key": 8,
+				"linePath": [
+					{
+						"x": 529,
+						"y": 195
+					},
+					{
+						"x": 555,
+						"y": 195
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 9,
+				"linePath": [
+					{
+						"x": 529,
+						"y": 106
+					},
+					{
+						"x": 668,
+						"y": 106
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 10,
+				"linePath": [
+					{
+						"x": 410,
+						"y": 69
+					},
+					{
+						"x": 410,
+						"y": 108
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 11,
+				"linePath": [
+					{
+						"x": 475,
+						"y": 251
+					},
+					{
+						"x": 581,
+						"y": 251
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 12,
+				"linePath": [
+					{
+						"x": 555,
+						"y": 195
+					},
+					{
+						"x": 555,
+						"y": 140
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 13,
+				"linePath": [
+					{
+						"x": 555,
+						"y": 140
+					},
+					{
+						"x": 592,
+						"y": 140
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 14,
+				"linePath": [
+					{
+						"x": 581,
+						"y": 251
+					},
+					{
+						"x": 581,
+						"y": 167
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 15,
+				"linePath": [
+					{
+						"x": 581,
+						"y": 167
+					},
+					{
+						"x": 592,
+						"y": 167
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 16,
+				"linePath": [
+					{
+						"x": 581,
+						"y": 251
+					},
+					{
+						"x": 581,
+						"y": 309
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 17,
+				"linePath": [
+					{
+						"x": 581,
+						"y": 309
+					},
+					{
+						"x": 52,
+						"y": 309
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 18,
+				"linePath": [
+					{
+						"x": 590,
+						"y": 195
+					},
+					{
+						"x": 774,
+						"y": 195
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 19,
+				"linePath": [
+					{
+						"x": 619,
+						"y": 153
+					},
+					{
+						"x": 668,
+						"y": 153
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 20,
+				"linePath": [
+					{
+						"x": 713,
+						"y": 130
+					},
+					{
+						"x": 756,
+						"y": 130
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 21,
+				"linePath": [
+					{
+						"x": 756,
+						"y": 130
+					},
+					{
+						"x": 756,
+						"y": 168
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 22,
+				"linePath": [
+					{
+						"x": 756,
+						"y": 130
+					},
+					{
+						"x": 881,
+						"y": 130
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 23,
+				"linePath": [
+					{
+						"x": 756,
+						"y": 168
+					},
+					{
+						"x": 774,
+						"y": 168
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 24,
+				"linePath": [
+					{
+						"x": 846,
+						"y": 195
+					},
+					{
+						"x": 895,
+						"y": 195
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 25,
+				"linePath": [
+					{
+						"x": 881,
+						"y": 130
+					},
+					{
+						"x": 881,
+						"y": 168
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 26,
+				"linePath": [
+					{
+						"x": 881,
+						"y": 168
+					},
+					{
+						"x": 895,
+						"y": 168
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 27,
+				"linePath": [
+					{
+						"x": 881,
+						"y": 130
+					},
+					{
+						"x": 968,
+						"y": 130
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 28,
+				"linePath": [
+					{
+						"x": 968,
+						"y": 130
+					},
+					{
+						"x": 968,
+						"y": 69
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 29,
+				"linePath": [
+					{
+						"x": 968,
+						"y": 69
+					},
+					{
+						"x": 413,
+						"y": 69
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 30,
+				"linePath": [
+					{
+						"x": 410,
+						"y": 108
+					},
+					{
+						"x": 430,
+						"y": 108
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 31,
+				"linePath": [
+					{
+						"x": 138,
+						"y": 142
+					},
+					{
+						"x": 185,
+						"y": 142
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 32,
+				"linePath": [
+					{
+						"x": 214,
+						"y": 142
+					},
+					{
+						"x": 262,
+						"y": 142
+					}
+				],
+				"lineWidth": 5
+			},
+			{
+				"key": 33,
+				"linePath": [
+					{
+						"x": 230,
+						"y": 140
+					},
+					{
+						"x": 230,
+						"y": 72
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 34,
+				"linePath": [
+					{
+						"x": 230,
+						"y": 72
+					},
+					{
+						"x": 79,
+						"y": 72
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 35,
+				"linePath": [
+					{
+						"x": 79,
+						"y": 72
+					},
+					{
+						"x": 79,
+						"y": 118
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 36,
+				"linePath": [
+					{
+						"x": 79,
+						"y": 118
+					},
+					{
+						"x": 102,
+						"y": 118
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 37,
+				"linePath": [
+					{
+						"x": 400,
+						"y": 165
+					},
+					{
+						"x": 430,
+						"y": 165
+					}
+				],
+				"lineWidth": 3
+			},
+			{
+				"key": 38,
+				"linePath": [
+					{
+						"x": 400,
+						"y": 194
+					},
+					{
+						"x": 430,
+						"y": 194
+					}
+				],
+				"lineWidth": 3
+			},
+			{
+				"key": 39,
+				"linePath": [
+					{
+						"x": 400,
+						"y": 138
+					},
+					{
+						"x": 430,
+						"y": 138
+					}
+				],
+				"lineWidth": 3
+			},
+			{
+				"key": 40,
+				"linePath": [
+					{
+						"x": 400,
+						"y": 141
+					},
+					{
+						"x": 400,
+						"y": 194
+					}
+				],
+				"lineWidth": null
+			},
+			{
+				"key": 41,
+				"linePath": [
+					{
+						"x": 529,
+						"y": 195
+					},
+					{
+						"x": 572,
+						"y": 195
+					}
+				],
+				"lineWidth": null
+			}
+		],
+		"microinstructionInfo": [
+			{
+				"fieldNumber": "",
+				"key": 1,
+				"length": 9,
+				"microcommand": []
+			}
+		],
+		"sigInfo": [
+			{
+				"binding": 0,
+				"ctlBus": 0,
+				"ctlLine": [
+					[
+						39,
+						30,
+						10,
+						29,
+						28,
+						27,
+						20,
+						22,
+						9,
+						37
+					]
+				],
+				"ctlName": "RegWrite",
+				"key": 0,
+				"node": 0
+			},
+			{
+				"binding": 20,
+				"ctlBus": 0,
+				"ctlLine": [
+					[
+						5,
+						40,
+						38,
+						8,
+						12,
+						13
+					],
+					[
+						11,
+						14,
+						15,
+						19
+					]
+				],
+				"ctlName": "ImmToALU",
+				"key": 1,
+				"node": 0
+			},
+			{
+				"binding": 0,
+				"ctlBus": 0,
+				"ctlLine": [
+					[
+						5,
+						6,
+						7
+					]
+				],
+				"ctlName": "JUBSI",
+				"key": 2,
+				"node": 0
+			},
+			{
+				"binding": 20,
+				"ctlBus": 0,
+				"ctlLine": [
+					[],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					],
+					[
+						9,
+						37,
+						19
+					]
+				],
+				"ctlName": "ALUop",
+				"key": 3,
+				"node": 0
+			}
+		]
+	}
+}

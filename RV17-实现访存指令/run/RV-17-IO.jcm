@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "flag": "JCM",
+    "data": [
+{"key":  0,  "instruction": "80000413", "command": "addi s0, x0, -2048" },
+{"key":  4,  "instruction": "10000493", "command": "addi s1, x0, 0x100" },
+{"key":  8,  "instruction": "01449493", "command": "slli s1, s1, 20   " },
+{"key": 12,  "instruction": "fff00993", "command": "addi s3, x0, -1   " },
+{"key": 16,  "instruction": "03342023", "command": "sw   s3, 0x20(s0) " },
+{"key": 20,  "instruction": "00042903", "command": "lw   s2, 0x00(s0) " },
+{"key": 24,  "instruction": "0124a423", "command": "sw   s2, 8(s1)    " },
+{"key": 28,  "instruction": "01242823", "command": "sw   s2, 0x10(s0) " },
+{"key": 32,  "instruction": "0084a983", "command": "lw   s3, 8(s1)    " },
+{"key": 36,  "instruction": "03342023", "command": "sw   s3, 0x20(s0) " },
+{"key": 40,  "instruction": "02042903", "command": "lw   s2, 0x20(s0) " }
+    ]
+}
