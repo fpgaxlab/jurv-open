@@ -102,6 +102,23 @@
 			}
 		},
 		{
+			"description": "JUBSI",
+			"index": 1,
+			"key": 14,
+			"position": {
+				"x": -89,
+				"y": 123
+			},
+			"type": "signal",
+			"value": {
+				"data": "00000",
+				"color": "gray",
+				"isVertical": false,
+				"bitWidth": 5,
+				"placement": "top"
+			}
+		},
+		{
 			"key": 21,
 			"index": 0,
 			"type": "text",
@@ -780,6 +797,7 @@
 				"ctlBus": 0,
 				"ctlLine": [
 					[
+						6,
 						7,
 						11,
 						14,

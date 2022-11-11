@@ -101,7 +101,8 @@ module CPU
     //送给调试器的观察信号
     struct packed{ 
     //【注意】 成员定义顺序需要与虚拟面板信号框的序号对应
-        logic WS0;        //RegWrite
+        logic [4:0] WS1;  //Imm_type
+        logic       WS0;  //RegWrite
     }ws;
 
     //送给调试器的观察数据
@@ -116,7 +117,8 @@ module CPU
 
     always_comb begin
         /*-【注意】定义观察信号后须关联相应变量！-*/
-        ws.WS0 = cRegWrite;
+        ws.WS1[4:0] = cImm_type;
+        ws.WS0      = cRegWrite;
     end
 
     always_comb begin
@@ -128,7 +130,7 @@ module CPU
         wd.WD0[31:0]  = nextPC; 
     end
     
-    // 调试器部分，请勿修改！
+    // 以下调试器部分，请勿修改！
     WatchChain #(.DATAWIDTH($bits(wd))) wdChain_inst(
         .DataIn(wd), 
         .ScanIn(iScanIn), 
