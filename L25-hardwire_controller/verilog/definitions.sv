@@ -1,3 +1,5 @@
+//ALU模块中的符号定义
+
 `ifndef DEFINITIONS_SVH
 `define DEFINITIONS_SVH
 
@@ -9,7 +11,7 @@ package defs;
       logic overflow; 
       logic carryOut;
    } t_flag;
-
+    
    typedef struct packed{
       logic ge;
       logic lt; 
@@ -22,7 +24,10 @@ package defs;
       SUB = 4'b0010,
       AND = 4'b0011,
       OR  = 4'b0100,
-      XOR = 4'b0101
+      XOR = 4'b0101,
+      SRA = 4'b0110,
+      SLL = 4'b0111,
+      SRL = 4'b1000
    } aluop;
 
 endpackage

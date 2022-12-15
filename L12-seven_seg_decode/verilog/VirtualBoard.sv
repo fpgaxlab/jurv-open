@@ -14,7 +14,15 @@ module VirtualBoard (
     output logic  [7:0] SD0
 ); 
 
-//TODO：七段译码器模块实例化 
+/** The input port is replaced with an internal signal **/
+wire [1:0] in = S[1:0];
+wire       en = S[2];
 
+/************* The logic of this experiment *************/
+wire [3:0] out;
+Decode2_4 decoder1(.iEn(en), .iA(in), .oY(out));
+
+/****** Internal signal assignment to output port *******/
+assign L[3:0] = out;
 
 endmodule

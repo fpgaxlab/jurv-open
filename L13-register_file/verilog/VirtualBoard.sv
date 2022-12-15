@@ -14,70 +14,28 @@ module VirtualBoard (
     output logic  [7:0] SD0
 );
 
-/********* Seven-segment decoder instantiation **********/
-logic [3:0] HD[7:0];  // 8 hexadecimal display 
-SevenSegDecode ssdecode_inst7(.iData(HD[7]), .oSeg(SD7));
-SevenSegDecode ssdecode_inst6(.iData(HD[6]), .oSeg(SD6));
-SevenSegDecode ssdecode_inst5(.iData(HD[5]), .oSeg(SD5));
-SevenSegDecode ssdecode_inst4(.iData(HD[4]), .oSeg(SD4));
-SevenSegDecode ssdecode_inst3(.iData(HD[3]), .oSeg(SD3));
-SevenSegDecode ssdecode_inst2(.iData(HD[2]), .oSeg(SD2));
-SevenSegDecode ssdecode_inst1(.iData(HD[1]), .oSeg(SD1));
-SevenSegDecode ssdecode_inst0(.iData(HD[0]), .oSeg(SD0));
-
 /** The input port is replaced with an internal signal **/
+wire reset  = PB[0];
 wire clk    = PB[1];
-wire [3:0] Data  = S[3:0];
-wire [1:0] Index = S[5:4];
-wire Load = S[6];
+wire [3:0] data  = S[3:0];
+wire load   = S[6];
 
 /************* The logic of this experiment *************/
-localparam N = 4;
-// 2-4 decode
-logic load3, load2, load1, load0;
-always_comb begin
-    if (Load)
-        case (Index)
-            2'b00: {load3, load2, load1, load0} = 4'b0001;
-            /*- TODO
-                这里将译码器补充完整
-                                                       -*/
-            default: {load3, load2, load1, load0} = 4'bx;
-        endcase
-    else
-        {load3, load2, load1, load0} = 4'b0000;
-end
+localparam N = 4;   // 字长
 
-// register instantiation
-logic [N-1:0] R0_Q, R1_Q, R2_Q, R3_Q;
-DataReg #(N) R0(.oQ(R0_Q), .iD(Data), .Clk(clk), .Load(load0), .Reset(1'b0));
-/*- TODO
-    这里实例化其余的寄存器
-                                                                          -*/
+// flip-flop instantiation
+wire [N-1:0] Q_ff;
+DataReg #(N) flip_flop(.oQ(Q_ff), .iD(data), .iClk(clk), .iLoad(load), .iReset(reset));
 
-// 4-1 MUX
-logic  [N-1:0] GRS_Q;
-/*- TODO
-
-
-
-    这里编写4选1多路器
-
-
-
-
- -*/
+// latch instantiation
+wire [N-1:0] Q_latch;
+DataLatch #(N) latch(.oQ(Q_latch), .iD(data), .iEn(load));
 
 /****** Internal signal assignment to output port *******/
-assign HD[0] = R0_Q;
-assign HD[1] = R1_Q;
-assign HD[2] = R2_Q;
-assign HD[3] = R3_Q;
-assign HD[4] = GRS_Q;
-assign L[0] = load0;
-assign L[1] = load1;
-assign L[2] = load2;
-assign L[3] = load3;
+SevenSegDecode ssdecoder0(.iData(Q_ff), .oSeg(SD0));
+SevenSegDecode ssdecoder1(.iData(Q_latch), .oSeg(SD1));
+assign L[0] = load;
+assign L[1] = load;
 
 endmodule
 
