@@ -25,9 +25,9 @@ wire oe2    = S[11];
 /************* The logic of this experiment *************/
 wire [2:0]out;
 // Logic description of three-state buffer
-assign out = oe0 ? data0 : 3'bZZZ;
-assign out = oe1 ? data1 : 3'bZZZ;
-assign out = oe2 ? data2 : 3'bZZZ;
+assign out = oe0 ? data0 : 3'bzzz;
+assign out = oe1 ? data1 : 3'bzzz;
+assign out = oe2 ? data2 : 3'bzzz;
 
 // 用与或门构成数据选择器
 // assign out = data0 & {3{oe0}} | data1 & {3{oe1}} | data2 & {3{oe2}};
