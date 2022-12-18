@@ -96,3 +96,7 @@ CPU部分的文件夹命名与支持的指令数量有关，见下表。
     - 实现分支预测；
     - 支持37条指令；
     - ......
+
+### 许可 | License
+
+[CC-BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)
