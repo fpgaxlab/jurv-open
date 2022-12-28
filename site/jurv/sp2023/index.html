@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>前言 :: 计算机组成与CPU设计实验</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">计算机组成与CPU设计实验</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="sp2023">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">计算机组成与CPU设计实验</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-lab-tools.html">实验环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#云端编译">云端编译</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L01-guide.html#验证设计">设计的实验验证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-remote.html#准备工作">准备工作</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="L02-guide-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local.html">本地实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">SystemVerilog和逻辑电路实验</span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">计算机组成实验</span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">RISC-V CPU设计实验</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">计算机组成与CPU设计实验</span>
+    <span class="version">sp2023</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">计算机组成与CPU设计实验</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">sp2023</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link is-current"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">计算机组成与CPU设计实验</a></li>
+    <li><a href="index.html">前言</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">前言</h1>
+<div class="paragraph">
+<p>从2019年秋季学期开始，我们在计算机类本科实验教学中引入RISC-V CPU设计的内容，到现在已经经过了五轮教学实践的不断改进完善，实验方案和实验项目已经趋于稳定。我们决定将<a href="http://fpga-lab.gitee.io/jurv-open">实验指导</a>和参考设计的代码按照<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>开源，实验代码和相关资源发布在开源项目托管网站，网址是<a href="https://gitee.com/fpga-lab/jurv-open" class="bare">https://gitee.com/fpga-lab/jurv-open</a>。</p>
+</div>
+<div class="paragraph">
+<p>这套实验主要是面向“计算机组成原理”课程。这门课程一向被认为是一门比较难学的课程，除了内容庞杂、考题灵活多变等原因外，缺少与理论教学内容相一致的实验设计是一个重要因素。在引入RISC-V之前，我们开发了JUC系列微程序控制的教学模型计算机（见开源项目<a href="https://gitee.com/fpga-lab/juc3-open">openJUC3</a>），2010年起在教学中使用，印证了我们“从设计的角度理解计算机的组成和工作原理”的教学思想。当年学生对课程设计的认可给了我们很大的鼓励，成为后来我们继续开发RISC-V系列实验的动力。</p>
+</div>
+<div class="paragraph">
+<p>本书分为四大部分：实验环境、SystemVerilog和逻辑电路实验、计算机组成实验、RISC-V CPU设计实验。各个部分并非截然分开，而是环环相扣、循序渐进，是一个整体的设计，但也可以根据自己的基础选择一部分学习，详见<a href="brief-of-parts.html" class="xref page">实验内容的组织</a>。</p>
+</div>
+<div class="paragraph">
+<p>本书采用“范例-任务”教学法。大部分实验项目都会先给出一个参考设计（范例），再布置一个任务。通过学习参考设计，理解相关原理、结构和HDL描述方法，对完成任务会有很大帮助。本书还配套了教学视频，发布在中国大学MOOC等网站上，见<a href="video-links.html" class="xref page">教学视频资源</a>。</p>
+</div>
+<div class="paragraph">
+<p>对于实验课，实验工具也是非常重要的一环。课程支持团队致力于提供跨平台的软硬件实验环境，这里的“跨平台”有两方面含义，一是实验软件同时支持线上和线下方式，二是实验硬件同时支持两大主流FPGA厂商的芯片。详见<a href="L02-lab-tools.html" class="xref page">实验环境概述</a>。</p>
+</div>
+<div class="paragraph">
+<p>最后，给学员提一点额外的要求。您完成的实验代码，希望不要在博客、开源网站等网站上公开。如上所述，这些实验项目经过几年的改进已经趋于稳定，会在学校的教学中继续使用，虽然每年会有一些细节完善，但可能不会有太大的变化。您可以在博客上发表相关的内容，但恳请您不要将您的答案公开。既要给学弟学妹们指路，也要让他们有路可走 (◠‿◠)。</p>
+</div>
+<div class="paragraph text-right">
+<p>作者&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</p>
+</div>
+<div class="paragraph text-right">
+<p>肖铁军 &lt;<a href="mailto:xiaotiejun@foxmail.com.cn">xiaotiejun@foxmail.com.cn</a>&gt;</p>
+</div>
+<div class="paragraph text-right">
+<p>2022年12月&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

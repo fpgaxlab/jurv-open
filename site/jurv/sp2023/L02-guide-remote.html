@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>FPGA验证流程（远程实验版） :: 计算机组成与CPU设计实验</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">计算机组成与CPU设计实验</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="sp2023">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">计算机组成与CPU设计实验</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-lab-tools.html">实验环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#云端编译">云端编译</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L01-guide.html#验证设计">设计的实验验证</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#准备工作">准备工作</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="L02-guide-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local.html">本地实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">SystemVerilog和逻辑电路实验</span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">计算机组成实验</span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">RISC-V CPU设计实验</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">计算机组成与CPU设计实验</span>
+    <span class="version">sp2023</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">计算机组成与CPU设计实验</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">sp2023</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">计算机组成与CPU设计实验</a></li>
+    <li>实验环境</li>
+    <li><a href="L02-guide-remote.html">远程实验验证流程</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">FPGA验证流程（远程实验版）</h1>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>熟悉FPGA实验验证流程；</p>
+</li>
+<li>
+<p>熟悉远程虚拟实验系统的使用；</p>
+</li>
+<li>
+<p>熟悉实验板的输入输出元件。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="准备工作"><a class="anchor" href="#准备工作"></a>准备工作</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_登录"><a class="anchor" href="#_登录"></a>登录</h3>
+<div class="paragraph">
+<p>请参阅<a href="L02-guide-login.html" class="xref page">《远程FPGA实验平台的登录》</a>。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">支持的浏览器</div>
+<div class="paragraph">
+<p>推荐使用最新版谷歌浏览器。其他chrome内核的浏览器也可以，但chrome内核版本要在57以上。</p>
+</div>
+<div class="paragraph">
+<p>对火狐浏览器的测试不充分，有可能存在细节问题，不推荐使用。IE浏览器不能用。</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>跳转到实验项目界面后，左上方会弹出一个任务列表，如<a href="#fig-1">图 1</a>。后续将依次完成列表中的各项任务。</p>
+</div>
+<div id="fig-1" class="imageblock">
+<div class="content">
+<img src="_images/L02a-image1.png" alt="image" width="399" height="193">
+</div>
+<div class="title">图 1. 实验项目的任务列表</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_实验指导与附件"><a class="anchor" href="#_实验指导与附件"></a>实验指导与附件</h3>
+<div class="paragraph">
+<p>下载附件材料，其中包含了虚拟面板背景图文件，将在后面“设计虚拟面板”时用到。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_设计与编译"><a class="anchor" href="#_设计与编译"></a>设计与编译</h3>
+<div class="paragraph">
+<p>如果前面已经用Quartus软件编译生成了电路文件，则可以跳过这一步。</p>
+</div>
+<div class="paragraph">
+<p>从任务列表中选择“代码与编译”，会自动打开在线代码编辑器，并且定义了一个VirtualBoard模块，可以看到该模块只有端口定义，如下所示。</p>
+</div>
+<div id="虚拟实验板模块" class="listingblock">
+<div class="title">虚拟实验板模块</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`default_nettype none 
+module VirtualBoard (
+    input  wire   CLOCK,      // 10 MHz Input Clock 
+    input  wire  [19:0] PB,   // 20 Push Buttons, logical 1 when pressed
+    input  wire  [35:0] S,    // 36 Switches
+    output logic [35:0] L,    // 36 LEDs, drive logical 1 to light up
+    output logic  [7:0] SD7,  // 8 common anode Seven-segment Display
+    output logic  [7:0] SD6,
+    output logic  [7:0] SD5,
+    output logic  [7:0] SD4,
+    output logic  [7:0] SD3,
+    output logic  [7:0] SD2,
+    output logic  [7:0] SD1,
+    output logic  [7:0] SD0
+); 
+
+endmodule</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+如果希望用VHDL，可以用下面<a href="#VHDL版本的虚拟实验板模块">VHDL版本的虚拟实验板模块</a>覆盖在线代码编辑器中的代码。
+</td>
+</tr>
+</table>
+</div>
+<details id="VHDL版本的虚拟实验板模块">
+<summary class="title">虚拟实验板模块的VHDL版本（点击此行展开）</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_unsigned.ALL;
+ENTITY  VirtualBoard IS
+PORT (   
+   CLOCK:in std_logic;                     -- 10MHz Input Clock 
+   PB: in  std_logic_vector(19 downto 0);  -- 20 Push buttons, logical 1 when pressed
+   S:  in  std_logic_vector(35 downto 0);  -- 36 Switches
+   L:  out std_logic_vector(35 downto 0);  -- 36 LEDs, drive logical 1 to light up
+   SD7:out std_logic_vector(7 downto 0);   -- 8 common anode Seven-segment Display
+   SD6:out std_logic_vector(7 downto 0);
+   SD5:out std_logic_vector(7 downto 0);
+   SD4:out std_logic_vector(7 downto 0);
+   SD3:out std_logic_vector(7 downto 0);
+   SD2:out std_logic_vector(7 downto 0);
+   SD1:out std_logic_vector(7 downto 0);
+   SD0:out std_logic_vector(7 downto 0)); 
+END VirtualBoard;
+
+ARCHITECTURE  behav_VB OF  VirtualBoard IS
+
+BEGIN
+
+
+END behav_VB;</pre>
+</div>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>这个VirtualBoard模块可以想象成一个实验板，有1个时钟输入CLOCK， 20个按键PB，36个拨动开关S，36个指示灯L，8个七段数码管SD0～SD7。该模块命名为“VirtualBoard”的含义是“虚拟实验板”，在后面验证时我们会看到，“虚拟实验板”模块与实验调试软件的“虚拟面板”是相互对应的。</p>
+</div>
+<div class="paragraph">
+<p>下面为VirtualBoard模块添加设计代码。首先用8个拨动开关S7～S0直接驱动七段数码管SD0的8个段，将下面的代码添加到<a href="#虚拟实验板模块">虚拟实验板模块</a>的 <code>endmodule</code> 之前。</p>
+</div>
+<div class="listingblock">
+<div class="title">需添加的代码</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">   //开关7~0直接驱动数码管SD0的各个段
+   assign SD0 = S[7:0];
+
+   //开关11~8驱动指示灯L11~8的亮灭
+   <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>在这里添加Verilog HDL的assign赋值语句，实现S11～S8控制L11～L8的亮灭。</td>
+</tr>
+</table>
+</div>
+<details>
+<summary class="title">VHDL版本（点击此行展开）</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>   //开关7~0直接驱动数码管SD0的各个段
+   SD0 &lt;= S(7 downto 0);
+
+   //开关11~8驱动指示灯L11~8的亮灭
+   <i class="conum" data-value="1"></i><b>(1)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>在这里添加VHDL的赋值语句，实现S11～S8控制L11～L8的亮灭。</td>
+</tr>
+</table>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>点击“编译”按钮，云端服务器将对编辑器中的代码进行编译。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="验证流程"><a class="anchor" href="#验证流程"></a>实验验证流程</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_选择验证任务"><a class="anchor" href="#_选择验证任务"></a>选择验证任务</h3>
+<div class="paragraph">
+<p>选择任务列表中的“虚拟实验板”，打开的虚拟面板界面，如<a href="#fig-4">图 2</a>，这个虚拟面板以实验板的实物照片为背景，在开关、指示灯等输入输出元件位置上放置了虚拟元件。</p>
+</div>
+<div id="fig-4" class="imageblock">
+<div class="content">
+<img src="_images/L02a-image2.png" alt="image" width="388" height="298">
+</div>
+<div class="title">图 2. 虚拟面板</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_申请远程实验板"><a class="anchor" href="#_申请远程实验板"></a>申请远程实验板</h3>
+<div class="paragraph">
+<p>点击开始实验按钮<span class="image"><img src="_images/L02a-image3.png" alt="image" width="19" height="18"></span>，申请实验板。实验板申请成功后会提示：“已成功获取硬件设备，请点击“FPGA编程”，并且按钮图标变为<span class="image"><img src="_images/L02a-image4.png" alt="image" width="19" height="18"></span>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_加载fpga电路"><a class="anchor" href="#_加载fpga电路"></a>加载FPGA电路</h3>
+<div class="paragraph">
+<p>开始验证之前首先要将编译生成的FPGA电路文件加载到FPGA芯片中（也称配置、编程）。点击“FPGA编程”，在打开的文件对话框中选择云编译生成的<em>xxx.rbf</em>文件；如果是之前“FPGA 设计流程”实验中本地Quartus编译的，这里选择“本地上传”。编程过程中会出现进度指示，完成后会有提示“文件加载完成”。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_操作虚拟面板"><a class="anchor" href="#_操作虚拟面板"></a>操作虚拟面板</h3>
+<div class="paragraph">
+<p>将鼠标指针指向某个虚拟元件，会提示该元件的名称和当前状态，如最右边的开关提示“S0：低电平”，最右边数码管的名称为“SD0”，这些虚拟元件的名称与<a href="#虚拟实验板模块">虚拟实验板模块</a>端口名称相对应。点击虚拟面板中的拨动开关S7～S0，观察数码管SD0显示内容的变化；点击虚拟开关S8～S11，相应的LED指示灯应该点亮。如果与预期不同，检查前面的设计代码是否正确。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_释放远程实验板"><a class="anchor" href="#_释放远程实验板"></a>释放远程实验板</h3>
+<div class="paragraph">
+<p>点击完成实验按钮<span class="image"><img src="_images/L02a-image4.png" alt="image" width="19" height="18"></span>释放实验板资源。</p>
+</div>
+<div class="paragraph">
+<p>上面使用的是以实物照片为背景的通用虚拟面板，具有真实感的视觉效果，也完全能胜任比较简单的实验。在后面的实验中，我们更倾向于使用以原理框图为背景的虚拟面板。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="设计虚拟面板"><a class="anchor" href="#设计虚拟面板"></a>设计虚拟面板</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>下面从头设计一个全新的虚拟面板。在任务列表中选择“设计虚拟面板并记录验证”，出现一个空白的虚拟面板，如<a href="#fig-5">图 3</a>，可以自己添加背景图形和元件。</p>
+</div>
+<div id="fig-5" class="imageblock">
+<div class="content">
+<img src="_images/L02a-image5.png" alt="image" width="555" height="256">
+</div>
+<div class="title">图 3. 空白的虚拟面板</div>
+</div>
+<div class="sect2">
+<h3 id="_绘制面板背景图"><a class="anchor" href="#_绘制面板背景图"></a>绘制面板背景图</h3>
+<div class="paragraph">
+<p>背景图展示虚拟元件之间的连接关系，有助于实验过程中分析实验结果。可使用自己熟悉的绘图软件，如开源软件diagrams.net（又名draw.io）。diagrams.net有Web版和桌面版， 可从https://www.diagrams.net/ 进入Web版或下载桌面版。</p>
+</div>
+<div class="paragraph">
+<p>绘制完成的效果如<a href="#fig-6">图 4</a>。</p>
+</div>
+<div id="fig-6" class="imageblock">
+<div class="content">
+<img src="_images/L02a-image6.png" alt="image" width="510" height="378">
+</div>
+<div class="title">图 4. 绘制完成的背景图</div>
+</div>
+<div class="paragraph">
+<p>绘制完成后需要导出为图像格式，点击菜单文件➤导出为，选择最后一项“高级”，格式选择PNG，DPI设置为150，如<a href="#fig-7">图 5</a>。</p>
+</div>
+<div id="fig-7" class="imageblock">
+<div class="content">
+<img src="_images/L02a-image7.png" alt="image" width="292" height="323">
+</div>
+<div class="title">图 5. 导出设置</div>
+</div>
+<div class="paragraph">
+<p>如果暂时不打算自己绘图，实验材料中提供了一个“虚拟面板背景图.png”文件，可直接使用。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+背景图的文件大小不宜过大，否则会影响虚拟面板的加载速度，超过1MB实验平台无法加载。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_添加背景图"><a class="anchor" href="#_添加背景图"></a>添加背景图</h3>
+<div class="paragraph">
+<p>在空白虚拟面板左边的虚拟元件工具栏中点击最上边的图片按钮，选择图片文件作为虚拟面板背景图。实验平台默认以图片尺寸作为虚拟面板的初始大小。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_添加虚拟元件"><a class="anchor" href="#_添加虚拟元件"></a>添加虚拟元件</h3>
+<div class="paragraph">
+<p>现在我们给虚拟面板添加虚拟元件。以虚拟开关为例，从左边栏用鼠标左键点击并拖动开关图标<span class="image"><img src="_images/L02a-image8.png" alt="image" width="24" height="24"></span>，将开关图标拖到背景图上所希望的位置，然后松开鼠标左键将开关图标放置在虚拟面板上，此时右边栏显示了该开关的参数，第1个开关元件的序号是S0。放置元件时元件的序号是自动分配的，可以在右边参数栏的“序号”中手动进行修改。虚拟元件的名称和序号代表了设计代码中VirtualBoard模块的端口信号，如虚拟元件S0就是设计代码中的端口S[0]。</p>
+</div>
+<div class="paragraph">
+<p>用类似的方法添加需要的开关、数码管和指示灯。如果元件的排列不是很整齐，可以在选中元件后用键盘上的↑、↓、←、→键进行移动，也可以在右边参数栏的“位置”参数中输入精确的坐标值。元件的大小也可以通过右边参数栏修改，例如将指示灯的大小设置为20×20。最终完成虚拟面板效果如<a href="#fig-9">保存虚拟面板</a>，其中段的名称“a, b, c&#8230;&#8203;”使用了文本框元件（左边栏的图标“T”），该元件和电路没有关联，只是用于虚拟面板的标注。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/L02a-image9.png" alt="image" width="555" height="408">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fig-9"><a class="anchor" href="#fig-9"></a>保存虚拟面板</h3>
+<div class="paragraph">
+<div class="title">设计完成的虚拟面板</div>
+<p>最后在参数栏输入虚拟面板名称“认识虚拟元件”，点击“保存”按钮将虚拟面板保存在本地硬盘。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+实验平台不会在云端保存虚拟面板。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>上面介绍的是从空白开始设计一个全新的虚拟面板，实际上已有虚拟面板也可以修改，只不过左边栏和右边栏默认是收起的，只要点击左侧的<span class="image"><img src="_images/L02a-image10.png" alt="image" width="30" height="28"></span>和右侧的<span class="image"><img src="_images/L02a-image11.png" alt="image" width="24" height="28"></span>展开左边栏和右边栏就可以修改虚拟面板。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="实验考核"><a class="anchor" href="#实验考核"></a>实验考核</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>实验平台支持两种考核方式：验证记录和电路测试。</p>
+</div>
+<div class="sect2">
+<h3 id="_记录验证过程"><a class="anchor" href="#_记录验证过程"></a>记录验证过程</h3>
+<div class="paragraph">
+<p>如果该实验任务有考核要求，虚拟面板界面上会出现用于记录验证过程的悬浮窗口，如<a href="#fig-10">图 6</a>。如果不要求记录验证过程，悬浮窗中“记录”按钮是灰色的，或者不出现悬浮窗。提交日期截止后，悬浮窗也不会出现。</p>
+</div>
+<div id="fig-10" class="imageblock">
+<div class="content">
+<img src="_images/L02a-image12.png" alt="image" width="232" height="150">
+</div>
+<div class="title">图 6. 验证记录悬浮窗口</div>
+</div>
+<div class="paragraph">
+<p>该功能可以理解为线下实验的教师现场检查场景，通过验证记录可以反映实验者对电路功能的理解，直观展示实验结果；教师通过回放功能评阅学生的验证记录。</p>
+</div>
+<div class="paragraph">
+<p>本实验要求理解数码管的驱动原理，推断数码管是共阳极还是共阴极，找出数码管段编码与字形的对应关系。根据拨向0点亮还是拨向1点亮的实验现象，可以得出数码管是共阴极还是共阳极的结论；通过改变开关状态可以使数码管显示0～F十六个数字，找出所显示数字的七段编码，在以后的七段译码器实验中将会用到这些编码。</p>
+</div>
+<div class="paragraph">
+<p>记录窗口还提供了文字输入功能，用于分析实验现象、得出结论。是否要求输入文字描述由指导教师根据每个实验的特点决定。</p>
+</div>
+<div class="paragraph">
+<p>特别提醒，每按下一次<span class="image"><img src="_images/L02a-image13.png" alt="image" width="38" height="18"></span>按钮，仅产生一条记录，后续的操作并不会自动地记录。也就是说，每一个需要回放的步骤都应该按下一次<span class="image"><img src="_images/L02a-image13.png" alt="image" width="38" height="18"></span>按钮。如果要对当前实验电路现象输入文字分析，也要在按下<span class="image"><img src="_images/L02a-image13.png" alt="image" width="38" height="18"></span>按钮之前输入。<span class="image"><img src="_images/L02a-image14.png" alt="image" width="63" height="21"></span>按钮按下后，会清空前面输入的所有记录，系统给出“记录已清空”的提示。<span class="image"><img src="_images/L02a-image15.png" alt="image" width="46" height="20"></span>按钮按下后，自动提交所有记录，实验板收回，系统提示“提交成功”和“本次实验已结束”，如果想再次记录并提交，可以再次申请实验板后重新FPGA编程，系统保存最新的提交。</p>
+</div>
+<div class="paragraph">
+<p>验证记录提交以后，可以通过任务列表上的回放按钮<span class="image"><img src="_images/L02a-image16.png" alt="image" width="13" height="16"></span>观看自己的记录，确认操作没有遗漏。教师评分之后，才可以在回放界面右上角看到验证记录的成绩，如<a href="#fig-11">图 7</a>。</p>
+</div>
+<div id="fig-11" class="imageblock">
+<div class="content">
+<img src="_images/L02a-image17.png" alt="image" width="191" height="77">
+</div>
+<div class="title">图 7. 验证记录成绩</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+提交后任务列表上该任务会显示“无需考核”，是指该任务不包含“电路测试”的考核，并非不考核验证记录。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_电路测试"><a class="anchor" href="#_电路测试"></a>电路测试</h3>
+<div class="paragraph">
+<p>在任务列表选择“电路测试”进入虚拟面板界面，申请远程实验板、加载FPGA电路后，无需操作虚拟面板直接点击“提交”，实验平台对提交的电路文件进行自动测试，之后在任务列表上可以看到电路测试的分数。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

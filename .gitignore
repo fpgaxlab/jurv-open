@@ -19,7 +19,7 @@ output/
 *.done
 *.eqn
 *.hex
-*.html
+# *.html
 *.jdi
 *.mif
 *.pin

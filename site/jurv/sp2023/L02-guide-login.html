@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>远程实验平台的登录 :: 计算机组成与CPU设计实验</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">计算机组成与CPU设计实验</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="sp2023">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">计算机组成与CPU设计实验</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-lab-tools.html">实验环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#云端编译">云端编译</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L01-guide.html#验证设计">设计的实验验证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-remote.html#准备工作">准备工作</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="L02-guide-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local.html">本地实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">SystemVerilog和逻辑电路实验</span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">计算机组成实验</span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">RISC-V CPU设计实验</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">计算机组成与CPU设计实验</span>
+    <span class="version">sp2023</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">计算机组成与CPU设计实验</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">sp2023</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">计算机组成与CPU设计实验</a></li>
+    <li>实验环境</li>
+    <li><a href="L02-guide-remote.html">远程实验验证流程</a></li>
+    <li><a href="L02-guide-remote.html#准备工作">准备工作</a></li>
+    <li><a href="L02-guide-login.html">登录远程实验平台</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">远程实验平台的登录</h1>
+<div class="sect1">
+<h2 id="_远程实验平台的网址"><a class="anchor" href="#_远程实验平台的网址"></a>远程实验平台的网址</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>远程实验平台的网址是 <a href="http://welab.ujs.edu.cn/new/" class="bare">http://welab.ujs.edu.cn/new/</a> ，登录页面如下图。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/L02c-image1.png" alt="image" width="420" height="228">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="重要"></i>
+</td>
+<td class="content">
+由于系统升级，网址中一定要带“new”。不带“new”的网址是老系统，登录首面与上图不同。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_支持的浏览器"><a class="anchor" href="#_支持的浏览器"></a>支持的浏览器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>推荐使用最新版谷歌浏览器。其他chrome内核的浏览器也可以（如Edge），但chrome内核版本要在57以上。</p>
+</div>
+<div class="paragraph">
+<p>对火狐浏览器的测试不充分，有可能存在细节问题，不推荐使用。IE浏览器不能用。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_注册"><a class="anchor" href="#_注册"></a>注册</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>实验平台向全社会开放，学员既有高校学分课程的学生，也有自学的学员。</p>
+</div>
+<div class="paragraph">
+<p>学分课程的学生注册通常由教师统一安排，请根据任课教师的要求，一般不需要自己注册。</p>
+</div>
+<div class="paragraph">
+<p>自学学员需要注册。视系统设置注册后可能需要等待审核，一般不超过24小时。如果长时间未得到审核或者注册遇到问题，请加入QQ群：121253650 反映。江苏大学的学生请根据任课教师的要求加入另外的课程群。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_选课"><a class="anchor" href="#_选课"></a>选课</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>转到首页，找到要选课的课程，点击“立即报名”。报名时需要选择教学班。</p>
+</div>
+<div class="paragraph">
+<p>学分课程的选课学生，请根据任课教师的要求，一般不需要自己选课。</p>
+</div>
+<div class="paragraph">
+<p>如果还未登录，会显示登录页面；如果尚未注册，点击登录页面右上角的“去注册”。</p>
+</div>
+<div class="paragraph">
+<p>报名后需要等待教师审核，一般不超过24小时。如果长时间未得到审核，请加入QQ群：121253650 反映。江苏大学的学生请根据任课教师的要求加入另外的课程群。</p>
+</div>
+<div class="paragraph">
+<p>报名成功后在“我的课程”可以看到该课程，在“实验项目”中选择实验项目点击“立即实验”。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_访问限制"><a class="anchor" href="#_访问限制"></a>访问限制</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>远程FPGA实验平台部署在江苏大学校内，正常情况下对社会开放。有时学校信息化中心会临时限制校外访问，显示页面如下。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/L02c-image2.png" alt="image" width="273" height="276">
+</div>
+</div>
+<div class="paragraph">
+<p>此时江苏大学的师生在校外仍可以通过webvpn访问。</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
