@@ -1,7 +1,7 @@
 # openJURV
 
 ### 介绍
-RISC-V CPU 实验资源。授课视频及实验指导见中国大学MOOC(慕课)开放课程《计算机组成与CPU设计实验》（江苏大学 肖铁军），实验环境使用[FPGA实验云平台](http://welab.ujs.edu.cn/new/)。
+RISC-V CPU 实验资源。配套指导书网址：http://fpga-lab.gitee.io/jurv-open。授课视频见中国大学MOOC(慕课)开放课程《计算机组成与CPU设计实验》（江苏大学 肖铁军），实验环境使用[FPGA实验云平台](http://welab.ujs.edu.cn/new/)。
 
 ### 文件组织结构
 实验资源可以分为三大版块

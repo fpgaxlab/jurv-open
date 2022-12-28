@@ -18,13 +18,7 @@ PORT (
 END VirtualBoard;
 
 ARCHITECTURE  behav_VB OF  VirtualBoard IS
-signal HD7, HD6, HD5, HD4, HD3, HD2, HD1, HD0 : std_logic_vector(3 downto 0); 
-COMPONENT SevenSegDecode
-PORT (   
-	 iData:in std_logic_vector(3 downto 0);                           
-    oSeg:out std_logic_vector(7 downto 0)
-	 ); 
-end COMPONENT;
+
 BEGIN
 
 
