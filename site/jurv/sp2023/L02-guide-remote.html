@@ -437,7 +437,7 @@ END behav_VB;</pre>
 </div>
 <div id="fig-5" class="imageblock">
 <div class="content">
-<img src="_images/L02a-image5.png" alt="image" width="555" height="256">
+<img src="_images/L02a-image5m.png" alt="image" width="555" height="256">
 </div>
 <div class="title">图 3. 空白的虚拟面板</div>
 </div>
@@ -489,10 +489,10 @@ END behav_VB;</pre>
 <div class="sect2">
 <h3 id="_添加虚拟元件"><a class="anchor" href="#_添加虚拟元件"></a>添加虚拟元件</h3>
 <div class="paragraph">
-<p>现在我们给虚拟面板添加虚拟元件。以虚拟开关为例，从左边栏用鼠标左键点击并拖动开关图标<span class="image"><img src="_images/L02a-image8.png" alt="image" width="24" height="24"></span>，将开关图标拖到背景图上所希望的位置，然后松开鼠标左键将开关图标放置在虚拟面板上，此时右边栏显示了该开关的参数，第1个开关元件的序号是S0。放置元件时元件的序号是自动分配的，可以在右边参数栏的“序号”中手动进行修改。虚拟元件的名称和序号代表了设计代码中VirtualBoard模块的端口信号，如虚拟元件S0就是设计代码中的端口S[0]。</p>
+<p>现在我们给虚拟面板添加虚拟元件。以虚拟开关为例，从左边栏用鼠标左键点击并拖动开关图标<span class="image"><img src="_images/L02a-image8.png" alt="image" width="24" height="24"></span>，将开关图标拖到背景图上所希望的位置，然后松开鼠标左键将开关图标放置在虚拟面板上，此时右边栏显示了该开关的属性，第1个开关元件的序号是S0。放置元件时元件的序号是自动分配的，可以在右边属性栏的“序号”中手动进行修改。虚拟元件的名称和序号代表了设计代码中VirtualBoard模块的端口信号，如虚拟元件S0就是设计代码中的端口S[0]。</p>
 </div>
 <div class="paragraph">
-<p>用类似的方法添加需要的开关、数码管和指示灯。如果元件的排列不是很整齐，可以在选中元件后用键盘上的↑、↓、←、→键进行移动，也可以在右边参数栏的“位置”参数中输入精确的坐标值。元件的大小也可以通过右边参数栏修改，例如将指示灯的大小设置为20×20。最终完成虚拟面板效果如<a href="#fig-9">保存虚拟面板</a>，其中段的名称“a, b, c&#8230;&#8203;”使用了文本框元件（左边栏的图标“T”），该元件和电路没有关联，只是用于虚拟面板的标注。</p>
+<p>用类似的方法添加需要的开关、数码管和指示灯。如果元件的排列不是很整齐，可以在选中元件后用键盘上的↑、↓、←、→键进行移动，也可以在右边属性栏的“位置”属性中输入精确的坐标值。元件的大小也可以通过右边属性栏修改，例如将指示灯的大小设置为20×20。除基本的位置、大小属性外，还可以通过属性设置开关的方向和指示灯的颜色。最终完成虚拟面板效果如<a href="#fig-9">保存虚拟面板</a>，其中段的名称“a, b, c&#8230;&#8203;”使用了文本框元件（左边栏的图标“T”），该元件和电路没有关联，只是用于虚拟面板的标注。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -504,7 +504,7 @@ END behav_VB;</pre>
 <h3 id="fig-9"><a class="anchor" href="#fig-9"></a>保存虚拟面板</h3>
 <div class="paragraph">
 <div class="title">设计完成的虚拟面板</div>
-<p>最后在参数栏输入虚拟面板名称“认识虚拟元件”，点击“保存”按钮将虚拟面板保存在本地硬盘。</p>
+<p>最后在属性栏输入虚拟面板名称“认识虚拟元件”，点击“保存”按钮将虚拟面板保存在本地硬盘。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -580,12 +580,23 @@ END behav_VB;</pre>
 <div class="paragraph">
 <p>在任务列表选择“电路测试”进入虚拟面板界面，申请远程实验板、加载FPGA电路后，无需操作虚拟面板直接点击“提交”，实验平台对提交的电路文件进行自动测试，之后在任务列表上可以看到电路测试的分数。</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_更多教程"><a class="anchor" href="#_更多教程"></a>更多教程</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>通过这个实验初步了解了远程实验平台的使用，还有很多细节功能需要读者自己探索，也可观看由前端开发同学制作的<a href="https://www.bilibili.com/video/av93961752/">WeLab远程FPGA实验平台介绍视频</a>，由于制作的时间较早，没有反映后来开发的考核等功能。</p>
+</div>
+<div class="paragraph">
+<p>这个实验只涉及了逻辑电路实验，CPU实验的界面和使用会稍微复杂一点，在本书后面的CPU部分介绍。</p>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="title">许可 | License</div>
 <div class="paragraph">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
-</div>
 </div>
 </div>
 </div>
