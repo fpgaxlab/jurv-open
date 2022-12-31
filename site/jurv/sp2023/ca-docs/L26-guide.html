@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>RISC-V汇编语言实验 :: 计算机组成与CPU设计实验</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">计算机组成与CPU设计实验</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="sp2023">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">计算机组成与CPU设计实验</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#云端编译">云端编译</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L01-guide.html#验证设计">设计的实验验证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html#准备工作">准备工作</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../L02-guide-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local.html">本地实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">SystemVerilog和逻辑电路实验</span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">计算机组成实验</span>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">RISC-V CPU设计实验</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">计算机组成与CPU设计实验</span>
+    <span class="version">sp2023</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">计算机组成与CPU设计实验</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">sp2023</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">计算机组成与CPU设计实验</a></li>
+    <li><a href="L26-guide.html">RISC-V汇编语言实验</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">RISC-V汇编语言实验</h1>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>熟悉RISC-V汇编语言，能够用汇编语言编写简单的程序；</p>
+</li>
+<li>
+<p>熟悉RISC-V汇编器，能够使用汇编器将汇编语言程序翻译为机器指令程序；</p>
+</li>
+<li>
+<p>通过使用RISC-V模拟器，熟悉RISC-V数据通路和指令功能；</p>
+</li>
+<li>
+<p>熟悉RISC-V过程调用。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验原理"><a class="anchor" href="#_实验原理"></a>实验原理</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RISC-V<a href="#crva">[1]</a>是美国加州大学伯克利分校为教学开发指令系统，于2014年开源。指令系统是计算机硬件的语言系统，是硬件和底层软件之间的接口。指令（Instruction）是计算机硬件能够识别的二进制编码，所以称作机器指令。为了克服机器语言难以记忆、表达和阅读等缺点，用一些文字符号代替二进制编码，称为符号指令。用符号指令编写的程序要翻译为机器指令才能被计算机执行，翻译工作可以手工进行，也可以借助软件完成，这种翻译软件被称为汇编器（Assembler）。</p>
+</div>
+<div class="paragraph">
+<p>不同的CPU对机器指令的格式和编码有不同的约定，例如，同样是寄存器相加指令，RISC-V和MIPS处理器的机器指令完全不同，所以某种CPU的机器指令只能在该CPU上才能正确执行。为了在没有CPU硬件的情况下能够学习和调试该CPU的程序，可以使用一种叫做模拟器（Simulator）的软件，例如本实验使用的模拟器能够在个人电脑上（Windows， Linux或 Mac）模拟RISC-V处理器的运行。</p>
+</div>
+<div class="paragraph">
+<p>即使是同一种指令系统，如果要将不同的编译器/汇编器产生的目标代码连接在一起，也还需要对应用程序二进制接口（Application Binary Interface，ABI）做一些约定，本实验主要涉及过程调用和寄存器约定。RISC-V将寄存器分为四类：临时寄存器、保存寄存器、参数/返回值寄存器，以及特殊寄存器。参数寄存器用于调用者传递参数给被调用者，其中前2个参数寄存器与返回值寄存器共用。在被调用的子程序中使用的寄存器，如果是“保存寄存器”，则使用前须将寄存器值保存到栈中，返回前再恢复；如果是“临时寄存器”，则无需保存。返回地址通过x1寄存器传递给子程序，称为返回地址寄存器；如果子程序又要调用其他的子程序，则需要将返回上级程序的地址事先保存在栈中。RISC-V的栈生长方向是地址减小的方向，用x2寄存器作为栈指针寄存器。为了便于阅读，对32个寄存器根据他们的分类赋予了别名，如<a href="#tab-寄存器约定">表 1</a>所示。更多内容请阅读 <a href="https://github.com/riscv-non-isa/riscv-asm-manual/">RISC-V Assembly Programmer&#8217;s Manual</a>。</p>
+</div>
+<table id="tab-寄存器约定" class="tableblock frame-all grid-all fit-content">
+<caption class="title">表 1. RISC-V寄存器约定</caption>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">寄存器</th>
+<th class="tableblock halign-left valign-top">别名</th>
+<th class="tableblock halign-left valign-top">推荐用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zero</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">硬件零</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ra</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">return address，返回地址寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stack pointer，栈指针寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">global pointer，全局指针寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">thread pointer，线程指针寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">temporary/alternate link register，临时/可选链接寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x6-x7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t1-t2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">temporaries，临时寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s0/fp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">saved register/frame pointer，保存寄存器/帧指针寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">saved register，保存寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x10-x11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a0-a1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">function arguments/return values，参数/返回值寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x12-x17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a2-a7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">function arguments，参数寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x18-x27</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s2-s11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">saved register，保存寄存器</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x28-x31</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t3-t6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">temporaries，临时寄存器</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_熟悉ripes软件工具"><a class="anchor" href="#_熟悉ripes软件工具"></a>熟悉Ripes软件工具</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ripes是一个开源软件，具有源代码编辑、汇编/编译、模拟运行三大功能。Ripes发布在开源软件托管平台Github，安装和运行请参考<a href="https://github.com/mortbopet/Ripes">Ripes的Github项目首页</a>README，只需下载Release的可执行软件包，无需下载源码。本书使用的Release版本是V2.2.4。下面简单介绍Ripes的基本用法，更多用法请参考Ripes模拟器开源项目文档中的 <a href="https://github.com/mortbopet/Ripes/blob/master/docs/introduction.md"> Ripes Introduction</a>。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>如果你的电脑无法打开Ripes，最后的<a href="#appendix-A">附录</a>中介绍了其他的RISC-V汇编和模拟器，可以选择使用。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_1_熟悉编辑器和汇编器的使用"><a class="anchor" href="#_1_熟悉编辑器和汇编器的使用"></a>1. 熟悉编辑器和汇编器的使用</h3>
+<div class="paragraph">
+<p><span class="image"><img src="_images/L26-Editor标签.png" alt="L26 Editor标签" width="76" height="55"></span>点击左侧Editor标签，在Source code栏编写汇编语言程序，对应的右边Executable code栏将会显示对应汇编语言的机器指令的十六进制和二进制表示，也可以在右上角切换到Disassembled，显示机器指令及反汇编的结果。打开实验材料中的汇编语言程序<a href="#code-ex1">ex1.s</a>，如<a href="#img-编辑器和汇编器界面">图 1</a>。</p>
+</div>
+<div id="img-编辑器和汇编器界面" class="imageblock">
+<div class="content">
+<img src="_images/L26-img1.png" alt="L26 img1">
+</div>
+<div class="title">图 1. 编辑器和汇编器界面</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_用模拟器运行risc_v汇编语言程序"><a class="anchor" href="#_2_用模拟器运行risc_v汇编语言程序"></a>2. 用模拟器运行RISC-V汇编语言程序</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">（1）选择处理器</dt>
+<dd>
+<p>点击工具条的芯片图标，并在弹出窗口中选择第一个Single Cycle Processor，如<a href="#img-选择处理器界面">图 2</a>。
+<span class="image"><img src="_images/L26-Processor标签.png" alt="L26 Processor标签" width="76" height="55"></span>点击左侧的Processor标签，此时可以看到当前执行指令的数据通路图显示，各个寄存器的当前值，以及指令存储器的内容。</p>
+</dd>
+</dl>
+</div>
+<div id="img-选择处理器界面" class="imageblock">
+<div class="content">
+<img src="_images/L26-img2.png" alt="L26 img2">
+</div>
+<div class="title">图 2. 选择处理器界面</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">（2）用模拟器运行汇编语言程序，观察分析运行结果。</dt>
+<dd>
+<p>工具条上的仿真工具按钮 <span class="image"><img src="_images/L26-仿真工具按钮.png" alt="L26 仿真工具按钮" width="230"></span> 依次为①复位，②撤销一个时钟，③产生一个时钟，④以设定的时间间隔自动产生时钟，⑤快速运行。
+每点击 <span class="image"><img src="_images/L26-运行一个时钟按钮.png" alt="L26 运行一个时钟按钮" width="30"></span> 一次，运行一条指令，数据通路图显示正在执行指令，在右侧Resigters窗口可以查看上一条指令执行后各个寄存器的值。 注意观察每条指令执行时，数据通路各个部件有效的控制信号，帮助理解指令的执行；控制信号用颜色表示是否有效，绿点表示有效，红点则表示无效。如<a href="#img-模拟器运行界面">图 3</a>正在执行“beq x0 x0 loop”，Branch模块的Branch taken为绿色，表示将发生转移。</p>
+</dd>
+</dl>
+</div>
+<div id="img-模拟器运行界面" class="imageblock">
+<div class="content">
+<img src="_images/L26-img3.png" alt="L26 img3">
+</div>
+<div class="title">图 3. 模拟器运行界面</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">（3）显示更多的数据，分析数据通路上的信息流动。</dt>
+<dd>
+<p>点击View菜单的Show processor signal values <span class="image"><img src="_images/L26-View菜单.png" alt="L26 View菜单" width="236"></span>，数据通路图上可以显示每条路径上的数据，如<a href="#img-显示信号值">图 4</a>所示。</p>
+</dd>
+</dl>
+</div>
+<div id="img-显示信号值" class="imageblock">
+<div class="content">
+<img src="_images/L26-img4.png" alt="L26 img4">
+</div>
+<div class="title">图 4. 显示信号值</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_存储空间划分和loadstroe指令"><a class="anchor" href="#_3_存储空间划分和loadstroe指令"></a>3. 存储空间划分和Load/Stroe指令</h3>
+<div class="paragraph">
+<p>虽然RISC-V硬件的存储结构采用指令存储和数据存储分离的哈佛结构，但操作系统通常将指令存储器和数据存储器作为一个统一的存储空间进行管理，用代码段（text segment）和数据段（data segment）区分指令和数据。RISC-V约定预留x3寄存器指向数据段的起始地址，称作全局指针（global pointer），在汇编语言程序中，x3寄存器也可以用别名gp代替。Ripes模拟器在选择处理器的对话框中可以设置x3的值，如<a href="#img-选择处理器界面">图 2</a>的标记③所指的设置表示数据段的起始地址为0x10000000。因此，在使用Load/Stroe指令编写程序时，注意不要访问代码段的存储空间，以免意外修改了指令。</p>
+</div>
+<div class="paragraph">
+<p>要查看存储器内容，可以切换到Memory视图，在底部Go to section下拉列表框中选择要查看的存储器区域。若选择“.data”，则显示自0x10000000开始的数据存储器的内容，如<a href="#img-Memory视图">图 5</a>所示。</p>
+</div>
+<div id="img-Memory视图" class="imageblock">
+<div class="content">
+<img src="_images/L26-img5.png" alt="L26 img5">
+</div>
+<div class="title">图 5. Memory视图</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_输入输出设备"><a class="anchor" href="#_4_输入输出设备"></a>4. 输入输出设备</h3>
+<div class="paragraph">
+<p>Ripes还支持拨动开关等输入输出设备的仿真。使用方法大致如下。
+首先设置输入输出接口的起始地址，如<a href="#img-设置IO起始地址">图 6</a>，这里设置的地址要和程序代码中一致。</p>
+</div>
+<div id="img-设置IO起始地址" class="imageblock">
+<div class="content">
+<img src="_images/L26-img6.png" alt="L26 img6">
+</div>
+<div class="title">图 6. 设置IO起始地址</div>
+</div>
+<div class="paragraph">
+<p>然后在“I/O”标签页双击“Devices”中需要添加的设备，如“Switches”。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_使用c语言编译器"><a class="anchor" href="#_5_使用c语言编译器"></a>5. 使用C语言编译器</h3>
+<div class="paragraph">
+<p>Ripes通过外挂RISC-V C编译器将C语言程序转换为机器指令程序，之后就可以在模拟器上运行。具体方法请阅读Ripes文档<a href="https://github.com/mortbopet/Ripes/blob/master/docs/c_programming.md">“Building and Executing C programs with Ripes”</a>。大致步骤如下。
+（1）下载适合自己平台的预构建的RISC-V工具链<a href="#SFRT">[2]</a>，文件名中带有“elf-toolchain”或者“elf-gcc”的是包含C编译器的工具链，其中文件名中带有“w64-mingw32”的是适合64位Windows平台的；
+（2）在Ripes中注册（设置）上面的工具链，如<a href="#img-在Ripes中注册工具链">图 7</a>所示；
+（3）在Editor标签中选择Source code Input type为C Executable code，点击编译（锤子）按钮即可将编辑器中的C语言程序转换为可执行的机器指令，并显示在右侧的反汇编窗格中；
+（4）运行生成的汇编语言程序。</p>
+</div>
+<div id="img-在Ripes中注册工具链" class="imageblock">
+<div class="content">
+<img src="_images/L26-img7.png" alt="L26 img7">
+</div>
+<div class="title">图 7. 在Ripes中注册（设置）工具链</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>默认的编译包含了标准库支持代码，如果希望单步执行程序，则很难跟踪。在不需要标准库的情况下，可以设置“-nostdlib”编译参数，此时只有用户编写的 C 函数才会链接到生成的可执行文件中。程序的第一个函数将是可执行代码的入口点（可以没有main函数），因此，须确保源代码中定义的第一个函数是入口点函数。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如果想进一步了解<a href="#img-在Ripes中注册工具链">图 7</a>中gcc的参数，可参阅<a href="https://www.sifive.com/blog/all-aboard-part-1-compiler-args">RISC-V GCC参数解释</a>。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>如果你的电脑无法打开Ripes，最后的<a href="#appendix-A">附录</a>中介绍了一个C/C++在线编译工具——Compiler Explorer，可以选择使用。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验任务"><a class="anchor" href="#_实验任务"></a>实验任务</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_任务1熟悉汇编语言和ripes软件工具"><a class="anchor" href="#_任务1熟悉汇编语言和ripes软件工具"></a>任务1：熟悉汇编语言和Ripes软件工具</h3>
+<div class="paragraph">
+<p>在Ripes中运行实验材料中的汇编语言程序ex1.s，具体要求见作业。</p>
+</div>
+<div id="code-ex1" class="listingblock">
+<div class="title">ex1.s</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asm hljs" data-lang="asm">.data
+    .word 1,3,5,7,9
+.text
+    lui x3, 0x10000
+    add x9, x3, x0  
+    add x10, x0, x0 
+    add x11, x0, x0 
+    addi x13,x0, 5  
+Loop: 
+    bge x11,x13,Done
+    lw x12, 0(x9)   
+    add x10,x10,x12 
+    addi x9, x9,4   
+    addi x11,x11,1  
+    beq x0,x0,Loop  
+Done:
+    sw x10, 0(x9)   
+    addi x17, x0, 10 
+    ecall  # x17=10表示程序退出</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该程序定义一个数组A，在循环中对数组A的各个元素求和。最后一条ecall指令是环境调用（Environment calls）指令，也称作系统调用（System calls），通过对x17寄存器赋予不同的值选择不同的调用功能，所支持的功能可查看Help菜单下的System calls菜单项，更详细的用法可阅读Ripes文档中的ecall文档 <a href="https://github.com/mortbopet/Ripes/blob/master/docs/ecalls.md">Supported Environment Calls</a>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_任务2编写斐波那契数列计算程序"><a class="anchor" href="#_任务2编写斐波那契数列计算程序"></a>任务2：编写斐波那契数列计算程序</h3>
+<div class="paragraph">
+<p>用RISC-V汇编语言编写一个程序，计算出斐波那契数列项，具体要求见作业。用模拟器分析指令的执行结果，调试该程序直至成功。</p>
+</div>
+<div class="paragraph">
+<p>斐波那契数列（Fibonacci sequence）是指这样一个数列：{1,1,2,3,5,8,13,21&#8230;&#8203;}，它的首项为1，第2项也为1，且从第3项起,每一项都等于它前两项之和。用符号定义如下:F(1)=1，F(2)=1， F(n)=F(n-1)+F(n 2)（n ≥ 3，n ∈ N*）。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_任务3编写汇编语言子程序对数据进行位操作"><a class="anchor" href="#_任务3编写汇编语言子程序对数据进行位操作"></a>任务3：编写汇编语言子程序对数据进行位操作</h3>
+<div class="paragraph">
+<p>实验材料中的ex3.s给出了一部分汇编语言程序，其中主程序调用4个位操作子程序，主程序从拨动开关Switches0读入8位数据，从Switches1读入操作类型和操作的位。</p>
+</div>
+<div class="listingblock">
+<div class="title">ex3.s</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asm hljs" data-lang="asm">.equ IO_BASE -2048
+.equ SW0_OFFSET 0
+.equ SW1_OFFSET 4
+.data
+str_origin: .string "\nOrigin = "
+str_result: .string "\nResult = "
+str_get:    .string "\nGet bit "
+str_set:    .string "\nSet bit "
+str_clr:    .string "\nClear bit "
+str_flip:   .string "\nFlip bit "
+.text
+start:
+    li   s0, IO_BASE
+    lw   s1, SW0_OFFSET(s0)
+    lw   s2, SW1_OFFSET(s0)
+    mv   a0, s1
+    andi a1, s2, 0x007
+    srli s2, s2, 6
+    slli s2, s2, 3
+    lui  s5, %hi(jmplist)
+    addi s5, s5, %lo(jmplist) 
+    add  s2, s2, s5
+    jr   s2
+
+jmplist:
+    jal  get_bit
+    j    print  
+    jal  set_bit
+    j    print  
+    jal  clr_bit
+    j    print  
+    jal  flip_bit
+    j    print  
+print:
+    mv   s3, a0
+    la   a0 str_origin
+    jal  print_str
+    mv   a0, s1
+    jal  print_bin
+    la   a0 str_result
+    jal  print_str
+    mv   a0, s3
+    jal  print_bin
+    li   a7, 10  #Exit
+    ecall  
+
+print_str:
+    li a7, 4
+    ecall
+    ret
+
+print_int:
+    li a7, 1
+    ecall
+    ret
+
+print_bin:
+    li a7, 35
+    ecall
+    ret
+
+get_bit:
+    addi sp, sp, -8
+    sw   ra, 4(sp)
+    sw   s1, 0(sp)
+    li   s1, 1
+    sll  s1, s1, a1
+    and  s1, a0, s1
+    la   a0 str_get
+    jal  print_str
+    mv   a0, a1
+    jal  print_int
+    mv   a0, s1
+    lw   s1, 0(sp)
+    lw   ra, 4(sp) 
+    addi sp, sp, 8
+    ret
+
+set_bit:
+    // 在这里编写你的程序
+
+clr_bit:
+    // 在这里编写你的程序
+
+flip_bit: 
+    // 在这里编写你的程序</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>读懂给出的主程序和get_bit子程序以及print子程序，完成set_bit、clr_bit和flip_bit三个子程序，具体要求见作业。完成本任务可以达到的训练目标：
+（1）了解开关输入程序；
+（2）熟悉子程序调用中的参数和返回值传递；
+（3）熟悉位操作。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="appendix-A"><a class="anchor" href="#appendix-A"></a>附录 A: 其他RISC-V工具</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>这里简单介绍另外的RISC-V模拟器和C编译器。要了解更多的RISC-V软件工具，可访问<a href="https://riscv.org">RISC-V官方网站</a>，模拟器在“RISC-V Exchange: Available Software”页面的Simulators分类；也可访问RISC-V官方的Github仓库：<a href="https://github.com/riscv-collab">RISC-V Software Collaboration</a>。</p>
+</div>
+<div class="sect2">
+<h3 id="_1_risc_v_venus_simulator"><a class="anchor" href="#_1_risc_v_venus_simulator"></a>1. RISC-V Venus Simulator</h3>
+<div class="paragraph">
+<p>Venus Simulator是 Stephan Kaminsky在加州大学伯克利分校工作期间利用业余时间开发的RISC-V汇编器和模拟器<a href="#CS61C">[3]</a>。它是一个Visual Studio Code插件，可以在VS CODE中编写汇编语言源程序，然后汇编和运行，效果如<a href="#img-Venus插件界面">图 8</a>。另外也有一个<a href="https://thaumicmekanism.github.io/venus">web版Venus</a>，可以在浏览器中运行，无需安装。</p>
+</div>
+<div id="img-Venus插件界面" class="imageblock">
+<div class="content">
+<img src="_images/L26-img8.png" alt="L26 img8">
+</div>
+<div class="title">图 8. VS CODE中的Venus</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_c语言程序转换为risc_v汇编语言程序的web版"><a class="anchor" href="#_2_c语言程序转换为risc_v汇编语言程序的web版"></a>2. C语言程序转换为RISC-V汇编语言程序的Web版</h3>
+<div class="paragraph">
+<p>Ripes项目页面介绍了一个C/C++在线编译工具——Godbolt的<a href="https://godbolt.org/Matt">Compiler Explorer</a>。在 Compiler Explorer 中，选择“ RISC-V rv32gc clang (trunk) ”，如<a href="#img-CompilerExplorer">图 9</a>。该选项生成的汇编代码去除了调试符号、程序入口点（没有main函数）等，能够比较直接地了解C语句和汇编语言程序的对应。通过编写简短的C程序，查看生成的汇编指令，有助于理解RISC-V指令的用途。如果要将生成的汇编代码拷贝到Ripes中运行，仍然需要做一些改动，详情见Ripes项目Wiki页面的“Adapting Compiler Explorer generated RISC V assembly code”的说明。</p>
+</div>
+<div id="img-CompilerExplorer" class="imageblock">
+<div class="content">
+<img src="_images/L26-img9.png" alt="L26 img9">
+</div>
+<div class="title">图 9. Compiler Explorer</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_参考链接"><a class="anchor" href="#_参考链接"></a>参考链接</h2>
+<div class="sectionbody">
+<div class="ulist bibliography">
+<ul class="bibliography">
+<li>
+<p><a id="crva"></a>[1] RISC-V手册（中文版）. <a href="http://crva.ict.ac.cn/wjxz/202202/t20220217_19660.html" class="bare">http://crva.ict.ac.cn/wjxz/202202/t20220217_19660.html</a></p>
+</li>
+<li>
+<p><a id="SFRT"></a>[2]SiFive Freedom RISC-V Tools. <a href="https://github.com/sifive/freedom-tools/releases/" class="bare">https://github.com/sifive/freedom-tools/releases/</a></p>
+</li>
+<li>
+<p><a id="CS61C"></a>[3]CS 61C at UC Berkeley with Nick Weaver &amp; Jack Kolb - Spring 2021. <a href="https://inst.eecs.berkeley.edu/~cs61c/sp21/labs/lab03/" class="bare">https://inst.eecs.berkeley.edu/~cs61c/sp21/labs/lab03/</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
