@@ -122,31 +122,23 @@
 <ul>
 <li>
 <p>课程名称</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>对于学分课程，建议与学生教务系统选课名称一致。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>是否开放课程</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>开放课程会在首页课程封面上有“开放课程”字样。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>开课时间</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>设置开课时间后课程才会出现在首页。</p>
+</div>
+</li>
+</ul>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -169,51 +161,35 @@
 <ul>
 <li>
 <p>项目名称</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>项目的名称。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>项目类型</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
-<p>CPU实验或逻辑电路实验。应根据所采用的工程框架选择，如果源代码的工程框架是逻辑电路，即使设计的是CPU，也要选择逻辑电路。</p>
+<p>CPU实验或逻辑电路实验。应根据所采用的工程框架选择，例如源代码的工程框架是逻辑电路，即使实验内容是设计CPU，也要选择逻辑电路。逻辑电路实验与CPU实验的验证操作界面不同。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>截止时间</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>超过截止时间后，仍然可以进入实验界面做实验，但不能提交。如果不设置截止时间（空着），则一直可以提交。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>补交截止时间</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>如果空着，表示不允许补交。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>学生端隐藏</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>项目准备阶段建议设置为“是”，学生端就看不到该项目，避免学生误操作。</p>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -239,16 +215,15 @@
 <ul>
 <li>
 <p>任务名称</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>任务的名称。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>任务类型</p>
+<div class="paragraph">
+<p>有四种任务类型。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -289,51 +264,35 @@
 <ul>
 <li>
 <p>工程框架</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>该框架决定云端编译所用的文件，也和项目类型有关。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>入口文件</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>工程框架有默认的入口文件，如逻辑电路实验框架的默认入口文件是<em>VirtualBoard.sv</em>，该默认文件是只有端口声明的空模块。如果需要给学生提供一些初始代码（如范例或部分代码），可以上传文件替换默认的入口文件。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>是否允许编译</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>如果允许，编译按钮将出现在学生界面上。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>是否考核</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>考核功能目前尚未开发。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>任务权重占比</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>目前没用，未来用于计算项目的得分。</p>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -342,31 +301,23 @@
 <ul>
 <li>
 <p>电路文件</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>如果是需要学生设计电路的任务，应选择“学生上传”。如果是演示，或者不要求学生设计电路，应选择“自动加载”，选自动加载时教师需要上传rbf文件。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>虚拟面板</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>可选择“学生上传”或“自动加载”。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>是否考核电路文件</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>如果设置为“是”，应点击右上角“生成金数据”制作电路测试数据；或者点击“上传文件”上传之前保存的金数据和金答案。学生在实验界面点提交后，系统会根据教师制作的“金数据”自动对学生提交的电路进行测试。</p>
+</div>
+</li>
+</ul>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -384,31 +335,23 @@
 <ul>
 <li>
 <p>是否考核考核验证记录</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>如果设置为“是”，学生界面会出现“记录”窗口，允许学生记录验证过程，之后教师可以回放学生的验证过程并评分。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>分值</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>目前没啥用。未来可能删除该设置项。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>任务权重占比</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>目前也没用，未来用于计算项目的得分。</p>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -423,31 +366,23 @@
 <ul>
 <li>
 <p>教学班名称</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>教学班的名称。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>免审核</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>是指报名免审核。学生报名该课程的该教学班时，是否需要教师审核。该设置只对开放课程有效。</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>添加学生</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>教学班的学生可以由教师添加，也可以由学生报名、教师审核。点击教学班列表的“查看学生”，再点击“新增学生”，可以手动选择学生，也可以从Excel表格批量导入学生，导入前可在导入界面下载Excel模板。</p>
+</div>
+</li>
+</ul>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -473,11 +408,11 @@
 </li>
 <li>
 <p>在课程的“基本信息”中填上“发布时间”，课程将出现在首页。</p>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>如果已经导入学生名单，课程发布后学生可在“我的课程”中看到该课程；尚未加入该课程任何教学班的学生可以点击“立即报名”申请加入教学班。</p>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -491,9 +426,30 @@
 </div>
 </div>
 <div class="sect2">
+<h3 id="_重置学生密码"><a class="anchor" href="#_重置学生密码"></a>重置学生密码</h3>
+<div class="paragraph">
+<p>如果有学生忘记密码，教师在教学班的“查看学生”中点击“重置密码”，可以恢复初始密码。</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_批阅"><a class="anchor" href="#_批阅"></a>批阅</h3>
 <div class="paragraph">
-<p>点击任务列表的“电路批阅”、“记录批阅”按钮可进入批阅界面。“设计批阅”尚未开发。</p>
+<p>点击任务列表的“电路批阅”或“记录批阅”按钮可进入批阅界面。电路测试由系统自动评分，验证记录由教师人工评分。批阅后可导出成绩为Excel表格。</p>
+</div>
+<div class="paragraph">
+<p>“设计批阅”尚未开发。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+即使任务的设置中没有使能考核开关，仍可以进入批阅界面。未来会改进，屏蔽未设置考核的批阅入口。
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

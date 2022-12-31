@@ -146,21 +146,105 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <span class="nav-text">SystemVerilog和逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">SystemVerilog概述</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">组合逻辑电路的SystemVerilog描述（上）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">三态门和多路器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">组合逻辑电路的SystemVerilog描述（下）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">译码器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">时序逻辑电路的SystemVerilog描述（上）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">寄存器堆实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">时序逻辑电路的SystemVerilog描述（中）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">流水灯和移位寄存器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">时序逻辑电路的SystemVerilog描述（下）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">计数器和分频器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">有限状态机的SystemVerilog描述</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">彩灯控制器</span>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">加法器和比较器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">算术逻辑单元实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">存储器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">RISC-V汇编语言实验</span>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现ADDI指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现整数运算指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现访存指令和简单IO</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现分支指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">初步实现流水线</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">支持27条指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线数据冲突</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线控制冲突</span>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -221,6 +305,149 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
+<p>编写TCL脚本文件</p>
+<div class="paragraph">
+<p>实验材料的<em>LabProject</em>文件夹中提供了<em>create_project_pocket.tcl</em>文件。或者将下面的TCL脚本复制到文本编辑器中。</p>
+</div>
+<details>
+<summary class="title">点击此行展开TCL脚本</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-tcl hljs" data-lang="tcl"># 创建工程
+project_new -revision Lab -overwrite Lab
+
+# 添加源文件
+set_global_assignment -name VERILOG_FILE LabBoard_TOP.v
+set_global_assignment -name QIP_FILE pll.qip
+set_global_assignment -name VERILOG_FILE GlobalCLK.v
+set_global_assignment -name QXP_FILE JutagScanChain.qxp
+
+# 添加时序约束文件
+set_global_assignment -name SDC_FILE RemotePocket.sdc
+
+# 设置工程的顶层模块
+set_global_assignment -name TOP_LEVEL_ENTITY LabBoard_TOP
+
+#------------------GLOBAL--------------------#
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE6E22C8
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name ENABLE_INIT_DONE_OUTPUT OFF
+
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED"
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DATA0_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DATA1_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_FLASH_NCE_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DCLK_AFTER_CONFIGURATION "USE AS REGULAR IO"
+
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY .\\output
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_global_assignment -name ON_CHIP_BITSTREAM_DECOMPRESSION OFF
+set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
+
+# 并行编译可使用的最大处理器数
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+
+
+#------------------ 引脚约束 --------------------#
+
+# RESET按键
+set_location_assignment PIN_110  -to RESET_N
+
+#DEBIG IO
+set_location_assignment PIN_125  -to JTCK
+set_location_assignment PIN_127  -to JTMS
+set_location_assignment PIN_120  -to JTDI
+set_location_assignment PIN_119  -to JTDO
+
+#时钟引脚 50M
+set_location_assignment	PIN_88	-to CLOCK_50 
+
+
+#LED对应的引脚
+set_location_assignment	PIN_38	-to LEDR[0]
+set_location_assignment	PIN_39	-to LEDR[1]
+set_location_assignment	PIN_42	-to LEDR[2]
+set_location_assignment	PIN_43	-to LEDR[3]
+set_location_assignment	PIN_44	-to LEDR[4]
+set_location_assignment	PIN_46	-to LEDR[5]
+set_location_assignment	PIN_49	-to LEDR[6]
+set_location_assignment	PIN_50	-to LEDR[7]
+set_location_assignment	PIN_51	-to LEDR[8]
+set_location_assignment	PIN_52	-to LEDR[9]
+set_location_assignment	PIN_53	-to LEDR[10]
+set_location_assignment	PIN_54	-to LEDR[11]
+set_location_assignment	PIN_55	-to LEDR[12]
+set_location_assignment	PIN_58	-to LEDR[13]
+set_location_assignment	PIN_59	-to LEDR[14]
+set_location_assignment	PIN_60	-to LEDR[15]
+
+set_location_assignment	PIN_65	-to LEDG[0]
+set_location_assignment	PIN_66	-to LEDG[1]
+set_location_assignment	PIN_67	-to LEDG[2]
+set_location_assignment	PIN_68	-to LEDG[3]
+set_location_assignment	PIN_69	-to LEDG[4]
+set_location_assignment	PIN_70	-to LEDG[5]
+set_location_assignment	PIN_71	-to LEDG[6]
+set_location_assignment	PIN_72	-to LEDG[7]
+
+#按键对应的引脚
+set_location_assignment	PIN_34	 -to KEY[0]
+set_location_assignment	PIN_33	 -to KEY[1]
+set_location_assignment	PIN_32   -to KEY[2]
+set_location_assignment	PIN_31   -to KEY[3]
+
+#开关对应的引脚
+# set_location_assignment	PIN_30   -to SW[0]
+# set_location_assignment	PIN_28   -to SW[1]
+# set_location_assignment	PIN_11   -to SW[2]
+# set_location_assignment	PIN_10   -to SW[3]
+# set_location_assignment	PIN_7    -to SW[4]
+# set_location_assignment	PIN_3    -to SW[5]
+# set_location_assignment	PIN_2    -to SW[6]
+# set_location_assignment	PIN_1    -to SW[7]
+
+#数码管对应的引脚
+#数码管7段+小数点
+# set_location_assignment	PIN_98	-to SEG[0]
+# set_location_assignment	PIN_99	-to SEG[1]
+# set_location_assignment	PIN_100	-to SEG[2]
+# set_location_assignment	PIN_101	-to SEG[3]
+# set_location_assignment	PIN_103	-to SEG[4]
+# set_location_assignment	PIN_104	-to SEG[5]
+# set_location_assignment	PIN_105	-to SEG[6]
+# set_location_assignment	PIN_106	-to SEG[7]
+
+#8位数码管的8个控制位
+# set_location_assignment	PIN_73	-to SEL[0]
+# set_location_assignment	PIN_74	-to SEL[1]
+# set_location_assignment	PIN_75  -to SEL[2]
+# set_location_assignment	PIN_76	-to SEL[3]
+# set_location_assignment	PIN_84	-to SEL[4] 
+# set_location_assignment	PIN_85	-to SEL[5]
+# set_location_assignment	PIN_86	-to SEL[6]
+# set_location_assignment	PIN_87	-to SEL[7]
+
+# 弱上拉
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTMS
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTDI
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTDO
+
+#--------------------------------------------#
+# 将所有约束写入qsf文件
+export_assignments
+
+# 关闭工程
+# project_close</code></pre>
+</div>
+</div>
+</div>
+</details>
+</li>
+<li>
 <p>启动 Quartus Prime，点击 View ➤ Tcl Console 菜单项打开 “Tcl Console” 子窗口，最后一行可以输入 TCL 命令。</p>
 </li>
 <li>
@@ -228,6 +455,9 @@
 </li>
 <li>
 <p>输入命令 <code>source ./create_project_pocket.tcl</code> 。 如果出现Select Family对话框，选择Cyclone IV E。之后将根据 tcl 文件中的脚本命令自动创建工程并打开在Project Navigate子窗口。</p>
+</li>
+</ol>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -235,13 +465,10 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-create_project_pocket.tcl 是用于远程实验板和口袋实验板的脚本文件，如果是DE2-115实验板，替换成 create_project_de2-115.tcl。
+<em>create_project_pocket.tcl</em>是用于远程实验板和口袋实验板的脚本文件。如果是DE2-115实验板，替换成实验材料中的<em>create_project_de2-115.tcl</em>。
 </td>
 </tr>
 </table>
-</div>
-</li>
-</ol>
 </div>
 </div>
 </div>

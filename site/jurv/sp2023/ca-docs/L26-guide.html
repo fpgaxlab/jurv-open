@@ -146,21 +146,105 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <span class="nav-text">SystemVerilog和逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">SystemVerilog概述</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">组合逻辑电路的SystemVerilog描述（上）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">三态门和多路器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">组合逻辑电路的SystemVerilog描述（下）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">译码器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">时序逻辑电路的SystemVerilog描述（上）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">寄存器堆实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">时序逻辑电路的SystemVerilog描述（中）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">流水灯和移位寄存器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">时序逻辑电路的SystemVerilog描述（下）</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">计数器和分频器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">有限状态机的SystemVerilog描述</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">彩灯控制器</span>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">加法器和比较器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">算术逻辑单元实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">存储器实验</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">RISC-V汇编语言实验</span>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现ADDI指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现整数运算指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现访存指令和简单IO</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现分支指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">初步实现流水线</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">支持27条指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线数据冲突</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线控制冲突</span>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -351,11 +435,11 @@
 <div class="sect2">
 <h3 id="_1_熟悉编辑器和汇编器的使用"><a class="anchor" href="#_1_熟悉编辑器和汇编器的使用"></a>1. 熟悉编辑器和汇编器的使用</h3>
 <div class="paragraph">
-<p><span class="image"><img src="_images/L26-Editor标签.png" alt="L26 Editor标签" width="76" height="55"></span>点击左侧Editor标签，在Source code栏编写汇编语言程序，对应的右边Executable code栏将会显示对应汇编语言的机器指令的十六进制和二进制表示，也可以在右上角切换到Disassembled，显示机器指令及反汇编的结果。打开实验材料中的汇编语言程序<a href="#code-ex1">ex1.s</a>，如<a href="#img-编辑器和汇编器界面">图 1</a>。</p>
+<p><span class="image"><img src="_images/L26-Editor标签.png" alt="image" width="74" height="53"></span>点击左侧Editor标签，在Source code栏编写汇编语言程序，对应的右边Executable code栏将会显示对应汇编语言的机器指令的十六进制和二进制表示，也可以在右上角切换到Disassembled，显示机器指令及反汇编的结果。打开实验材料中的汇编语言程序<a href="#code-ex1">ex1.s</a>，如<a href="#img-编辑器和汇编器界面">图 1</a>。</p>
 </div>
 <div id="img-编辑器和汇编器界面" class="imageblock">
 <div class="content">
-<img src="_images/L26-img1.png" alt="L26 img1">
+<img src="_images/L26-img1.png" alt="image" width="714" height="466">
 </div>
 <div class="title">图 1. 编辑器和汇编器界面</div>
 </div>
@@ -366,14 +450,16 @@
 <dl>
 <dt class="hdlist1">（1）选择处理器</dt>
 <dd>
-<p>点击工具条的芯片图标，并在弹出窗口中选择第一个Single Cycle Processor，如<a href="#img-选择处理器界面">图 2</a>。
-<span class="image"><img src="_images/L26-Processor标签.png" alt="L26 Processor标签" width="76" height="55"></span>点击左侧的Processor标签，此时可以看到当前执行指令的数据通路图显示，各个寄存器的当前值，以及指令存储器的内容。</p>
+<p>点击工具条的芯片图标，并在弹出窗口中选择第一个Single Cycle Processor，如<a href="#img-选择处理器界面">图 2</a>。</p>
 </dd>
 </dl>
 </div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/L26-Processor标签.png" alt="image" width="68" height="54"></span>点击左侧的Processor标签，此时可以看到当前执行指令的数据通路图显示，各个寄存器的当前值，以及指令存储器的内容。</p>
+</div>
 <div id="img-选择处理器界面" class="imageblock">
 <div class="content">
-<img src="_images/L26-img2.png" alt="L26 img2">
+<img src="_images/L26-img2.png" alt="image" width="682" height="410">
 </div>
 <div class="title">图 2. 选择处理器界面</div>
 </div>
@@ -381,14 +467,14 @@
 <dl>
 <dt class="hdlist1">（2）用模拟器运行汇编语言程序，观察分析运行结果。</dt>
 <dd>
-<p>工具条上的仿真工具按钮 <span class="image"><img src="_images/L26-仿真工具按钮.png" alt="L26 仿真工具按钮" width="230"></span> 依次为①复位，②撤销一个时钟，③产生一个时钟，④以设定的时间间隔自动产生时钟，⑤快速运行。
-每点击 <span class="image"><img src="_images/L26-运行一个时钟按钮.png" alt="L26 运行一个时钟按钮" width="30"></span> 一次，运行一条指令，数据通路图显示正在执行指令，在右侧Resigters窗口可以查看上一条指令执行后各个寄存器的值。 注意观察每条指令执行时，数据通路各个部件有效的控制信号，帮助理解指令的执行；控制信号用颜色表示是否有效，绿点表示有效，红点则表示无效。如<a href="#img-模拟器运行界面">图 3</a>正在执行“beq x0 x0 loop”，Branch模块的Branch taken为绿色，表示将发生转移。</p>
+<p>工具条上的仿真工具按钮 <span class="image"><img src="_images/L26-仿真工具按钮.png" alt="image" width="139" height="18"></span> 依次为①复位，②撤销一个时钟，③产生一个时钟，④以设定的时间间隔自动产生时钟，⑤快速运行。
+每点击 <span class="image"><img src="_images/L26-运行一个时钟按钮.png" alt="image" width="19" height="16"></span> 一次，运行一条指令，数据通路图显示正在执行指令，在右侧Resigters窗口可以查看上一条指令执行后各个寄存器的值。 注意观察每条指令执行时，数据通路各个部件有效的控制信号，帮助理解指令的执行；控制信号用颜色表示是否有效，绿点表示有效，红点则表示无效。如<a href="#img-模拟器运行界面">图 3</a>正在执行“beq x0 x0 loop”，Branch模块的Branch taken为绿色，表示将发生转移。</p>
 </dd>
 </dl>
 </div>
 <div id="img-模拟器运行界面" class="imageblock">
 <div class="content">
-<img src="_images/L26-img3.png" alt="L26 img3">
+<img src="_images/L26-img3.png" alt="image" width="725" height="359">
 </div>
 <div class="title">图 3. 模拟器运行界面</div>
 </div>
@@ -396,13 +482,13 @@
 <dl>
 <dt class="hdlist1">（3）显示更多的数据，分析数据通路上的信息流动。</dt>
 <dd>
-<p>点击View菜单的Show processor signal values <span class="image"><img src="_images/L26-View菜单.png" alt="L26 View菜单" width="236"></span>，数据通路图上可以显示每条路径上的数据，如<a href="#img-显示信号值">图 4</a>所示。</p>
+<p>点击View菜单的Show processor signal values <span class="image"><img src="_images/L26-View菜单.png" alt="image" width="123" height="38"></span>，数据通路图上可以显示每条路径上的数据，如<a href="#img-显示信号值">图 4</a>所示。</p>
 </dd>
 </dl>
 </div>
 <div id="img-显示信号值" class="imageblock">
 <div class="content">
-<img src="_images/L26-img4.png" alt="L26 img4">
+<img src="_images/L26-img4.png" alt="image" width="751" height="223">
 </div>
 <div class="title">图 4. 显示信号值</div>
 </div>
@@ -417,7 +503,7 @@
 </div>
 <div id="img-Memory视图" class="imageblock">
 <div class="content">
-<img src="_images/L26-img5.png" alt="L26 img5">
+<img src="_images/L26-img5.png" alt="image" width="747" height="487">
 </div>
 <div class="title">图 5. Memory视图</div>
 </div>
@@ -430,7 +516,7 @@
 </div>
 <div id="img-设置IO起始地址" class="imageblock">
 <div class="content">
-<img src="_images/L26-img6.png" alt="L26 img6">
+<img src="_images/L26-img6.png" alt="image" width="481" height="205">
 </div>
 <div class="title">图 6. 设置IO起始地址</div>
 </div>
@@ -449,7 +535,7 @@
 </div>
 <div id="img-在Ripes中注册工具链" class="imageblock">
 <div class="content">
-<img src="_images/L26-img7.png" alt="L26 img7">
+<img src="_images/L26-img7.png" alt="image" width="573" height="463">
 </div>
 <div class="title">图 7. 在Ripes中注册（设置）工具链</div>
 </div>
@@ -650,7 +736,7 @@ flip_bit:
 </div>
 <div id="img-Venus插件界面" class="imageblock">
 <div class="content">
-<img src="_images/L26-img8.png" alt="L26 img8">
+<img src="_images/L26-img8.png" alt="image" width="720" height="405">
 </div>
 <div class="title">图 8. VS CODE中的Venus</div>
 </div>
@@ -662,7 +748,7 @@ flip_bit:
 </div>
 <div id="img-CompilerExplorer" class="imageblock">
 <div class="content">
-<img src="_images/L26-img9.png" alt="L26 img9">
+<img src="_images/L26-img9.png" alt="image" width="717" height="419">
 </div>
 <div class="title">图 9. Compiler Explorer</div>
 </div>
