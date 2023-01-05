@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>前言 :: 计算机组成与CPU设计实验</title>
+    <title>前言 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -12,7 +12,7 @@
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="../..">计算机组成与CPU设计实验</a>
+      <a class="navbar-item" href="../..">RISC-V CPU设计实验教程</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -53,7 +53,7 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">计算机组成与CPU设计实验</a></h3>
+    <h3 class="title"><a href="index.html">RISC-V CPU设计实验教程</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -73,10 +73,10 @@
   </li>
   <li class="nav-item" data-depth="0">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">实验环境</span>
+    <span class="nav-text">实验工具和环境</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="L02-lab-tools.html">实验环境概述</a>
+    <a class="nav-link" href="L02-lab-tools.html">实验工具和环境概述</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -95,9 +95,6 @@
     <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
   </li>
 </ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="L01-guide.html#验证设计">设计的实验验证</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -253,23 +250,23 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">计算机组成与CPU设计实验</span>
+    <span class="title">RISC-V CPU设计实验教程</span>
     <span class="version">sp2023</span>
   </div>
   <ul class="components">
-    <li class="component is-current">
-      <a class="title" href="index.html">计算机组成与CPU设计实验</a>
-      <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="index.html">sp2023</a>
-        </li>
-      </ul>
-    </li>
     <li class="component">
       <a class="title" href="../../teach/index.html">FPGA实验云 ● 教师指南</a>
       <ul class="versions">
         <li class="version is-latest">
           <a href="../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">sp2023</a>
         </li>
       </ul>
     </li>
@@ -284,7 +281,7 @@
   <a href="index.html" class="home-link is-current"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">计算机组成与CPU设计实验</a></li>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
     <li><a href="index.html">前言</a></li>
   </ul>
 </nav>
@@ -296,7 +293,7 @@
 <article class="doc">
 <h1 class="page">前言</h1>
 <div class="paragraph">
-<p>从2019年秋季学期开始，我们在计算机类本科实验教学中引入RISC-V CPU设计的内容，到现在已经经过了五轮教学实践的不断改进完善，实验方案和实验项目已经趋于稳定。我们决定将<a href="http://fpga-lab.gitee.io/jurv-open">实验指导</a>和参考设计的代码按照<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>开源，实验代码和相关资源发布在开源项目托管网站，网址是<a href="https://gitee.com/fpga-lab/jurv-open" class="bare">https://gitee.com/fpga-lab/jurv-open</a>。</p>
+<p>从2019年秋季学期开始，我们在计算机类本科实验教学中引入RISC-V CPU设计的内容，到现在已经经过了五轮教学实践的不断改进完善，实验方案和实验项目已经趋于稳定。我们决定将本书和参考设计的代码按照<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>开源，实验代码和相关资源发布在开源项目托管网站，网址是<a href="https://gitee.com/fpga-lab/jurv-open" class="bare">https://gitee.com/fpga-lab/jurv-open</a>。</p>
 </div>
 <div class="paragraph">
 <p>这套实验主要是面向“计算机组成原理”课程。这门课程一向被认为是一门比较难学的课程，除了内容庞杂、考题灵活多变等原因外，缺少与理论教学内容相一致的实验设计是一个重要因素。在引入RISC-V之前，我们曾开发了JUC系列微程序控制的教学模型计算机（见开源项目<a href="https://gitee.com/fpga-lab/juc3-open">openJUC3</a>），2010年起在教学中使用，印证了我们“从设计的角度理解计算机的组成和工作原理”的教学思想。当年学生对课程设计的认可给了我们很大的鼓励，成为后来我们继续开发RISC-V系列实验的动力。</p>
@@ -312,6 +309,9 @@
 </div>
 <div class="paragraph">
 <p>最后，给学员提一点额外的要求。您完成的实验代码，希望不要在博客、开源网站等网站上公开。如上所述，这些实验项目经过几年的改进已经趋于稳定，会在学校的教学中继续使用，虽然每年会有一些细节完善，但可能不会有太大的变化。您可以在博客上发表相关的内容，但希望您不要将答案公开。既要给学弟学妹们指路，也要让他们有路可走 (◠‿◠)。</p>
+</div>
+<div class="paragraph">
+<p>欢迎读者提出改进意见。可以在开源项目托管网站发issue讨论，也可以直接给我发邮件。</p>
 </div>
 <div class="paragraph text-right">
 <p>作者&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</p>

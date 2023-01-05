@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: 计算机组成与CPU设计实验</title>
+    <title>实验工具和环境概述 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -12,7 +12,7 @@
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="../..">计算机组成与CPU设计实验</a>
+      <a class="navbar-item" href="../..">RISC-V CPU设计实验教程</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -53,7 +53,7 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">计算机组成与CPU设计实验</a></h3>
+    <h3 class="title"><a href="index.html">RISC-V CPU设计实验教程</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -73,10 +73,10 @@
   </li>
   <li class="nav-item" data-depth="0">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">实验环境</span>
+    <span class="nav-text">实验工具和环境</span>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="L02-lab-tools.html">实验环境概述</a>
+    <a class="nav-link" href="L02-lab-tools.html">实验工具和环境概述</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -95,9 +95,6 @@
     <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
   </li>
 </ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="L01-guide.html#验证设计">设计的实验验证</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -253,23 +250,23 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">计算机组成与CPU设计实验</span>
+    <span class="title">RISC-V CPU设计实验教程</span>
     <span class="version">sp2023</span>
   </div>
   <ul class="components">
-    <li class="component is-current">
-      <a class="title" href="index.html">计算机组成与CPU设计实验</a>
-      <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="index.html">sp2023</a>
-        </li>
-      </ul>
-    </li>
     <li class="component">
       <a class="title" href="../../teach/index.html">FPGA实验云 ● 教师指南</a>
       <ul class="versions">
         <li class="version is-latest">
           <a href="../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">sp2023</a>
         </li>
       </ul>
     </li>
@@ -284,9 +281,9 @@
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">计算机组成与CPU设计实验</a></li>
-    <li>实验环境</li>
-    <li><a href="L02-lab-tools.html">实验环境概述</a></li>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li>实验工具和环境</li>
+    <li><a href="L02-lab-tools.html">实验工具和环境概述</a></li>
   </ul>
 </nav>
 </div>
@@ -295,23 +292,82 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
+<h1 class="page">实验工具和环境概述</h1>
 <div class="sect1">
-<h2 id="_实验环境"><a class="anchor" href="#_实验环境"></a>实验环境</h2>
+<h2 id="_fpga实验板"><a class="anchor" href="#_fpga实验板"></a>FPGA实验板</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>基于FPGA的数字硬件实验的过程，大致上可以分为设计和验证两个阶段。历史上有两大FPGA制造商：Altera公司和Xilinx公司，现在已分别纳入Intel公司和AMD公司，设计阶段的编译工具采用这两大公司的软件。验证阶段的实验软件由课程支持团队开发，提供跨平台的软硬件实验环境。这里的“跨平台”有两方面含义，一是实验软件同时支持线上和线下方式，二是实验硬件同时支持两大主流FPGA厂商的芯片。</p>
+<p>FPGA（Field Programmable Gate Arrays）是一种可编程的逻辑电路，用户使用计算机软件描述自己的设计，该软件能够将设计输入转换为逻辑电路，其过程类似于软件编程和编译。由于FPGA具有可无限次重写的特性，非常适合用于教学实验。</p>
 </div>
 <div class="paragraph">
-<p>远程实验基于<a href="http://welab.ujs.edu.cn/new">FPGA实验云</a>，提供以云端真实实验板为基础的虚拟实验环境。线下实验基于Windows版的虚拟实验软件，通过USB适配器与多种实验板、开发板连接。</p>
+<p>Altera公司和Xilinx公司曾经是两家全球知名的FPGA制造商，现在已分别纳入Intel公司和AMD公司。本书实验支持这两大主流厂商的FPGA，目前已经适配的实验板见下表。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">实验板</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FPGA芯片</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">自研远程实验板</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Altera Cyclone IV E</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">自研口袋实验板</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Altera Cyclone IV E</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Terasic DE2-115</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Altera Cyclone II</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Digilent Nexys4DDR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Xilinx Artix-7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_设计和验证"><a class="anchor" href="#_设计和验证"></a>设计和验证</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>基于FPGA的数字硬件实验的过程，大致上可以分为设计和验证两个阶段。设计阶段将设计输入转换为FPGA的电路文件，验证阶段将电路文件加载到FPGA芯片中，通过实验手段对FPGA中的电路施加激励并检查输出响应是否正确。</p>
 </div>
 <div class="paragraph">
-<p>实验云平台提供了云端编译功能，屏蔽了FPGA芯片相关的细节，学员只需提交HDL设计代码就可以生成电路文件，从用户层面可以理解为芯片无关的设计。同时，实验平台也支持上传由本地Quartus编译生成的电路文件。</p>
+<p>设计阶段的编译工具采用这两家公司的软件，分别是Intel Quartus Prime 和 Xilinx Vivado。本书的所有范例充分考虑了可移植性，无需修改均可在Quartus和Vivado两种设计环境下编译通过。</p>
 </div>
 <div class="paragraph">
-<p>线下实验通过特制的USB调试适配器可以适配两大主流FPGA厂商的芯片和开发板，并且实验软件与线上环境有着相似的操作方式。所有实验项目中的范例充分考虑了可移植性，无需修改均可在Quartus和Vivado两种设计环境下编译通过。</p>
+<p>实验教学中最常见的验证手段是利用实验板上配置的输入输出元件，但这种方式有很大的局限性，尤其是不能适应CPU设计这样复杂的实验需求。</p>
 </div>
 <div class="paragraph">
-<p>跨平台的软硬件实验环境为实验教学提供了灵活的实施方式。既可以以线上方式为主，也可以以线下为主，还可以采用线上、线下混合的方式，比如线下实验室使用Altera或Xilinx的开发板，线上完成慕课的预习和实验云平台的实验任务。</p>
+<p>本书配套的实验系统采用虚拟实验的方式。虚拟实验不是通过计算机软件进行模拟、仿真的实验，它是以真实硬件实验板为基础，通过软件实现人机交互的新型实验方式。实验软件是虚拟实验的灵魂。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_远程和本地"><a class="anchor" href="#_远程和本地"></a>远程和本地</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>本书配套的虚拟实验系统有本地（线下）和远程（线上）两种。远程实验基于Web浏览器，提供以云端真实实验板为基础的虚拟实验环境。线下实验基于Windows版的虚拟实验软件，通过特制的USB调试适配器可以适配两大主流FPGA厂商的芯片和开发板。两种实验系统具有相似的用户界面，并且大部分实验文件可以通用。</p>
+</div>
+<div class="paragraph">
+<p>远程实验平台还提供了云端编译功能，只需提交HDL设计代码就可以生成电路文件，屏蔽了FPGA芯片相关的细节，从用户层面可以理解为芯片无关的设计。同时，实验平台也支持上传由本地Quartus编译生成的电路文件。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_跨平台"><a class="anchor" href="#_跨平台"></a>跨平台</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>综上所述，配套的实验系统提供了跨平台的软硬件实验环境。这里的“跨平台”有两方面含义，一是实验软件同时支持线上和线下方式，二是实验硬件同时支持两大主流FPGA厂商的芯片。</p>
+</div>
+<div class="paragraph">
+<p>跨平台的软硬件实验环境为实验教学提供了灵活的实施方式。既可以以线上方式为主，也可以以线下为主，还可以采用线上、线下混合的方式。</p>
 </div>
 </div>
 </div>
