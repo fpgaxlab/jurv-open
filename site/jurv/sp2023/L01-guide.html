@@ -89,7 +89,7 @@
     <a class="nav-link" href="#实验步骤">实验步骤</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#云端编译">云端编译</a>
+    <a class="nav-link" href="#常见错误">常见错误</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
@@ -326,7 +326,7 @@
 <div class="sect2">
 <h3 id="_下载实验材料创建工程文件夹"><a class="anchor" href="#_下载实验材料创建工程文件夹"></a>下载实验材料、创建工程文件夹</h3>
 <div class="paragraph">
-<p>课程网站中提供了一些实验材料文件，在开始之前首先要下载<em>LabProject.zip</em>这个压缩包。课程网站的网址由指导教师公布。</p>
+<p>慕课网站中提供了本实验项目所需的实验材料文件，在开始之前首先要下载<em>LabProject.zip</em>这个压缩包。也可以从开源项目托管网站<a href="https://gitee.com/fpga-lab/jurv-open" class="bare">https://gitee.com/fpga-lab/jurv-open</a>下载，其中包含了本书所有实验项目最新的附件材料。</p>
 </div>
 <div class="paragraph">
 <p>将<em>LabProject.zip</em>解压到一个文件夹作为工程文件夹。同样要注意，工程文件夹的名称和路径均不能包含空格和汉字；也不建议把工程文件夹建在桌面上。学校实验室计算机通常安装硬盘保护系统，不要在被保护的硬盘分区（包括桌面）创建工程文件夹，一般盘符靠后的如E盘是开放的。</p>
@@ -474,8 +474,17 @@ Quartus软件安装路径不要有汉字和空格。工程文件夹的名称和�
 <div class="paragraph">
 <p>“Error (12006): Node instance "Lab_inst" instantiates undefined entity "VirtualBoard". ”这个错误信息是说编译器没找到“VirtualBoard”这个模块。</p>
 </div>
-<div class="paragraph">
-<p>很多初学者不习惯阅读错误信息，实际上学会读懂错误信息是很有用的。可以点鼠标右键将错误信息复制下来，百度看看过来人怎么说，慢慢地就能读懂了。</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+很多初学者不习惯阅读错误信息，实际上学会读懂错误信息是很有用的。可以点鼠标右键将错误信息复制下来，百度看看过来人怎么说，慢慢地就能读懂了。后面还给出了本项目的<a href="#常见错误">常见编译错误</a>。
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -590,7 +599,10 @@ END behav_VB;</code></pre>
    assign SD0 = S[7:0];
 
    //开关11~8驱动指示灯L11~8的亮灭
-   <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+   <i class="conum" data-value="1"></i><b>(1)</b>
+
+   //按键PB0驱动指示灯L18
+   assign L[18] = PB[0];</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -608,11 +620,14 @@ END behav_VB;</code></pre>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">   //开关7~0直接驱动数码管SD0的各个段
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">   --开关7~0直接驱动数码管SD0的各个段
    SD0 &lt;= S(7 downto 0);
 
-   //开关11~8驱动指示灯L11~8的亮灭
-   <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+   --开关11~8驱动指示灯L11~8的亮灭
+   <i class="conum" data-value="1"></i><b>(1)</b>
+
+   --按键PB0驱动指示灯L18
+   L(18) &lt;= PB(0);</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -657,18 +672,55 @@ END behav_VB;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="云端编译"><a class="anchor" href="#云端编译"></a>关于云端编译</h2>
+<h2 id="常见错误"><a class="anchor" href="#常见错误"></a>常见编译错误</h2>
 <div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>引脚不够用</p>
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
-<p>远程实验平台支持云端编译，不需要在本地计算机上安装Quartus软件，也就不需要上面的新建工程、配置工程等步骤，具体用法在后面的实验中结合远程实验平台介绍。</p>
+<p>Error (169282): There are 100 IO output pads in the design, but only 85 IO output pad locations available on the device.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>错误原因：顶层模块设置错了。可能是将<em>VirtualBoard.sv</em>设置为顶层了，应将<em>LabBoard_TOP.v</em>设置为顶层。</p>
+</div>
+</li>
+<li>
+<p>模块实例未定义</p>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Error (12006): Node instance "实例名" instantiates undefined entity "模块名"</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>可能的错误原因：</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>模块文件未加入工程。</p>
+</li>
+<li>
+<p>拼写错误，实例化时的模块名和定义的模块名不一样。</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="验证设计"><a class="anchor" href="#验证设计"></a>验证设计</h2>
+<h2 id="_小结"><a class="anchor" href="#_小结"></a>小结</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>测试验证首先要将上面编译生成的编程文件下载到FPGA，然后对实验电路施加输入激励，并读回输出响应进行分析判断。传统实验验证方式使用实验板上的开关等元件施加输入，通过实验板上的指示灯、数码管等观察实验现象；本课程使用虚拟实验调试软件进行实验验证，有本地实验和远程实验两种版本的实验软件，对应使用的实验电路板的不同（远程实验使用远程实验板，本地实验使用口袋实验板等），FPGA电路的加载方法也有所不同。请根据所使用的实验板和实验调试软件，参阅相应的 <a href="L02-guide-remote.html" class="xref page">《FPGA实验验证流程（远程版）》</a>或 <a href="L02-guide-local.html" class="xref page">《FPGA实验验证流程（本地版）》</a>。</p>
+<p>通过这个实验熟悉了FPGA设计流程和Quartus设计软件的使用。设计完成后需要验证自己的设计是否正确，实验验证首先要将上面编译生成的编程文件下载到FPGA，然后对实验电路施加输入激励，并读回输出响应进行分析判断。传统实验验证方式使用实验板上的开关等元件施加输入，通过实验板上的指示灯、数码管等观察实验现象；本课程使用虚拟实验调试软件进行实验验证，有本地实验和远程实验两种版本的实验软件，对应使用的实验电路板的不同（远程实验使用远程实验板，本地实验使用口袋实验板等），FPGA电路的加载方法也有所不同。请根据所使用的实验板和实验调试软件，参阅相应的 <a href="L02-guide-remote.html" class="xref page">FPGA实验验证流程（远程版）</a>或 <a href="L02-guide-local.html" class="xref page">FPGA实验验证流程（本地版）</a>。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
