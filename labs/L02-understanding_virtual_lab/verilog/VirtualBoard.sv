@@ -18,5 +18,6 @@ module VirtualBoard (
 
 //开关11~8驱动指示灯L11~8的亮灭
 
+//按键PB0驱动指示灯L18
 
 endmodule
