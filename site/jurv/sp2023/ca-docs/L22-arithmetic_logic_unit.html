@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>算术逻辑单元实验 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="sp2023">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#常见错误">常见错误</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html#准备工作">准备工作</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../L02-guide-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local.html">本地实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-2-combinational.html">组合逻辑的Verilog HDL描述（二）</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现ADDI指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现整数运算指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现访存指令和简单IO</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现分支指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">初步实现流水线</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">支持27条指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线数据冲突</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线控制冲突</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">sp2023</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">sp2023</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>计算机组成实验</li>
+    <li><a href="L22-arithmetic_logic_unit.html">算术逻辑单元实验</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">算术逻辑单元实验</h1>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>理解ALU电路结构；</p>
+</li>
+<li>
+<p>掌握ALU运算电路的HDL描述方法。</p>
+</li>
+<li>
+<p>掌握SystemVerilog的package、结构体、枚举等语法知识。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验内容1alu设计与验证"><a class="anchor" href="#_实验内容1alu设计与验证"></a>实验内容1：ALU设计与验证</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>算术逻辑单元（ALU）完成计算机中的算术运算和逻辑运算。本项目在前面加减运算实验的基础上增加移位运算和逻辑运算。</p>
+</div>
+<div class="sect2">
+<h3 id="_参考设计1简单alu"><a class="anchor" href="#_参考设计1简单alu"></a>参考设计1：简单ALU</h3>
+<div class="paragraph">
+<p>算术逻辑单元（ALU）完成计算机中的算术运算和逻辑运算。实验材料中给出了一个简单ALU的设计，如<a href="#fig-23">图 1</a>，虚线框内是前面加减运算实验的参考设计，只是简化了画法，将4位数据用一根较粗的信号线表示，左下方增加了与、或、异或逻辑运算，并通过一个四选一多路器选择运算的功能。理解HDL代码和电路功能，并思考该电路如何实现对X的逻辑非运算。</p>
+</div>
+<div id="fig-23" class="imageblock">
+<div class="content">
+<img src="_images/lab-image23.png" alt="图4-12" width="392" height="297">
+</div>
+<div class="title">图 1. 参考设计的ALU原理图</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_设计任务1"><a class="anchor" href="#_设计任务1"></a>设计任务1</h3>
+<div class="paragraph">
+<p>用HDL设计ALU，实现<a href="#tab-6">表 1</a>列出的运算功能。和参考设计相比，运算功能增加了移位运算；被移位的数据来自X输入，移位位数由输入Y提供，由于X是4位数据，最多移3位，因此只截取Y的最低两位作为移位位数。</p>
+</div>
+<table id="tab-6" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 1. ALU运算功能与控制信号</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 32%;">
+<col style="width: 48%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ALUop</th>
+<th class="tableblock halign-left valign-top">运算</th>
+<th class="tableblock halign-left valign-top">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F=X+Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">加法（ADD）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0010</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F=X-Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">减法(SUB)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0011</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F=X∧Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">逻辑与（AND）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F=X∨Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">逻辑或（OR）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0101</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F=X⊕Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">逻辑异或（XOR）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0110</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F=X&gt;&gt;&gt;Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">算术右移Y[1:0]位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0111</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F=X&lt;&lt;Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">逻辑左移Y[1:0]位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F=X&gt;&gt;Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">逻辑右移Y[1:0]位</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>除了增加了移位运算，和参考设计相比，并不产生SZOC四个标志位，而是直接输出相等、不等、小于、大于等于四种比较结果，类似加减运算电路实验的设计任务；但是在加减电路实验中，并没有强调参与比较的运算数是无符号数还是带符号数，本实验任务要求将运算数当做带符号的补码进行比较。带符号数的表示可参考单元1教学视频：Verilog语法概要。</p>
+</div>
+<div class="paragraph">
+<p>硬件描述语言具有不同抽象层次的描述能力。如参考设计的代码完全是按照<a href="#fig-23">图 1</a>电路结构进行描述，这种风格要求设计者对电路的结构非常清楚，并且有能力设计最简的电路，前面实验大都是这类描述风格。另一种是更高层次的抽象，只关注电路的功能，不关注电路的结构，电路实现交给综合工具。本设计任务可以选择电路结构的描述风格，也可选择更高抽象的行为描述，实验材料中提供了两种方案的虚拟面板。下面对这两种描述风格的设计方案给一些具体的提示。</p>
+</div>
+<div class="sect3">
+<h4 id="_1面向结构的alu设计方案举例"><a class="anchor" href="#_1面向结构的alu设计方案举例"></a>（1）面向结构的ALU设计方案举例</h4>
+<div class="paragraph">
+<p>如<a href="#fig-24">图 2</a>所示，和<a href="#fig-23">图 1</a>参考设计相比，主要不同在虚线框内的加减运算和移位运算部分。加减运算和比较运算的方案与“加减运算电路实验”设计任务的方案相同，移位运算的方案与“流水灯与移位寄存器实验”任务2的桶形移位方案相同，此外增加了ALUop译码，ALUop与运算功能的对应关系应按<a href="#tab-6">表 1</a>设计，以便于机器考核。</p>
+</div>
+<div class="paragraph">
+<p>【提示】也可以设计与<a href="#fig-24">图 2</a>不同的电路结构，自己绘制原理框图作为虚拟面板的背景。如果需要可以自行添加指示灯和数码管。</p>
+</div>
+<div id="fig-24" class="imageblock">
+<div class="content">
+<img src="_images/lab-image24.png" alt="image" width="528" height="319">
+</div>
+<div class="title">图 2. 面向结构的ALU设计框图</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2面向行为的alu设计方案"><a class="anchor" href="#_2面向行为的alu设计方案"></a>（2）面向行为的ALU设计方案</h4>
+<div class="paragraph">
+<p>行为描述不关心电路的实现结构，只关心所要实现的电路的功能。验证时可以使用<a href="#fig-24">图 2</a>的虚拟面板，只用基本的输入输出，忽略电路结构和内部指示灯；也可以使用任务2的虚拟面板。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验内容2将alu封装为模块"><a class="anchor" href="#_实验内容2将alu封装为模块"></a>实验内容2：将ALU封装为模块</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在上面的参考设计和实验任务，为了便于在虚拟面板上观察ALU内部信号，代码直接写在VirtualBoard模块；现在将ALU写成独立的模块（功能没有变化），并且字长采用参数定义，以便在后面的CPU设计中重复使用。</p>
+</div>
+<div class="paragraph">
+<p>封装为模块后，虚拟面板只给出ALU外框，如<a href="#fig-25">图 3</a>所示。</p>
+</div>
+<div id="fig-25" class="imageblock">
+<div class="content">
+<img src="_images/lab-image25.png" alt="image" width="429" height="289">
+</div>
+<div class="title">图 3. ALU的虚拟面板</div>
+</div>
+<div class="sect2">
+<h3 id="_参考设计2"><a class="anchor" href="#_参考设计2"></a>参考设计2</h3>
+<div class="paragraph">
+<p>参考设计代码使用了SystemVerilog的package、结构体、枚举等描述方法，相关语法和用法与C/C++语言类似，请读者自己阅读理解，也是本项目要求掌握的内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>package defs;
+typedef struct packed{
+logic sign;
+logic zero;
+logic overflow;
+logic carryOut;
+} t_flag;
+
+enum logic [3:0] {
+ADD = 4'b0001,
+SUB = 4'b0010,
+AND = 4'b0011,
+OR = 4'b0100,
+XOR = 4'b0101
+} aluop;
+
+endpackage</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里对结构体定义中的packed修饰符做一些说明，packed表示这是一个压缩的结构体，它会被当做一个向量进行存储。比如t_flag结构体类型将存储为4位向量，结构体的第一个成员sign在向量的最左边，最后一个成员carryOut是向量的最低位，相当于{sign, zero, overflow, carryOut}。正因为如此，才可以在VirtualBoard模块中将结构体变量赋给一个向量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>assign L[21:18] = flag;</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_设计任务2"><a class="anchor" href="#_设计任务2"></a>设计任务2</h3>
+<div class="paragraph">
+<p>将自己设计的ALU写成独立的模块，要求使用枚举常量定义运算功能，定义t_cmp结构体表示比较运算的结果。ALU模块的端口定义如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>module ALU
+#(parameter N=4)
+(
+input wire [N-1:0] iX, iY,
+input wire [3:0] iALUop,
+output logic [N-1:0]oF,
+output defs::t_cmp oCmp
+);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>【关于电路测试的提示】电路测试采用<a href="#fig-25">图 3</a>所示的虚拟面板，但并不意味着必须采用面向行为的方案。因为测试只是针对电路的功能，与内部结构和实现方案无关。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_讨论你设计的alu使用了多少逻辑资源"><a class="anchor" href="#_讨论你设计的alu使用了多少逻辑资源"></a>讨论：你设计的ALU使用了多少逻辑资源</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>编译完成后，可以通过Flow Summary查看FPGA逻辑资源的占用情况，如<a href="#fig-26">图 4</a>。</p>
+</div>
+<div id="fig-26" class="imageblock">
+<div class="content">
+<img src="_images/lab-image26.png" alt="image" width="555" height="291">
+</div>
+<div class="title">图 4. Flow Summary中的FPGA逻辑资源占用报告</div>
+</div>
+<div class="paragraph">
+<p>也可以打开output文件夹下生成的Lab.fit.summary文件查看，如<a href="#fig-27">图 5</a>。</p>
+</div>
+<div id="fig-27" class="imageblock">
+<div class="content">
+<img src="_images/lab-image27.png" alt="image" width="453" height="211">
+</div>
+<div class="title">图 5. fit.summary文件中的FPGA逻辑资源占用报告</div>
+</div>
+<div class="paragraph">
+<p>因为一种型号的FPGA芯片的逻辑资源是固定的，所以报告的是占用比例。虽然占用的比例对特定的FPGA芯片来说不存在成本问题，但是可用于其他功能的逻辑资源就少了。而且如果是专用集成电路ASIC，逻辑资源的多少直接影响着硅片面积的大小，也就是芯片的材料成本。类似于软件中的内存占用，逻辑资源占用是硬件设计的一个指标，实现同样的功能，资源占用越少越好。</p>
+</div>
+<div class="paragraph">
+<p>讨论：</p>
+</div>
+<div class="paragraph">
+<p>实验指导中提到了两种实现方案，如果两种方案你都做了，查看output文件夹下编译产生的 .fit.summary文件，对比两种方案所占用的逻辑资源数量是否不同。如果只做了一种，和采用另一种方案的同学交流对比，讨论如何减少逻辑资源占用。</p>
+</div>
+<div class="paragraph">
+<p>另外需要说明的是，编译报告中的逻辑资源并不仅仅是ALU的逻辑资源，还包括了实验系统的片上调试器，但是不影响比较两种方案。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

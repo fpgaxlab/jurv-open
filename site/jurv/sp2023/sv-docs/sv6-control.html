@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>顺序控制逻辑的Verilog HDL描述 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="sp2023">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#常见错误">常见错误</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html#准备工作">准备工作</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../L02-guide-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local.html">本地实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-2-combinational.html">组合逻辑的Verilog HDL描述（二）</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现ADDI指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现整数运算指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现访存指令和简单IO</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现分支指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">初步实现流水线</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">支持27条指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线数据冲突</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线控制冲突</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">sp2023</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">sp2023</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>逻辑电路实验</li>
+    <li><a href="sv6-control.html">顺序控制逻辑的Verilog HDL描述</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">顺序控制逻辑的Verilog HDL描述</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>绝大多数控制逻辑都能用有限状态机设计，换句话说，有限状态机是设计控制逻辑的有效手段。本节主要介绍用Verilog描述状态机的方法。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_状态机的结构和描述方法"><a class="anchor" href="#_状态机的结构和描述方法"></a>状态机的结构和描述方法</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>状态机模型有摩尔型（Moore）和米利型（Mealy）两种，如<a href="#fig-4">图 1</a>和<a href="#fig-5">图 2</a>所示，摩尔型状态机的输出仅在状态变化时改变；在整个状态周期内保持不变，即使输入信号有变化。米利型状态机的输出不仅和当前状态有关，还直接受输入影响，变化可能出现在任何时刻。</p>
+</div>
+<div id="fig-4" class="imageblock">
+<div class="content">
+<img src="_images/sv-image4.png" alt="sv-4 摩尔型状态机结构" width="288" height="85">
+</div>
+<div class="title">图 1. 摩尔（Moore）型状态机结构</div>
+</div>
+<div id="fig-5" class="imageblock">
+<div class="content">
+<img src="_images/sv-image5.png" alt="sv-5 米利型状态机结构" width="288" height="102">
+</div>
+<div class="title">图 2. 米利（Mealy）型状态机结构</div>
+</div>
+<div id="fig-6" class="imageblock">
+<div class="content">
+<img src="_images/sv-image6.png" alt="sv-6 小车控制状态图" width="352" height="351">
+</div>
+<div class="title">图 3. 车速控制状态图</div>
+</div>
+<div class="paragraph">
+<p>下面通过一个车速控制的例子说明有限状态机的Verilog描述。假设汽车有四种行驶状态：停止、低速、中速、高速，一个表示速度值的输出信号，两个输入信号“加速”和“减速”控制速度的转换。<a href="#fig-6">图 3</a>示出了状态图，代码见<a href="#exa-29">例 1</a>。</p>
+</div>
+<div id="exa-29" class="exampleblock">
+<div class="title">例 1. 车速控制状态机描述</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module car_ctrl
+
+(
+
+input clk, reset, acc, brake,
+
+output reg [1:0] speed
+
+);
+
+localparam [1:0] STOPED = 2'b00;
+
+localparam [1:0] LOW = 2'b01;
+
+localparam [1:0] MODERATE = 2'b10;
+
+localparam [1:0] HIGH = 2'b11;
+
+reg [1:0] state, next_state;
+
+always @(posedge clk)
+
+if (reset)
+
+state &lt;= STOPED;
+
+else
+
+state &lt;= next_state;
+
+always @(state, acc, brake)
+
+case (state)
+
+STOPED:
+
+if (acc &amp;&amp; !brake)
+
+next_state = LOW;
+
+else
+
+next_state = STOPED;
+
+LOW:
+
+if (brake)
+
+next_state = STOPED;
+
+else if (acc)
+
+next_state = MODERATE;
+
+else
+
+next_state = LOW;
+
+MODERATE:
+
+if (brake)
+
+next_state = LOW;
+
+else if (acc)
+
+next_state = HIGH;
+
+else
+
+next_state = MODERATE;
+
+HIGH:
+
+if (brake)
+
+next_state = MODERATE;
+
+else
+
+next_state = HIGH;
+
+default:
+
+next_state = STOPED;
+
+endcase
+
+always @(state)
+
+speed = state; //本例的状态编码恰巧与输出（速度）相同
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>这是一个典型的摩尔型状态机。三个always块对应了<a href="#fig-4">图 1</a>的三个部分，第一个always块是时序逻辑，描述状态寄存器state；第二个always块是组合逻辑，描述次态逻辑next_state；第三个always块也是组合逻辑，描述输出逻辑speed。</p>
+</div>
+<div class="paragraph">
+<p>两个组合逻辑部分也可以合并到一个always块，如<a href="#exa-30">例 2</a>。整个状态机分为时序逻辑和组合逻辑两个部分，对应结构见<a href="#fig-7">图 4</a>。</p>
+</div>
+<div id="exa-30" class="exampleblock">
+<div class="title">例 2. 二段式状态机描述</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>always @(posedge clk)
+
+if (reset)
+
+state &lt;= STOPED;
+
+else
+
+state &lt;= next_state;
+
+always @(state, acc, brake)
+
+case (state)
+
+STOPED:
+
+speed=2'b00;
+
+if (acc &amp;&amp; !brake)
+
+next_state = LOW;
+
+else
+
+next_state = STOPED;
+
+LOW:
+
+speed=2'b01;
+
+if (brake)
+
+next_state = STOPED;
+
+else if (acc)
+
+next_state = MODERATE;
+
+else
+
+next_state = LOW;
+
+MODERATE:
+
+speed=2'b10;
+
+if (brake)
+
+next_state = LOW;
+
+else if (acc)
+
+next_state = HIGH;
+
+else
+
+next_state = MODERATE;
+
+HIGH:
+
+speed=2'b11;
+
+if (brake)
+
+next_state = MODERATE;
+
+else
+
+next_state = HIGH;
+
+default:
+
+speed=2'b00;
+
+next_state = STOPED;
+
+endcase</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="fig-7" class="imageblock">
+<div class="content">
+<img src="_images/sv-image7.png" alt="sv-7 状态机的两段式结构" width="213" height="102">
+</div>
+<div class="title">图 4. 状态机的两段式结构</div>
+</div>
+<div class="paragraph">
+<p>输出逻辑和次态逻辑合并之后，从结构上不能直接分辨出状态机的类型是摩尔型还是米利型，只能从代码上分析。<a href="#exa-30">例 2</a>中，输出speed和输入acc、brake无关，只和当前状态有关，仍然是摩尔型状态机。实际上，用Verilog描述状态机，并不一定需要区分摩尔型和米利型。过去之所以要区分米利型和摩尔型，是因为它们的设计方法不同。</p>
+</div>
+<div class="paragraph">
+<p>有的时候也能见到另外一种两段式结构，就是将状态描述和次态计算逻辑合并为一段，见下面<a href="#exa-31">例 3</a>。这种描述虽然也能运行，但是不利于综合器优化代码，不利于时序约束，不便于阅读、维护，而且不能很好的表示米利型状态机，所以不推荐采用这种结构。</p>
+</div>
+<div id="exa-31" class="exampleblock">
+<div class="title">例 3. 不推荐的结构：将状态描述和次态计算逻辑合并</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module car_ctrl_bad
+
+(
+
+input clk, acc, brake,
+
+output reg [1:0] speed
+
+);
+
+localparam [1:0] STOPED = 2'b00;
+
+localparam [1:0] LOW = 2'b01;
+
+localparam [1:0] MODERATE = 2'b10;
+
+localparam [1:0] HIGH = 2'b11;
+
+reg [1:0] state;
+
+always @(posedge clk)
+
+case (state)
+
+STOPED:
+
+if (acc &amp;&amp; !brake)
+
+state = LOW;
+
+else
+
+state = STOPED;
+
+LOW:
+
+if (brake)
+
+state = STOPED;
+
+else if (acc)
+
+state = MODERATE;
+
+else
+
+state = LOW;
+
+MODERATE:
+
+if (brake)
+
+state = LOW;
+
+else if (acc)
+
+state = HIGH;
+
+else
+
+state = MODERATE;
+
+HIGH:
+
+if (brake)
+
+state = MODERATE;
+
+else
+
+state = HIGH;
+
+default:
+
+next_state = STOPED;
+
+endcase
+
+always @(state)
+
+speed = state; //本例的状态编码恰巧与输出(速度)相同
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_状态机描述的几个问题"><a class="anchor" href="#_状态机描述的几个问题"></a>状态机描述的几个问题</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_状态编码"><a class="anchor" href="#_状态编码"></a>状态编码</h3>
+<div class="paragraph">
+<p>除了二进制编码，还有一种常见的状态编码叫做One-hot编码，它的每个编码中只有一位为1。以车速控制状态机为例，采用One-hot编码的状态定义如<a href="#exa-32">例 4</a>，它可以和<a href="#exa-30">例 2</a>的代码构成一个完整的状态机描述。</p>
+</div>
+<div id="exa-32" class="exampleblock">
+<div class="title">例 4. One-hot状态编码和状态寄存器定义</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>localparam [3:0] STOPED = 4'b0001;
+
+localparam [3:0] LOW = 4'b0010;
+
+localparam [3:0] MODERATE = 4'b0100;
+
+localparam [3:0] HIGH = 4'b1000;
+
+reg [3:0] state, next_state;</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>可以看出，One-hot编码使用的触发器较多，但计算次态的组合电路较小，适合于FPGA采用。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_消除输出信号的毛刺"><a class="anchor" href="#_消除输出信号的毛刺"></a>消除输出信号的毛刺</h3>
+<div class="paragraph">
+<p>由状态机产生的输出信号，可能会产生毛刺。毛刺不一定会对系统产生危害，所以通常会忽视它的存在。但是在高速系统中，这些毛刺可能产生危害，尤其是当它用作边沿触发信号时。那么如何消除输出的毛刺呢？产生毛刺的原因是输出信号由组合逻辑产生，由于不同路径的传输延迟不同，从而使组合逻辑的输出产生瞬间的变化。解决的办法就是采用寄存器输出，仅仅在时钟触发沿到来时输出更新，其他时间产生的毛刺不会传递到输出。代码见<a href="#exa-33">例 5</a>。</p>
+</div>
+<div id="exa-33" class="exampleblock">
+<div class="title">例 5. 消除状态机输出的毛刺</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module car_ctrl
+
+(
+
+input clk, reset, acc, brake,
+
+output reg [1:0] speed
+
+);
+
+localparam [3:0] STOPED = 4'b0001;
+
+localparam [3:0] LOW = 4'b0010;
+
+localparam [3:0] MODERATE = 4'b0100;
+
+localparam [3:0] HIGH = 4'b1000;
+
+reg [3:0] state, next_state;
+
+reg [1:0] out;
+
+always @(posedge clk)
+
+if (reset)
+
+state &lt;= STOPED;
+
+else
+
+state &lt;= next_state;
+
+always @(state, acc, brake)
+
+case (state)
+
+STOPED:
+
+out=2'b00;
+
+if (acc &amp;&amp; !brake)
+
+next_state = LOW;
+
+else
+
+next_state = STOPED;
+
+LOW:
+
+out=2'b01;
+
+if (brake)
+
+next_state = STOPED;
+
+else if (acc)
+
+next_state = MODERATE;
+
+else
+
+next_state = LOW;
+
+MODERATE:
+
+out=2'b10;
+
+if (brake)
+
+next_state = LOW;
+
+else if (acc)
+
+next_state = HIGH;
+
+else
+
+next_state = MODERATE;
+
+HIGH:
+
+out=2'b11;
+
+if (brake)
+
+next_state = MODERATE;
+
+else
+
+next_state = HIGH;
+
+default:
+
+out=2'b00;
+
+next_state = STOPED;
+
+endcase
+
+always @(posedge clk)
+
+speed = out;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_几个原则"><a class="anchor" href="#_几个原则"></a>几个原则</h3>
+<div class="paragraph">
+<p>(1) 复位后状态机应该有一个确定的状态；</p>
+</div>
+<div class="paragraph">
+<p>(2) 如果有未知的或不关心的次态，用default 给次态赋值，否则会产生锁存器；</p>
+</div>
+<div class="paragraph">
+<p>(3) 状态机描述只包含控制信号，其他功能（如计数器等）尽量放在状态机之外。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
