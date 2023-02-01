@@ -92,10 +92,10 @@
     <a class="nav-link" href="L01-guide.html#实验步骤">实验步骤</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L01-guide.html#常见错误">常见错误</a>
+    <a class="nav-link" href="L01a-faq-quartus.html">常见编译错误</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
+    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
   </li>
 </ul>
   </li>
@@ -104,13 +104,10 @@
     <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#准备工作">准备工作</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="L02-guide-login.html">登录远程实验平台</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#准备工作">准备工作</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#验证流程">验证流程</a>
@@ -125,21 +122,42 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="L02-guide-local.html">本地实验验证流程</a>
+    <a class="nav-link" href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-local.html#准备工作">准备工作</a>
+    <a class="nav-link" href="L02-guide-local-welab.html#准备工作">准备工作</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-local.html#验证流程">验证流程</a>
+    <a class="nav-link" href="L02-guide-local-welab.html#验证流程">验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-local.html#设计虚拟面板">设计虚拟面板</a>
+    <a class="nav-link" href="L02-guide-local-welab.html#设计虚拟面板">设计虚拟面板</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-local.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+    <a class="nav-link" href="L02-guide-local-welab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-quartus-revision.html">线上线下混合模式的工程设置</a>
   </li>
 </ul>
   </li>
@@ -370,7 +388,7 @@
 <div class="sect2">
 <h3 id="_设计与编译"><a class="anchor" href="#_设计与编译"></a>设计与编译</h3>
 <div class="paragraph">
-<p>如果前面已经用Quartus软件编译生成了电路文件，则可以跳过这一步。</p>
+<p>如果前面已经用Quartus软件编译生成了电路文件，则可以跳过这一步，直接进入<a href="#验证流程">实验验证流程</a>。</p>
 </div>
 <div class="paragraph">
 <p>从任务列表中选择“代码与编译”，会自动打开在线代码编辑器，并且定义了一个VirtualBoard模块，可以看到该模块只有端口定义，如下所示。</p>
@@ -471,7 +489,7 @@ END behav_VB;</pre>
 </table>
 </div>
 <details>
-<summary class="title">VHDL版本（点击此行展开）</summary>
+<summary class="title">需添加代码的VHDL版本（点击此行展开）</summary>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -561,7 +579,7 @@ END behav_VB;</pre>
 <div class="title">图 3. 空白的虚拟面板</div>
 </div>
 <div class="sect2">
-<h3 id="_绘制面板背景图"><a class="anchor" href="#_绘制面板背景图"></a>绘制面板背景图</h3>
+<h3 id="绘制面板背景图"><a class="anchor" href="#绘制面板背景图"></a>绘制面板背景图</h3>
 <div class="paragraph">
 <p>背景图展示虚拟元件之间的连接关系，有助于实验过程中分析实验结果。可使用自己熟悉的绘图软件绘制背景图，这里推荐开源软件diagrams.net（又名draw.io）。diagrams.net有Web版和桌面版， 可从<a href="https://www.diagrams.net">https://www.diagrams.net</a>进入Web版或下载桌面版。</p>
 </div>
@@ -667,7 +685,7 @@ END behav_VB;</pre>
 <p>记录窗口还提供了文字输入功能，用于分析实验现象、得出结论。是否要求输入文字描述由指导教师根据每个实验的特点决定。</p>
 </div>
 <div class="paragraph">
-<p>特别提醒，每按下一次<span class="image"><img src="_images/L02a-image13.png" alt="记录" width="48" height="27"></span>按钮，仅产生一条记录，后续的操作并不会自动地记录。也就是说，每一个需要回放的步骤都应该按下一次<span class="image"><img src="_images/L02a-image13.png" alt="记录" width="48" height="27"></span>按钮。如果要对当前实验电路现象输入文字分析，也要在按下<span class="image"><img src="_images/L02a-image13.png" alt="记录" width="48" height="27"></span>按钮之前输入。<span class="image"><img src="_images/L02a-image14.png" alt="重新记录" width="63" height="21"></span>按钮按下后，会清空前面输入的所有记录，系统给出“记录已清空”的提示。<span class="image"><img src="_images/L02a-image15.png" alt="提交" width="48" height="21"></span>按钮按下后，自动提交所有记录，实验板收回，系统提示“提交成功”和“本次实验已结束”，如果想再次记录并提交，可以再次申请实验板后重新FPGA编程，系统保存最新的提交。</p>
+<p>特别提醒，每按下一次 <code>记录</code> 按钮，仅产生一条记录，后续的操作并不会自动地记录。也就是说，每一个需要回放的步骤都应该按下一次 <code>记录</code> 按钮。如果要对当前实验电路现象输入文字分析，也要在按下 <code>记录</code> 按钮之前输入。 <code>重新记录</code> 按钮按下后，会清空前面输入的所有记录，系统给出“记录已清空”的提示。 <code>提交</code> 按钮按下后，自动提交所有记录，实验板收回，系统提示“提交成功”和“本次实验已结束”，如果想再次记录并提交，可以再次申请实验板后重新FPGA编程，系统保存最新的提交。</p>
 </div>
 <div class="paragraph">
 <p>验证记录提交以后，可以通过任务列表上的回放按钮<span class="image"><img src="_images/L02a-image16.png" alt="回放" width="15" height="18"></span>观看自己的记录，确认操作没有遗漏。教师评分之后，才可以在回放界面右上角看到验证记录的成绩，如<a href="#fig-11">图 8</a>。</p>

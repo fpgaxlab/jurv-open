@@ -92,10 +92,10 @@
     <a class="nav-link" href="../L01-guide.html#实验步骤">实验步骤</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../L01-guide.html#常见错误">常见错误</a>
+    <a class="nav-link" href="../L01a-faq-quartus.html">常见编译错误</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
+    <a class="nav-link" href="../L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
   </li>
 </ul>
   </li>
@@ -104,13 +104,10 @@
     <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../L02-guide-remote.html#准备工作">准备工作</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../L02-guide-login.html">登录远程实验平台</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#准备工作">准备工作</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-remote.html#验证流程">验证流程</a>
@@ -125,21 +122,42 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../L02-guide-local.html">本地实验验证流程</a>
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../L02-guide-local.html#准备工作">准备工作</a>
+    <a class="nav-link" href="../L02-guide-local-welab.html#准备工作">准备工作</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../L02-guide-local.html#验证流程">验证流程</a>
+    <a class="nav-link" href="../L02-guide-local-welab.html#验证流程">验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../L02-guide-local.html#设计虚拟面板">设计虚拟面板</a>
+    <a class="nav-link" href="../L02-guide-local-welab.html#设计虚拟面板">设计虚拟面板</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../L02-guide-local.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+    <a class="nav-link" href="../L02-guide-local-welab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-quartus-revision.html">线上线下混合模式的工程设置</a>
   </li>
 </ul>
   </li>
@@ -411,8 +429,17 @@
 <div class="paragraph">
 <p>如<a href="#fig-24">图 2</a>所示，和<a href="#fig-23">图 1</a>参考设计相比，主要不同在虚线框内的加减运算和移位运算部分。加减运算和比较运算的方案与“加减运算电路实验”设计任务的方案相同，移位运算的方案与“流水灯与移位寄存器实验”任务2的桶形移位方案相同，此外增加了ALUop译码，ALUop与运算功能的对应关系应按<a href="#tab-6">表 1</a>设计，以便于机器考核。</p>
 </div>
-<div class="paragraph">
-<p>【提示】也可以设计与<a href="#fig-24">图 2</a>不同的电路结构，自己绘制原理框图作为虚拟面板的背景。如果需要可以自行添加指示灯和数码管。</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+也可以设计与<a href="#fig-24">图 2</a>不同的电路结构，自己绘制原理框图作为虚拟面板的背景。如果需要可以自行添加指示灯和数码管。
+</td>
+</tr>
+</table>
 </div>
 <div id="fig-24" class="imageblock">
 <div class="content">
@@ -497,8 +524,17 @@ output defs::t_cmp oCmp
 );</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>【关于电路测试的提示】电路测试采用<a href="#fig-25">图 3</a>所示的虚拟面板，但并不意味着必须采用面向行为的方案。因为测试只是针对电路的功能，与内部结构和实现方案无关。</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+电路测试采用<a href="#fig-25">图 3</a>所示的虚拟面板，但并不意味着必须采用面向行为的方案。因为测试只是针对电路的功能，与内部结构和实现方案无关。
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

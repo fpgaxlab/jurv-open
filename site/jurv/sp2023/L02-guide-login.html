@@ -92,10 +92,10 @@
     <a class="nav-link" href="L01-guide.html#实验步骤">实验步骤</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L01-guide.html#常见错误">常见错误</a>
+    <a class="nav-link" href="L01a-faq-quartus.html">常见编译错误</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用TCL文件快速创建工程</a>
+    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
   </li>
 </ul>
   </li>
@@ -103,14 +103,11 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="L02-guide-remote.html#准备工作">准备工作</a>
-<ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="L02-guide-login.html">登录远程实验平台</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#准备工作">准备工作</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L02-guide-remote.html#验证流程">验证流程</a>
@@ -125,21 +122,42 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="L02-guide-local.html">本地实验验证流程</a>
+    <a class="nav-link" href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-local.html#准备工作">准备工作</a>
+    <a class="nav-link" href="L02-guide-local-welab.html#准备工作">准备工作</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-local.html#验证流程">验证流程</a>
+    <a class="nav-link" href="L02-guide-local-welab.html#验证流程">验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-local.html#设计虚拟面板">设计虚拟面板</a>
+    <a class="nav-link" href="L02-guide-local-welab.html#设计虚拟面板">设计虚拟面板</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-local.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+    <a class="nav-link" href="L02-guide-local-welab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-quartus-revision.html">线上线下混合模式的工程设置</a>
   </li>
 </ul>
   </li>
@@ -293,7 +311,6 @@
     <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
     <li>实验工具和环境</li>
     <li><a href="L02-guide-remote.html">远程实验验证流程</a></li>
-    <li><a href="L02-guide-remote.html#准备工作">准备工作</a></li>
     <li><a href="L02-guide-login.html">登录远程实验平台</a></li>
   </ul>
 </nav>
@@ -344,7 +361,7 @@
 <h2 id="register-class"><a class="anchor" href="#register-class"></a>选课并加入教学班</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>学校学分课程的学生一般不需要自己加入教学班，通常由教师后台导入。登录后就可在“我的课程”中可以看到自己的课程。如果教师没有导入名单，需要自己加入教学班，请向任课教师咨询课程名称（一般与学校教务系统的课程名称相同）和教学班名称，在“学分课程”标签页下找到自己的课程。</p>
+<p>学校学分课程的学生一般不需要自己加入教学班，通常由教师后台导入。登录后就可在“我的课程”中可以看到自己的课程。如果教师没有导入名单，需要自己加入教学班，请向任课教师咨询课程名称（一般与学校教务系统的课程名称相同）和教学班名称，在首页找到自己的课程后加入。</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -361,7 +378,7 @@
 </table>
 </div>
 <div class="paragraph">
-<p>自学学员请在首页“共享课程”标签页下选择“RISC-V CPU设计实验”课程，进入后在“所属班级”选择“默认班级”，点击“立即报名”。如果还未登录，会显示登录页面；如果尚未注册，点击登录页面右上角的“去注册”。</p>
+<p>自学学员请在首页选择“RISC-V CPU设计实验”课程，进入后在“所属班级”选择“默认班级”，点击“立即报名”。如果还未登录，会显示登录页面；如果尚未注册，点击登录页面右上角的“去注册”。</p>
 </div>
 <div class="paragraph">
 <p>学分课程报名后需要等待教师审核，如果长时间未得到审核，请主动向任课教师反映。共享课程报名后通常不需要等待审核，如果需要审核且超过24小时未得到审核，请加入QQ群121253650反馈。学分课程的学生请勿加入此群。</p>
