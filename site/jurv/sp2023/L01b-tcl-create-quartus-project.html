@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: RISC-V CPU设计实验教程</title>
+    <title>用脚本创建Quartus工程 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -21,26 +21,11 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-        <a class="navbar-item" href="#">Home</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Products</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Product A</a>
-            <a class="navbar-item" href="#">Product B</a>
-            <a class="navbar-item" href="#">Product C</a>
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Services</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Service A</a>
-            <a class="navbar-item" href="#">Service B</a>
-            <a class="navbar-item" href="#">Service C</a>
-          </div>
-        </div>
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
         <div class="navbar-item">
           <span class="control">
-            <a class="button is-primary" href="#">Download</a>
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">Download</a>
           </span>
         </div>
       </div>
@@ -316,13 +301,11 @@
 </nav>
 </div>
   <div class="content">
-<aside class="toc sidebar" data-title="Contents" data-levels="2">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect1">
-<h2 id="_用脚本创建quartus工程"><a class="anchor" href="#_用脚本创建quartus工程"></a>用脚本创建Quartus工程</h2>
-<div class="sectionbody">
+<h1 class="page">用脚本创建Quartus工程</h1>
 <div class="paragraph">
 <p>创建和配置工程的步骤细致繁琐，需要花费一定的时间，而且稍有差错就会导致实验失败。虽然可以把建好的工程保存下来在后面使用，但仍然存在不同Quartus版本的兼容性问题。用TCL脚本文件创建工程可以避免Quartus版本不兼容的问题，效率也很高，步骤如下。</p>
 </div>
@@ -472,7 +455,7 @@ export_assignments
 </details>
 </li>
 <li>
-<p>启动 Quartus Prime，点击 View ➤ Tcl Console 菜单项打开 “Tcl Console” 子窗口，提示符“tcl&gt;”后面可以输入TCL命令。</p>
+<p>启动 Quartus Prime，点击 View ➤ Tcl Console 菜单项打开 “Tcl Console” 子窗口，提示符 <code>tcl&gt;</code> 后面可以输入命令。</p>
 </li>
 <li>
 <p>用 cd 命令切换到 tcl 文件所在的目录，如 <code>cd d:/LabProject</code> 。注意，路径要用“/”而不是“\”。</p>
@@ -486,18 +469,24 @@ export_assignments
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-note" title="注"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p><em>create_project_pocket.tcl</em>是用于远程实验板和口袋实验板的脚本文件。如果是DE2-115实验板，替换成实验材料中的<em>create_project_de2-115.tcl</em>。</p>
+<p>（1）<em>create_project_pocket.tcl</em>是用于远程实验板和口袋实验板的脚本文件。如果是DE2-115实验板，替换成实验材料中的<em>create_project_de2-115.tcl</em>。</p>
 </div>
 <div class="paragraph">
-<p>创建的工程仅仅是包含了工程配置的工程框架，还需要将设计模块如<em>VirtualBoard.sv</em>添加到工程。</p>
+<p>（2）创建的工程仅仅是包含了工程配置的工程框架，还需要将设计模块如<em>VirtualBoard.sv</em>添加到工程。</p>
 </div>
 </td>
 </tr>
 </table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
 </div>
 </div>
 </div>

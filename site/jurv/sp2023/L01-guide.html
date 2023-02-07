@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -21,26 +21,11 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-        <a class="navbar-item" href="#">Home</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Products</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Product A</a>
-            <a class="navbar-item" href="#">Product B</a>
-            <a class="navbar-item" href="#">Product C</a>
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Services</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Service A</a>
-            <a class="navbar-item" href="#">Service B</a>
-            <a class="navbar-item" href="#">Service C</a>
-          </div>
-        </div>
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
         <div class="navbar-item">
           <span class="control">
-            <a class="button is-primary" href="#">Download</a>
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">Download</a>
           </span>
         </div>
       </div>
@@ -315,7 +300,7 @@
 </nav>
 </div>
   <div class="content">
-<aside class="toc sidebar" data-title="Contents" data-levels="2">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
@@ -344,7 +329,7 @@
 <div class="sect2">
 <h3 id="_安装fpga_设计软件"><a class="anchor" href="#_安装fpga_设计软件"></a>安装FPGA 设计软件</h3>
 <div class="paragraph">
-<p>本教程使用的设计软件为：Quartus Prime 20.1.1。Quartus Prime分为Pro、Standard 和 Lite Edition，其中 Lite（精简版）是免费的，完全能够满足教学使用，因此建议安装Lite Edition。软件可从Intel官方网站（https://fpgasoftware.intel.com/）下载，同时需要下载支持Cyclone IV E器件的Cyclone器件库。安装时只要将下载的器件库和Quartus安装程序放在同一个文件夹，安装程序会自动搜寻器件库并默认选择所包含的器件系列；本教程使用Cyclone IV系列的器件。也可以使用其他版本的Quartus设计软件，支持Cyclone IV E器件即可，只是在界面菜单操作等细节上可能与本教程不完全相同。</p>
+<p>本书使用的设计软件为：Quartus Prime 20.1.1。Quartus Prime分为Pro、Standard 和 Lite Edition，其中 Lite（精简版）是免费的，完全能够满足教学使用，因此建议安装Lite Edition。软件可从<a href="https://fpgasoftware.intel.com/">Intel官方网站</a>下载；本书使用Cyclone IV E系列的器件，所以还需要下载支持Cyclone IV E器件的Cyclone器件库。安装时只要将下载的器件库和Quartus安装程序放在同一个文件夹，安装程序会自动搜寻器件库并默认选择所包含的器件系列。也可以使用其他版本的Quartus设计软件，支持Cyclone IV E器件即可，只是在界面菜单操作等细节上可能与本书不完全相同。</p>
 </div>
 <div class="paragraph">
 <p>安装时采用软件的默认设置即可。如果要改变安装路径，注意安装路径不要有汉字和空格。</p>
@@ -363,31 +348,38 @@
 <colgroup>
 <col>
 <col>
+<col>
 </colgroup>
 <thead>
 <tr>
+<th class="tableblock halign-left valign-top">实验板</th>
 <th class="tableblock halign-left valign-top">远程或口袋实验板</th>
 <th class="tableblock halign-left valign-top">DE2-115开发板</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LabProject（文件夹）</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LabPrj_DE2-115（文件夹）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文件夹</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LabProject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LabPrj_DE2-115</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">顶层模块</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LabBoard_TOP.v</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DE2_115_TOP.v</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">时序约束</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">RemotePocket.sdc</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DE2-115.sdc</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">工程配置脚本</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">RemotePocket.tcl</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DE2-115.tcl</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">创建工程脚本</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">create_project_pocket.tcl</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">create_project_de2-115.tcl</p></td>
 </tr>
@@ -434,7 +426,7 @@ Quartus软件安装路径不要有汉字和空格。工程文件夹的名称和�
 <div class="sect3">
 <h4 id="_导入设计文件"><a class="anchor" href="#_导入设计文件"></a>导入设计文件</h4>
 <div class="paragraph">
-<p>点击菜单项Project ➤ ADD/Remove Files in Project…，出现category Files对话框。该对话框用来将已存在的设计文件加入到工程中。点击<span class="image"><img src="_images/L01-image2.png" alt="image" width="24" height="19"></span>按钮，选择已经拷贝到工程文件夹内的Design Files（<em>LabBoard_TOP.v</em>，<em>GlobalCLK.v</em>，<em>pll.v</em>，<em>WatchChain.sv</em>和<em>JutagScanChain.qxp</em>），添加到工程中。这些文件是虚拟实验系统所需要的基础文件，用户不应该去修改它们，通常也无需理解其中的代码。</p>
+<p>点击菜单项Project ➤ ADD/Remove Files in Project…，出现category Files对话框。该对话框用来将已存在的设计文件加入到工程中。点击 <code>&#8230;&#8203;</code> 浏览按钮，选择已经拷贝到工程文件夹内的Design Files（<em>LabBoard_TOP.v</em>，<em>GlobalCLK.v</em>，<em>pll.v</em>，<em>WatchChain.sv</em>和<em>JutagScanChain.qxp</em>），添加到工程中。这些文件是虚拟实验系统所需要的基础文件，用户不应该去修改它们，通常也无需理解其中的代码。</p>
 </div>
 </div>
 <div class="sect3">
@@ -479,16 +471,20 @@ Quartus软件安装路径不要有汉字和空格。工程文件夹的名称和�
 <p>点击菜单项Assignments ➤ Device…，出现Device对话框，根据使用的实验板在Device Family列表和Available devices列表中找到所用的FPGA器件。 远程实验板和口袋实验板的FPGA型号是Cyclone IV E系列的EP4CE6E22C8，DE2-115开发板的FPGA型号为EP4CE115F29C7。</p>
 </div>
 <div class="paragraph">
-<p>在Device对话框中点击“Device and Pin Options …”出现Device and Pin Options对话框，在该对话框中：</p>
+<p>在Device对话框中点击“Device and Pin Options …”按钮出现Device and Pin Options对话框，在对话框左侧Category列表中选择以下设置。</p>
 </div>
-<div class="paragraph">
-<p>选择Category列表中的“Programming Files”，勾选Raw Binary File (.rbf)。远程实验板及口袋实验板需要rbf文件作为FPGA编程文件。DE2-115实验板使用JTAG方式编程，可以不勾选生成rbf文件。</p>
-</div>
-<div class="paragraph">
-<p>选择Category列表中的Category列表中选择“Unused Pins”，设置为“As input tri-stated with weak pull-up”。</p>
-</div>
-<div class="paragraph">
-<p>选择Category列表中的“Dual-Purpose Pins”，将“nCEO”设置为“Use as regular I/O”。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>选中“Programming Files”，勾选Raw Binary File (.rbf)。远程实验板及口袋实验板需要rbf文件作为FPGA编程文件。DE2-115实验板使用JTAG方式编程，无需勾选生成rbf文件。</p>
+</li>
+<li>
+<p>选中“Unused Pins”，设置为“As input tri-stated with weak pull-up”。</p>
+</li>
+<li>
+<p>选中“Dual-Purpose Pins”，将“nCEO”设置为“Use as regular I/O”。</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -513,7 +509,7 @@ Quartus软件安装路径不要有汉字和空格。工程文件夹的名称和�
 <p>实验材料中还包含了另一个tcl文件<em>create_project_pocket.tcl</em>，这里不要选择该文件。</p>
 </li>
 <li>
-<p>只能运行工程文件夹下的tcl文件，如果Tcl Scripts窗口中没有出现<em>RemotePocket.tcl</em>，请检查该文件是否在工程文件夹内。</p>
+<p>只能运行工程文件夹下的tcl文件，如果Tcl Scripts窗口中没有出现<em>RemotePocket.tcl</em>，请检查该文件是否事先复制到了工程文件夹内。</p>
 </li>
 <li>
 <p>适用于DE2-115开发板的脚本文件为<em>DE2-115.tcl</em>。</p>
@@ -525,10 +521,10 @@ Quartus软件安装路径不要有汉字和空格。工程文件夹的名称和�
 </table>
 </div>
 <div class="paragraph">
-<p>实际上<em>RemotePocket.tcl</em>脚本文件不仅有引脚定义信息，还包含了前面通过图形界面所做的一些设置。此外，还有一种导入引脚约束的方法是用菜单Assignments ➤ Import Assignments…导入qsf或csv等文件，本实验不做练习。</p>
+<p>实际上<em>RemotePocket.tcl</em>脚本文件不仅有引脚定义信息，还包含了前面通过图形界面所做的一些设置。此外，还有一种导入引脚约束的方法是用菜单Assignments ➤ Import Assignments导入qsf或csv等文件，本实验不做练习。</p>
 </div>
 <div class="paragraph">
-<p>需要说明的是，本课程的实验采用虚拟实验方式，同学们的设计并不直接使用顶层端口，但是仍然需要进行引脚约束，否则使用虚拟实验调试系统的时候会出现问题。</p>
+<p>需要说明的是，本书的实验采用虚拟实验方式，同学们的设计并不直接使用顶层端口，但是仍然需要进行引脚约束，否则使用虚拟实验调试系统的时候会出现问题。</p>
 </div>
 </div>
 </div>
@@ -559,7 +555,7 @@ Quartus软件安装路径不要有汉字和空格。工程文件夹的名称和�
 <div class="sect2">
 <h3 id="_编译错误信息"><a class="anchor" href="#_编译错误信息"></a>编译错误信息</h3>
 <div class="paragraph">
-<p>点击Processing ➤ Start菜单的Start Analysis &amp; Synthesis项或工具栏相应按钮，使用Quartus软件内嵌的分析综合工具Analysis &amp; Synthesis对设计进行逻辑综合。如果综合通过，任务流程区中Analysis &amp; Synthesis步骤前面会显示绿色的勾；如果有语法错误，会显示红色的叉，同时在信息显示区会显示错误信息。</p>
+<p>点击Processing ➤ Start ➤ Start Analysis &amp; Synthesis菜单项或工具栏相应按钮，使用Quartus软件内嵌的分析综合工具Analysis &amp; Synthesis对设计进行逻辑综合。如果综合通过，任务流程区中Analysis &amp; Synthesis步骤前面会显示绿色的勾；如果有语法错误，会显示红色的叉，同时在信息显示区会显示错误信息。</p>
 </div>
 <div class="paragraph">
 <p>查找错误时，应从第一个错误信息看起，因为后面的错误有可能是由前面的错误引起的。应点击Error标签（红叉），翻到第一个错误信息，如<a href="#fig-3">图 3</a>。</p>
@@ -591,7 +587,7 @@ Quartus软件安装路径不要有汉字和空格。工程文件夹的名称和�
 <div class="sect3">
 <h4 id="_添加已有的模块"><a class="anchor" href="#_添加已有的模块"></a>添加已有的模块</h4>
 <div class="paragraph">
-<p>用菜单项Project ➤ Add/Remove Files in Project… 打开添加文件对话框，点击<span class="image"><img src="_images/L01-image2.png" alt="image" width="24" height="19"></span>按钮，将实验材料中的<em>VirtualBoard.sv</em>添加到工程。</p>
+<p>用菜单项Project ➤ Add/Remove Files in Project… 打开添加文件对话框，点击 <code>&#8230;&#8203;</code> 浏览按钮，将实验材料中的<em>VirtualBoard.sv</em>添加到工程。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -780,10 +776,10 @@ END behav_VB;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_小结"><a class="anchor" href="#_小结"></a>小结</h2>
+<h2 id="_验证"><a class="anchor" href="#_验证"></a>验证</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>通过这个实验熟悉了FPGA设计流程和Quartus设计软件的使用。设计完成后需要验证自己的设计是否正确，实验验证首先要将上面编译生成的编程文件下载到FPGA，然后对实验电路施加输入激励，并读回输出响应进行分析判断。传统实验验证方式使用实验板上的开关等元件施加输入，通过实验板上的指示灯、数码管等观察实验现象；本课程使用虚拟实验调试软件进行实验验证，有本地实验和远程实验两种版本的实验软件，对应使用的实验电路板的不同（远程实验使用远程实验板，本地实验使用口袋实验板等），FPGA电路的加载方法也有所不同。请根据所使用的实验板和实验调试软件，阅读后面的实验验证流程。</p>
+<p>通过这个实验熟悉了FPGA设计流程和Quartus设计软件的使用。设计完成后需要验证自己的设计是否正确，实验验证首先要将上面编译生成的编程文件下载到FPGA，然后对实验电路施加输入激励，并读回输出响应进行分析判断。传统实验验证方式使用实验板上的开关等元件施加输入，通过实验板上的指示灯、数码管等观察实验现象；本书使用虚拟实验调试软件进行实验验证，有本地实验和远程实验两种版本的实验软件，对应使用的实验电路板的不同（远程实验使用远程实验板，本地实验使用口袋实验板等），FPGA电路的加载方法也有所不同。请根据所使用的实验板和实验调试软件，阅读后面的实验验证流程。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
