@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: RISC-V CPU设计实验教程</title>
+    <title>登录远程实验平台 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -76,7 +76,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L0-mooc-video.html">登录慕课平台</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
   </li>
 </ul>
@@ -310,6 +310,12 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li>实验工具和环境</li>
+    <li>实验前的准备工作</li>
+    <li><a href="L0-welab-login.html">登录远程实验平台</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
@@ -317,49 +323,101 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect2">
-<h3 id="_附录"><a class="anchor" href="#_附录"></a>附录</h3>
-<div class="sect3">
-<h4 id="安装USB驱动程序"><a class="anchor" href="#安装USB驱动程序"></a>A：安装USB驱动程序</h4>
+<h1 class="page">登录远程实验平台</h1>
+<div class="sect1">
+<h2 id="_远程实验平台的网址"><a class="anchor" href="#_远程实验平台的网址"></a>远程实验平台的网址</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>有两种类型的调试适配器，一种需要安装驱动程序，另一种使用Windows自带的驱动。这里介绍32位Windows系统的USB驱动程序安装，64位Windows系统的USB驱动安装方法请自行百度。</p>
+<p>远程实验平台的网址是 <a href="http://welab.ujs.edu.cn/new/" class="bare">http://welab.ujs.edu.cn/new/</a> ，登录页面如下图。</p>
 </div>
-<div class="paragraph">
-<p>调试适配器或内置调试适配器的实验板通过USB电缆连接PC机后，在弹出的“安装驱动程序向导”窗口中，选择“从列表或指定位置安装”，根据提示点击“下一步”，浏览到驱动程序在软件包中的位置，根据提示点击“下一步”，即可完成JUPOD驱动程序安装。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="Quartus下载sof"><a class="anchor" href="#Quartus下载sof"></a>B：使用Quartus软件下载sof文件</h4>
-<div class="paragraph">
-<p>DE2-115使用Quartus软件通过JTAG接口下载sof文件。首先需要将USB电缆连接到DE2-115开发板左上角的第一个USB接口。</p>
-</div>
-<div class="paragraph">
-<p>点击菜单项Tool ➤ Programmer或工具栏按钮进入器件编程话框，如<a href="#fig-8">器件编程窗口</a>。</p>
-</div>
-<div id="fig-8" class="imageblock">
+<div class="imageblock">
 <div class="content">
-<img src="_images/L02b-image8.png" alt="image" width="424" height="263">
+<img src="_images/L02c-image1.png" alt="image" width="420" height="228">
 </div>
-<div class="title">Figure 1. 器件编程窗口</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="重要"></i>
+</td>
+<td class="content">
+由于系统升级，网址中一定要带“new”。不带“new”的网址是老系统，登录页面与上图不同。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_支持的浏览器"><a class="anchor" href="#_支持的浏览器"></a>支持的浏览器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>推荐使用最新版谷歌浏览器。其他chrome内核的浏览器也可以（如Edge），但chrome内核版本要在57以上。</p>
 </div>
 <div class="paragraph">
-<p>点击 <code>Hardware Setup</code> 按钮或Edit ➤ Hardware Setup菜单项，在Currently selected hardware列表中选择USB-Blaster作为编程硬件，如<a href="#fig-9">下载电缆设置</a>。</p>
+<p>对火狐浏览器的测试不充分，有可能存在细节问题，不推荐使用。IE浏览器不能用。</p>
 </div>
-<div id="fig-9" class="imageblock">
+</div>
+</div>
+<div class="sect1">
+<h2 id="register-class"><a class="anchor" href="#register-class"></a>选课并加入教学班</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>学校学分课程的学生一般不需要自己加入教学班，通常由教师后台导入。登录后就可在“我的课程”中可以看到自己的课程。如果教师没有导入名单，需要自己加入教学班，请向任课教师咨询课程名称（一般与学校教务系统的课程名称相同）和教学班名称，在首页找到自己的课程后加入。</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="警告"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>请勿随意选择课程和教学班，以免教师统计成绩出错。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>自学学员请在首页选择“RISC-V CPU设计实验”课程，进入后在“所属班级”选择“默认班级”，点击“立即报名”。如果还未登录，会显示登录页面；如果尚未注册，点击登录页面右上角的“去注册”。</p>
+</div>
+<div class="paragraph">
+<p>学分课程报名后需要等待教师审核，如果长时间未得到审核，请主动向任课教师反映。共享课程报名后通常不需要等待审核，如果需要审核且超过24小时未得到审核，请加入QQ群121253650反馈。学分课程的学生请勿加入此群。</p>
+</div>
+<div class="paragraph">
+<p>报名成功后在“我的课程”可以看到该课程，在“实验项目”中选择实验项目点击“立即实验”。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_注册"><a class="anchor" href="#_注册"></a>注册</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>实验平台向全社会开放，学员既有高校学分课程的学生，也有自学的学员。</p>
+</div>
+<div class="paragraph">
+<p>学分课程的学生通常由教师后台注册。请咨询任课教师，避免重复注册导致统计成绩出错。</p>
+</div>
+<div class="paragraph">
+<p>自学学员需要自行注册。注册后可能需要等待审核，一般不超过24小时。如果长时间未得到审核或者注册遇到问题，请加入QQ群：121253650 反映。（学分课程的学生请勿加入此群。）</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_访问限制"><a class="anchor" href="#_访问限制"></a>访问限制</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>远程FPGA实验平台部署在江苏大学校内，正常情况下对社会开放。有时学校信息化中心会临时限制校外访问，显示页面如下。</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<img src="_images/L02b-image9.png" alt="image" width="343" height="202">
+<img src="_images/L02c-image2.png" alt="image" width="273" height="276">
 </div>
-<div class="title">Figure 2. 下载电缆设置</div>
-</div>
-<div class="paragraph">
-<p>回到<a href="#fig-8">器件编程窗口</a>编程界面，点击 <code>Add File</code> 按钮或Edit ➤ Add File菜单项，在工程目录的<em>output</em>文件夹下选择要下载的sof文件，如<em>DE2-115.sof</em>。
-在Mode中选择JTAG模式。勾选Program/Configure选项框，点击 <code>Start</code> 按钮或Processing ➤ Start菜单项开始器件编程。在Process进度条中会显示编程进度。</p>
 </div>
 <div class="paragraph">
-<p>完成后，在Quartus的信息显示区中，会报告成功或出错信息。注意，信息显示在Quartus主界面的信息显示区中，不在编程窗口中；为了方便看到提示信息，可以从Window菜单执行Attach Window，将编程窗口嵌入到QuartusII主界面中。</p>
-</div>
-<div class="paragraph">
-<p>编程界面左侧的其它按钮分别表示停止编程；自动检测编程硬件是否连接；删除编程文件；更改选中的编程文件；保存文件；添加用户自定义的器件；更改编程文件的顺序。</p>
+<p>此时江苏大学的师生在校外仍可以通过webvpn访问。</p>
 </div>
 </div>
 </div>

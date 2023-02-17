@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: RISC-V CPU设计实验教程</title>
+    <title>下载实验材料 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -70,7 +70,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L0-install-software.html">安装软件</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="L0-download-resource.html">下载实验材料</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -310,6 +310,12 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li>实验工具和环境</li>
+    <li>实验前的准备工作</li>
+    <li><a href="L0-download-resource.html">下载实验材料</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
@@ -317,49 +323,77 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect2">
-<h3 id="_附录"><a class="anchor" href="#_附录"></a>附录</h3>
-<div class="sect3">
-<h4 id="安装USB驱动程序"><a class="anchor" href="#安装USB驱动程序"></a>A：安装USB驱动程序</h4>
+<h1 class="page">下载实验材料</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>有两种类型的调试适配器，一种需要安装驱动程序，另一种使用Windows自带的驱动。这里介绍32位Windows系统的USB驱动程序安装，64位Windows系统的USB驱动安装方法请自行百度。</p>
+<p>实验材料发布在gitee开源项目托管网站的<a href="https://gitee.com/fpga-lab/jurv-open">openJURV</a>项目。建议在电脑中安装Git，以方便获得后续的更新。如果暂时不想安装Git，也可以直接登录Gitee下载。下面分别介绍两种方法。</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用git获取实验材料"><a class="anchor" href="#_使用git获取实验材料"></a>使用Git获取实验材料</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>安装Git</p>
 <div class="paragraph">
-<p>调试适配器或内置调试适配器的实验板通过USB电缆连接PC机后，在弹出的“安装驱动程序向导”窗口中，选择“从列表或指定位置安装”，根据提示点击“下一步”，浏览到驱动程序在软件包中的位置，根据提示点击“下一步”，即可完成JUPOD驱动程序安装。</p>
+<p>下载并安装 <a href="https://git-scm.com/download/win">Git for Windows</a>。
+如果遇到问题可阅读<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git">官方文档</a>。</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="Quartus下载sof"><a class="anchor" href="#Quartus下载sof"></a>B：使用Quartus软件下载sof文件</h4>
+</li>
+<li>
+<p>打开GitBash终端</p>
 <div class="paragraph">
-<p>DE2-115使用Quartus软件通过JTAG接口下载sof文件。首先需要将USB电缆连接到DE2-115开发板左上角的第一个USB接口。</p>
+<p>在想要存放实验材料的文件夹上右键点击 <code>Git Bash Here</code> ，打开GitBash终端。或者从Windows开始菜单启动GitBash，用 <code>cd</code> 命令进入想要存放实验材料的文件夹。</p>
 </div>
+</li>
+<li>
+<p>下载实验材料</p>
 <div class="paragraph">
-<p>点击菜单项Tool ➤ Programmer或工具栏按钮进入器件编程话框，如<a href="#fig-8">器件编程窗口</a>。</p>
+<p>在GitBash终端中执行下面的命令。</p>
 </div>
-<div id="fig-8" class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/L02b-image8.png" alt="image" width="424" height="263">
+<pre>git clone https://gitee.com/fpga-lab/jurv-open.git</pre>
 </div>
-<div class="title">Figure 1. 器件编程窗口</div>
 </div>
+</li>
+<li>
+<p>更新实验材料</p>
 <div class="paragraph">
-<p>点击 <code>Hardware Setup</code> 按钮或Edit ➤ Hardware Setup菜单项，在Currently selected hardware列表中选择USB-Blaster作为编程硬件，如<a href="#fig-9">下载电缆设置</a>。</p>
+<p>以后如果需要获取最后的更新，在GitBash终端中执行下面的命令进入jurv-open文件夹后拉取更新的部分。</p>
 </div>
-<div id="fig-9" class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/L02b-image9.png" alt="image" width="343" height="202">
+<pre>cd jurv-open
+git pull</pre>
 </div>
-<div class="title">Figure 2. 下载电缆设置</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_登录gitee网站下载实验材料"><a class="anchor" href="#_登录gitee网站下载实验材料"></a>登录gitee网站下载实验材料</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>注册为<a href="https://gitee.com">gitee</a>用户并登录；</p>
+</li>
+<li>
+<p>转到<a href="https://gitee.com/fpga-lab/jurv-open">openJURV</a>项目，点击 <code>克隆/下载</code> 按钮，再点击 <code>下载ZIP</code> 。</p>
+</li>
+<li>
+<p>如果以后网站上有更新，重复上述操作。</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>回到<a href="#fig-8">器件编程窗口</a>编程界面，点击 <code>Add File</code> 按钮或Edit ➤ Add File菜单项，在工程目录的<em>output</em>文件夹下选择要下载的sof文件，如<em>DE2-115.sof</em>。
-在Mode中选择JTAG模式。勾选Program/Configure选项框，点击 <code>Start</code> 按钮或Processing ➤ Start菜单项开始器件编程。在Process进度条中会显示编程进度。</p>
-</div>
-<div class="paragraph">
-<p>完成后，在Quartus的信息显示区中，会报告成功或出错信息。注意，信息显示在Quartus主界面的信息显示区中，不在编程窗口中；为了方便看到提示信息，可以从Window菜单执行Attach Window，将编程窗口嵌入到QuartusII主界面中。</p>
-</div>
-<div class="paragraph">
-<p>编程界面左侧的其它按钮分别表示停止编程；自动检测编程硬件是否连接；删除编程文件；更改选中的编程文件；保存文件；添加用户自定义的器件；更改编程文件的顺序。</p>
+<p>这种方法的“优点”是不用安装Git，缺点是每次都要下载完整的项目，速度稍慢。</p>
 </div>
 </div>
 </div>

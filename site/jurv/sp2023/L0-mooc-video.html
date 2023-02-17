@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: RISC-V CPU设计实验教程</title>
+    <title>慕课 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -73,7 +73,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L0-download-resource.html">下载实验材料</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="L0-mooc-video.html">登录慕课平台</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -310,6 +310,12 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li>实验工具和环境</li>
+    <li>实验前的准备工作</li>
+    <li><a href="L0-mooc-video.html">登录慕课平台</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
@@ -317,51 +323,21 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect2">
-<h3 id="_附录"><a class="anchor" href="#_附录"></a>附录</h3>
-<div class="sect3">
-<h4 id="安装USB驱动程序"><a class="anchor" href="#安装USB驱动程序"></a>A：安装USB驱动程序</h4>
+<h1 class="page">慕课</h1>
 <div class="paragraph">
-<p>有两种类型的调试适配器，一种需要安装驱动程序，另一种使用Windows自带的驱动。这里介绍32位Windows系统的USB驱动程序安装，64位Windows系统的USB驱动安装方法请自行百度。</p>
+<p>登录<a href="https://www.icourse163.org">中国大学MOOC</a>网站，搜索肖铁军、赵蕙主讲的“计算机组成与CPU设计实验”。该课程包含了本书的配套教学视频和测验。</p>
 </div>
-<div class="paragraph">
-<p>调试适配器或内置调试适配器的实验板通过USB电缆连接PC机后，在弹出的“安装驱动程序向导”窗口中，选择“从列表或指定位置安装”，根据提示点击“下一步”，浏览到驱动程序在软件包中的位置，根据提示点击“下一步”，即可完成JUPOD驱动程序安装。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="Quartus下载sof"><a class="anchor" href="#Quartus下载sof"></a>B：使用Quartus软件下载sof文件</h4>
-<div class="paragraph">
-<p>DE2-115使用Quartus软件通过JTAG接口下载sof文件。首先需要将USB电缆连接到DE2-115开发板左上角的第一个USB接口。</p>
-</div>
-<div class="paragraph">
-<p>点击菜单项Tool ➤ Programmer或工具栏按钮进入器件编程话框，如<a href="#fig-8">器件编程窗口</a>。</p>
-</div>
-<div id="fig-8" class="imageblock">
-<div class="content">
-<img src="_images/L02b-image8.png" alt="image" width="424" height="263">
-</div>
-<div class="title">Figure 1. 器件编程窗口</div>
-</div>
-<div class="paragraph">
-<p>点击 <code>Hardware Setup</code> 按钮或Edit ➤ Hardware Setup菜单项，在Currently selected hardware列表中选择USB-Blaster作为编程硬件，如<a href="#fig-9">下载电缆设置</a>。</p>
-</div>
-<div id="fig-9" class="imageblock">
-<div class="content">
-<img src="_images/L02b-image9.png" alt="image" width="343" height="202">
-</div>
-<div class="title">Figure 2. 下载电缆设置</div>
-</div>
-<div class="paragraph">
-<p>回到<a href="#fig-8">器件编程窗口</a>编程界面，点击 <code>Add File</code> 按钮或Edit ➤ Add File菜单项，在工程目录的<em>output</em>文件夹下选择要下载的sof文件，如<em>DE2-115.sof</em>。
-在Mode中选择JTAG模式。勾选Program/Configure选项框，点击 <code>Start</code> 按钮或Processing ➤ Start菜单项开始器件编程。在Process进度条中会显示编程进度。</p>
-</div>
-<div class="paragraph">
-<p>完成后，在Quartus的信息显示区中，会报告成功或出错信息。注意，信息显示在Quartus主界面的信息显示区中，不在编程窗口中；为了方便看到提示信息，可以从Window菜单执行Attach Window，将编程窗口嵌入到QuartusII主界面中。</p>
-</div>
-<div class="paragraph">
-<p>编程界面左侧的其它按钮分别表示停止编程；自动检测编程硬件是否连接；删除编程文件；更改选中的编程文件；保存文件；添加用户自定义的器件；更改编程文件的顺序。</p>
-</div>
-</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="注意"></i>
+</td>
+<td class="content">
+学校学分课程一般会设置面向本校学生的同步SPOC课程，学分课程的学生应选择自己学校的SPOC课程，通过SPOC课程观看源课程的教学视频，以便获得学分课程所需的成绩，具体要求请咨询自己学校的指导教师。
+</td>
+</tr>
+</table>
 </div>
 </article>
   </div>

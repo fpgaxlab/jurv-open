@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: RISC-V CPU设计实验教程</title>
+    <title>安装软件 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -67,7 +67,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">实验前的准备工作</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="L0-install-software.html">安装软件</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -310,6 +310,12 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li>实验工具和环境</li>
+    <li>实验前的准备工作</li>
+    <li><a href="L0-install-software.html">安装软件</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
@@ -317,49 +323,38 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="sect2">
-<h3 id="_附录"><a class="anchor" href="#_附录"></a>附录</h3>
-<div class="sect3">
-<h4 id="安装USB驱动程序"><a class="anchor" href="#安装USB驱动程序"></a>A：安装USB驱动程序</h4>
+<h1 class="page">安装软件</h1>
+<div class="sect1">
+<h2 id="_安装fpga设计软件"><a class="anchor" href="#_安装fpga设计软件"></a>安装FPGA设计软件</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>有两种类型的调试适配器，一种需要安装驱动程序，另一种使用Windows自带的驱动。这里介绍32位Windows系统的USB驱动程序安装，64位Windows系统的USB驱动安装方法请自行百度。</p>
-</div>
-<div class="paragraph">
-<p>调试适配器或内置调试适配器的实验板通过USB电缆连接PC机后，在弹出的“安装驱动程序向导”窗口中，选择“从列表或指定位置安装”，根据提示点击“下一步”，浏览到驱动程序在软件包中的位置，根据提示点击“下一步”，即可完成JUPOD驱动程序安装。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="Quartus下载sof"><a class="anchor" href="#Quartus下载sof"></a>B：使用Quartus软件下载sof文件</h4>
-<div class="paragraph">
-<p>DE2-115使用Quartus软件通过JTAG接口下载sof文件。首先需要将USB电缆连接到DE2-115开发板左上角的第一个USB接口。</p>
+<p>Quartus Prime分为Pro、Standard 和 Lite Edition，其中 Lite（精简版）是免费的，完全能够满足教学使用，因此建议安装Lite Edition。软件可从<a href="https://www.intel.com/content/www/us/en/products/details/fpga/development-tools/quartus-prime/resource.html">Intel官方网站</a>下载；本书使用Cyclone IV E系列的器件，所以还需要下载Cyclone IV Device Support Package。安装时只要将下载的器件库和Quartus安装程序放在同一个文件夹，安装程序会自动搜寻器件库并默认选择所包含的器件系列。本书使用的Quartus Prime版本为20.1.1，也可以使用更新版本的Quartus设计软件，支持Cyclone IV E器件即可，只是在界面菜单操作等细节上可能与本书不完全相同。</p>
 </div>
 <div class="paragraph">
-<p>点击菜单项Tool ➤ Programmer或工具栏按钮进入器件编程话框，如<a href="#fig-8">器件编程窗口</a>。</p>
+<p>安装时采用软件的默认设置即可。如果要改变安装路径，注意安装路径不要有汉字和空格。</p>
 </div>
-<div id="fig-8" class="imageblock">
-<div class="content">
-<img src="_images/L02b-image8.png" alt="image" width="424" height="263">
 </div>
-<div class="title">Figure 1. 器件编程窗口</div>
+</div>
+<div class="sect1">
+<h2 id="_安装本地实验调试软件"><a class="anchor" href="#_安装本地实验调试软件"></a>安装本地实验调试软件</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>本地实验软件有两种：WeLab和JULAB。请向指导教师咨询是否需要使用本地实验软件以及使用哪一种。</p>
 </div>
 <div class="paragraph">
-<p>点击 <code>Hardware Setup</code> 按钮或Edit ➤ Hardware Setup菜单项，在Currently selected hardware列表中选择USB-Blaster作为编程硬件，如<a href="#fig-9">下载电缆设置</a>。</p>
+<p>实验软件发布在gitee开源项目托管网站中<a href="https://gitee.com/fpga-lab/jurv-open">openJURV</a>项目的software文件夹，从中下载需要使用的实验调试软件。WeLab和JULAB均无需安装，解压后即可使用。</p>
 </div>
-<div id="fig-9" class="imageblock">
-<div class="content">
-<img src="_images/L02b-image9.png" alt="image" width="343" height="202">
-</div>
-<div class="title">Figure 2. 下载电缆设置</div>
-</div>
-<div class="paragraph">
-<p>回到<a href="#fig-8">器件编程窗口</a>编程界面，点击 <code>Add File</code> 按钮或Edit ➤ Add File菜单项，在工程目录的<em>output</em>文件夹下选择要下载的sof文件，如<em>DE2-115.sof</em>。
-在Mode中选择JTAG模式。勾选Program/Configure选项框，点击 <code>Start</code> 按钮或Processing ➤ Start菜单项开始器件编程。在Process进度条中会显示编程进度。</p>
-</div>
-<div class="paragraph">
-<p>完成后，在Quartus的信息显示区中，会报告成功或出错信息。注意，信息显示在Quartus主界面的信息显示区中，不在编程窗口中；为了方便看到提示信息，可以从Window菜单执行Attach Window，将编程窗口嵌入到QuartusII主界面中。</p>
-</div>
-<div class="paragraph">
-<p>编程界面左侧的其它按钮分别表示停止编程；自动检测编程硬件是否连接；删除编程文件；更改选中的编程文件；保存文件；添加用户自定义的器件；更改编程文件的顺序。</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+点击本电子书网站右上角的 <code>Download</code> 按钮可跳转到<a href="https://gitee.com/fpga-lab/jurv-open">openJURV</a>项目首页。
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

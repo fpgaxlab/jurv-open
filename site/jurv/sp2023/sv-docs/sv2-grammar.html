@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Verilog HDL语法概要 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="sp2023">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01a-faq-quartus.html">常见编译错误</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-2-combinational.html">组合逻辑的Verilog HDL描述（二）</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现ADDI指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现整数运算指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现访存指令和简单IO</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">实现分支指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">初步实现流水线</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">支持27条指令</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线数据冲突</span>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">解决流水线控制冲突</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">sp2023</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">sp2023</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>Verilog与逻辑电路实验</li>
+    <li><a href="sv2-grammar.html">Verilog HDL语法概要</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Verilog HDL语法概要</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Verilog的词法非常类似于C语言，比如标识符是大小写敏感的；所有的关键字都是小写；单行注释以“ //”开头；多行注释以“ /*”开头、以“*/”结尾，标识符的组成等等。这里假定读者具有C语言语法基础，因此不对Verilog语法作详细介绍，重点介绍Verilog特有的语言现象。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec-1-2-1"><a class="anchor" href="#sec-1-2-1"></a>数据类型及数的表示</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_四值逻辑"><a class="anchor" href="#_四值逻辑"></a>四值逻辑</h3>
+<div class="paragraph">
+<p>Verilog HDL 有下列四种逻辑值：</p>
+</div>
+<div class="paragraph">
+<p>0：逻辑 0 或“假”；</p>
+</div>
+<div class="paragraph">
+<p>1：逻辑 1 或“真”；</p>
+</div>
+<div class="paragraph">
+<p>x：不确定值（Unknown Value）；</p>
+</div>
+<div class="paragraph">
+<p>z：高阻。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_数据类型"><a class="anchor" href="#_数据类型"></a>数据类型</h3>
+<div class="paragraph">
+<p>有两类重要的数据类型，变量类型和线网类型。它们的主要区别在于赋值和维持数据的方式。</p>
+</div>
+<div class="paragraph">
+<p>线网类型包括wire、tri、wand、wor等，在FPGA设计中主要使用wire型。正如wire所表达的含义，可以把它理解为电路中的连线。wire型不存储值，它的值是由驱动端的值决定的。wire型的初始值是z。wire是系统缺省的线网类型，也可以用 <code>`default_nettype</code> 改变，见1.2.4。</p>
+</div>
+<div class="paragraph">
+<p>变量类型包括reg、integer、time、real和realtime等。reg、integer、time型的初值是x，real和realtime型的初值是0.0。变量类型是数据存储特性的抽象，在一次赋值之后它保持其值直到下一次赋值。reg是可综合为物理元件的类型，其他几个主要用于高层次的抽象建模和仿真。特别需要注意的是，reg型变量并不一定就是逻辑电路中的寄存器，这里不能望文生义，在后面<a href="#sec-1-3-2">[sec-1-3-2]</a>将有具体实例。在最初的Verilog-1995标准中，reg类型被称为寄存器（register）类型，在Verilog-2001中用“变量（variable）”代替了术语“寄存器（register）”，就是为了避免将reg型变量理解为寄存器。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_标量和向量"><a class="anchor" href="#_标量和向量"></a>标量和向量</h3>
+<div class="paragraph">
+<p>（1）标量和向量的声明</p>
+</div>
+<div class="paragraph">
+<p>线网和reg型可以指定数据宽度。如果没有指定，缺省为1位，称为标量（scalar），声明方式举例如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>wire w; // wire型标量
+reg a; // reg型标量
+wire w1, w2; // 声明2个wire型标量</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果指定了位宽，就称为向量（vector）。声明方式举例如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>wire [15:0] busa; // 16位总线
+reg [3:0] v; // 4位 reg 型向量
+reg [-1:4] b; // 6位reg向量
+reg [4:0] x, y, z; // 声明3个5位reg型向量</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>缺省情况下，线网和reg型向量是无符号的；可以用关键字signed声明为有符号的（注：Verilog-1995没有有符号的向量），例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>reg signed [3:0] signed_reg; // 有符号的4位reg向量，取值范围是-8～+7
+wire signed [7:0] s; // 有符号的8位wire向量</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>（2）向量的位选择和部分选择</p>
+</div>
+<div class="paragraph">
+<p>从向量中抽取一位称为位选择（bit-selects）。可以用一个表达式指定选择的位，语法如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>vect[expr]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>从向量中抽取几个相邻的位称为部分选择（part-selects）。部分选择有两种表达方式：常量部分选择（constant part-select）和可变部分选择（indexed part-select）。常量部分选择的语法如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>vect[msb_expr:lsb_expr]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其中msb_expr和lsb_expr都只能是常量。可变部分选择的语法如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[base_expr +: width_expr]
+[base_expr -: width_expr]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>width_expr是选择的位宽，必须是常量；base_expr是选择的起始位，可以是常量或变量；+: 表示由base_expr向上增长width_expr位，-: 表示由base_expr向下递减width_expr位。例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>reg [31: 0] big_vect; //最高位为最大位号
+reg [0 :31] little_vect; //最高位为最小位号
+reg [63: 0] dword;
+integer sel;
+big_vect[ 0 +: 8] // == big_vect[ 7 : 0]
+big_vect[15 -: 8] // == big_vect[15 : 8]
+little_vect[ 0 +: 8] // == little_vect[0 : 7]
+little_vect[15 -: 8] // == little_vect[8 :15]
+dword[8*sel +: 8] // 具有固定宽度的可变部分选择</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因为big_vect在声明时最高位为最大位号，little声明时的最高位为最小位号，所以可变部分引用[0 +: 8]用在big_vect表示big_vect[7:0]，而用在little_vect则表示little_vect[0:7]，也就是说位号的大小顺序与声明时一致。</p>
+</div>
+<div class="paragraph">
+<p>最后说明一下，integer类型不能指定数据宽度，而是使用系统的设置，缺省是32位。integer类型不存在标量和向量之分。integer类型的变量是有符号的。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_常数的表示"><a class="anchor" href="#_常数的表示"></a>常数的表示</h3>
+<div class="paragraph">
+<p>Verilog HDL的定长（Sized）整型常数的表示格式如下：</p>
+</div>
+<div class="paragraph">
+<p>&lt;位数&gt; ' &lt;基&gt; &lt;数字&gt;</p>
+</div>
+<div class="paragraph">
+<p>&lt;位数&gt;是用十进制表示的数字的位数；' &lt;基&gt;用来定义此数为十进制（'d或 'D）、二进制（'b或 'B）、十六进制（'h或 'H）、八进制（'o或 'O）；&lt;数字&gt;即用相应进制表示的数，也可以包含x和z，不区分大小写。举例如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>4'b1001 // 4位二进制数
+5'D3 // 十进制数表示的3，位宽为5位，即二进制数00011
+12'habc // 12位十六进制数
+3'b01x // 3位二进制数，最低位是不确定值
+16'hz // 16位高阻
+4'b10?? // ?和z相同，即4'b10zz</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果不指定&lt;位数&gt;，则称为不定长（Unsized）数；此时若&lt;基&gt;省略，则表示十进制。举例如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>659 // 十进制数
+'h 837FF //十六进制数
+'o7460 // 八进制数
+4af // 非法（十六进制格式应该有 'h）</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>表示负数的负号应放在最前面，如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>-8'd3 // 用8位二进制补码表示的-3</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以用下划线增强可读性，如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>12'b1111_0000_1010 // 即12'b111100001010</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在基的符号前加入s符号，可以显式地表明常数是有符号数。如</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>8'sh5d // 8位十六进制有符号常数+5DH
+-6'sd3 // 6位十进制有符号数-3</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verilog中的实数既可以用小数（如0.5），也可以用科学计数法（如3e6，1.7E8）来表达，带小数点的实数在小数点两侧都必须至少有一位数字。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_数组"><a class="anchor" href="#_数组"></a>数组</h3>
+<div class="paragraph">
+<p>各种数据类型都可以定义数组。数组的维数没有限制（注：Verilog-1995只能定义一维数组）。举例如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>reg [7:0] mema[0:255]; // 声明一个字长为8位、有256个单元的存储器
+reg arrayb[7:0][0:255]; // 声明一个二维数组，字长1位
+wire w_array[7:0][5:0]; // 声明wire型二维数组
+integer inta[1:64]; // 声明有64个元素的integer型数组
+time chng_hist[1:1000] //声明有1000个元素的time型数组</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_运算符"><a class="anchor" href="#_运算符"></a>运算符</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Verilog的运算符见<a href="#tab-1">表 1</a>。形式上大部分和C语言类似，只有归约运算符（Reduction）、并接/复制运算符（Concatenation，replication）以及算术移位运算符是Verilog特有的。优先级见<a href="#tab-2">表 2</a>。</p>
+</div>
+<table id="tab-1" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 1. Verilog运算符</caption>
+<colgroup>
+<col style="width: 17%;">
+<col style="width: 20%;">
+<col style="width: 63%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">分类</th>
+<th class="tableblock halign-left valign-top">运算符及功能</th>
+<th class="tableblock halign-left valign-top">简要说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">算术运算符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+ 加</p>
+<p class="tableblock">- 减</p>
+<p class="tableblock">* 乘</p>
+<p class="tableblock">/ 除</p>
+<p class="tableblock">% 取余</p>
+<p class="tableblock">** 乘方</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">二元运算符，即有两个操作数。</p>
+<p class="tableblock">%是求余运算符，在两个整数相除基础上，取余数。</p>
+<p class="tableblock">例如，5%6的值是5；13%5余数3。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">比较运算符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&gt; 大于</p>
+<p class="tableblock">&lt; 小于</p>
+<p class="tableblock">&gt;= 大于等于</p>
+<p class="tableblock">&#8656; 小于等于</p>
+<p class="tableblock">== 逻辑相等</p>
+<p class="tableblock">!= 逻辑不等</p>
+<p class="tableblock">=== 全等</p>
+<p class="tableblock">!== 非全等</p>
+<p class="tableblock">&amp;&amp; 逻辑与</p>
+<p class="tableblock">|| 逻辑或</p>
+<p class="tableblock">! 逻辑非</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">!为一元运算符，其他是二元运算符，关系运算的结果是1位逻辑值。如果操作数之间的关系成立，返回值为1；关系不成立，则返回值为0；若某一个操作数为不定值x，则关系是模糊的，返回值是不定值x。</p>
+<p class="tableblock">逻辑相等与全等运算符的区别：逻辑相等运算，如果两个操作数中含有不定值或高阻值，则结果为不定值；而全等运算的结果要么为1要么为0。例如： A=8’b1101xx01 B=8’b1101xx01</p>
+<p class="tableblock">则A==B 运算结果为x（不定）；</p>
+<p class="tableblock">A===B 运算结果为1（真）。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">位逻辑运算符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">~ 按位非</p>
+<p class="tableblock">&amp; 按位与</p>
+<p class="tableblock">| 按位或</p>
+<p class="tableblock">^ 按位异或</p>
+<p class="tableblock">^ ~ (~ ^) 按位同或</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">“~”是一元运算符，其余都是二元运算符。将操作数按位进行逻辑运算。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">归约运算符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&amp; 归约与</p>
+<p class="tableblock">~&amp; 归约与非</p>
+<p class="tableblock">| 归约或</p>
+<p class="tableblock">~| 归约或非</p>
+<p class="tableblock">^ 归约异或</p>
+<p class="tableblock">~ ^ (^ ~) 归约同或</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一元运算符，对操作数各位的值进行运算。如“&amp;”是对操作数各位的值进行逻辑与运算，得到一个一位的结果值1或0 。</p>
+<p class="tableblock">例如：A=8’b11010001，则 &amp;A=0，|A=1。归约与运算A中的数字全为1时，结果才为1；归约或运算A中的数字全为0时，结果才为0。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">移位运算符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt; 逻辑左移</p>
+<p class="tableblock">&gt;&gt; 逻辑右移</p>
+<p class="tableblock">&lt;&lt;&lt; 算术左移</p>
+<p class="tableblock">&gt;&gt;&gt; 算术右移</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">二元运算符，对左侧的操作数进行它右侧操作数指明的位数的移位。逻辑移位和算术左移时空出的位用0补全。算术右移时空出位的补全取决于结果的数据类型，如果是无符号型，补0；如果是有符号型，复制最高位。如果操作数有不定值x或高阻值z，结果为x。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">条件运算符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">三元运算符，即条件运算符有三个操作数。</p>
+<p class="tableblock">操作数 = 条件 ? 表达式1 : 表达式2；</p>
+<p class="tableblock">当条件为真（值为1）时，操作数=表达式1；</p>
+<p class="tableblock">为假（值为0）时，操作数=表达式2。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">并接运算符</p>
+<p class="tableblock">复制运算符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{, }</p>
+<p class="tableblock">{{}}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将两个或两个以上用逗号分隔的表达式按位连接在一起。还可以用常数来指定重复的次数。例如 {a,{2{a,b}}} 等价于{a,a,b,a,b}。</p></td>
+</tr>
+</tbody>
+</table>
+<table id="tab-2" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 2. 运算符的优先级</caption>
+<colgroup>
+<col style="width: 90%;">
+<col style="width: 10%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+ - ! ~ &amp; ~&amp; | ~| ^ ~^ ^~ （一元）</p></td>
+<td class="tableblock halign-center valign-middle" rowspan="14"><p class="tableblock">优</p>
+<p class="tableblock">先</p>
+<p class="tableblock">级</p>
+<p class="tableblock">从</p>
+<p class="tableblock">高</p>
+<p class="tableblock">到</p>
+<p class="tableblock">低</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">**</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">* / %</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+ -（二元）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt; &gt;&gt; &lt;&lt;&lt; &gt;&gt;&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt; &lt;= &gt; &gt;=</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">== != === !==</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&amp; （二元）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">^ ^~ ~^ （二元）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">| （二元）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&amp;&amp;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">||</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{} {{}}</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_模块"><a class="anchor" href="#_模块"></a>模块</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>模块是Verilog 的基本描述单位，用于描述某个逻辑实体的功能、结构以及与其他模块通信的外部端口。模块可以小到简单的门，也可以大到整个系统，比如，一个计数器、一个存储子系统、一个微处理器等。</p>
+</div>
+<div class="paragraph">
+<p>具有两个输入端口、一个输出端口的空模块定义如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>module module_name(a, b, c);
+
+input a, b;
+
+output c;
+
+endmodule</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在Verilog-2001中，引入了ANSI风格的端口说明。上例的ANSI风格的模块定义如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>module module_name
+
+(
+
+input a,
+
+input b,
+
+output c
+
+);
+
+endmodule</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>模块的端口类型有三种：input（输入），output（输出）和inout（双向）。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_编译指示字"><a class="anchor" href="#_编译指示字"></a>编译指示字</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>编译指示字以 <code>`</code> （键盘上Esc键下面的一个按键）开始。编译指示字的作用域并不限于声明它的文件，在整个编译过程中有效。这里只介绍几个常见的编译指示字。</p>
+</div>
+<div class="sect2">
+<h3 id="_default_nettype"><a class="anchor" href="#_default_nettype"></a>`default_nettype</h3>
+<div class="paragraph">
+<p>前面<a href="#sec-1-2-1">数据类型及数的表示</a>已经介绍，wire是系统缺省的线网类型，也就是说，如果一个信号没有声明，编译器认为它是wire型标量。这在一定程度上方便了代码编写，但是也带来了一些隐患，比如打字错误会被编译器当作一个新的wire型标识符，再如没有声明的wire型向量会被当作wire型标量，为避免这些问题，可以关闭系统的缺省线网类型，如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>`default_nettype none</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当然，<code>`default_nettype</code> 不仅可以用来关闭系统的缺省线网类型，也可以用来改变系统的缺省线网类型，如将缺省线网类型改为wand型：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>`default_nettype wand</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_define_和undef"><a class="anchor" href="#_define_和undef"></a>`define 和`undef</h3>
+<div class="paragraph">
+<p><code>`default_nettype</code> 用于文本替换，它和 C 语言中的 <code>#define</code> 类似。如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>`define max(a,b) ((a) &gt; (b) ? (a) : (b))</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>定义的符号在引用时也要以 <code>`</code> 开头，如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>n = `max(p+q, r+s) ;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>`undef</code> 用于取消前面定义的宏。如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>`undef max</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一旦 <code>`define</code> 指示字被编译，所定义的符号在整个编译过程中都有效，直到用 <code>`undef</code> 取消。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ifdef_else_elsif_endif_ifndef"><a class="anchor" href="#_ifdef_else_elsif_endif_ifndef"></a>`ifdef, `else, `elsif, `endif, `ifndef</h3>
+<div class="paragraph">
+<p>这些编译指示字用于条件编译。下面是一个例子，如果之前已经用 <code>`define</code> 定义了BEHAVIORAL，持续赋值语句被编译；否则，一个与门被实例化。</p>
+</div>
+<div id="exa-1" class="exampleblock">
+<div class="title">例 1. 条件编译</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module and_op
+
+( output a;
+
+input b, c
+
+);
+
+`ifdef BEHAVIORAL
+
+wire a = b &amp; c;
+
+`else
+
+and a1 (a,b,c);
+
+`endif
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_include"><a class="anchor" href="#_include"></a>`include</h3>
+<div class="paragraph">
+<p><code>`include</code> 编译指示字用于插入文件的内容。文件既可以用相对路径名定义，也可以用全路径名定义，和C语言的#include用法相当。</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

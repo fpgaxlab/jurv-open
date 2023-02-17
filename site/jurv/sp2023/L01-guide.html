@@ -64,7 +64,22 @@
     <a class="nav-link" href="L02-lab-tools.html">实验工具和环境概述</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -88,9 +103,6 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-login.html">登录远程实验平台</a>
-  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L02-guide-remote.html#准备工作">准备工作</a>
   </li>
@@ -150,8 +162,14 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">逻辑电路实验</span>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sv-docs/sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
   </li>
@@ -327,21 +345,18 @@
 <h2 id="准备工作"><a class="anchor" href="#准备工作"></a>准备工作</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_安装fpga_设计软件"><a class="anchor" href="#_安装fpga_设计软件"></a>安装FPGA 设计软件</h3>
+<h3 id="_安装fpga设计软件"><a class="anchor" href="#_安装fpga设计软件"></a>安装FPGA设计软件</h3>
 <div class="paragraph">
-<p>本书使用的设计软件为：Quartus Prime 20.1.1。Quartus Prime分为Pro、Standard 和 Lite Edition，其中 Lite（精简版）是免费的，完全能够满足教学使用，因此建议安装Lite Edition。软件可从<a href="https://fpgasoftware.intel.com/">Intel官方网站</a>下载；本书使用Cyclone IV E系列的器件，所以还需要下载支持Cyclone IV E器件的Cyclone器件库。安装时只要将下载的器件库和Quartus安装程序放在同一个文件夹，安装程序会自动搜寻器件库并默认选择所包含的器件系列。也可以使用其他版本的Quartus设计软件，支持Cyclone IV E器件即可，只是在界面菜单操作等细节上可能与本书不完全相同。</p>
-</div>
-<div class="paragraph">
-<p>安装时采用软件的默认设置即可。如果要改变安装路径，注意安装路径不要有汉字和空格。</p>
+<p>Quartus Prime的下载和安装见<a href="L0-install-software.html" class="xref page">安装软件</a>。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_下载实验材料创建工程文件夹"><a class="anchor" href="#_下载实验材料创建工程文件夹"></a>下载实验材料、创建工程文件夹</h3>
 <div class="paragraph">
-<p>在开始之前首先要下载实验材料。开源项目托管网站 <a href="https://gitee.com/fpga-lab/jurv-open" class="bare">https://gitee.com/fpga-lab/jurv-open</a> 包含了本书所有实验项目最新的附件材料。也可以从实验云或慕课平台下载。建议从gitee下载，以获得最新的更新。</p>
+<p>实验材料的下载方法见<a href="L0-download-resource.html" class="xref page">下载实验材料</a>。</p>
 </div>
 <div class="paragraph">
-<p>后面正文提到的实验材料名称均为适用于远程实验板或口袋实验板的实验材料，DE2-115开发板对应的实验材料名称如<a href="#tab-1">表 1</a>，在后面也会以提示的形式给出。</p>
+<p>后文提到的实验材料名称均为适用于远程实验板或口袋实验板的实验材料，DE2-115开发板对应的实验材料名称如<a href="#tab-1">表 1</a>，在后面也会以提示的形式给出。</p>
 </div>
 <table id="tab-1" class="tableblock frame-all grid-all fit-content center">
 <caption class="title">表 1. 实验材料名称对照表</caption>
@@ -395,7 +410,12 @@
 <i class="fa icon-important" title="重要"></i>
 </td>
 <td class="content">
-Quartus软件安装路径不要有汉字和空格。工程文件夹的名称和路径均不能包含汉字和空格。
+<div class="paragraph">
+<p>Quartus软件安装路径不要有汉字和空格。</p>
+</div>
+<div class="paragraph">
+<p>工程文件夹的名称和路径均不能包含汉字和空格。</p>
+</div>
 </td>
 </tr>
 </table>

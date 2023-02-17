@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>译码器实验 :: RISC-V CPU设计实验教程</title>
+    <title>Verilog HDL概述 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -164,7 +164,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Verilog与逻辑电路实验</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="sv1-introduction.html">Verilog HDL概述</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -182,7 +182,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L12-decoder.html">译码器实验</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -313,7 +313,7 @@
   <ul>
     <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
     <li>Verilog与逻辑电路实验</li>
-    <li><a href="L12-decoder.html">译码器实验</a></li>
+    <li><a href="sv1-introduction.html">Verilog HDL概述</a></li>
   </ul>
 </nav>
 </div>
@@ -322,101 +322,48 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">译码器实验</h1>
-<div class="sect1">
-<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
-<div class="sectionbody">
+<h1 class="page">Verilog HDL概述</h1>
 <div class="paragraph">
-<p>(1) 掌握七段译码器的HDL描述；</p>
+<p>Verilog HDL（简称Verilog）最初是GDA（Gateway Design Automation）公司在1983年开发的一种硬件描述语言（Hardware Description Language），GDA公司随后推出了相应的逻辑仿真器产品Verilog-XL。1987年，Synopsys公司发布了第一个Verilog的逻辑综合工具之后，提高了数字电路的设计效率。1989年，著名EDA公司 Cadence Design Systems并购了GDA公司，并于1990年公开发表了Verilog HDL，成立了OVI（Open Verilog Internation）组织来负责Verilog HDL的发展。在OVI组织的推动下，Verilog HDL于1995年被接受为IEEE标准，即IEEE std 1364-1995，之后在2001年和2005年分别进行了修订，通常简称为Verilog-1995、Verilog-2001和Verilog-2005。Verilog-2001是对Verilog-1995的一个重大改进版本，引入了一些新的特性；Verilog-2005只是对Verilog-2001做了一些细微修正。Verilog-2001是目前Verilog的主流版本，被大多数商业电子设计自动化软件支持，本书以Verilog-2001为主介绍。</p>
 </div>
 <div class="paragraph">
-<p>(3) 掌握HDL模块层次化设计方法。</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_参考设计"><a class="anchor" href="#_参考设计"></a>参考设计</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>实验材料中给出了一个2-4译码器的设计。虚拟面板如<a href="#fig-6">图 1</a>。</p>
-</div>
-<div id="fig-6" class="imageblock">
-<div class="content">
-<img src="_images/lab-image6.png" alt="image" width="154" height="134">
-</div>
-<div class="title">图 1. 2-4译码器的虚拟面板</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_实验内容和要求"><a class="anchor" href="#_实验内容和要求"></a>实验内容和要求</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>用HDL设计七段译码器模块，按照如下端口声明编写。</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>module SevenSegDecode (
-
-input wire [3:0]iData,
-
-output logic [7:0]oSeg
-
-);</pre>
-</div>
+<p>和传统的原理图输入方式相比，硬件描述语言有以下优点：</p>
 </div>
 <div class="paragraph">
-<p>输入是4位二进制数，输出是与输入数值相对应的数码管段码，要求包含小数点但小数点不亮，0～F共16个数据的显示效果如<a href="#fig-7">图 2</a>。编写完成后保存文件，文件名与模块名相同，即SevenSegDecode.sv。</p>
-</div>
-<div id="fig-7" class="imageblock">
-<div class="content">
-<img src="_images/lab-image7.jpeg" alt="七段数码管字形" width="193" height="65">
-</div>
-<div class="title">图 2. 七段数码管字形</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>实例化七段译码器模块。</p>
-</li>
-</ol>
+<p>（1）HDL比原理图更有效率，可以描述更复杂的系统。</p>
 </div>
 <div class="paragraph">
-<p>打开第一个实验的VirtualBoard.sv模板文件，将实例化七段译码器的代码添加到该模块内，如下。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>//七段译码器模块实例化
-SevenSegDecode ssd_inst(.iData(S[11:8]), .oSeg(SD1));
-
-//用LED显示8个段的电平值
-assign L[7:0] = SD1;</pre>
-</div>
+<p>传统的原理图设计方法，描述一个系统需要几十张至几百张图纸。但是随着设计规模日益增大，原理图描述变得过于复杂，设计和维护就变得很不方便。采用文本的输入方式，可以将精力集中到系统的功能描述，而不必顾及绘图的方法；能够以较少的时间完成更大的、更复杂的设计。</p>
 </div>
 <div class="paragraph">
-<p>可以看到，这条语句实例化七段译码器模块，也就是将SevenSegDecode模块的端口与VirtualBoard模块中的信号连接起来；具体说来就是将4个拨动开关S11～ S8连接到七段译码器模块的输入端口iData；译码输出oSeg连接到七段数码管SD1。同时用LED指示灯显示每个段的电平值。</p>
+<p>（2）HDL比原理图具有更高层次的抽象表达能力。</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>编译成功后在实验平台验证。</p>
-</li>
-<li>
-<p>【选做】修改七段译码器模块，使其能显示“P”、“L”等尽可能多的字符。提示：输入改为5位二进制，虚拟面板增加一个开关。所扩充字符的5位编码自己规定，但0～F十六个编码要与基本任务要求一致。</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>原理图设计是将已有的电路元件按照某种设计意图连接起来，实现一定的逻辑功能；设计者必须有一种能力，用逻辑元件的组合来实现所需要的系统行为。而硬件描述语言具有行为级的描述能力，能够以较抽象的形式描述系统；将行为描述转变为逻辑电路的工作交由综合工具完成。</p>
+</div>
+<div class="paragraph">
+<p>（3）有利于设计的维护和重用。</p>
+</div>
+<div class="paragraph">
+<p>代码的重用比原理图更有优势，比如硬件描述语言支持参数化设计，易于从整体上修改设计，比如修改总线宽度。文本的代码也比原理图有更好的可移植性，易于迁移到不同的设计环境。</p>
+</div>
+<div class="paragraph">
+<p>（4）不仅可以用于逻辑设计，还可以用于系统建模和仿真。</p>
+</div>
+<div class="paragraph">
+<p>原理图只能用于逻辑设计，而硬件描述语言不仅可以用于逻辑设计，还可以用于系统建模和仿真。在传统的硬件设计中，仿真和调试通常只能在后期进行，一旦出现问题，重新修改设计的代价很大。基于HDL的设计可以在早期就进行仿真，较早发现设计错误，大大缩短设计周期，降低设计成本。</p>
+</div>
+<div class="paragraph">
+<p>Verilog HDL的语法非常类似于C语言，很多关键字也是相同的。这使得熟悉C语言的工程师学习Verilog变得容易。但是C语言和Verilog又有着本质的不同，C语言是程序设计语言（Programming Language），而Verilog是描述语言（Description Language）。Verilog和C语言最大的不同，就是C语言的语句最终是由某个CPU依次执行的，而Verilog语句并不是被某个CPU执行，它描述的是并行工作的硬件。要想用好Verilog，必须有数字逻辑的基础知识和硬件的思维方式。</p>
+</div>
+<div class="paragraph">
+<p>作为一种硬件描述语言，Verilog HDL即可用于仿真建模，也可用于逻辑综合。所谓综合，就是将抽象的HDL描述依据约束条件转变成门级逻辑网络。逻辑综合通常由综合工具软件完成。Verilog能在多个层次上进行设计描述，从开关级、门级、寄存器传输级（RTL），到算法级甚至系统级，都可以胜任；但是用Verilog描述的电路模型，不一定都能够被综合，有些语句只能用于仿真，本书着重介绍可综合的Verilog描述。Verilog HDL支持多种描述风格：行为描述、结构描述、数据流描述。结构描述是通过基本元件（如与、或、非门，触发器等）和相互连接关系描述电路，本质上和画原理图相同，只是将原理图的符号和连线用语句来描述。行为描述是对设计的功能进行描述，设计者不需要考虑具体用什么逻辑电路来实现，具有一定的抽象性，比较适合RTL级和算法级的设计。数据流描述通常是指用assign赋值语句对组合逻辑电路功能的描述。在实际应用中，往往需要三种描述方式混合使用。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="title">许可 | License</div>
 <div class="paragraph">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
-</div>
-</div>
 </div>
 </div>
 </div>

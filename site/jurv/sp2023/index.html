@@ -64,7 +64,22 @@
     <a class="nav-link" href="L02-lab-tools.html">实验工具和环境概述</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -88,9 +103,6 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="L02-guide-login.html">登录远程实验平台</a>
-  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L02-guide-remote.html#准备工作">准备工作</a>
   </li>
@@ -150,8 +162,14 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">逻辑电路实验</span>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sv-docs/sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
   </li>
@@ -314,7 +332,7 @@
 <p>本书分为四大部分：实验环境、SystemVerilog和逻辑电路实验、计算机组成实验、RISC-V CPU设计实验。各个部分并非截然分开，而是环环相扣、循序渐进，是一个整体的设计，但也可以根据自己的基础选择一部分学习，详见<a href="brief-of-parts.html" class="xref page">实验内容的组织</a>。</p>
 </div>
 <div class="paragraph">
-<p>本书采用“范例-任务”教学法。大部分实验项目都会先给出一个参考设计（范例），再布置一个任务。通过学习参考设计，理解相关原理、结构和HDL描述方法，对完成任务会有很大帮助。本书还配套了教学视频，发布在中国大学MOOC等网站上，见<a href="video-links.html" class="xref page">教学视频资源</a>。</p>
+<p>本书采用“范例-任务”教学法。大部分实验项目都会先给出一个参考设计（范例），再布置一个任务。通过学习参考设计，理解相关原理、结构和HDL描述方法，对完成任务会有很大帮助。本书还配套了教学视频，发布在中国大学MOOC等网站上，见<a href="L0-mooc-video.html" class="xref page">教学视频资源</a>。</p>
 </div>
 <div class="paragraph">
 <p>对于实验课，实验工具也是非常重要的一环。本书所用的虚拟实验软件也是我们自己开发的。所谓虚拟实验，并不是模拟（仿真）实验，它以真实硬件实验板为基础，通过软件实现人机交互。虚拟实验包括本地（线下）和远程（线上）两种方式。本地虚拟实验调试系统是我和马学文老师带领研究生开发的，从2013年起在本校投入使用。在这个基础上，继续开发了远程FPGA虚拟实验平台，后端主要由我的研究生开发，前端由在校的本科生开发。远程实验平台自2018年秋季投入教学使用，很大程度上改变了硬件实验的教学方式。在3年的抗疫中，不仅为本校的实验教学提供了保障，也为其他有需要的高校提供了服务和支持。2021年底，我们与上海吉亮信息科技有限公司合作，由吉亮信息开发了教学管理功能，并对原有的实验功能做了重要改进和补充，合称为FPGA实验云。有关实验工具的具体介绍见<a href="L02-lab-tools.html" class="xref page">实验环境</a>部分。</p>
