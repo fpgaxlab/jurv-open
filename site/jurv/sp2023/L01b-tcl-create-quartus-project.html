@@ -25,7 +25,7 @@
 
         <div class="navbar-item">
           <span class="control">
-            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">Download</a>
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
           </span>
         </div>
       </div>
@@ -494,7 +494,10 @@ export_assignments
 <p>（1）<em>create_project_pocket.tcl</em>是用于远程实验板和口袋实验板的脚本文件。如果是DE2-115实验板，替换成实验材料中的<em>create_project_de2-115.tcl</em>。</p>
 </div>
 <div class="paragraph">
-<p>（2）创建的工程仅仅是包含了工程配置的工程框架，还需要将设计模块如<em>VirtualBoard.sv</em>添加到工程。</p>
+<p>（2）创建的工程文件名为<em>Lab.qpf</em>。执行脚本之前，该文件夹中不应该有同名的文件；否则执行脚本时会报错 <code>Can&#8217;t open project: Lab</code>。</p>
+</div>
+<div class="paragraph">
+<p>（3）创建的工程仅仅是包含了工程配置的工程框架，还需要将设计模块如<em>VirtualBoard.sv</em>添加到工程。</p>
 </div>
 </td>
 </tr>

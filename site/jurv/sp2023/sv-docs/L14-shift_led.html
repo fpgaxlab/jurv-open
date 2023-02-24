@@ -25,7 +25,7 @@
 
         <div class="navbar-item">
           <span class="control">
-            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">Download</a>
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
           </span>
         </div>
       </div>
@@ -461,7 +461,7 @@
 <h2 id="_实验内容2桶形移位"><a class="anchor" href="#_实验内容2桶形移位"></a>实验内容2：桶形移位</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_参考设计2"><a class="anchor" href="#_参考设计2"></a>参考设计2</h3>
+<h3 id="_基本原理"><a class="anchor" href="#_基本原理"></a>基本原理</h3>
 <div class="paragraph">
 <p>上面的设计是一个时钟移一位，如果需要移动多位，就需要多个时钟周期。但是现代计算机的移位指令，通常需要在一个时钟周期移动多位。实现多位移位的组合逻辑称作桶形移位器（barrel shifter），一般的实现方法是使用多路器阵列。<a href="#fig-barrel-shifter">图 3</a>是一个四位的循环左移桶形移位器，由4个4选1多路器构成；DI<sub>3-0</sub>是4位输入，DO<sub>3-0</sub>是移位的输出，移位的位数由N<sub>1</sub>N<sub>0</sub>决定，一次可移位0～3位。N<sub>1</sub>N<sub>0</sub>实际是4选1多路器的选择信号，当N<sub>1</sub>N<sub>0</sub>=00时，DO<sub>3-0</sub>输出选择的是对应的DI<sub>3-0</sub>输入，即DO<sub>3-0</sub>=DI<sub>3-0</sub>，不进行移位；当N<sub>1</sub>N<sub>0</sub>=01时，DO<sub>3-1</sub>=DI<sub>2-0</sub>，即DI左移1位，而DO<sub>0</sub>=DI<sub>3</sub>，所以是循环左移1位；当N<sub>1</sub>N<sub>0</sub>=10时，DO<sub>3-2</sub>=DI<sub>1-0</sub>，DO<sub>1-0</sub>=DI<sub>3-2</sub>，循环左移2位；类似地，当N<sub>1</sub>N<sub>0</sub>=11时，循环左移3位。</p>
 </div>
@@ -474,9 +474,12 @@
 <div class="paragraph">
 <p>由上可知，构造一个M位的桶形移位器需要M个M选1的多路器，最大可移位位数为lgM-1位。如果M较大，可采用分层的多路器阵列，以避免扇入数太大。</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_参考设计2"><a class="anchor" href="#_参考设计2"></a>参考设计2</h3>
 <div class="paragraph">
-<p>桶形移位器是一个组合逻辑，要实现桶形移位寄存器，还需要增加一个数据寄存器。参考设计范例2给出了一个8位的循环左移桶形移位寄存器的设计，阅读其HDL代码可知，该电路分为时序逻辑和组合逻辑两个部分，组合逻辑实现移位功能，而时序逻辑就是一个并行数据寄存器，用来将移位的结果保存在寄存器中。参考设计的桶形移位逻辑并未直接按照<a href="#fig-barrel-shifter">图 3</a>结构进行描述，而是采用了Verilog行为描述方法，由综合工具生成具体的电路结构。
-逻辑结构如<a href="#fig-12">图 4</a>虚拟面板所示，复位时数据寄存器的初值为00000001，寄存器的输出Q连到桶形移位逻辑的数据输入DI，Num决定移位位数，DO是移位输出。如果Num大于1，DI左移指定位数，当点击Clk按钮时，之前的移位输出保存到寄存器并且作为移位器新的输入，连续点击Clk，LED的视觉效果是一个跳跃的流水灯。</p>
+<p>桶形移位器是一个组合逻辑，要实现桶形移位寄存器，还需要增加一个数据寄存器。参考设计范例2给出了一个8位的循环左移桶形移位寄存器的设计，阅读其HDL代码可知，该电路分为时序逻辑和组合逻辑两个部分，组合逻辑实现移位功能，而时序逻辑就是一个并行数据寄存器，用来将移位的结果保存在寄存器中。
+电路框图如<a href="#fig-12">图 4</a>虚拟面板所示，复位时数据寄存器的初值为00000001，寄存器的输出Q连到桶形移位逻辑的数据输入DI，Num决定移位位数，DO是移位输出。如果Num大于1，DI左移指定位数，当点击Clk按钮时，之前的移位输出保存到寄存器并且作为移位器新的输入，连续点击Clk，LED的视觉效果是一个跳跃的流水灯。</p>
 </div>
 <div id="fig-12" class="imageblock">
 <div class="content">
@@ -514,7 +517,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">输出零（O=0）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">输出零（DO=0）</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
@@ -529,7 +532,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">传送（O=I）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">传送（DO=DI）</p></td>
 </tr>
 </tbody>
 </table>
