@@ -3,8 +3,8 @@ project_new -revision Lab -overwrite Lab
 
 # 添加源文件
 set_global_assignment -name VERILOG_FILE LabBoard_TOP.v
-set_global_assignment -name QIP_FILE pll.qip
-set_global_assignment -name QIP_FILE GlobalCLK.qip
+set_global_assignment -name VERILOG_FILE pll.v
+set_global_assignment -name VERILOG_FILE GlobalCLK.v
 set_global_assignment -name QXP_FILE JutagScanChain.qxp
 
 # 添加时序约束文件

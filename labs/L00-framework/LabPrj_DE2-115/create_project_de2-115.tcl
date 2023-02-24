@@ -3,7 +3,7 @@ project_new -revision DE2-115 -overwrite Lab
 
 # 添加源文件
 set_global_assignment -name VERILOG_FILE DE2_115_TOP.v
-set_global_assignment -name QIP_FILE pll.qip
+set_global_assignment -name VERILOG_FILE pll.v
 set_global_assignment -name VERILOG_FILE GlobalCLK.v
 set_global_assignment -name QXP_FILE JutagScanChain.qxp
 
