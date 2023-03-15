@@ -171,13 +171,13 @@
     <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
+    <a class="nav-link" href="sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L11-tristate_mux.html">三态门和多路器实验</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sv3-2-combinational.html">组合逻辑的Verilog HDL描述（二）</a>
+    <a class="nav-link" href="sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
@@ -344,18 +344,14 @@
 <div class="listingblock">
 <div class="content">
 <pre>module D_FF
-
-( input D,
-
-input Clock,
-
-output reg Q
-
+(
+  input D,
+  input Clock,
+  output reg Q
 );
 
 always @ (posedge Clock)
-
-Q &lt;= D;
+  Q &lt;= D;
 
 endmodule</pre>
 </div>
@@ -380,23 +376,16 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module T_FF
-
-( input T,
-
-input Clock,
-
-output reg Q,
-
-output Q_n
-
+(
+  input T,
+  input Clock,
+  output reg Q,
+  output Q_n
 );
 
 always @ (posedge Clock)
-
 if (T == 1)
-
-Q &lt;= ~Q;
-
+  Q &lt;= ~Q;
 assign Q_n = ~Q;
 
 endmodule</pre>
@@ -422,26 +411,18 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module D_FF
-
-( input D,
-
-input Clock,
-
-input Reset,
-
-output reg Q
-
+(
+  input D,
+  input Clock,
+  input Reset,
+  output reg Q
 );
 
 always @ (posedge Clock)
-
-if (Reset)
-
-Q &lt;= 0;
-
-else
-
-Q &lt;= D;
+  if (Reset)
+    Q &lt;= 0;
+  else
+    Q &lt;= D;
 
 endmodule</pre>
 </div>
@@ -454,26 +435,18 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module D_FF
-
-( input D,
-
-input Clock,
-
-input Reset,
-
-output reg Q
-
+(
+  input D,
+  input Clock,
+  input Reset,
+  output reg Q
 );
 
 always @ (posedge Clock or posedge Reset)
-
-if (Reset)
-
-Q &lt;= 0;
-
-else
-
-Q &lt;= D;
+  if (Reset)
+    Q &lt;= 0;
+  else
+    Q &lt;= D;
 
 endmodule</pre>
 </div>
@@ -494,22 +467,17 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module D_FF
-
-( input D,
-
-input Clock,
-
-input Load,
-
-output reg Q
-
+(
+  input D,
+  input Clock,
+  input Load,
+  output reg Q
 );
 
-wire gateClock = (Load &amp; Clock);
-
+wire gateClock;
+assign gateClock = (Load &amp; Clock);
 always @ (posedge gateClock)
-
-Q &lt;= D;
+  Q &lt;= D;
 
 endmodule</pre>
 </div>
@@ -534,22 +502,16 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module D_FF
-
-( input D,
-
-input Clock,
-
-input Load,
-
-output reg Q
-
+(
+  input D,
+  input Clock,
+  input Load,
+  output reg Q
 );
 
 always @ (posedge Clock)
-
 if (Load == 1)
-
-Q &lt;= D;
+  Q &lt;= D;
 
 endmodule</pre>
 </div>
@@ -570,26 +532,17 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module REG16
-
 (
-
-input [15:0] D,
-
-input Clock, Reset
-
-output reg [15:0] Q
-
+  input [15:0] D,
+  input Clock, Reset,
+  output reg [15:0] Q
 );
 
 always @ (posedge Clock or posedge Reset)
-
-if (Reset)
-
-Q &lt;= 0;
-
-else
-
-Q &lt;= Data;
+  if (Reset)
+    Q &lt;= 0;
+  else
+    Q &lt;= Data;
 
 endmodule</pre>
 </div>
@@ -611,26 +564,17 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module Reg16
-
 (
-
-inout [15:0] Data,
-
-input Clock, Reset, OE
-
+  inout [15:0] Data,
+  input Clock, Reset, OE
 );
 
 reg [15:0] Q;
-
 always @ (posedge Clock or posedge Reset)
-
-if (Reset)
-
-Q &lt;= 0;
-
-else
-
-Q &lt;= Data;
+  if (Reset)
+    Q &lt;= 0;
+  else
+    Q &lt;= Data;
 
 assign Data = OE ? Q : 16'bz;
 
@@ -650,26 +594,18 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module CountUp
-
-( input Clock,
-
-input Reset,
-
-input Enable,
-
-output reg [7:0] Q
-
+(
+  input Clock,
+  input Reset,
+  input Enable,
+  output reg [7:0] Q
 );
 
 always @ (posedge Clock or posedge Reset)
-
-if (Reset == 1)
-
-Q &lt;= 0;
-
-else if (Enable)
-
-Q &lt;= Q + 1;
+  if (Reset == 1)
+    Q &lt;= 0;
+  else if (Enable)
+    Q &lt;= Q + 1;
 
 endmodule</pre>
 </div>
@@ -682,26 +618,17 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module Shifter
-
 (
-
-input Clock, Load,
-
-input [7:0] D,
-
-output reg [7:0] Q
-
+  input Clock, Load,
+  input [7:0] D,
+  output reg [7:0] Q
 );
 
 always @ (posedge Clock)
-
-if (Load)
-
-Q &lt;= D;
-
-else
-
-Q &lt;= {1'b0, Q[7:1]};
+  if (Load)
+    Q &lt;= D;
+  else
+    Q &lt;= {1'b0, Q[7:1]};
 
 endmodule</pre>
 </div>
@@ -722,20 +649,14 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module Latch
-
 (
-
-input D, En,
-
-output reg Q
-
+  input D, En,
+  output reg Q
 );
 
 always @ (En or D)
-
-if (En)
-
-Q &lt;= D;
+  if (En)
+    Q &lt;= D;
 
 endmodule</pre>
 </div>
@@ -754,15 +675,10 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>case (op)
-
-2'b00: y = a + b;
-
-2'b01: y = a – b;
-
-2'b10: y = a ^ b;
-
-default: y = 'bx;
-
+  2'b00: y = a + b;
+  2'b01: y = a – b;
+  2'b10: y = a ^ b;
+  default: y = 'bx;
 endcase</pre>
 </div>
 </div>
@@ -779,27 +695,17 @@ endcase</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module RAM
-
 (
-
-output [7:0] Q,
-
-input [7:0] Data,
-
-input [3:0] Addr,
-
-input WR, Clk
-
+  output [7:0] Q,
+  input [7:0] Data,
+  input [3:0] Addr,
+  input WR, Clk
 );
 
 reg [7:0] MEM [0:15];
-
 always @ (posedge Clk) begin
-
-if (WR) mem[Addr] &lt;= Data ;
-
+  if (WR) mem[Addr] &lt;= Data ;
 end
-
 assign Q = mem[Addr];
 
 endmodule</pre>
@@ -827,13 +733,9 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>begin
-
-a = 1;
-
-b = a;
-
-c = b;
-
+  a = 1;
+  b = a;
+  c = b;
 end</pre>
 </div>
 </div>
@@ -846,13 +748,9 @@ end</pre>
 <div class="listingblock">
 <div class="content">
 <pre>begin
-
-a &lt;= 1;
-
-b &lt;= a;
-
-c &lt;= b;
-
+  a &lt;= 1;
+  b &lt;= a;
+  c &lt;= b;
 end</pre>
 </div>
 </div>
@@ -861,11 +759,9 @@ end</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>a = 1
-
-b = a原来的值
-
-c = b原来的值</pre>
+<pre>a = 1;
+b = a原来的值;
+c = b原来的值。</pre>
 </div>
 </div>
 <div class="paragraph">

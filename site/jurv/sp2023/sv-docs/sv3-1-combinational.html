@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>组合逻辑的Verilog HDL描述（一） :: RISC-V CPU设计实验教程</title>
+    <title>用assign持续赋值语句描述组合逻辑 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -171,13 +171,13 @@
     <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
+    <a class="nav-link" href="sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L11-tristate_mux.html">三态门和多路器实验</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sv3-2-combinational.html">组合逻辑的Verilog HDL描述（二）</a>
+    <a class="nav-link" href="sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
@@ -313,7 +313,7 @@
   <ul>
     <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
     <li>Verilog与逻辑电路实验</li>
-    <li><a href="sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a></li>
+    <li><a href="sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a></li>
   </ul>
 </nav>
 </div>
@@ -322,7 +322,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">组合逻辑的Verilog HDL描述（一）</h1>
+<h1 class="page">用assign持续赋值语句描述组合逻辑</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -331,10 +331,8 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="sec-1-3-1"><a class="anchor" href="#sec-1-3-1"></a>用assign持续赋值语句描述组合逻辑</h2>
+<h2 id="_assign语句"><a class="anchor" href="#_assign语句"></a>assign语句</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_assign语句"><a class="anchor" href="#_assign语句"></a>assign语句</h3>
 <div class="paragraph">
 <p>持续赋值（Continuous Assignment）语句的关键字是assign，其形式是：</p>
 </div>
@@ -350,13 +348,10 @@
 <div class="listingblock">
 <div class="content">
 <pre>module NAndGate
-
-( input A,
-
-input B,
-
-output C
-
+(
+  input A,
+  input B,
+  output C
 );
 
 assign C = ~(A &amp; B);
@@ -367,8 +362,10 @@ endmodule</pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_隐含的持续赋值语句"><a class="anchor" href="#_隐含的持续赋值语句"></a>隐含的持续赋值语句</h3>
+</div>
+<div class="sect1">
+<h2 id="_隐含的持续赋值语句"><a class="anchor" href="#_隐含的持续赋值语句"></a>隐含的持续赋值语句</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>持续赋值可以作为wire型变量说明的一部分，例如：</p>
 </div>
@@ -387,23 +384,21 @@ assign a = b;</pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_多路选择器"><a class="anchor" href="#_多路选择器"></a>多路选择器</h3>
+</div>
+<div class="sect1">
+<h2 id="_多路选择器"><a class="anchor" href="#_多路选择器"></a>多路选择器</h2>
+<div class="sectionbody">
 <div id="exa-3" class="exampleblock">
 <div class="title">例 2. 用持续赋值语句描述二选一多路选择器</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>module MUX2to1
-
-( input A,
-
-input B,
-
-input Select,
-
-output Y
-
+(
+  input A,
+  input B,
+  input Select,
+  output Y
 );
 
 assign Y = (Select) ? B : A;
@@ -417,21 +412,20 @@ endmodule</pre>
 <p>这里使用了条件运算符，和C语言的语法规则是一样的。当Sel为1，Y=B；否则，Y=A。</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_三态缓冲器"><a class="anchor" href="#_三态缓冲器"></a>三态缓冲器</h3>
+</div>
+<div class="sect1">
+<h2 id="_三态缓冲器"><a class="anchor" href="#_三态缓冲器"></a>三态缓冲器</h2>
+<div class="sectionbody">
 <div id="exa-4" class="exampleblock">
 <div class="title">例 3. 三态缓冲器的逻辑描述</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>module Buffer
-
-( output Out,
-
-input In,
-
-input Enable
-
+(
+  output Out,
+  input In,
+  input Enable
 );
 
 assign Out = Enable ? In : 1'bz;
@@ -450,17 +444,12 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module BiBuffer
-
 (
-
-inout A, B,
-
-input En, A2B
-
+  inout A, B,
+  input En, A2B
 );
 
 assign B = (En &amp;&amp; A2B) ? A : 'bz;
-
 assign A = (En &amp;&amp; !A2B) ? B : 'bz;
 
 endmodule</pre>
@@ -471,95 +460,11 @@ endmodule</pre>
 <div class="paragraph">
 <p>在这个例子中，有两个assign语句。注意，不要受软件编程语言的影响，认为这两个语句是顺序“执行”的。Verilog是硬件描述语言，这两个语句是并发的，两个语句描述的硬件电路是同时工作的。比如En变化时，A和B同时被重新计算。</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sec-1-3-2"><a class="anchor" href="#sec-1-3-2"></a>用always过程语句描述组合逻辑</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="sec-1-3-2-1"><a class="anchor" href="#sec-1-3-2-1"></a>always语句</h3>
-<div class="paragraph">
-<p>在alawys过程块中的赋值称为过程赋值（Procedural Assignment）。首先通过一个例子说明always块的结构和含义。</p>
-</div>
-<div id="exa-6" class="exampleblock">
-<div class="title">例 5. 用过程语句描述半加器</div>
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre>module HalfAdder
-
-( input A, B,
-
-output reg Sum, Carry
-
-);
-
-always @ (A or B)
-
-begin
-
-Sum &lt;= A ^ B;
-
-Carry &lt;= A &amp; B;
-
-end
-
-endmodule</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>always语句中@ (A or B)称为敏感列表，其含义是，当输入A或B变化时，重新计算begin…end块中的表达式值，更新赋值结果；然后等待下次敏感列表的变化。always语句是不会停止的，要么在等待敏感列表的变化，要么在“执行”块中语句，这正是“always”这个词的含义。这里借用了软件的“执行”这个词，需要再次说明的是，并不存在一个处理器负责执行Verilog语句，Verilog语句描述的是硬件。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sec-1-3-2-2"><a class="anchor" href="#sec-1-3-2-2"></a>敏感列表</h3>
-<div class="paragraph">
-<p>Verilog-2001标准对敏感列表的语法做了扩充，主要有两点。</p>
-</div>
-<div class="paragraph">
-<p>(1) 用逗号代替“or”,可以使表达更简洁。如：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>always @ (A, B)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>(2) “*”通配符</p>
-</div>
-<div class="paragraph">
-<p>用always语句描述组合逻辑，要求所有的输入变量都要出现在敏感列表中，否则综合工具有可能无法正确地推断出设计者的意图。假如<a href="#exa-6">例 5</a>的敏感列表缺少了输入变量B，即</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>always @ (A)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>意味着当B变化时，不会重新计算输出；综合出的逻辑特性可能会出现难以预料的结果。因此Verilog-2001增加了通配符*，以简化书写形式，减少设计工程师出错的可能性。举例如下：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>always @ *</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>或</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>always @ (*)</pre>
-</div>
-</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="title">许可 | License</div>
 <div class="paragraph">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
-</div>
 </div>
 </div>
 </div>

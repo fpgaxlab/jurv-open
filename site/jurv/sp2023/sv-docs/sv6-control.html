@@ -171,13 +171,13 @@
     <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
+    <a class="nav-link" href="sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L11-tristate_mux.html">三态门和多路器实验</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sv3-2-combinational.html">组合逻辑的Verilog HDL描述（二）</a>
+    <a class="nav-link" href="sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
@@ -363,96 +363,56 @@
 <div class="listingblock">
 <div class="content">
 <pre>module car_ctrl
-
 (
-
-input clk, reset, acc, brake,
-
-output reg [1:0] speed
-
+  input clk, reset, acc, brake,
+  output reg [1:0] speed
 );
 
 localparam [1:0] STOPED = 2'b00;
-
 localparam [1:0] LOW = 2'b01;
-
 localparam [1:0] MODERATE = 2'b10;
-
 localparam [1:0] HIGH = 2'b11;
 
 reg [1:0] state, next_state;
 
 always @(posedge clk)
-
-if (reset)
-
-state &lt;= STOPED;
-
-else
-
-state &lt;= next_state;
+  if (reset)
+    state &lt;= STOPED;
+  else
+    state &lt;= next_state;
 
 always @(state, acc, brake)
-
-case (state)
-
-STOPED:
-
-if (acc &amp;&amp; !brake)
-
-next_state = LOW;
-
-else
-
-next_state = STOPED;
-
-LOW:
-
-if (brake)
-
-next_state = STOPED;
-
-else if (acc)
-
-next_state = MODERATE;
-
-else
-
-next_state = LOW;
-
-MODERATE:
-
-if (brake)
-
-next_state = LOW;
-
-else if (acc)
-
-next_state = HIGH;
-
-else
-
-next_state = MODERATE;
-
-HIGH:
-
-if (brake)
-
-next_state = MODERATE;
-
-else
-
-next_state = HIGH;
-
-default:
-
-next_state = STOPED;
-
-endcase
+  case (state)
+    STOPED:
+      if (acc &amp;&amp; !brake)
+        next_state = LOW;
+      else
+        next_state = STOPED;
+    LOW:
+      if (brake)
+        next_state = STOPED;
+      else if (acc)
+        next_state = MODERATE;
+      else
+        next_state = LOW;
+    MODERATE:
+      if (brake)
+        next_state = LOW;
+      else if (acc)
+        next_state = HIGH;
+      else
+        next_state = MODERATE;
+    HIGH:
+      if (brake)
+        next_state = MODERATE;
+      else
+        next_state = HIGH;
+    default:
+      next_state = STOPED;
+  endcase
 
 always @(state)
-
-speed = state; //本例的状态编码恰巧与输出（速度）相同
+  speed = state; //本例的状态编码恰巧与输出（速度）相同
 
 endmodule</pre>
 </div>
@@ -471,82 +431,45 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>always @(posedge clk)
-
-if (reset)
-
-state &lt;= STOPED;
-
-else
-
-state &lt;= next_state;
+  if (reset)
+    state &lt;= STOPED;
+  else
+    state &lt;= next_state;
 
 always @(state, acc, brake)
-
-case (state)
-
-STOPED:
-
-speed=2'b00;
-
-if (acc &amp;&amp; !brake)
-
-next_state = LOW;
-
-else
-
-next_state = STOPED;
-
-LOW:
-
-speed=2'b01;
-
-if (brake)
-
-next_state = STOPED;
-
-else if (acc)
-
-next_state = MODERATE;
-
-else
-
-next_state = LOW;
-
-MODERATE:
-
-speed=2'b10;
-
-if (brake)
-
-next_state = LOW;
-
-else if (acc)
-
-next_state = HIGH;
-
-else
-
-next_state = MODERATE;
-
-HIGH:
-
-speed=2'b11;
-
-if (brake)
-
-next_state = MODERATE;
-
-else
-
-next_state = HIGH;
-
-default:
-
-speed=2'b00;
-
-next_state = STOPED;
-
-endcase</pre>
+  case (state)
+    STOPED:
+      speed=2'b00;
+      if (acc &amp;&amp; !brake)
+        next_state = LOW;
+      else
+        next_state = STOPED;
+    LOW:
+      speed=2'b01;
+      if (brake)
+        next_state = STOPED;
+      else if (acc)
+        next_state = MODERATE;
+      else
+        next_state = LOW;
+    MODERATE:
+      speed=2'b10;
+      if (brake)
+        next_state = LOW;
+      else if (acc)
+        next_state = HIGH;
+      else
+        next_state = MODERATE;
+    HIGH:
+      speed=2'b11;
+      if (brake)
+        next_state = MODERATE;
+      else
+        next_state = HIGH;
+    default:
+      speed=2'b00;
+      next_state = STOPED;
+  endcase</pre>
 </div>
 </div>
 </div>
@@ -569,86 +492,49 @@ endcase</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module car_ctrl_bad
-
 (
-
-input clk, acc, brake,
-
-output reg [1:0] speed
-
+  input clk, acc, brake,
+  output reg [1:0] speed
 );
 
 localparam [1:0] STOPED = 2'b00;
-
 localparam [1:0] LOW = 2'b01;
-
 localparam [1:0] MODERATE = 2'b10;
-
 localparam [1:0] HIGH = 2'b11;
 
 reg [1:0] state;
-
 always @(posedge clk)
-
-case (state)
-
-STOPED:
-
-if (acc &amp;&amp; !brake)
-
-state = LOW;
-
-else
-
-state = STOPED;
-
-LOW:
-
-if (brake)
-
-state = STOPED;
-
-else if (acc)
-
-state = MODERATE;
-
-else
-
-state = LOW;
-
-MODERATE:
-
-if (brake)
-
-state = LOW;
-
-else if (acc)
-
-state = HIGH;
-
-else
-
-state = MODERATE;
-
-HIGH:
-
-if (brake)
-
-state = MODERATE;
-
-else
-
-state = HIGH;
-
-default:
-
-next_state = STOPED;
-
-endcase
+  case (state)
+    STOPED:
+      if (acc &amp;&amp; !brake)
+        state = LOW;
+      else
+        state = STOPED;
+    LOW:
+      if (brake)
+        state = STOPED;
+      else if (acc)
+        state = MODERATE;
+      else
+        state = LOW;
+    MODERATE:
+    if (brake)
+        state = LOW;
+      else if (acc)
+        state = HIGH;
+      else
+        state = MODERATE;
+    HIGH:
+      if (brake)
+        state = MODERATE;
+      else
+        state = HIGH;
+    default:
+      next_state = STOPED;
+  endcase
 
 always @(state)
-
-speed = state; //本例的状态编码恰巧与输出(速度)相同
+  speed = state; //本例的状态编码恰巧与输出(速度)相同
 
 endmodule</pre>
 </div>
@@ -671,13 +557,9 @@ endmodule</pre>
 <div class="listingblock">
 <div class="content">
 <pre>localparam [3:0] STOPED = 4'b0001;
-
 localparam [3:0] LOW = 4'b0010;
-
 localparam [3:0] MODERATE = 4'b0100;
-
 localparam [3:0] HIGH = 4'b1000;
-
 reg [3:0] state, next_state;</pre>
 </div>
 </div>
@@ -698,108 +580,62 @@ reg [3:0] state, next_state;</pre>
 <div class="listingblock">
 <div class="content">
 <pre>module car_ctrl
-
 (
-
-input clk, reset, acc, brake,
-
-output reg [1:0] speed
-
+  input clk, reset, acc, brake,
+  output reg [1:0] speed
 );
 
 localparam [3:0] STOPED = 4'b0001;
-
 localparam [3:0] LOW = 4'b0010;
-
 localparam [3:0] MODERATE = 4'b0100;
-
 localparam [3:0] HIGH = 4'b1000;
 
 reg [3:0] state, next_state;
-
 reg [1:0] out;
 
 always @(posedge clk)
-
-if (reset)
-
-state &lt;= STOPED;
-
-else
-
-state &lt;= next_state;
+  if (reset)
+    state &lt;= STOPED;
+  else
+    state &lt;= next_state;
 
 always @(state, acc, brake)
-
-case (state)
-
-STOPED:
-
-out=2'b00;
-
-if (acc &amp;&amp; !brake)
-
-next_state = LOW;
-
-else
-
-next_state = STOPED;
-
-LOW:
-
-out=2'b01;
-
-if (brake)
-
-next_state = STOPED;
-
-else if (acc)
-
-next_state = MODERATE;
-
-else
-
-next_state = LOW;
-
-MODERATE:
-
-out=2'b10;
-
-if (brake)
-
-next_state = LOW;
-
-else if (acc)
-
-next_state = HIGH;
-
-else
-
-next_state = MODERATE;
-
-HIGH:
-
-out=2'b11;
-
-if (brake)
-
-next_state = MODERATE;
-
-else
-
-next_state = HIGH;
-
-default:
-
-out=2'b00;
-
-next_state = STOPED;
-
-endcase
+  case (state)
+    STOPED:
+      out=2'b00;
+      if (acc &amp;&amp; !brake)
+        next_state = LOW;
+      else
+        next_state = STOPED;
+    LOW:
+      out=2'b01;
+      if (brake)
+        next_state = STOPED;
+      else if (acc)
+        next_state = MODERATE;
+      else
+        next_state = LOW;
+    MODERATE:
+      out=2'b10;
+      if (brake)
+        next_state = LOW;
+      else if (acc)
+        next_state = HIGH;
+      else
+        next_state = MODERATE;
+    HIGH:
+      out=2'b11;
+      if (brake)
+        next_state = MODERATE;
+      else
+        next_state = HIGH;
+    default:
+      out=2'b00;
+      next_state = STOPED;
+  endcase
 
 always @(posedge clk)
-
-speed = out;
+  speed = out;
 
 endmodule</pre>
 </div>

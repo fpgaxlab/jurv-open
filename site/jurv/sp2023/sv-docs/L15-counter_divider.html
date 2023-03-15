@@ -171,13 +171,13 @@
     <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
+    <a class="nav-link" href="sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L11-tristate_mux.html">三态门和多路器实验</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sv3-2-combinational.html">组合逻辑的Verilog HDL描述（二）</a>
+    <a class="nav-link" href="sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
@@ -392,7 +392,7 @@ output reg ClkOut
 <p>用ModelSim仿真参考设计。关于ModelSim的用法请阅读实验教程《ModelSim仿真入门》，下面针对本实验做几点说明。</p>
 </div>
 <div class="paragraph">
-<p>（1）Testbench在实验材料中已经提供，应读懂。</p>
+<p>（1）Testbench在实验材料中已经提供，应读懂。本实验只做功能仿真，被仿真的设计模块是VirtualBoard。</p>
 </div>
 <div class="paragraph">
 <p>（2）需要手动将count和q添加到波形窗口，重新启动仿真后的波形如<a href="#fig-16">图 3</a>。</p>
@@ -404,7 +404,7 @@ output reg ClkOut
 <div class="title">图 3. 计数器的仿真波形</div>
 </div>
 <div class="paragraph">
-<p>从波形上看移位寄存器的输出q（图中最后一行）一直是00000001没有变化，也就是复位的初值。这是因为仿真的时间不够长，计数器count还没有溢出；可以将设计代码中的“assign clk = count[22];”改为较小的分频数以便能观察到q的变化。</p>
+<p>从波形上看移位寄存器的输出q（图中最后一行）一直是00000001没有变化，也就是复位的初值。这是因为仿真的时间不够长，计数器count还没有溢出。可以修改testbench，延长停止仿真前的时长；或者将设计代码中的“assign clk = count[22];”改为较小的分频数以便能观察到q的变化。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">

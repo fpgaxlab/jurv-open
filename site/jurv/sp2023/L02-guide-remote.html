@@ -171,13 +171,13 @@
     <a class="nav-link" href="sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sv-docs/sv3-1-combinational.html">组合逻辑的Verilog HDL描述（一）</a>
+    <a class="nav-link" href="sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sv-docs/sv3-2-combinational.html">组合逻辑的Verilog HDL描述（二）</a>
+    <a class="nav-link" href="sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
@@ -677,7 +677,23 @@ END behav_VB;</pre>
 <p>记录窗口还提供了文字输入功能，用于分析实验现象、得出结论。是否要求输入文字描述由指导教师根据每个实验的特点决定。</p>
 </div>
 <div class="paragraph">
-<p>特别提醒，每按下一次 <code>记录</code> 按钮，仅产生一条记录，后续的操作并不会自动地记录。也就是说，每一个需要回放的步骤都应该按下一次 <code>记录</code> 按钮。如果要对当前实验电路现象输入文字分析，也要在按下 <code>记录</code> 按钮之前输入。 <code>重新记录</code> 按钮按下后，会清空前面输入的所有记录，系统给出“记录已清空”的提示。 <code>提交</code> 按钮按下后，自动提交所有记录，实验板收回，系统提示“提交成功”和“本次实验已结束”，如果想再次记录并提交，可以再次申请实验板后重新FPGA编程，系统保存最新的提交。</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
+特别提醒，每按下一次 <code>记录</code> 按钮，仅产生一条记录，后续的操作并不会自动地记录。也就是说，每一个需要回放的步骤都应该按下一次 <code>记录</code> 按钮。如果要对当前实验电路现象输入文字分析，也要在按下 <code>记录</code> 按钮之前输入。 <code>重新记录</code> 按钮按下后，会清空前面输入的所有记录，系统给出“记录已清空”的提示。 <code>提交</code> 按钮按下后，自动提交所有记录，实验板收回，系统提示“提交成功”和“本次实验已结束”，如果想再次记录并提交，可以再次申请实验板后重新FPGA编程，系统保存最新的提交。</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="注意"></i>
+</td>
+<td class="content">
+特别提醒，每按下一次 <code>记录</code> 按钮，仅产生一帧记录，后续的操作并不会自动地记录。也就是说，每一个需要回放的步骤都应该按下一次 <code>记录</code> 按钮。文字描述也是针对当前帧，如果要对当前实验电路现象输入文字分析，也要在按下 <code>记录</code> 按钮之前输入。
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>验证记录提交以后，可以通过任务列表上的回放按钮<span class="image"><img src="_images/L02a-image16.png" alt="回放" width="15" height="18"></span>观看自己的记录，确认操作没有遗漏。教师评分之后，才可以在回放界面右上角看到验证记录的成绩，如<a href="#fig-11">图 8</a>。</p>
@@ -700,18 +716,15 @@ END behav_VB;</pre>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>==== 电路测试</p>
 </div>
-<div class="sect2">
-<h3 id="_电路测试"><a class="anchor" href="#_电路测试"></a>电路测试</h3>
 <div class="paragraph">
 <p>在任务列表选择“电路测试”进入虚拟面板界面，申请远程实验板、加载FPGA电路后，无需操作虚拟面板直接点击“提交”，实验平台对提交的电路文件进行自动测试，之后在任务列表上可以看到电路测试的分数。</p>
 </div>
+<div class="paragraph">
+<p>=== 小结</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_小结"><a class="anchor" href="#_小结"></a>小结</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>通过这个实验主要熟悉了开关、按键、指示灯、数码管等虚拟元件的特性，也初步了解了远程实验平台的使用，还有很多细节功能需要读者自己探索，也可观看由前端开发同学余乐韬制作的<a href="https://www.bilibili.com/video/av93961752/">WeLab远程FPGA实验平台介绍视频</a>，由于制作的时间较早，没有反映后来开发的考核等功能。</p>
 </div>
@@ -723,6 +736,9 @@ END behav_VB;</pre>
 <div class="title">许可 | License</div>
 <div class="paragraph">
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
