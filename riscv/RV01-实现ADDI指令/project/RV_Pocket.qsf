@@ -43,6 +43,7 @@ set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:18:15  AUGUST 21, 2022"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
 set_global_assignment -name VERILOG_FILE RV_Pocket.v
+set_global_assignment -name SYSTEMVERILOG_FILE "../common/RAM_asIM.sv"
 set_global_assignment -name VERILOG_FILE ../common/WatchChain.sv
 set_global_assignment -name QIP_FILE ../common/pll.qip
 set_global_assignment -name QIP_FILE ../common/GlobalCLK.qip
