@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>附录：片内存储器块的使用 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="sp2023">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01a-faq-quartus.html">常见编译错误</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">sp2023</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">sp2023</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li><a href="RV27-appendix.html">附录：片内存储器块的使用</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">附录：片内存储器块的使用</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>在Quartus II的参数化模块库中，有许多现成的设计资源可以用来构建数字系统，有一些Altera提供的基本宏模块可以免费选用，通常称为IP核。它们是数字电路中的常用功能块，并且被设计成参数可修改的模块，让用户可以直接调用。这些基本宏模块都是针对目标器件进行优化过的模块，应用在具体的Altera器件的设计中。利用这些资源，可以使设计性能更高，资源占用更少，加快设计的进度。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ip核方式设计ramrom"><a class="anchor" href="#_ip核方式设计ramrom"></a>IP核方式设计RAM/ROM</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>基于Altera提供的宏功能，借助MegaWizard插件管理器可以建立或者修改含有自定义宏功能模块变量的设计文件。</p>
+</div>
+<div class="paragraph">
+<p>使用菜单项Tools&#8594;MegaWizard Plug-In Manager，打开MegaWizard管理器，如<a href="#fig-9">图 1</a>，在出现的对话框中有三种选择，分别表示创建一个新的宏功能（create a new megafunction variation），编辑（Edit）一个已经存在的宏，以及拷贝（copy)一个已存在的宏功能文件。选择创建新的宏模块，单击Next按钮，进入宏模块选择对话框，如<a href="#fig-10">图 2</a>。</p>
+</div>
+<div id="fig-9" class="imageblock">
+<div class="content">
+<img src="_images/image9.png" alt="image" width="352" height="249">
+</div>
+<div class="title">图 1. 打开MegaWizard插件管理器</div>
+</div>
+<div id="fig-10" class="imageblock">
+<div class="content">
+<img src="_images/image10.png" alt="image" width="347" height="332">
+</div>
+<div class="title">图 2. 宏模块选择对话框</div>
+</div>
+<div class="paragraph">
+<p>对话框的左侧是IP核的分类管理，列出了可供选择的宏功能模块的类型，在已安装类里又分为SOPC核、运算、通信、数字信号处理、逻辑门、IO端口、接口、JTAG扩展和存储器。另外一个大类就需要额外购买了。</p>
+</div>
+<div class="paragraph">
+<p>DE2-115开发板搭载的Cyclone IV器件具有嵌入式存储器结构，嵌入式存储器结构由一列列M9K存储器模块组成，通过对这些M9K存储器模块进行配置，可以实现各种存储器功能，例如：RAM、ROM、移位寄存器以及FIFO缓冲器。这里以该器件为例，创建一个片内256×8bit的单端口RAM 。</p>
+</div>
+<div class="paragraph">
+<p>选择存储器编译器（Memory Compiler）中的RAM：1PORT。对话框的右侧部分包括器件选择，语言选择，输出文件路径和名称等，本例输出文件选择“Verilog HDL”，使用文件名“RAMB”。</p>
+</div>
+<div class="paragraph">
+<p>单击Next铵钮，进入参数设置页面，如<a href="#fig-11">图 3</a>，这里需要设置RAM存储器数据宽度和深度，选择生成当前IP核需要使用的片上资源，配置驱动时钟模式。生成IP核资源一栏默认的是AUTO选项，QuartusII将根据选择的目标器件，自动确定嵌入RAM块的类型，其它选项与FPGA芯片上可能存在的硬件资源相关，需要根据具体硬件灵活选择，例如针对Cyclone IV器件可以选择M9K。在驱动时钟模式配置中，一种是单时钟模式，意思是输入和输出采用同样的时钟驱动；另外一个模式是输入与输出分别采用单独的时钟驱动，用以处理跨时钟域的信号。按照设计需要进行选择，单击Next按钮继续。</p>
+</div>
+<div id="fig-11" class="imageblock">
+<div class="content">
+<img src="_images/image11.png" alt="image" width="355" height="326">
+</div>
+<div class="title">图 3. 单端口RAM的参数设置页面</div>
+</div>
+<div class="paragraph">
+<p>如<a href="#fig-12">图 4</a>，现在可以选择输出数据是否需要用寄存器缓存，缓存后可以提高输出数据的稳定性，保证与下一级模块相接的时候，特别是在直接进行I/O输出时具有良好的时序。另一个可配置的选项是产生一个时钟使能信号，这样可以在RAM未使用的情况下停止时钟，节省功耗。接下来，可以选择的是异步复位信号，可以用来异步清零端口上的寄存器缓存，为一些需要清空错误数据的设计提供帮助，根据设计需要进行选择。</p>
+</div>
+<div class="paragraph">
+<p>单击Next按钮继续，这个对话框用来配置RAM的输出行为，如<a href="#fig-13">图 5</a>。根据设置，如果在写操作期间激活rden信号，可以选择RAM输出端会显示相应地址上正在写入的新数据，还是保持原有的旧数据。如果在rden信号未激活的情况下执行写操作，那么RAM输出端将保留它们在最近的rden信号有效期间所保持的值。</p>
+</div>
+<div id="fig-12" class="imageblock">
+<div class="content">
+<img src="_images/image12.png" alt="image" width="355" height="326">
+</div>
+<div class="title">图 4. 输出锁存、时钟使能、字节使能、读使能等设置</div>
+</div>
+<div id="fig-13" class="imageblock">
+<div class="content">
+<img src="_images/image13.png" alt="image" width="355" height="326">
+</div>
+<div class="title">图 5. 输出行为配置</div>
+</div>
+<div class="paragraph">
+<p>接下来的对话框用来选择初始时RAM是留空还是使用初始化文件，如<a href="#fig-14">图 6</a>。例如设计信号发生器时，就可以预先生成需要的波形数据放到RAM中。还需要注意，是否勾选了“Allow In-System Memory Content Editor to capture and update content independently of the system clock”。通过这个设置，Quartus II能通过JTAG下载接口，使用In-System Memory Content Editor调试工具对FPGA中的该RAM进行“在系统”测试和读写，修改存储器。同时需要给这个存储器指定一个“Instance ID”实例名，因为实际设计中可能存在多个嵌入的存储器实例需要区分，这里设置的ID号就作为该存储器的识别名称。</p>
+</div>
+<div id="fig-14" class="imageblock">
+<div class="content">
+<img src="_images/image14.png" alt="image" width="355" height="326">
+</div>
+<div class="title">图 6. 初始化设置</div>
+</div>
+<div class="paragraph">
+<p>点击Next，得到的信息表示支持仿真需要的仿真库文件为altera_mf.v，如<a href="#fig-15">图 7</a>。如果仅仅是使用自己编写的逻辑，是不需要额外的仿真库的，但是如果仿真器在编译的时候遇到了仿真器本身无法解释的语法或模块，就需要补充描述它们。Altera的库都存放在安装目录&#8230;&#8203;\quartus\eda\sim_lib下。</p>
+</div>
+<div id="fig-15" class="imageblock">
+<div class="content">
+<img src="_images/image15.png" alt="image" width="355" height="326">
+</div>
+<div class="title">图 7. 仿真库文件</div>
+</div>
+<div class="paragraph">
+<p>最后一项是生成文件列表，如<a href="#fig-16">图 8</a>，默认生成.v的Verilog文件，打钩的*bb.v的文件属于在其它综合工具综合时需要加载的黑盒（black box）文件。</p>
+</div>
+<div id="fig-16" class="imageblock">
+<div class="content">
+<img src="_images/image16.png" alt="image" width="355" height="326">
+</div>
+<div class="title">图 8. 生成文件列表</div>
+</div>
+<div class="paragraph">
+<p>如果想深入学习，弄明白其它参数的含义，可以通过单击右上角的Document获得当前IP核的使用手册。</p>
+</div>
+<div class="paragraph">
+<p>点击Finish按钮完成宏创建，MegaWizard已经生成了一个宏功能模块，生成的模块默认已经加入当前工程中。在生成的封装文件中封装了一个Altera的基本宏功能RAM-1PORT，这是一个可参数化的单端口RAM。</p>
+</div>
+<div class="paragraph">
+<p>添加IP核ROM的过程和RAM类似，需要深入学习，仍旧可以单击右上角的Document按键来获得资料。因为是ROM，所以必须有初始化文件，下面来看如何创建存储器初始化文件。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_存储器初始化文件"><a class="anchor" href="#_存储器初始化文件"></a>存储器初始化文件</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Quartus II能接受的存储器初始化文件格式有两种：Memory Initialization File（.mif）格式和Hexadecimal Intel-Format File（.hex）格式。</p>
+</div>
+<div class="paragraph">
+<p>点击菜单项File&#8594; new&#8230;&#8203;，打新建源文件对话框，选择新建一个mif或hex格式的存储器初始化文件，在出现的对话框中设置存储器初始化文件的规格，包括存储器数据宽度和存储深度，如<a href="#fig-17">图 9</a>。存储器内容编辑窗口中，在左侧的地址列中点击鼠标右键，可以设置地址显示的格式以及输入数据的格式，如<a href="#fig-18">图 10</a>。</p>
+</div>
+<div id="fig-17" class="imageblock">
+<div class="content">
+<img src="_images/image17.png" alt="image" width="168" height="74">
+</div>
+<div class="title">图 9. 存储器初始化文件规格设置</div>
+</div>
+<div id="fig-18" class="imageblock">
+<div class="content">
+<img src="_images/image18.png" alt="image" width="292" height="160">
+</div>
+<div class="title">图 10. 存储器内容编辑器窗口</div>
+</div>
+<div class="paragraph">
+<p>其他文本编辑器也可以编辑MIF文件，格式如下，地址和数据都为十六进制，冒号左边是地址，右边是对应的数据，并以分号结尾。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>WIDTH = 8;
+DEPTH =64;
+ADDRESS_RADIX      = HEX;
+DATA_RADIX         = HEX;
+CONTENT  BEGIN
+     0             : FF;
+     1             : FE;
+     2             : FC;
+     3             : F9;
+     ......
+     100           : FF</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_在系统存储器数据编辑器"><a class="anchor" href="#_在系统存储器数据编辑器"></a>在系统存储器数据编辑器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>对于Cyclone等系列的FPGA，只要对使用的存储器宏功能模块适当设置，就能利用Quartus II提供的存储器内容在系统调试工具In-System Memory Content Editor实时读取显示和改写更新Altera片内处于工作状态的存储器中的存储数据，读取过程不影响FPGA正常工作。使用该编辑器，可以在系统了解ROM/RAM中加载的数据，对嵌入在由FPGA资源构成的CPU中的数据RAM和程序ROM进行信息读取和数据修改等。</p>
+</div>
+<div class="paragraph">
+<p>工程全编译完成并下载到器件后，即可使用菜单项“Tool&#8594;In-System Memory Content Editor”打开存储器数据在系统编辑器界面，实时更改存储器中的数值，如<a href="#fig-19">图 11</a>。</p>
+</div>
+<div id="fig-19" class="imageblock">
+<div class="content">
+<img src="_images/image19.png" alt="image" width="555" height="292">
+</div>
+<div class="title">图 11. In-System Memory Content Editor界面</div>
+</div>
+<div class="paragraph">
+<p>在系统存储器数据编辑器界面包含三个独立的面板区：实例管理区Instance Manager，JTAG链配置区JTAG Chain Configuration和数据编辑区Hex Editor。</p>
+</div>
+<div class="sect2">
+<h3 id="_instance_manager"><a class="anchor" href="#_instance_manager"></a>Instance Manager</h3>
+<div class="paragraph">
+<p>实例管理区显示了目前FPGA器件上所有可用的、运行时可实时修改的FPGA片内存储器，可以查看到它们的编号、实例名、状态、数据宽度和深度。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jtag_chain_configuration"><a class="anchor" href="#_jtag_chain_configuration"></a>JTAG Chain Configuration</h3>
+<div class="paragraph">
+<p>JTAG链配置区可以选择扫描链上的FPGA器件并进行编程。如果设计有变化，可以在这里重新编程FPGA器件。例如选择硬件（Hardware）设置为USB-Blaster，浏览选择要下载的.sof文件，使用 ？按钮为器件编程。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hex_editor"><a class="anchor" href="#_hex_editor"></a>Hex Editor</h3>
+<div class="paragraph">
+<p>数据编辑区中显示当前在实例管理区面板中选中的存储器地址范围的内容，初始没有执行任何命令时，看到的是一堆问号。</p>
+</div>
+<div class="paragraph">
+<p>使用菜单项“Processing&#8594;Read data from In-system memory”或点击 ？ 按钮可以读出存储器当前各单元的值（如果设有初始值）。</p>
+</div>
+<div class="paragraph">
+<p>如果要实时修改存储器的值，可以使用键盘在编辑区为存储器的各单元输入数据，未实际写入存储器的输入数据呈现蓝色，输入完成后，使用菜单项“Processing&#8594;Write data to In-system memory”或点击 ？ 按钮，完成存储器内容写入，数据呈现红色。</p>
+</div>
+<div class="paragraph">
+<p>使用存储器内容编辑器可以导入和导出存储器的数据值。使用菜单项中的Export Data to File可以将“在系统”读出的数据以MIF或HEX的格式文件存入计算机中供将来使用，或者使用Import from File将此类格式的文件“在系统”地下载到FPGA中去，快速加载整个存储器映像。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

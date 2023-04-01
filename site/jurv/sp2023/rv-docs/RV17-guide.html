@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>实现存储器访问指令和简单IO接口 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="sp2023">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01a-faq-quartus.html">常见编译错误</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">sp2023</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">sp2023</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>RISC-V CPU设计实验</li>
+    <li><a href="RV17-guide.html">实现访存指令和简单IO</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">实现存储器访问指令和简单IO接口</h1>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>（1）理解load和store访存指令的功能；</p>
+</div>
+<div class="paragraph">
+<p>（2）进一步理解数据通路与指令功能的关联；</p>
+</div>
+<div class="paragraph">
+<p>（3）理解存储器和输入输出接口的统一编址及地址译码；</p>
+</div>
+<div class="paragraph">
+<p>（4）掌握简单IO接口的设计方法。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验原理"><a class="anchor" href="#_实验原理"></a>实验原理</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>前面实验的整数运算指令，运算数来自寄存器堆或指令代码中的立即数，运算结果也是保存在寄存器堆中。如果需要存储器中的运算数据，或者将运算结果保存到存储器，就需要取数/存数指令。RISC-V有10条访存指令，本实验只实现2条按字存取的lw和sw指令。</p>
+</div>
+<div class="paragraph">
+<p>实现访存指令的数据通路如<a href="#fig-3">图 1</a>。</p>
+</div>
+<div id="fig-3" class="imageblock">
+<div class="content">
+<img src="_images/image3.png" alt="SingleCycleRISCV_07_SC4_300dpi" width="582" height="229">
+</div>
+<div class="title">图 1. 访存指令的数据通路</div>
+</div>
+<div class="paragraph">
+<p>RISC-V的IO接口采用与主存储器统一编址的方式，因此可以用访存指令进行输入输出操作。通常将主存地址空间中较高或较低的一部分地址空间划作输入输出接口的地址，本实验将0xFFFF800以上的地址空间作为输入输出接口的地址。增加输入输出之后的数据通路如<a href="#fig-4">图 2</a>所示。</p>
+</div>
+<div id="fig-4" class="imageblock">
+<div class="content">
+<img src="_images/image4.png" alt="包含输入输出接口的数据通路" width="582" height="279">
+</div>
+<div class="title">图 2. 包含输入输出接口的数据通路</div>
+</div>
+<div class="paragraph">
+<p>实验材料中提供了简单输入输出接口的参考设计，输入设备是一组8位的拨动开关，输出设备是一组8位的LED指示灯。LED输出接口的原理如<a href="#fig-5">图 3</a>，它的核心是一个寄存器，寄存器的输入数据来自CPU的写数据，寄存器的输出连接到LED指示灯。当CPU送出的数据地址是LED接口的地址时，地址译码器输出使能信号，如果CPU同时也发出了写信号，就会将写数据装入输出寄存器。</p>
+</div>
+<div id="fig-5" class="imageblock">
+<div class="content">
+<img src="_images/image5.png" alt="LED输出接口的原理图" width="413" height="191">
+</div>
+<div class="title">图 3. LED输出接口的原理图</div>
+</div>
+<div class="paragraph">
+<p>输入接口读回开关的状态，32个开关分为4组。此外，LED输出寄存器同时具有输入功能，可以读回写入输出寄存器的值。输入接口根据地址译码从多组输入中选择一组。</p>
+</div>
+<div class="paragraph">
+<p><a href="#tab-2">表 1</a>给出了输入输出接口的名称和地址。参考设计只实现了开关输入接口A和LED 输出接口A，其余的留作实验任务。</p>
+</div>
+<table id="tab-2" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 1. 输入输出接口地址</caption>
+<colgroup>
+<col style="width: 52%;">
+<col style="width: 30%;">
+<col style="width: 18%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">输入输出接口</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">接口地址</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">位宽</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">拨动开关输入接口A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFFFF800H</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">拨动开关输入接口B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFFFF804H</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">拨动开关输入接口C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFFFF808H</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">拨动开关输入接口D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFFFF80CH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LED输出寄存器A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFFFF810H</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LED输出寄存器B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFFFF814H</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LED输出寄存器C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFFFF818H</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LED输出寄存器D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFFFF81CH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">数码管输出寄存器</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FFFFF820H</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32位</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_任务1实现访存指令"><a class="anchor" href="#_任务1实现访存指令"></a>任务1：实现访存指令</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_设计控制逻辑"><a class="anchor" href="#_1_设计控制逻辑"></a>1. 设计控制逻辑</h3>
+<div class="paragraph">
+<p>修改Controller模块，增加load和store指令译码，产生MemWrite、MemToReg以及立即数类型等控制信号。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_实现数据通路"><a class="anchor" href="#_2_实现数据通路"></a>2. 实现数据通路</h3>
+<div class="paragraph">
+<p>（1）SoC模块</p>
+</div>
+<div class="paragraph">
+<p>前面存储器实验已经学习过RAM的描述，这里用它作为数据存储器；实验材料中的SoC模块实例化了数据存储器模块，并且连到了CPU模块的端口。</p>
+</div>
+<div class="paragraph">
+<p>（2）ImmGen模块</p>
+</div>
+<div class="paragraph">
+<p>增加S型立即数的生成。</p>
+</div>
+<div class="paragraph">
+<p>（4）CPU模块</p>
+</div>
+<div class="paragraph">
+<p>根据<a href="#fig-3">图 1</a>数据通路连接各个部件，其中数据存储器在CPU外部，需要将端口上的相关信号连接到CPU模块的内部逻辑，下面是示例代码，自己代码中的变量名可能不同。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   wire [31:0] memReadData;
+   assign oRD = cMemToReg;   //控制信号MemToReg连接到读使能端口
+   assign oWR = cMemWrite;   //控制信号MemWrite连接到写使能端口
+   assign oAB = aluOut;      //ALU的输出连接到数据存储器的地址端口
+   assign oWriteData = regReadData2; //寄存器堆的RD2连接到写数据端口
+   assign memReadData = iReadData;   //读数据端口连接到内部变量memReadData</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_增加调试观察信号"><a class="anchor" href="#_3_增加调试观察信号"></a>3. 增加调试观察信号</h3>
+<div class="paragraph">
+<p>根据虚拟面板添加观察信号和观察数据，对应关系如下示例。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    always_comb begin
+        ws.WS5[3:0] = cALUop;
+        ws.WS4[4:0] = cImm_type;
+        ws.WS3      = cImmToALU;
+        ws.WS2      = cMemWrite;
+        ws.WS1      = cMemToReg;
+        ws.WS0      = cRegWrite;
+    end
+
+    always_comb begin
+        wd.WD11[31:0] = memReadData;
+        wd.WD10[31:0] = aluOut;
+        wd.WD9 [31:0] = immData;
+        wd.WD8 [31:0] = regReadData2;
+        wd.WD7 [31:0] = regReadData1;
+        wd.WD6 [4:0]  = ra2;
+        wd.WD5 [4:0]  = ra1;
+        wd.WD4 [31:0] = regWriteData;
+        wd.WD3 [4:0]  = wa;
+        wd.WD2 [31:0] = instruction;
+        wd.WD1 [31:0] = pc;
+        wd.WD0 [31:0] = nextPC;
+    end</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_在实验平台验证设计"><a class="anchor" href="#_4_在实验平台验证设计"></a>4. 在实验平台验证设计</h3>
+<div class="paragraph">
+<p>编写程序测试sw和lw指令。可以利用实验平台的功能独立验证lw和sw指令。如sw指令执行后，通过实验平台检查写入数据是否正确；【提示】实验平台的数据存储器窗口的内容不会主动变化，需要手动进行刷新操作。验证lw指令时，可以利用实验平台事先向某一存储单元写入已知的数据，再执行lw指令。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_任务2扩充数码管接口"><a class="anchor" href="#_任务2扩充数码管接口"></a>任务2：扩充数码管接口</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>理解参考设计，设计数码管输出接口。可同时输出32位二进制数在8个数码管上显示，显示内容只能是十六进制数，不带小数点；显示数据可读回。</p>
+</div>
+<div class="paragraph">
+<p>在实验平台上验证设计，参考测试程序如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    addi s0, x0, -2048
+    addi s1, x0, 0x100
+    slli s1, s1, 20
+    addi s3, x0, -1
+    sw   s3, 0x20(s0)
+    lw   s2, 0x00(s0)
+    sw   s2, 8(s1)
+    sw   s2, 0x10(s0)
+    lw   s3, 8(s1)
+    sw   s3, 0x20(s0)
+    lw   s2, 0x20(s0)</pre>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
