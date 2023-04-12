@@ -22,7 +22,7 @@ wire [3:0] Y = S[3:0];
 
 /************* The logic of this experiment *************/
 wire [3:0] F;
-defs::t_flag flag;
+alu_defs::t_flag flag;
 ALU #(.N(4)) alu(
     .iX(X), 
     .iY(Y), 

@@ -1,7 +1,7 @@
-`ifndef DEFINITIONS_SVH
-`define DEFINITIONS_SVH
-
-package defs;
+`ifndef ALU_DEFS_SVH
+`define ALU_DEFS_SVH
+//tag::body[]
+package alu_defs;
 
    typedef struct packed{
       logic sign; 
@@ -19,5 +19,5 @@ package defs;
    } aluop;
 
 endpackage
-
+//end::body[]
 `endif

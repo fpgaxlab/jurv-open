@@ -5,10 +5,10 @@ module ALU
    input  wire  [N-1:0] iX, iY,
    input  wire  [3:0] iALUop,
    output logic [N-1:0]oF,
-   output defs::t_flag oFlag
+   output alu_defs::t_flag oFlag
 );
 
-import defs::*;
+import alu_defs::*;
 
 wire [N-1:0] X = iX;
 wire [N-1:0] Y = iY;
