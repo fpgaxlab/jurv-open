@@ -20,27 +20,26 @@ wire [3:0] X = S[7:4];
 wire [3:0] Y = S[3:0];
 
 /************* The logic of this experiment *************/
-wire [3:0] A,B,F;
-wire C0;
-logic [4:0] result; // Bit width is 5 bits
+//tag::logic[]
+logic [3:0] A, B, F;
+logic C0, C4;
 logic sign, zero, overflow, carryOut;
 
 assign A = X;
 assign B = Y ^ {4{M}};
 assign C0 = M;
-assign result = A + B + C0;  
+assign {C4,F} = A + B + C0;  
 
-assign F = result[3:0];
 assign sign = F[3];
-assign zero = (F==0) ? 1'b1 : 1'b0;  // ~|F;
-assign overflow = (~A[3]) & ~B[3] & F[3] | (A[3]) & B[3] & ~F[3] ;
-assign carryOut = (M==1'b0) ? result[4] : ~result[4];  
-
+assign zero = ~|F;  //<1>
+assign overflow = ~A[3] & ~B[3] & F[3] | A[3] & B[3] & ~F[3]; //<2>
+assign carryOut = (M==1'b0) ? C4 : ~C4; //<3>
+//end::logic[]
 /****** Internal signal assign to output port *******/
-assign L[3:0]  = B[3:0];
-assign L[7:4]  = X[3:0]; 
-assign L[12:9] = F;
+assign L[3:0]   = B[3:0];
+assign L[7:4]   = X[3:0]; 
+assign L[11:8]  = F;
+assign L[15:12] = {sign, zero, overflow, carryOut};
 assign L[26] = C0; 
-assign L[21:18] = {sign, zero, overflow, carryOut};
 
 endmodule

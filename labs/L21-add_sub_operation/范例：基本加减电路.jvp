@@ -1,10 +1,11 @@
 {
-	"name": "加减运算电路",
+	"name": "验证：基本加减电路",
 	"description": "",
 	"flag": "jsonvirtualpanel",
 	"version": "1.2.4",
 	"components": [
 		{
+			"description": "",
 			"index": 0,
 			"key": 0,
 			"position": {
@@ -13,11 +14,12 @@
 			},
 			"type": "switch",
 			"value": {
-				"checked": 0,
-				"isVertical": true
+				"isVertical": true,
+				"checked": 0
 			}
 		},
 		{
+			"description": "",
 			"index": 1,
 			"key": 1,
 			"position": {
@@ -26,11 +28,12 @@
 			},
 			"type": "switch",
 			"value": {
-				"checked": 0,
-				"isVertical": true
+				"isVertical": true,
+				"checked": 0
 			}
 		},
 		{
+			"description": "",
 			"index": 2,
 			"key": 2,
 			"position": {
@@ -39,11 +42,12 @@
 			},
 			"type": "switch",
 			"value": {
-				"checked": 0,
-				"isVertical": true
+				"isVertical": true,
+				"checked": 0
 			}
 		},
 		{
+			"description": "",
 			"index": 3,
 			"key": 3,
 			"position": {
@@ -52,11 +56,12 @@
 			},
 			"type": "switch",
 			"value": {
-				"checked": 0,
-				"isVertical": true
+				"isVertical": true,
+				"checked": 0
 			}
 		},
 		{
+			"description": "",
 			"index": 4,
 			"key": 4,
 			"position": {
@@ -65,11 +70,12 @@
 			},
 			"type": "switch",
 			"value": {
-				"checked": 0,
-				"isVertical": true
+				"isVertical": true,
+				"checked": 0
 			}
 		},
 		{
+			"description": "",
 			"index": 5,
 			"key": 5,
 			"position": {
@@ -78,11 +84,12 @@
 			},
 			"type": "switch",
 			"value": {
-				"checked": 0,
-				"isVertical": true
+				"isVertical": true,
+				"checked": 0
 			}
 		},
 		{
+			"description": "",
 			"index": 6,
 			"key": 6,
 			"position": {
@@ -91,11 +98,12 @@
 			},
 			"type": "switch",
 			"value": {
-				"checked": 0,
-				"isVertical": true
+				"isVertical": true,
+				"checked": 0
 			}
 		},
 		{
+			"description": "",
 			"index": 7,
 			"key": 7,
 			"position": {
@@ -104,11 +112,12 @@
 			},
 			"type": "switch",
 			"value": {
-				"checked": 0,
-				"isVertical": true
+				"isVertical": true,
+				"checked": 0
 			}
 		},
 		{
+			"description": "",
 			"index": 9,
 			"key": 9,
 			"position": {
@@ -117,11 +126,12 @@
 			},
 			"type": "switch",
 			"value": {
-				"checked": 0,
-				"isVertical": true
+				"isVertical": true,
+				"checked": 0
 			}
 		},
 		{
+			"description": "",
 			"index": 0,
 			"key": 13,
 			"position": {
@@ -135,6 +145,7 @@
 			}
 		},
 		{
+			"description": "",
 			"index": 1,
 			"key": 14,
 			"position": {
@@ -148,6 +159,7 @@
 			}
 		},
 		{
+			"description": "",
 			"index": 2,
 			"key": 15,
 			"position": {
@@ -161,6 +173,7 @@
 			}
 		},
 		{
+			"description": "",
 			"index": 3,
 			"key": 16,
 			"position": {
@@ -174,6 +187,7 @@
 			}
 		},
 		{
+			"description": "",
 			"index": 4,
 			"key": 17,
 			"position": {
@@ -187,6 +201,7 @@
 			}
 		},
 		{
+			"description": "",
 			"index": 5,
 			"key": 18,
 			"position": {
@@ -200,6 +215,7 @@
 			}
 		},
 		{
+			"description": "",
 			"index": 6,
 			"key": 19,
 			"position": {
@@ -213,6 +229,7 @@
 			}
 		},
 		{
+			"description": "",
 			"index": 7,
 			"key": 20,
 			"position": {
@@ -226,7 +243,8 @@
 			}
 		},
 		{
-			"index": 9,
+			"description": "",
+			"index": 8,
 			"key": 21,
 			"position": {
 				"x": -28,
@@ -239,7 +257,8 @@
 			}
 		},
 		{
-			"index": 10,
+			"description": "",
+			"index": 9,
 			"key": 22,
 			"position": {
 				"x": -57,
@@ -252,7 +271,8 @@
 			}
 		},
 		{
-			"index": 11,
+			"description": "",
+			"index": 10,
 			"key": 23,
 			"position": {
 				"x": -84,
@@ -265,7 +285,8 @@
 			}
 		},
 		{
-			"index": 12,
+			"description": "",
+			"index": 11,
 			"key": 24,
 			"position": {
 				"x": -112,
@@ -278,11 +299,12 @@
 			}
 		},
 		{
-			"index": 18,
+			"description": "",
+			"index": 12,
 			"key": 25,
 			"position": {
 				"x": -264,
-				"y": -160
+				"y": -161
 			},
 			"type": "led",
 			"value": {
@@ -291,7 +313,8 @@
 			}
 		},
 		{
-			"index": 19,
+			"description": "",
+			"index": 13,
 			"key": 26,
 			"position": {
 				"x": -289,
@@ -304,7 +327,8 @@
 			}
 		},
 		{
-			"index": 20,
+			"description": "",
+			"index": 14,
 			"key": 27,
 			"position": {
 				"x": -314,
@@ -317,7 +341,8 @@
 			}
 		},
 		{
-			"index": 21,
+			"description": "",
+			"index": 15,
 			"key": 28,
 			"position": {
 				"x": -338,
@@ -330,6 +355,7 @@
 			}
 		},
 		{
+			"description": "",
 			"index": 26,
 			"key": 29,
 			"position": {
@@ -360,6 +386,10 @@
 		"x": 26,
 		"y": 26
 	},
+	"pipelineInsSize": {
+		"x": 100,
+		"y": 40
+	},
 	"ledSize": {
 		"x": 16,
 		"y": 16
@@ -369,6 +399,7 @@
 		"y": 33
 	},
 	"textFontSize": 14,
+	"textPipeFontSize": 18,
 	"dataFontSize": 14,
 	"signalFontSize": 14,
 	"panelSize": {
