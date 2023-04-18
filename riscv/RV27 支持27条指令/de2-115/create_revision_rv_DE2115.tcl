@@ -1129,3 +1129,6 @@ export_assignments
 
 # 关闭工程
 # project_close
+
+# 设置为当前Revision
+ set_current_revision -force RV_DE2115
