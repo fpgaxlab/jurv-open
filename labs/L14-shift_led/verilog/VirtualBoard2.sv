@@ -34,7 +34,7 @@ always_comb
         default:shiftOut = 8'hxx;
 	endcase
 /*  
-    也可用下面的语句实现一次移动多位的循环左移
+    循环左移桶形移位的另一种实现方法
     logic [7:0] temp;
     assign {shiftOut, temp} = {q,q}<<num;
 */
