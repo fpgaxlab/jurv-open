@@ -21,7 +21,7 @@ output/
 *.hex
 # *.html
 *.jdi
-*.mif
+#*.mif
 *.pin
 *.pof
 *.ptf.*
