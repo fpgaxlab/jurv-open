@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>用脚本创建Quartus工程 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v1.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01a-faq-quartus.html">常见编译错误</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023春</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version">
+          <a href="../v2.0/index.html">2023秋</a>
+        </li>
+        <li class="version is-current is-latest">
+          <a href="index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li>实验工具和环境</li>
+    <li><a href="L01-guide.html">Quartus FPGA设计流程</a></li>
+    <li><a href="L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023春</button>
+  <div class="version-menu">
+    <a class="version" href="../v2.0/L01b-tcl-create-quartus-project.html">2023秋</a>
+    <a class="version is-current" href="L01b-tcl-create-quartus-project.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">用脚本创建Quartus工程</h1>
+<div class="paragraph">
+<p>创建和配置工程的步骤细致繁琐，需要花费一定的时间，而且稍有差错就会导致实验失败。虽然可以把建好的工程保存下来在后面使用，但仍然存在不同Quartus版本的兼容性问题。用TCL脚本文件创建工程可以避免Quartus版本不兼容的问题，效率也很高，步骤如下。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>编写TCL脚本文件</p>
+<div class="paragraph">
+<p>实验材料的<em>LabProject</em>文件夹中提供了<em>create_project_pocket.tcl</em>文件。或者将下面的TCL脚本复制到文本编辑器中。</p>
+</div>
+<details>
+<summary class="title">点击此行展开TCL脚本</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-tcl hljs" data-lang="tcl"># 创建工程
+project_new -revision Lab -overwrite Lab
+
+# 添加源文件
+set_global_assignment -name VERILOG_FILE LabBoard_TOP.v
+set_global_assignment -name VERILOG_FILE pll.v
+set_global_assignment -name VERILOG_FILE GlobalCLK.v
+set_global_assignment -name QXP_FILE JutagScanChain.qxp
+
+# 添加时序约束文件
+set_global_assignment -name SDC_FILE RemotePocket.sdc
+
+# 设置工程的顶层模块
+set_global_assignment -name TOP_LEVEL_ENTITY LabBoard_TOP
+
+#------------------GLOBAL--------------------#
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE6E22C8
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name ENABLE_INIT_DONE_OUTPUT OFF
+
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED"
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DATA0_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DATA1_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_FLASH_NCE_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DCLK_AFTER_CONFIGURATION "USE AS REGULAR IO"
+
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY .\\output
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_global_assignment -name ON_CHIP_BITSTREAM_DECOMPRESSION OFF
+set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
+
+# 并行编译可使用的最大处理器数
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+
+
+#------------------ 引脚约束 --------------------#
+
+# RESET按键
+set_location_assignment PIN_110  -to RESET_N
+
+#DEBIG IO
+set_location_assignment PIN_125  -to JTCK
+set_location_assignment PIN_127  -to JTMS
+set_location_assignment PIN_120  -to JTDI
+set_location_assignment PIN_119  -to JTDO
+
+#时钟引脚 50M
+set_location_assignment	PIN_88	-to CLOCK_50 
+
+
+#LED对应的引脚
+set_location_assignment	PIN_38	-to LEDR[0]
+set_location_assignment	PIN_39	-to LEDR[1]
+set_location_assignment	PIN_42	-to LEDR[2]
+set_location_assignment	PIN_43	-to LEDR[3]
+set_location_assignment	PIN_44	-to LEDR[4]
+set_location_assignment	PIN_46	-to LEDR[5]
+set_location_assignment	PIN_49	-to LEDR[6]
+set_location_assignment	PIN_50	-to LEDR[7]
+set_location_assignment	PIN_51	-to LEDR[8]
+set_location_assignment	PIN_52	-to LEDR[9]
+set_location_assignment	PIN_53	-to LEDR[10]
+set_location_assignment	PIN_54	-to LEDR[11]
+set_location_assignment	PIN_55	-to LEDR[12]
+set_location_assignment	PIN_58	-to LEDR[13]
+set_location_assignment	PIN_59	-to LEDR[14]
+set_location_assignment	PIN_60	-to LEDR[15]
+
+set_location_assignment	PIN_65	-to LEDG[0]
+set_location_assignment	PIN_66	-to LEDG[1]
+set_location_assignment	PIN_67	-to LEDG[2]
+set_location_assignment	PIN_68	-to LEDG[3]
+set_location_assignment	PIN_69	-to LEDG[4]
+set_location_assignment	PIN_70	-to LEDG[5]
+set_location_assignment	PIN_71	-to LEDG[6]
+set_location_assignment	PIN_72	-to LEDG[7]
+
+#按键对应的引脚
+set_location_assignment	PIN_34	 -to KEY[0]
+set_location_assignment	PIN_33	 -to KEY[1]
+set_location_assignment	PIN_32   -to KEY[2]
+set_location_assignment	PIN_31   -to KEY[3]
+
+#开关对应的引脚
+# set_location_assignment	PIN_30   -to SW[0]
+# set_location_assignment	PIN_28   -to SW[1]
+# set_location_assignment	PIN_11   -to SW[2]
+# set_location_assignment	PIN_10   -to SW[3]
+# set_location_assignment	PIN_7    -to SW[4]
+# set_location_assignment	PIN_3    -to SW[5]
+# set_location_assignment	PIN_2    -to SW[6]
+# set_location_assignment	PIN_1    -to SW[7]
+
+#数码管对应的引脚
+#数码管7段+小数点
+# set_location_assignment	PIN_98	-to SEG[0]
+# set_location_assignment	PIN_99	-to SEG[1]
+# set_location_assignment	PIN_100	-to SEG[2]
+# set_location_assignment	PIN_101	-to SEG[3]
+# set_location_assignment	PIN_103	-to SEG[4]
+# set_location_assignment	PIN_104	-to SEG[5]
+# set_location_assignment	PIN_105	-to SEG[6]
+# set_location_assignment	PIN_106	-to SEG[7]
+
+#8位数码管的8个控制位
+# set_location_assignment	PIN_73	-to SEL[0]
+# set_location_assignment	PIN_74	-to SEL[1]
+# set_location_assignment	PIN_75  -to SEL[2]
+# set_location_assignment	PIN_76	-to SEL[3]
+# set_location_assignment	PIN_84	-to SEL[4] 
+# set_location_assignment	PIN_85	-to SEL[5]
+# set_location_assignment	PIN_86	-to SEL[6]
+# set_location_assignment	PIN_87	-to SEL[7]
+
+# 弱上拉
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTMS
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTDI
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to JTDO
+
+#--------------------------------------------#
+# 将所有约束写入qsf文件
+export_assignments
+
+# 关闭工程
+# project_close</code></pre>
+</div>
+</div>
+</div>
+</details>
+</li>
+<li>
+<p>启动 Quartus Prime，点击 View ➤ Tcl Console 菜单项打开 “Tcl Console” 子窗口，提示符 <code>tcl&gt;</code> 后面可以输入命令。</p>
+</li>
+<li>
+<p>用 cd 命令切换到 tcl 文件所在的目录，如 <code>cd d:/LabProject</code> 。注意，路径要用“/”而不是“\”。</p>
+</li>
+<li>
+<p>输入命令 <code>source ./create_project_pocket.tcl</code> 。 如果出现Select Family对话框，选择Cyclone IV E。之后将根据 tcl 文件中的脚本命令自动创建工程并打开在Project Navigate子窗口。</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>（1）<em>create_project_pocket.tcl</em>是用于远程实验板和口袋实验板的脚本文件。如果是DE2-115实验板，替换成实验材料中的<em>create_project_de2-115.tcl</em>。</p>
+</div>
+<div class="paragraph">
+<p>（2）创建的工程文件名为<em>Lab.qpf</em>。执行脚本之前，该文件夹中不应该有同名的文件；否则执行脚本时会报错 <code>Can&#8217;t open project: Lab</code>。</p>
+</div>
+<div class="paragraph">
+<p>（3）创建的工程仅仅是包含了工程配置的工程框架，还需要将设计模块如<em>VirtualBoard.sv</em>添加到工程。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

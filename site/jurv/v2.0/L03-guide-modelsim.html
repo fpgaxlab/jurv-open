@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ModelSim仿真入门 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v2.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">设计工具</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html">Quartus FPGA设计流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01c-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">验证环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023秋</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../v1.0/index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">2023秋</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../v1.0/index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../v1.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li><a href="L03-guide-modelsim.html">ModelSim仿真入门</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <div class="version-menu">
+    <a class="version is-current" href="L03-guide-modelsim.html">2023秋</a>
+    <a class="version is-missing" href="../v1.0/index.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">ModelSim仿真入门</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>有两种方式启动ModelSim：从Quartus启动，或者独立使用。从Quartus启动ModelSim仿真的方法事先需要在Quartus中做一些设置，但是启动ModelSim之后需要做的操作比较少，有利于反复进行仿真，这里以这种方式为主进行介绍，最后再补充说明脱离Quartus独立使用ModelSim的方法。</p>
+</div>
+<div class="paragraph">
+<p>这里举例使用的设计环境为：Quartus Prime 20.1 和ModelSim - Intel FPGA Starter Edition 2020.1。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_准备工作"><a class="anchor" href="#_准备工作"></a>准备工作</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_创建或打开quartus_ii工程"><a class="anchor" href="#_创建或打开quartus_ii工程"></a>创建或打开Quartus II工程</h3>
+<div class="paragraph">
+<p>这里以<a href="sv-docs/L15-counter_divider.html" class="xref page">计数器实验</a>的参考设计为例。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_编译设计工程"><a class="anchor" href="#_编译设计工程"></a>编译设计工程</h3>
+<div class="paragraph">
+<p>如果是功能仿真，只需要逻辑综合；点击Processing ➤ Start ➤ Start Analysis &amp; Synthesis菜单项或工具栏相应按钮，对设计进行综合。</p>
+</div>
+<div class="paragraph">
+<p>如果要做时序仿真，因为时间参数是Quartus布局布线后的产生的，所以必须进行全编译，点击Processing ➤ Start Compilation菜单项或工具栏相应按钮全编译工程。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_编写testbench"><a class="anchor" href="#_编写testbench"></a>编写Testbench</h3>
+<div class="paragraph">
+<p>如果是功能仿真，可以只对工程中某个模块进行仿真，而时序仿真则必须仿真整个工程。在编写Testbench时需注意这一点。</p>
+</div>
+<div class="paragraph">
+<p><a href="sv-docs/L15-counter_divider.html" class="xref page">计数器实验</a>的实验材料中提供了功能仿真的testbench，将文件拷贝到工程文件夹内。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_仿真环境设置"><a class="anchor" href="#_仿真环境设置"></a>仿真环境设置</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_设置modelsim的路径"><a class="anchor" href="#_设置modelsim的路径"></a>设置ModelSim的路径</h3>
+<div class="paragraph">
+<p>通过菜单Tools ➤ Options… 在EDA Tool Options中设置<em>modelsim.exe</em>可执行文件的路径，点击ModelSim-Altera编辑框右端的 <code>&#8230;&#8203;</code> 按钮，在文件资源管理器中找到<em>modelsim.exe</em>，一般是在Quartus安装目录下的<em>modelsim_ase\win32aloem</em>文件夹。<a href="#fig-1">图 1</a>仅为示例，应根据自己电脑中安装路径进行设置。</p>
+</div>
+<div id="fig-1" class="imageblock">
+<div class="content">
+<img src="_images/L03-image1.jpeg" alt="Snipaste_2022-08-11_17-02-33" width="546" height="541">
+</div>
+<div class="title">图 1. 设置第三方仿真工具可执行文件路径</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_设置modelsim_仿真属性"><a class="anchor" href="#_设置modelsim_仿真属性"></a>设置ModelSim 仿真属性</h3>
+<div class="paragraph">
+<p>通过菜单Assignmenets ➤ Settings… 打开设置对话框，如<a href="#fig-2">图 2</a>。在EDA Tool Settings的Simulation选项中进行如下设置。Tool name选择ModelSim-Altera；Format for output netlist选择SystemVerilog HDL；Time scale是仿真的时间单位，如果在Testbench里没有写`timescale语句来定义时间单位，那么仿真器会按照这里设置的时间单位进行仿真。推荐在testbench中写`timescale语句。</p>
+</div>
+<div id="fig-2" class="imageblock">
+<div class="content">
+<img src="_images/L03-image2.png" alt="Snipaste_2023-03-07_08-04-34" width="530" height="474">
+</div>
+<div class="title">图 2. 设置仿真属性</div>
+</div>
+<div class="paragraph">
+<p>在NativeLink settings中，选择Compile test bench，点击Test Benches… 按钮，新建一个Test Bench设置，对Test Bench Settings对话框中的设置选项进行手工填写，如<a href="#fig-3">图 3</a>。包括：</p>
+</div>
+<div class="paragraph">
+<p>Test bench name ——可以任意，<a href="#fig-3">图 3</a>中填写的是Function test。这里填写的名称将出现在随后的列表中（见<a href="#fig-4">图 4</a>），代表该项Testbench设置。</p>
+</div>
+<div class="paragraph">
+<p>Top level module in test bench —— 在这里指明Testbench的模块名。注意这个名称不是指设计模块的顶层，而是Testbench的顶层模块名。之所以称作“Top level module”，是因为Testbench可能包含多个模块；本实验Testbench只有一个模块。</p>
+</div>
+<div class="paragraph">
+<p>Simulation period ——设定仿真时间。可以选择运行完所有的激励向量或者设定仿真结束时间。</p>
+</div>
+<div class="paragraph">
+<p>点击Test bench and simulation files中的文件浏览按钮 <code>&#8230;&#8203;</code>，找到事先写好的Test bench文件，点击Add按钮，将其加入文件列表。如果Test bench有多个文件，须全部加入。本实验只有一个Test bench文件，在前面准备工作中已经放入工程文件夹内。</p>
+</div>
+<div id="fig-3" class="imageblock">
+<div class="content">
+<img src="_images/L03-image3.png" alt="Snipaste_2023-03-09_05-39-44" width="450" height="458">
+</div>
+<div class="title">图 3. 编辑Test Bench设置</div>
+</div>
+<div class="paragraph">
+<p>点击OK按钮完成Test Bench Settings填写后，刚才完成的设置出现在Existing test bench settings列表中，如<a href="#fig-4">图 4</a>，以后还可以通过Edit和Delete按钮对设置进行编辑修改或删除。</p>
+</div>
+<div id="fig-4" class="imageblock">
+<div class="content">
+<img src="_images/L03-image4.png" alt="Snipaste_2023-03-09_05-44-13" width="520" height="223">
+</div>
+<div class="title">图 4. Test Bench列表</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_运行仿真"><a class="anchor" href="#_运行仿真"></a>运行仿真</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_启动modelsim仿真工具"><a class="anchor" href="#_启动modelsim仿真工具"></a>启动ModelSim仿真工具</h3>
+<div class="paragraph">
+<p>在Quartus中，功能仿真对应菜单项Tools ➤Run Simulation Tool ➤ RTL Simulation，时序仿真对应菜单项Gate Level Simulation。一般应先进行功能仿真，点击相应菜单项，Quartus 根据之前对仿真器和Testbench的设置，自动调用ModelSim进行功能仿真。</p>
+</div>
+<div class="paragraph">
+<p>ModelSim启动后，默认条件下，界面如<a href="#fig-5">图 5</a>，可以看到sim窗口（Structure）、对象窗口（Objects）、波形窗口（Wave）、代码窗口（Files）和脚本窗口（Transcript）。如果某个窗口被关闭，可以通过View菜单项打开，括号中的英文是View菜单的子项名称。</p>
+</div>
+<div id="fig-5" class="imageblock">
+<div class="content">
+<img src="_images/L03-image5.png" alt="Snipaste_2023-03-09_05-52-37" width="555" height="346">
+</div>
+<div class="title">图 5. ModelSim界面</div>
+</div>
+<div class="paragraph">
+<p>sim窗口可以显示仿真模块的层次并选择某个模块观察，对象窗口用来显示当前模块中包含的各个信号，信号的显示会随着主窗口工作区中选中的不同层次的不同模块而自动发生变化。</p>
+</div>
+<div class="paragraph">
+<p>下方Transcript窗口中记录了ModelSim命令的执行结果。如果启动后界面和预期不同，可检查Transcript窗口中是否有错误信息。此外，Transcript窗口中也可以在提示符下输入ModelSim命令，为有经验的用户提供了另一种操作方式。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_波形窗口"><a class="anchor" href="#_波形窗口"></a>波形窗口</h3>
+<div class="paragraph">
+<p>波形窗口用来直观的显示仿真波形，是最常用的仿真窗口之一。点击“Wave”选项卡使波形窗口成为活动窗口。波形窗口分为三个区域，分别用来显示信号名称以及路径，显示光标所在位置信号的当前值，以及显示波形。</p>
+</div>
+<div class="paragraph">
+<p>点击Wave窗口右上角的<span class="image"><img src="_images/L03-image6.png" alt="2009-10-14_124424" width="18" height="18"></span><span class="image"><img src="_images/L03-image7.png" alt="2009-10-14_124445" width="18" height="18"></span>按钮，可以扩展、还原Wave窗口，点击<span class="image"><img src="_images/L03-image8.png" alt="2009-10-14_123652" width="18" height="18"></span>按钮，可将Wave窗口变为浮动窗口。工具栏中的 <span class="image"><img src="_images/L03-image9.png" alt="image" width="74" height="19"></span> 用来放大、缩小波形、显示全部波形以及光标为中心放大波形。通过缩小波形可以观察到仿真波形如<a href="#fig-6">图 6</a>，窗口自动包含了Testbench里定义的信号。</p>
+</div>
+<div id="fig-6" class="imageblock">
+<div class="content">
+<img src="_images/L03-image10.png" alt="Snipaste_2023-03-09_06-00-49" width="555" height="365">
+</div>
+<div class="title">图 6. 波形窗口</div>
+</div>
+<div class="paragraph">
+<p>Wave窗口左下方区域有三个小按钮<span class="image"><img src="_images/L03-image11.png" alt="image" width="56" height="18"></span>，第一个按钮用来选择是否显示信号的路径；第二个按钮用来设置Wave窗口的属性，例如更改显示时间单位；第三个按钮用来添加时间光标。</p>
+</div>
+<div class="paragraph">
+<p>在Wave窗口信号名称区域中选中某些观察信号后，可以使用右键菜单Radix改变所观察信号的基数（radix）。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_添加观察信号"><a class="anchor" href="#_添加观察信号"></a>添加观察信号</h3>
+<div class="paragraph">
+<p>可以添加更多的内部信号来观察，如计数值等。在sim窗口依次展开设计层次树形结构：testbench - UUT，单击选中UUT模块后，该模块内部的信号就会出现在Objects 窗口，如<a href="#fig-7">图 7</a>。在Objects窗口中选择想要观察的信号，如count和q信号，右击鼠标，右键菜单项Add Wave将所选信号加入Wave窗口。</p>
+</div>
+<div id="fig-7" class="imageblock">
+<div class="content">
+<img src="_images/L03-image12.png" alt="Snipaste_2023-03-09_06-03-34" width="492" height="425">
+</div>
+<div class="title">图 7. 添加观察信号</div>
+</div>
+<div class="paragraph">
+<p>也可以将Objects窗口的信号直接拖到到Wave窗口中去。ModelSim除主窗口之外的各个窗口内的对象都可以从一个窗口直接拖动到另外的窗口，使用起来和Windows资源管理器类似。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_重新执行仿真"><a class="anchor" href="#_重新执行仿真"></a>重新执行仿真</h3>
+<div class="paragraph">
+<p>所需信号加入Wave窗口后，重新执行仿真并观察仿真结果。通过仿真运行工具栏<span class="image"><img src="_images/L03-image13.png" alt="image" width="153" height="20"></span>操作如下：点击最左边的Restart 按钮<span class="image"><img src="_images/L03-image14.png" alt="2009-10-14_105224" width="20" height="20"></span>，重新启动仿真；点击Run-All按钮，仿真器运行仿真直到遇到testbench中的 $stop或 $finish语句时停止。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_仿真结果分析"><a class="anchor" href="#_仿真结果分析"></a>仿真结果分析</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_观察分析仿真结果"><a class="anchor" href="#_观察分析仿真结果"></a>观察分析仿真结果</h3>
+<div class="paragraph">
+<p>重新启动仿真后的波形如<a href="#fig-16">图 8</a>。</p>
+</div>
+<div id="fig-16" class="imageblock">
+<div class="content">
+<img src="_images/lab-image16.jpeg" alt="Snipaste_2022-08-11_18-09-17" width="548" height="295">
+</div>
+<div class="title">图 8. 添加观察信号后的仿真波形</div>
+</div>
+<div class="paragraph">
+<p>从波形上看移位寄存器的输出q（图中最后一行）一直是00000001没有变化，也就是复位的初值。这是因为仿真的时间不够长，计数器count还没有溢出。可以继续运行仿真，也可修改testbench，延长停止仿真前的时长。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_存储波形窗口格式"><a class="anchor" href="#_存储波形窗口格式"></a>存储波形窗口格式</h3>
+<div class="paragraph">
+<p>一旦关闭了波形窗口，我们在该窗口所作的所有配置（信号添加、游标设置等）都会随之丢失。为了保存观察信号的设置，可以在ModelSim波形窗口或者主窗口菜单中选择“File ➤ Save Format”捕获当前波形窗口的显示和信号参量等，将波形窗口信息存储到一个Format文件中，以.do为后缀，本实验存储为wave.do文件。以后通过菜单“File ➤ Load”加载该.do文件即可重建与先前的波形窗口完全相同的观察信号和游标设置。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_仿真调试工具"><a class="anchor" href="#_仿真调试工具"></a>仿真调试工具</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>如果仿真结果和预期不同，如何查找问题的原因呢？通过阅读代码和分析波形虽然也可以找到设计中存在的简单问题，但是充分利用工具，可以达到事半功倍的效果。</p>
+</div>
+<div class="sect2">
+<h3 id="_使用modelsim设置断点与源代码单步执行进行调试"><a class="anchor" href="#_使用modelsim设置断点与源代码单步执行进行调试"></a>使用ModelSim设置断点与源代码单步执行进行调试</h3>
+<div class="paragraph">
+<p>ModelSim环境提供交互式的调试功能，用户可以在源代码窗口设置断点，运行仿真并调试。点击View ➤ Files菜单项，出现Files文件窗口，展开树形结构，可以看到工程中的设计文件，如<a href="#fig-8">图 9</a>，双击verilog设计文件在源代码窗口打开文件。</p>
+</div>
+<div id="fig-8" class="imageblock">
+<div class="content">
+<img src="_images/L03-image16.png" alt="Snipaste_2023-03-09_06-08-05" width="555" height="212">
+</div>
+<div class="title">图 9. 在源代码窗口设置断点</div>
+</div>
+<div class="paragraph">
+<p>在源代码窗口中，单击某条语句所在的行号，会出现红色圆点，即在该语句处设置断点。单击红色圆点可以使断点在“禁止/使能”两状态间切换，右击红色圆点并选择“Remove Breakpoint”可以删除断点。</p>
+</div>
+<div class="paragraph">
+<p>断点设置完成后，点击Restart 按钮<span class="image"><img src="_images/L03-image14.png" alt="2009-10-14_105224" width="14" height="14"></span>重新启动仿真，点击Run或者Run -All按钮，仿真将运行直到遇到断点停止，同时在源代码窗口中用箭头指向断点语句。</p>
+</div>
+<div class="paragraph">
+<p>在源代码窗口选中某个信号，如count，右击鼠标，在弹出的菜单中选择“Examine”命令，系统弹出Source Examine窗口，通过该窗口可以查看信号的当前的值。点击工具栏上<span class="image"><img src="_images/L03-image17.png" alt="2010-09-21_00161" width="18" height="18"></span>按钮可以单步执行仿真。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_脱离quartus独立使用modelsim仿真的步骤"><a class="anchor" href="#_脱离quartus独立使用modelsim仿真的步骤"></a>脱离Quartus独立使用ModelSim仿真的步骤</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>这里举例的仿真环境使用ModelSim - Intel FPGA Starter Edition 2020.1，该版本与Quartus Prime 20.1 配套。</p>
+</div>
+<div class="sect2">
+<h3 id="_创建modelsim工程并为工程添加文件"><a class="anchor" href="#_创建modelsim工程并为工程添加文件"></a>创建ModelSim工程并为工程添加文件</h3>
+<div class="paragraph">
+<p>从Windows开始菜单启动ModelSim - Intel FPGA Starter Edition，在Welcome窗口点击Jumpstart按钮。通过菜单项File ➤ New ➤ Project… 打开创建工程对话框。在Project Name编辑框中填入工程名，Project Location框中设置工程路径，点击“OK”完成工程创建。</p>
+</div>
+<div class="paragraph">
+<p>在弹出的“Add items to the Project”对话框中，点击“Add Exiting File”，打开添加文件对话框，将设计文件和TestBench文件加入工程。添加时可选择“Reference from current location”或者“Copy to project directory”，建议选择后者。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_编译"><a class="anchor" href="#_编译"></a>编译</h3>
+<div class="paragraph">
+<p>文件添加完成后，在Project窗口可以看到加入的文件。通过菜单项Compile ➤ Compile All对工程中所有文件进行编译，或者右键点击Project窗口弹出右键菜单，点击Compile All完成对文件的编译。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_启动仿真"><a class="anchor" href="#_启动仿真"></a>启动仿真</h3>
+<div class="paragraph">
+<p>通过菜单项Simulate ➤ Start Simulation…打开启动仿真对话框，在work中选择Testbench模块，如<a href="#fig-9">图 10</a>，点击“OK”，启动仿真。</p>
+</div>
+<div id="fig-9" class="imageblock">
+<div class="content">
+<img src="_images/L03-image18.png" alt="Snipaste_2023-03-09_06-16-30" width="485" height="386">
+</div>
+<div class="title">图 10. 启动仿真</div>
+</div>
+<div class="paragraph">
+<p>通过菜单项View ➤ Wave打开波形窗口，ModelSim不会自动地添加观察信号，用前面介绍的方法添加观察信号。如果以前保存过波形窗口格式，可通过菜单项File ➤ Load ➤ Macro File（或者Tools ➤ TCL ➤ Execute Macro…）导入<em>.do</em>宏文件。</p>
+</div>
+<div class="paragraph">
+<p>独立使用ModelSim也不会自动运行仿真，需要在工具栏中点击运行按钮。之后的操作就与从Quartus启动ModelSim仿真一样啦，不再重复说明。</p>
+</div>
+<div class="sidebarblock text-center">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

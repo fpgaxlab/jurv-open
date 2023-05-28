@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>实验工具和环境概述 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v2.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">设计工具</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html">Quartus FPGA设计流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01c-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">验证环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023秋</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../v1.0/index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">2023秋</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../v1.0/index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../v1.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li>实验工具和环境</li>
+    <li><a href="L02-lab-tools.html">实验工具和环境概述</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <div class="version-menu">
+    <a class="version is-current" href="L02-lab-tools.html">2023秋</a>
+    <a class="version" href="../v1.0/L02-lab-tools.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">实验工具和环境概述</h1>
+<div class="sect1">
+<h2 id="_fpga实验板"><a class="anchor" href="#_fpga实验板"></a>FPGA实验板</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>FPGA（Field Programmable Gate Arrays）是一种可编程的逻辑电路，用户使用计算机软件描述自己的设计，该软件能够将设计输入转换为逻辑电路，其过程类似于软件编程和编译。由于FPGA具有可无限次重写的特性，非常适合用于教学实验。</p>
+</div>
+<div class="paragraph">
+<p>Altera公司和Xilinx公司曾经是两家全球知名的FPGA制造商，现在已分别纳入Intel公司和AMD公司。本书实验支持这两大主流厂商的FPGA，目前已经适配的实验板见下表。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">实验板</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FPGA芯片</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">自研远程实验板</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Altera Cyclone IV E</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">自研口袋实验板</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Altera Cyclone IV E</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Terasic DE2-115</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Altera Cyclone II</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Digilent Nexys4DDR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Xilinx Artix-7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_设计和验证"><a class="anchor" href="#_设计和验证"></a>设计和验证</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>基于FPGA的数字硬件实验的过程，大致上可以分为设计和验证两个阶段。设计阶段将设计输入转换为FPGA的电路文件，验证阶段将电路文件加载到FPGA芯片中，通过实验手段对FPGA中的电路施加激励并检查输出响应是否正确。</p>
+</div>
+<div class="paragraph">
+<p>设计阶段的编译工具采用这两家公司的软件，分别是Intel Quartus Prime 和 Xilinx Vivado。本书的所有范例充分考虑了可移植性，无需修改均可在Quartus和Vivado两种设计环境下编译通过。</p>
+</div>
+<div class="paragraph">
+<p>实验教学中最常见的验证手段是利用实验板上配置的输入输出元件，但这种方式有很大的局限性，尤其是不能适应CPU设计这样复杂的实验需求。</p>
+</div>
+<div class="paragraph">
+<p>本书配套的实验系统采用虚拟实验的方式。虚拟实验不是通过计算机软件进行模拟、仿真的实验，它是以真实硬件实验板为基础，通过软件实现人机交互的新型实验方式。实验软件是虚拟实验的灵魂。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_远程和本地"><a class="anchor" href="#_远程和本地"></a>远程和本地</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>本书配套的虚拟实验系统有本地（线下）和远程（线上）两种。远程实验基于Web浏览器，提供以云端真实实验板为基础的虚拟实验环境。线下实验基于Windows版的虚拟实验软件，通过特制的USB调试适配器可以适配两大主流FPGA厂商的芯片和开发板。两种实验系统具有相似的用户界面，并且大部分实验文件可以通用。</p>
+</div>
+<div class="paragraph">
+<p>远程实验平台还提供了云端编译功能，只需提交HDL设计代码就可以生成电路文件，屏蔽了FPGA芯片相关的细节，从用户层面可以理解为芯片无关的设计。同时，实验平台也支持上传由本地Quartus编译生成的电路文件。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_跨平台"><a class="anchor" href="#_跨平台"></a>跨平台</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>综上所述，配套的实验系统提供了跨平台的软硬件实验环境。这里的“跨平台”有两方面含义，一是实验软件同时支持线上和线下方式，二是实验硬件同时支持两大主流FPGA厂商的芯片。</p>
+</div>
+<div class="paragraph">
+<p>跨平台的软硬件实验环境为实验教学提供了灵活的实施方式。既可以以线上方式为主，也可以以线下为主，还可以采用线上、线下混合的方式。</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

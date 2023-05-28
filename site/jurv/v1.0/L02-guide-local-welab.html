@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>FPGA验证流程（本地WeLab版） :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v1.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01a-faq-quartus.html">常见编译错误</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023春</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version">
+          <a href="../v2.0/index.html">2023秋</a>
+        </li>
+        <li class="version is-current is-latest">
+          <a href="index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li>实验工具和环境</li>
+    <li><a href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023春</button>
+  <div class="version-menu">
+    <a class="version" href="../v2.0/L02-guide-local-welab.html">2023秋</a>
+    <a class="version is-current" href="L02-guide-local-welab.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">FPGA验证流程（本地WeLab版）</h1>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>熟悉FPGA实验验证流程；</p>
+</li>
+<li>
+<p>熟悉实验调试软件的使用方法；</p>
+</li>
+<li>
+<p>熟悉实验板的输入输出元件。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验设备"><a class="anchor" href="#_实验设备"></a>实验设备</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>实验调试软件：Windows版WeLab实验软件。</p>
+</div>
+<div class="paragraph">
+<p>实验板：以下任选一种，本文举例以Pocket口袋实验板为主。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Pocket口袋实验板（内含调试适配器和FPGA编程器）</p>
+</li>
+<li>
+<p>DE2-115开发板和JUPOD调试适配器</p>
+</li>
+<li>
+<p>Nexys4 DDR开发板和JUPOD调试适配器</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="准备工作"><a class="anchor" href="#准备工作"></a>准备工作</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_安装软件"><a class="anchor" href="#_安装软件"></a>安装软件</h3>
+<div class="paragraph">
+<p>首先从<a href="https://gitee.com/fpga-lab/jurv-open">openJURV</a>开源项目的software文件夹下载<em>welab.zip</em>压缩包到本地硬盘，解压即可。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_实验板硬件连接"><a class="anchor" href="#_实验板硬件连接"></a>实验板硬件连接</h3>
+<div class="paragraph">
+<p>实验软件可与多种硬件实验板配套，大致分为两种类型，一种是独立的调试适配器+实验/开发板，如DE2-115和Nexys4DDR；另一种是实验板内置调试适配器，如Pocket口袋板。下面分别介绍这三种实验板的连接。</p>
+</div>
+<div class="sect3">
+<h4 id="_pocket口袋板"><a class="anchor" href="#_pocket口袋板"></a>Pocket口袋板</h4>
+<div class="paragraph">
+<p>Pocket口袋板（<a href="#fig-1">图 1</a>）和PC机通过USB电缆连接后，口袋板上的蓝色电源指示灯点亮，右侧16个红色灯和8个绿色灯也处于半亮状态。之后Windows系统开始识别设备，见<a href="#驱动程序安装">驱动程序安装</a>。</p>
+</div>
+<div id="fig-1" class="imageblock">
+<div class="content">
+<img src="_images/L02b-image1.jpeg" alt="IMG_9130_裁剪" width="294" height="227">
+</div>
+<div class="title">图 1. Pocket口袋实验板</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_de2_115_jupod调试适配器"><a class="anchor" href="#_de2_115_jupod调试适配器"></a>DE2-115 + JUPOD调试适配器</h4>
+<div class="paragraph">
+<p>首先确保DE2-115开发板处于断电状态，将JUPOD调试适配器通过扁平电缆连接DE2-115开发板左侧红色电源开关下方的14脚扩展接口，如<a href="#fig-2">图 2</a>所示。DE2-115开发板上电后，调试适配器的蓝色指示灯点亮。调试适配器通过USB电缆连接PC机之后，Windows系统开始识别设备，见<a href="#驱动程序安装">驱动程序安装</a>。</p>
+</div>
+<div id="fig-2" class="imageblock">
+<div class="content">
+<img src="_images/L02b-image2.jpeg" alt="IMG_6857 抠图.jpg" width="327" height="151">
+</div>
+<div class="title">图 2. DE2-115 + JUPOD</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nexys4ddr_jupod调试适配器"><a class="anchor" href="#_nexys4ddr_jupod调试适配器"></a>Nexys4DDR + JUPOD调试适配器</h4>
+<div class="paragraph">
+<p>首先确保Nexys4DDR开发板处于断电状态，将JUPOD调试适配器通过扁平电缆连接Nexys4DDR开发板右侧中部的JA连接器的下排插孔，如<a href="#fig-3">图 3</a>所示。实验板上电后，调试适配器的蓝色指示灯点亮。调试适配器通过USB电缆连接PC机之后，Windows系统开始识别设备，见<a href="#驱动程序安装">驱动程序安装</a>。</p>
+</div>
+<div id="fig-3" class="imageblock">
+<div class="content">
+<img src="_images/L02b-image3.jpeg" alt="IMG_7725抠图" width="327" height="117">
+</div>
+<div class="title">图 3. Nexys4DDR + JUPOD</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="驱动程序安装"><a class="anchor" href="#驱动程序安装"></a>驱动程序安装</h3>
+<div class="paragraph">
+<p>有两种类型的调试适配器，一种需要手动安装驱动程序，另一种使用Windows自带的驱动。目前大部分调试适配器属于后一种，调试适配器或内置调试适配器的实验板通过USB电缆连接PC机后，Windows系统会自动识别并安装驱动程序。一般首次连接到的电脑需要的时间稍长，对于学校实验室机房有硬盘保护功能的电脑，每次开机后都相当于首次连接，请耐心等待。</p>
+</div>
+<div class="paragraph">
+<p>调试适配器通过指示灯指示驱动是否安装成功。独立调试适配器是一个红绿双色指示灯，口袋实验板在USB接口附近有两个LED指示灯，分别是标注了DATA的红色指示灯和标注了LINK的绿色指示灯。在驱动安装完成之前，红色指示灯亮；驱动安装成功后，红色灯熄灭、绿色指示灯点亮。也可以通过实验软件检查驱动是否安装成功，见<a href="#与调试适配器建立连接">与调试适配器建立连接</a>。</p>
+</div>
+<div class="paragraph">
+<p>如果调试适配器通过USB电缆连接电脑后弹出“安装驱动程序向导”窗口，或者在Windows设备管理器的USB设备列表中出现带感叹号的“JU-POD”，说明需要手动安装驱动程序，见附录<a href="#安装USB驱动程序">A：安装USB驱动程序</a>。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+关于指示灯的进一步说明：绿色指示灯一般保持常亮，表示与计算机的连接正常，但是对于使用Windows自带驱动的调试适配器，在大部分win10系统下，几秒钟后绿色指示灯会自动熄灭，当操作实验软件与实验板传送数据时绿色指示灯又会自动点亮，这是正常现象。红色指示灯仅在有数据传输时闪烁。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="验证流程"><a class="anchor" href="#验证流程"></a>实验验证流程</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_打开虚拟实验板"><a class="anchor" href="#_打开虚拟实验板"></a>打开虚拟实验板</h3>
+<div class="paragraph">
+<p>启动WeLab软件后，点击“实验板 ➤ 打开虚拟面板”菜单项或工具条按钮，在打开的文件对话框中选择实验材料中<em>虚拟实验板.jvp</em>，打开后界面如<a href="#fig-4">图 4</a>，这个虚拟面板以实验板的实物照片为背景，在开关、指示灯等输入输出元件位置上放置了虚拟元件。</p>
+</div>
+<div class="paragraph">
+<p>将鼠标指针指向某个虚拟元件，会提示该元件的名称和序号，如最右边的开关提示“开关0”，这些虚拟元件的名称与设计模块端口名称相对应。如“开关7”～“开关0”，与Verilog代码中的S[7:0]对应；同样，虚拟面板中序号为“0”的数码管与代码中的“SD0”对应。</p>
+</div>
+<div id="fig-4" class="imageblock">
+<div class="content">
+<img src="_images/L02b-image4.png" alt="image" width="555" height="352">
+</div>
+<div class="title">图 4. 虚拟实验板</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="与调试适配器建立连接"><a class="anchor" href="#与调试适配器建立连接"></a>与调试适配器建立连接</h3>
+<div class="paragraph">
+<p>点击“实验板 ➤ 连接调试适配器”菜单项或工具条按钮，在弹出窗口中应已经列出发现的调试适配器，如<a href="#fig-5">图 5</a>，点击“连接”按钮。根据调试适配器的驱动类型，列表中出现的名称可能是“JU-HID”或“JU-POD”。若列表中未出现调试适配器，请检查实验板与计算机的连接；如果连接正确，请检查Windows“设备管理器”的“通用串行总线控制器” 设备列表中是否出现“JU-HID”或“JU-POD”，如果未出现或者有感叹号，说明驱动未安装成功。</p>
+</div>
+<div id="fig-5" class="imageblock">
+<div class="content">
+<img src="_images/L02b-image5.png" alt="image" width="281" height="209">
+</div>
+<div class="title">图 5. 连接调试适配器</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+USB电缆也是造成连接失败的一个常见原因。可以换一根电缆试试。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_加载fpga电路"><a class="anchor" href="#_加载fpga电路"></a>加载FPGA电路</h3>
+<div class="paragraph">
+<p>开始验证之前首先要将前面实验编译生成的FPGA电路文件加载到FPGA芯片中（也称配置、编程、下载）。</p>
+</div>
+<div class="paragraph">
+<p>内置调试适配器的Pocket口袋板通过实验软件下载FPGA。点击“实验板 ➤ 下载FPGA”菜单项或工具条按钮，在打开的文件对话框中选择之前编译生成的<em>xxx.rbf</em>文件后开始编程，编程过程中会在菜单栏位置出现进度条，完成后会有提示“配置FPGA成功”。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+无需安装驱动的口袋实验板的下载速度较慢，有时甚至出现进度条不动的假死现象，请耐心等待。无论下载是否成功，都会有提示窗弹出。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>独立调试适配器不能通过实验软件配置FPGA，如DE2-115实验板需要使用Quartus软件下载，具体操作见附录<a href="#Quartus下载sof">B：使用Quartus软件下载sof文件</a>。Nexys4DDR实验板需要使用Vivado软件下载，另文介绍。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_操作虚拟面板"><a class="anchor" href="#_操作虚拟面板"></a>操作虚拟面板</h3>
+<div class="paragraph">
+<p>点击虚拟面板中的拨动开关S7～S0，观察数码管0显示内容的变化；点击虚拟开关S8～S11，相应的LED指示灯应该点亮；点击虚拟开关S8～S11，相应的L8～L11指示灯应该点亮。按下PB0，L18绿色指示灯点亮，松开后熄灭。如果与预期不同，检查前面的设计代码是否正确。</p>
+</div>
+<div class="paragraph">
+<p>如果实际实验板有真实的指示灯和数码管，实际实验板上也会同步显示。Pocket实验板只有指示灯没有数码管，只能在虚拟实验板上观察虚拟数码管。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="设计虚拟面板"><a class="anchor" href="#设计虚拟面板"></a>设计虚拟面板</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>下面从头设计一个全新的虚拟面板。点击“实验板 ➤ 新建虚拟面板”菜单项或工具条按钮，输入虚拟面板名称“认识虚拟元件”；点击“设计 ➤ 添加更换背景图”菜单项或工具条按钮，实验材料中提供了一个“虚拟面板背景图.png”文件，选择该图片作为虚拟面板背景图，如<a href="#fig-6">图 6</a>。</p>
+</div>
+<div id="fig-6" class="imageblock">
+<div class="content">
+<img src="_images/L02b-image6.png" alt="image" width="317" height="253">
+</div>
+<div class="title">图 6. 添加虚拟面板背景图</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+可以自己绘制背景图，见<a href="L02-guide-remote.html#绘制面板背景图" class="xref page">绘制面板背景图</a>。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>现在我们给虚拟面板添加虚拟元件。以虚拟开关为例，在设计工具箱中点击“开关”，点击“开关0”，将它们添加到虚拟面板上，然后将它拖到所希望的位置。用类似的方法添加需要的开关、数码管和指示灯。最终完成虚拟面板效果如<a href="#fig-7">图 7</a>。点击“保存虚拟面板”菜单或工具按钮将面板设计保存到文件。</p>
+</div>
+<div id="fig-7" class="imageblock">
+<div class="content">
+<img src="_images/L02b-image7.png" alt="image" width="317" height="253">
+</div>
+<div class="title">图 7. 设计完成的虚拟面板</div>
+</div>
+<div class="paragraph">
+<p>上面介绍的是从空白开始设计一个全新的虚拟面板，实际上已有虚拟面板也可以修改，只要点击“模式 ➤ 虚拟面板设计”菜单项或笔形工具按钮，进入设计状态即可修改虚拟面板。</p>
+</div>
+<div class="paragraph">
+<p>完成虚拟面板设计后，点击“模式 ➤ 虚拟面板设计”菜单项或工具按钮，从设计模式转换为实验模式。拨动虚拟开关，观察数码管和指示灯显示是否正确。如果不正确，检查verilog设计是否存在错误，改正错误后重新验证。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_附录"><a class="anchor" href="#_附录"></a>附录</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="安装USB驱动程序"><a class="anchor" href="#安装USB驱动程序"></a>A：安装USB驱动程序</h3>
+<div class="paragraph">
+<p>有两种类型的调试适配器，一种需要安装驱动程序，另一种使用Windows自带的驱动。这里介绍32位Windows系统的USB驱动程序安装，64位Windows系统的USB驱动安装方法请自行百度。</p>
+</div>
+<div class="paragraph">
+<p>调试适配器或内置调试适配器的实验板通过USB电缆连接PC机后，在弹出的“安装驱动程序向导”窗口中，选择“从列表或指定位置安装”，根据提示点击“下一步”，浏览到驱动程序在软件包中的位置，根据提示点击“下一步”，即可完成JUPOD驱动程序安装。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Quartus下载sof"><a class="anchor" href="#Quartus下载sof"></a>B：使用Quartus软件下载sof文件</h3>
+<div class="paragraph">
+<p>DE2-115使用Quartus软件通过JTAG接口下载sof文件。首先需要将USB电缆连接到DE2-115开发板左上角的第一个USB接口。</p>
+</div>
+<div class="paragraph">
+<p>点击菜单项Tool ➤ Programmer或工具栏按钮进入器件编程话框，如<a href="#fig-8">图 8</a>。</p>
+</div>
+<div id="fig-8" class="imageblock">
+<div class="content">
+<img src="_images/L02b-image8.png" alt="image" width="424" height="263">
+</div>
+<div class="title">图 8. 器件编程窗口</div>
+</div>
+<div class="paragraph">
+<p>点击 <code>Hardware Setup</code> 按钮或Edit ➤ Hardware Setup菜单项，在Currently selected hardware列表中选择USB-Blaster作为编程硬件，如<a href="#fig-9">图 9</a>。</p>
+</div>
+<div id="fig-9" class="imageblock">
+<div class="content">
+<img src="_images/L02b-image9.png" alt="image" width="343" height="202">
+</div>
+<div class="title">图 9. 下载电缆设置</div>
+</div>
+<div class="paragraph">
+<p>回到<a href="#fig-8">图 8</a>编程界面，点击 <code>Add File</code> 按钮或Edit ➤ Add File菜单项，在工程目录的<em>output</em>文件夹下选择要下载的sof文件，如<em>DE2-115.sof</em>。
+在Mode中选择JTAG模式。勾选Program/Configure选项框，点击 <code>Start</code> 按钮或Processing ➤ Start菜单项开始器件编程。在Process进度条中会显示编程进度。</p>
+</div>
+<div class="paragraph">
+<p>完成后，在Quartus的信息显示区中，会报告成功或出错信息。注意，信息显示在Quartus主界面的信息显示区中，不在编程窗口中；为了方便看到提示信息，可以从Window菜单执行Attach Window，将编程窗口嵌入到QuartusII主界面中。</p>
+</div>
+<div class="paragraph">
+<p>编程界面左侧的其它按钮分别表示停止编程；自动检测编程硬件是否连接；删除编程文件；更改选中的编程文件；保存文件；添加用户自定义的器件；更改编程文件的顺序。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

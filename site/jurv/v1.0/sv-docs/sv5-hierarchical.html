@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>层次化和参数化设计 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v1.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01a-faq-quartus.html">常见编译错误</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023春</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version">
+          <a href="../../v2.0/index.html">2023秋</a>
+        </li>
+        <li class="version is-current is-latest">
+          <a href="../index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>Verilog与逻辑电路实验</li>
+    <li><a href="sv5-hierarchical.html">层次化和参数化设计</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023春</button>
+  <div class="version-menu">
+    <a class="version" href="../../v2.0/sv-docs/sv5-hierarchical.html">2023秋</a>
+    <a class="version is-current" href="sv5-hierarchical.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">层次化和参数化设计</h1>
+<div class="sect1">
+<h2 id="_层次化设计"><a class="anchor" href="#_层次化设计"></a>层次化设计</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Verilog的模块可以嵌入其他模块，形成层次化的嵌套关系。某一个模块要包含其他子模块，必须实例化子模块。实例化一个模块的方法是：</p>
+</div>
+<div class="paragraph">
+<p>&lt;模块名&gt; &lt;模块实例名&gt; ( &lt;端口映射&gt; )；</p>
+</div>
+<div class="paragraph">
+<p>端口映射的方法有两种，一种是位置映射法，一种是名称映射法。下面举例说明。假设某一设计需要将寄存器的输入输出与总线连接，为此需要将寄存器通过三态缓冲器连接输入输出，如<a href="#fig-3">图 1</a>。寄存器可以用<a href="sv4-sequential.html#exa-12" class="xref page">D触发器模块</a>实例化，<a href="sv3-1-combinational.html#exa-4" class="xref page">三态缓冲器模块</a>也在前面讲过，包含这两个子模块的顶层模块代码如下<a href="#exa-22">例 1</a>。</p>
+</div>
+<div id="fig-3" class="imageblock">
+<div class="content">
+<img src="_images/sv-image3.png" alt="20100223212645" width="147" height="115">
+</div>
+<div class="title">图 1. 数据寄存器和三态缓冲器</div>
+</div>
+<div id="exa-22" class="exampleblock">
+<div class="title">例 1. 模块的实例化</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module TOP
+(
+  inout Data,
+  input Clock, Reset, OE
+);
+
+wire buf_in;
+D_FF D_FF_inst (.Q(buf_in), .D(Data), .Clock(Clock), .Reset(Reset));
+Buffer Buffer_inst (Data, buf_in, OE);
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>三态缓冲器模块Buffer的端口映射采用的是位置映射法，触发器模块D_FF的端口映射采用的是名称映射法。位置映射法要求按照子模块端口声明的顺序与顶层模块的信号连接；而名称映射法通过显式地给出子模块的端口名称与顶层模块的信号连接，不一定要按照子模块端口声明的顺序。名称映射法具有较好的可读性和灵活性，推荐采用。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_参数化设计"><a class="anchor" href="#_参数化设计"></a>参数化设计</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_参数的声明及传递"><a class="anchor" href="#_参数的声明及传递"></a>参数的声明及传递</h3>
+<div class="paragraph">
+<p>参数化可以提高代码的可重用性。比如，的三态缓冲器的数据宽度是1位的，如果在设计中需要8位的数据宽度，就需要再设计一个8位的三态缓冲器。采用参数化的设计方法，就不需要再设计一个8位的三态缓冲器，只需要在实例化时指明数据宽度就可以了。</p>
+</div>
+<div class="paragraph">
+<p>参数声明的关键字是parameter。下面的例子采用了Verilog-2001的参数声明语法。</p>
+</div>
+<div id="exa-23" class="exampleblock">
+<div class="title">例 2. 参数化的三态缓冲器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module Buffer
+#(parameter SIZE = 1)
+(
+  output [SIZE-1:0] Out,
+  input [SIZE-1:0] In,
+  input Enable
+);
+
+assign Out = Enable ? In : \{SIZE\{1'bz}};
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>实例化为8位的三态缓冲器的方法如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Buffer #(8) Buffer_inst (.Out(out), .In(F), .Enable(en));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>参数的传递也可以采用名称映射，如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Buffer #(.SIZE(8)) Buffer_inst (.Out(out), .In(F), .Enable(en));</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果实例化时没有指明参数值，则使用模块内声明的参数缺省值。</p>
+</div>
+<div class="paragraph">
+<p>同样地，D触发器也可以采用参数化的设计（这里不再给出，留给读者练习），那么将<a href="#exa-22">例 1</a>改为8位数据宽度就很容易，见下例。</p>
+</div>
+<div id="exa-24" class="exampleblock">
+<div class="title">例 3. 实例化时重定义参数值</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module TOP
+(
+inout [7:0] Data,
+input Clock, Reset, OE
+);
+
+wire [7:0] buf_in;
+D_FF #(8) D_FF8 (.Q(buf_in), .D(Data), .Clock(Clock), .Reset(Reset));
+
+Buffer #(.SIZE(8)) Buffer_inst (Data, buf_in, OE);
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_局部参数"><a class="anchor" href="#_局部参数"></a>局部参数</h3>
+<div class="paragraph">
+<p>参数除了用于实例化时重定义参数值，在模块内部需要符号常量时，也可以用参数来定义。但是Verilog-1995不能从关键字上区分这两种用途，全都使用parameter。在IP核设计中，所有的参数都暴露给外部，会给使用者造成困惑，也容易造成一些错误。所以Verilog-2001增加了关键字localparam表示局部参数。下面是一个例子。</p>
+</div>
+<div id="exa-25" class="exampleblock">
+<div class="title">例 4. 用锁存器实现的存储器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module RAM
+#(parameter ADDR_SIZE = 4, DATA_SIZE = 8)
+(
+  output [DATA_SIZE-1:0] Q,
+  input [DATA_SIZE-1:0] Data,
+  input [ADDR_SIZE-1:0] Addr,
+  input WR
+);
+
+localparam MEM_DEPTH = 1&lt;&lt;ADDR_SIZE;
+reg [DATA_SIZE-1:0] mem [0:MEM_DEPTH-1];
+
+always @ * begin
+  if (WR) mem[Addr] = Data ;
+end
+
+assign Q = (WR) ? 0 : mem[Addr];
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>在上例中，存储单元的个数MEM_DEPTH是局部参数，在外部不能直接改变该参数值；但是它从参数ADDR_SIZE计算得到，所以是间接地被改变。如果将MEM_DEPTH也作为一个parameter，不仅给使用者增加了负担，不恰当的参数赋值还可能带来不希望的后果。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_generate结构"><a class="anchor" href="#_generate结构"></a>generate结构</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>generate结构可以在一个循环中重复创建多个实例，或者有条件地创建实例。</p>
+</div>
+<div class="sect2">
+<h3 id="_generate循环结构"><a class="anchor" href="#_generate循环结构"></a>generate循环结构</h3>
+<div class="paragraph">
+<p><a href="#exa-26">例 5</a>是一个循环创建多个实例的例子，实例化的模块是<a href="#exa-11">[exa-11]</a>的D触发器。需要指出的是，多个实例的创建是在综合工具进行逻辑综合的时候，也就是说，在综合之后硬件就已经生成，并不是在运行的时候动态地创建硬件电路。generate循环结构有几个要求：</p>
+</div>
+<div class="paragraph">
+<p>(1) 循环变量必须用genvar事先声明，它仅仅存在于综合期间，仿真时并不存在，所以不能在循环体以外被引用。</p>
+</div>
+<div class="paragraph">
+<p>(2) for循环必须命名，因此也必须有begin&#8230;&#8203;end，即使只有一句。</p>
+</div>
+<div id="exa-26" class="exampleblock">
+<div class="title">例 5. 用多个D触发器串联构成移位寄存器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module ShiftRegister
+#(parameter SIZE = 4)
+(
+input D,
+input Clk,
+input Reset,
+output Q
+);
+
+wire [SIZE : 0] q;
+assign q[0] = D;
+assign Q = q[SIZE];
+
+generate
+  genvar i;
+  for(i=1; i&lt;=SIZE; i=i+1)
+  begin : dff
+    D_FF gen_inst(.D(q[i-1]), .Clock(Clk), .Reset(Reset), .Q(q[i]));
+  end
+endgenerate
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>在generate块中并非只能对模块实例化，也可以直接包含assign语句、always语句。见下例。</p>
+</div>
+<div id="exa-27" class="exampleblock">
+<div class="title">例 6. 格雷码到二进制码的转换</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module gray2bin
+#(parameter SIZE = 8)
+(
+  output [SIZE-1:0] bin;
+  input [SIZE-1:0] gray
+);
+
+genvar i;
+generate
+  for (i=0; i&lt;SIZE; i=i+1)
+  begin:bit
+    assign bin[i] = ^gray[SIZE-1:i];
+  end
+endgenerate
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generate条件结构"><a class="anchor" href="#_generate条件结构"></a>generate条件结构</h3>
+<div class="paragraph">
+<p>在generate结构中可以加入if-else语句或case语句，实现有条件地生成代码。下面的<a href="#exa-28">例 7</a>根据不同的条件生成乘法器实例，如果数据宽度小于8位，生成先行进位（CLA）乘法器；否则，生成华莱士（WALLACE）乘法器。</p>
+</div>
+<div id="exa-28" class="exampleblock">
+<div class="title">例 7. 有条件地生成模块实例</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module Multiplier
+#(parameter A_WIDTH = 8, B_WIDTH = 8)
+(
+  input [A_WIDTH-1:0] A,
+  input [B_WIDTH-1:0] B,
+  output [A_WIDTH+B_WIDTH-1:0] Product
+);
+
+generate
+  if((A_WIDTH &lt; 8) || (B_WIDTH &lt; 8))
+    CLA_multiplier #(A_WIDTH,B_WIDTH) u1(A, B, Product);
+  else
+    WALLACE_multiplier #(A_WIDTH,B_WIDTH) u1(A, B, Product);
+endgenerate
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

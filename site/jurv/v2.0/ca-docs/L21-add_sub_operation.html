@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>加减运算电路实验 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v2.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">设计工具</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01c-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">验证环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023秋</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../v1.0/index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">2023秋</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../../v1.0/index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../v1.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>计算机组成实验</li>
+    <li><a href="L21-add_sub_operation.html">加减运算电路实验</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <div class="version-menu">
+    <a class="version is-current" href="L21-add_sub_operation.html">2023秋</a>
+    <a class="version" href="../../v1.0/ca-docs/L21-add_sub_operation.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">加减运算电路实验</h1>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>理解使用加法器实现补码加减运算的原理；</p>
+</li>
+<li>
+<p>理解标志位的含义和应用；</p>
+</li>
+<li>
+<p>掌握加减运算电路的HDL描述方法。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验原理"><a class="anchor" href="#_实验原理"></a>实验原理</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_加减运算"><a class="anchor" href="#_加减运算"></a>加减运算</h3>
+<div class="paragraph">
+<p>加法运算是最基本的算术运算，其运算速度对计算机的运行速度有着重要影响。4位的加法器可以用4个全加器级联构成，由于存在进位链的传递延时，运算速度随着精度的提高（位数增加）而降低。所以实际的并行加法器并不会采用全加器级联的方法，而是采用先行进位加法器。在硬件描述语言中，可以直接用“+”号描述并行加法器，综合工具会自动使用库中的先行进位加法器，无需设计者描述先行进位的实现细节。</p>
+</div>
+<div class="paragraph">
+<p>计算机中的带符号整数通常采用补码表示，因为补码可以连同符号位一起参加运算，这样就可以用二进制加法器完成补码加法运算，并且补码的减法也可以转换为加法，只需要在加法器的基础上增加求补电路就可以实现减法，无需为减法设计专门的电路。</p>
+</div>
+<div class="paragraph">
+<p><a href="#fig-21">图 1</a>是一种基本的加减运算电路，用M控制异或门实现求补运算，当M=0时做加法运算，M=1时做减法运算。该电路还产生S、Z、O、C四个运算结果的特征标志位，通常用于数值大小的比较判断。</p>
+</div>
+<div id="fig-21" class="imageblock">
+<div class="content">
+<img src="_images/lab-image21.png" alt="加减运算电路（4位）" width="440" height="215">
+</div>
+<div class="title">图 1. 加减运算电路参考设计的原理图</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_比较运算"><a class="anchor" href="#_比较运算"></a>比较运算</h3>
+<div class="paragraph">
+<p>在计算机软件程序设计中，常常需要比较两个变量的数值大小。实现两个数大小比较的最直接的做法就是将这两个数相减，根据减法的结果判断两者的大小。例如，若X&lt;Y，则X-Y的结果一定为负，因此依据符号标志就可以判断；但是若运算结果溢出，则恰恰相反。<a href="#tab-3">表 1</a>给出了两个带符号数依据减法运算结果的标志位比较大小的判断条件。而两个无符号数的相减，则可依据是否有借位来判断两个数的大小。<a href="#tab-4">表 2</a>给出了无符号数比较大小的判断条件。</p>
+</div>
+<table id="tab-3" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 1. 两个带符号数比较大小的判定条件</caption>
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">大小关系</th>
+<th class="tableblock halign-left valign-top">判定条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X&gt;Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OF⊕SF=0 且ZF=0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X≥Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OF⊕SF =0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X=Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ZF=1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X≠Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ZF=0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X&lt;Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OF⊕SF =1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X≤Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OF⊕SF =1 或ZF=1</p></td>
+</tr>
+</tbody>
+</table>
+<table id="tab-4" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 2. 两个无符号数比较大小的判定条件</caption>
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">大小关系</th>
+<th class="tableblock halign-left valign-top">判定条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X&gt;Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF=0 且ZF=0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X≥Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF=0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X=Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ZF=1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X≠Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ZF=0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X&lt;Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF=1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X≤Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF=1 或ZF=1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_参考设计"><a class="anchor" href="#_参考设计"></a>参考设计</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="#exa-21-1">例 1</a>给出了<a href="#fig-21">图 1</a>电路的HDL设计。</p>
+</div>
+<div id="exa-21-1" class="exampleblock">
+<div class="title">例 1. 加减运算电路参考设计的核心代码</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>logic [3:0] A, B, F;
+logic C0, C4;
+logic sign, zero, overflow, carryOut;
+
+assign A = X;
+assign B = Y ^ {4{M}};
+assign C0 = M;
+assign {C4,F} = A + B + C0;  
+
+assign sign = F[3];
+assign zero = ~|F;  <i class="conum" data-value="1"></i><b>(1)</b>
+assign overflow = ~A[3] &amp; ~B[3] &amp; F[3] | A[3] &amp; B[3] &amp; ~F[3]; <i class="conum" data-value="2"></i><b>(2)</b>
+assign carryOut = (M==1'b0) ? C4 : ~C4; <i class="conum" data-value="3"></i><b>(3)</b></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验任务"><a class="anchor" href="#_实验任务"></a>实验任务</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_理解参考设计"><a class="anchor" href="#_1_理解参考设计"></a>1. 理解参考设计</h3>
+<div class="paragraph">
+<p>阅读理解<a href="#exa-21-1">例 1</a>代码，通过实验验证电路功能，并完成以下练习。</p>
+</div>
+<div class="paragraph">
+<p>（1）该电路是否既可以进行无符号数的加减运算，也可以进行带符号数的加减运算？通过实验数据举例说明。</p>
+</div>
+<div class="paragraph">
+<p>（2）<a href="#exa-21-1">例 1</a>中标记①的语句是零标志的生成代码，说明 <code>|F</code> 实现的逻辑函数。</p>
+</div>
+<div class="paragraph">
+<p>（3）标记②的语句是溢出标志的生成代码，使用的是加法器的输入A和B的符号位，既可以用于X+Y也可以用于X-Y。如果使用原始输入X和Y的符号位，减法运算时溢出标志位的逻辑表达式是什么？用HDL描述并在后面的任务2中验证。</p>
+</div>
+<div class="paragraph">
+<p>（4）标记③的语句是进位标志的生成代码，M=0和M=1分别对应减法运算和减法运算，说明减法运算时借位与进位标志的关系。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_设计任务加减和比较运算电路"><a class="anchor" href="#_2_设计任务加减和比较运算电路"></a>2. 设计任务：加减和比较运算电路</h3>
+<div id="fig-22" class="imageblock">
+<div class="content">
+<img src="_images/lab-image22.png" alt="任务：加减运算电路 2022" width="472" height="263">
+</div>
+<div class="title">图 2. 设计任务的加减和比较运算电路</div>
+</div>
+<div class="paragraph">
+<p>按照<a href="#fig-22">图 2</a>原理设计加减和比较运算电路，具体要求如下。</p>
+</div>
+<div class="paragraph">
+<p>（1）<a href="#fig-22">图 2</a>的B输入端电路包含与或门构成的二选一多路器，请参照“三态门与多路器实验”中学习的与或门多路器的描述方法。
+该电路的特点是可以通过M0和M1的控制在B输入端产生“全0”和“全1”数据（与Y输入数据无关），用于一些特殊的功能，例如将X输入端的数据传送到F输出端。</p>
+</div>
+<div class="paragraph">
+<p>（2）依据S、Z、O、C四个标志位，产生相等、不等、小于（带符号数）、大于等于（带符号数）、小于（无符号数）、大于等于（无符号数）的比较结果。可参考实验原理部分<a href="#tab-3">表 1</a>和<a href="#tab-4">表 2</a>的判定条件。</p>
+</div>
+<div class="paragraph">
+<p>（3）分析<a href="#fig-22">图 2</a>电路按照<a href="#tab-5">表 3</a>中M0～M2的各种取值，将所对应的运算功能填入表中。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+<a href="#fig-22">图 2</a>电路的特点是可以通过M0和M1的控制在B输入端产生“全0”和“全1”数据（与Y输入数据无关），用于实现一些特殊的运算功能，例如，当M0=0、M1=0、M2=0时，B=0、C0=0，F=A+B+C0=A=X，实现的运算是F=X，即将输入X传送到F输出。
+</td>
+</tr>
+</table>
+</div>
+<table id="tab-5" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 3. 加减运算电路控制信号与功能</caption>
+<colgroup>
+<col style="width: 13%;">
+<col style="width: 11%;">
+<col style="width: 11%;">
+<col style="width: 28%;">
+<col style="width: 37%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">M2</th>
+<th class="tableblock halign-left valign-top">M1</th>
+<th class="tableblock halign-left valign-top">M0</th>
+<th class="tableblock halign-left valign-top">运算</th>
+<th class="tableblock halign-left valign-top">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F=X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">传送X（MOVX）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>（4）在实验系统上验证<a href="#tab-5">表 3</a>列出的运算。</p>
+</div>
+<div class="paragraph">
+<p>（5）在实验系统上验证比较运算。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+验证时M0～M2须设置为减法运算。
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock text-center">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

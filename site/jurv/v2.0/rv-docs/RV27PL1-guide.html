@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>解决流水线数据冲突 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v2.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">设计工具</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01c-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">验证环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023秋</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../v1.0/index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">2023秋</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../../v1.0/index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../v1.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>RISC-V CPU设计实验</li>
+    <li><a href="RV27PL1-guide.html">解决流水线数据冲突</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <div class="version-menu">
+    <a class="version is-current" href="RV27PL1-guide.html">2023秋</a>
+    <a class="version" href="../../v1.0/rv-docs/RV27PL1-guide.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">解决流水线数据冲突</h1>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>（1）理解流水线数据相关；</p>
+</div>
+<div class="paragraph">
+<p>（2）掌握流水线数据冲突的解决方法。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验原理"><a class="anchor" href="#_实验原理"></a>实验原理</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>数据相关引发流水线数据冲突的场景：产生结果的指令（“写者”）尚未将处理后的结果写回到通用寄存器堆中，而需要这个结果的指令（“读者”）已经在译码阶段了，此刻“读者”指令从通用寄存器堆中读出的值是旧值而非新值。</p>
+</div>
+<div class="paragraph">
+<p>如何避免产生这种错误呢？下面将讨论解决数据相关引发流水线冲突的检测和两种解决办法。</p>
+</div>
+<div class="sect2">
+<h3 id="_流水线数据相关的检测"><a class="anchor" href="#_流水线数据相关的检测"></a>流水线数据相关的检测</h3>
+<div class="paragraph">
+<p>根据五级流水线的CPU微结构，判断或是检测数据相关的条件具体可以描述为：处于译码阶段的指令需要获取源寄存器值，如果这些源寄存器中的任何一个地址（寄存器号）与当前时刻处于执行阶段、访存阶段或是写回阶段的需要写入的目的寄存器的地址相同，则表明处于译码阶段的指令与当前时刻处于执行阶段、访存阶段或是写回阶段的指令存在数据相关。</p>
+</div>
+<div class="paragraph">
+<p>但是在检测数据相关时还要考虑以下情况。第一，参与检测的指令到底有没有寄存器的源操作数，比如I型指令中，只有一个寄存器的源操作数，再比如U型和J型指令压根就没有寄存器的源操作数，那么在考虑这类指令的数据相关时，不需要将和寄存器无关的源操作数考虑进去。第二，指令中有寄存器的源操作数，但是寄存器号为0，那么也不会相关，因为0号寄存器的值恒为0。第三，处于执行阶段、访存阶段或是写回阶段的指令是否需要写结果寄存器，比如分支指令不需要写寄存器，其“目的寄存器号”实际是立即数的一部分。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_用停顿法处理数据冲突"><a class="anchor" href="#_用停顿法处理数据冲突"></a>用停顿法处理数据冲突</h3>
+<div class="paragraph">
+<p>解决数据冲突一种直观的解决思路是：让需要这个结果的“读者”指令在取指和译码阶段一直等待，直到产生结果的“写者”指令将结果写入到通用寄存器堆中，才可以进入到流水线的下一级的执行阶段。这种方法称为停顿（stall），也称作阻塞。</p>
+</div>
+<div id="fig-20" class="imageblock">
+<div class="content">
+<img src="_images/image20.png" alt="RISCV_Pipeline_6e_停顿法" width="718" height="310">
+</div>
+<div class="title">图 1. 停顿法处理数据冲突</div>
+</div>
+<div class="paragraph">
+<p>因为取指令阶段NextPC的值随着PC的变化而变化，译码阶段的其他值也是根据译码阶段的指令的变化而变化，所以停顿的基本思想就是保持这两个数值保持不变，简单来说就是保持从PC寄存器取出的pc值和从译码阶段的流水线寄存器PR1取出的指令值不变。具体实现方法可以利用寄存器的使能信号，当检测到冲突时阻止PC和PR1这两个寄存器更新数据，如<a href="#fig-20">图 1</a>所示stall信号。当取指令和译码阶段停顿时，其他阶段的数据仍然继续在流水线中向前传递，当相关的数据写入目的寄存器后，数据相关消失，随即撤销停顿信号，流水线恢复正常。根据相关的寄存器是处于执行阶段、访存阶段还是写回阶段，停顿的周期数分别是3、2、1。</p>
+</div>
+<div class="paragraph">
+<p>当发生数据冲突时，从寄存器堆读出的寄存器值是错误的，如果该寄存器值传递到执行阶段，ALU的运算结果也将是错误的，最终会将错误的结果写入目的寄存器。为了避免将错误的结果写入目的寄存器，在停顿的同时需要清零译码—执行的流水线寄存器PR2（包括控制信号的流水线寄存器），如<a href="#fig-20">图 1</a>所示flush信号。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_用前递法解决数据冲突"><a class="anchor" href="#_用前递法解决数据冲突"></a>用前递法解决数据冲突</h3>
+<div class="paragraph">
+<p>在遇到数据相关的指令时可以观察到一个现象，那就是需要这个结果的指令(“读者”)在译码阶段等待的过程中，前面产生结果的指令(“写者”)其实已经在执行阶段产生了结果，只不过还没有写入到寄存器堆中。</p>
+</div>
+<div class="paragraph">
+<p>比如这两条指令：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    add x5,x0,4 <i class="conum" data-value="1"></i><b>(1)</b>
+    add x6,x5,3 <i class="conum" data-value="2"></i><b>(2)</b></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当指令①处于执行阶段时，指令②处于译码阶段，且该指令要获取x5寄存器的值，此时就可以在执行阶段的ALU的结果输出处到译码阶段的寄存器堆读出结果的生成处添加一条旁路通路，把执行阶段对x5的处理结果送到译码阶段。这种方法称作前递或转发（forwarding），也称作旁路（bypassing）。同样的，按照这种思想，还可以依次添加从访存阶段、写回阶段到译码阶段的前递通路。增加前递的数据通路如<a href="#fig-21">图 2</a>所示。</p>
+</div>
+<div id="fig-21" class="imageblock">
+<div class="content">
+<img src="_images/image21.png" alt="前递法解决数据冲突" width="736" height="351">
+</div>
+<div class="title">图 2. 前递法解决数据冲突</div>
+</div>
+<div class="paragraph">
+<p>上面的方法可以处理运算指令写入寄存器的情况，但对于load指令还存在问题。如果在流水线上执行如下指令序列：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    lw x19,8(x0)    <i class="conum" data-value="1"></i><b>(1)</b>
+    addi x20,x19,3  <i class="conum" data-value="2"></i><b>(2)</b></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>假设此时指令①位于执行（EX）阶段，那么指令②就位于译码阶段，此时x19产生了数据相关，虽然存在执行阶段到译码阶段的前递通路，但是lw指令在执行阶段尚未读出存储器中的数据，要到访存（MEM）阶段才能读出要写入目的寄存器x19的数据。所以此时需要等待一个周期之后才能从MEM阶段前递，解决跟在lw指令后面的指令与之产生的数据冲突。</p>
+</div>
+<div class="paragraph">
+<p>此外在硬件设计时，还需要考虑前递的优先级。下面是一个特殊例子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    add x4,x1,x1    <i class="conum" data-value="1"></i><b>(1)</b>
+    add x4,x2,x2    <i class="conum" data-value="2"></i><b>(2)</b>
+    add x4,x3,x3    <i class="conum" data-value="3"></i><b>(3)</b>
+    sub x6,x5,x4    <i class="conum" data-value="4"></i><b>(4)</b></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该指令序列的①②③都写入x4寄存器，当指令④处于译码阶段，同时与指令①②③发生数据相关，指令①处于写回阶段，指令②处于访存阶段，指令③处于执行阶段，那么应该前递哪个阶段的数据呢？很显然，应该选择离它最近的执行阶段前递过来的结果，因为它是x4的最终结果。所以，硬件实现时还要考虑不同流水段的前递优先级。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验任务"><a class="anchor" href="#_实验任务"></a>实验任务</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_前递数据通路设计"><a class="anchor" href="#_1_前递数据通路设计"></a>1. 前递数据通路设计</h3>
+<div class="paragraph">
+<p>上面介绍了流水线数据冲突的检测和解决办法，并且以23条指令的数据通路为例给出了具体方案。实验任务是在前面实验自己设计的27条指令的单周期数据通路的基础上，设计支持27条指令的流水线数据通路并且能够解决数据冲突。具体要求如下。</p>
+</div>
+<div class="paragraph">
+<p>（1）用前递法解决流水线数据冲突。</p>
+</div>
+<div class="paragraph">
+<p>（2）对于由上一条load指令引起的数据冲突需要停顿一个周期再前递。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_虚拟面板设计"><a class="anchor" href="#_2_虚拟面板设计"></a>2. 虚拟面板设计</h3>
+<div class="paragraph">
+<p>根据自己设计的数据通路，绘图作为虚拟面板的背景；添加必要的观察数据和信号，同时在设计代码中添加相应的观察变量。
+具体步骤可参阅<a href="RV27-guide.html" class="xref page">支持27条指令</a>，但是实验材料有所不同，本实验所需实验材料如下所示。</p>
+</div>
+<div id="lst-rv27-diagram" class="listingblock">
+<div class="content">
+<pre>📂 riscv
+  📂 RV-27PL1
+    📁 diagram
+      📄 RV-PL23.drawio
+      📄 RV-PL27_golden.jvp</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于同时有多条指令在流水线上执行，为了帮助分析运行结果，可以在虚拟面板上添加指令提示框，显示每个流水段当前执行的指令，就像前面<a href="RV23PL-guide.html" class="xref page">23条指令流水线实验</a>的虚拟面板那样。指令提示框在虚拟面板左边栏中是字母“P”表示的虚拟元件，可以拖放到虚拟面板中，然后在右边栏中设置其大小。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_验证"><a class="anchor" href="#_3_验证"></a>3. 验证</h3>
+<div class="paragraph">
+<p>编写测试程序，在实验平台调试验证自己的设计。测试程序应包含各种需要前递的情况，以及不需要前递的情况，可参考教学视频的讲解。</p>
+</div>
+<div class="paragraph">
+<p>流水线的调试可能会比较困难，但也是训练分析问题、解决问题能力的好时机，同时也能帮助理解数据冲突的原理。</p>
+</div>
+<div class="sidebarblock text-center">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

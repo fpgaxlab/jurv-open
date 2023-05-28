@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quartus FPGA设计流程 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v1.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L01-guide.html">Quartus FPGA设计流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#实验步骤">实验步骤</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01a-faq-quartus.html">常见编译错误</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L01b-tcl-create-quartus-project.html">用脚本文件创建工程</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-remote.html#实验考核">实验考核</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-welab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#准备工作">准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#验证流程">验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#设计虚拟面板">设计虚拟面板</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-julab.html#Quartus下载sof">使用Quartus软件下载sof文件</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="L02-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rv-docs/RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023春</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version">
+          <a href="../v2.0/index.html">2023秋</a>
+        </li>
+        <li class="version is-current is-latest">
+          <a href="index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">RISC-V CPU设计实验教程</a></li>
+    <li>实验工具和环境</li>
+    <li><a href="L01-guide.html">Quartus FPGA设计流程</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023春</button>
+  <div class="version-menu">
+    <a class="version" href="../v2.0/L01-guide.html">2023秋</a>
+    <a class="version is-current" href="L01-guide.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Quartus FPGA设计流程</h1>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>熟悉FPGA设计流程；</p>
+</li>
+<li>
+<p>熟悉Quartus设计软件的使用；</p>
+</li>
+<li>
+<p>掌握Verilog HDL的模块、端口和持续赋值语句。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="准备工作"><a class="anchor" href="#准备工作"></a>准备工作</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_安装fpga设计软件"><a class="anchor" href="#_安装fpga设计软件"></a>安装FPGA设计软件</h3>
+<div class="paragraph">
+<p>Quartus Prime的下载和安装见<a href="L0-install-software.html" class="xref page">安装软件</a>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_下载实验材料创建工程文件夹"><a class="anchor" href="#_下载实验材料创建工程文件夹"></a>下载实验材料、创建工程文件夹</h3>
+<div class="paragraph">
+<p>实验材料的下载方法见<a href="L0-download-resource.html" class="xref page">下载实验材料</a>。</p>
+</div>
+<div class="paragraph">
+<p>后文提到的实验材料名称均为适用于远程实验板或口袋实验板的实验材料，DE2-115开发板对应的实验材料名称如<a href="#tab-1">表 1</a>，在后面也会以提示的形式给出。</p>
+</div>
+<table id="tab-1" class="tableblock frame-all grid-all fit-content center">
+<caption class="title">表 1. 实验材料名称对照表</caption>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">实验板</th>
+<th class="tableblock halign-left valign-top">远程或口袋实验板</th>
+<th class="tableblock halign-left valign-top">DE2-115开发板</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文件夹</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LabProject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LabPrj_DE2-115</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">顶层模块</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LabBoard_TOP.v</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DE2_115_TOP.v</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">时序约束</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RemotePocket.sdc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DE2-115.sdc</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">工程配置脚本</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RemotePocket.tcl</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DE2-115.tcl</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">创建工程脚本</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create_project_pocket.tcl</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create_project_de2-115.tcl</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>新建一个文件夹作为工程文件夹，并将实验材料中的<em>LabProject</em>文件夹的内容复制到工程文件夹。同样要注意，工程文件夹的名称和路径均不能包含空格和汉字；也不建议把工程文件夹建在桌面上。学校实验室计算机通常安装硬盘保护系统，不要在被保护的硬盘分区创建工程文件夹，一般盘符靠后的如E盘是开放的。</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="重要"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Quartus软件安装路径不要有汉字和空格。</p>
+</div>
+<div class="paragraph">
+<p>工程文件夹的名称和路径均不能包含汉字和空格。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="实验步骤"><a class="anchor" href="#实验步骤"></a>实验步骤</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_新建工程"><a class="anchor" href="#_新建工程"></a>新建工程</h3>
+<div class="paragraph">
+<p>运行Quartus软件。点击菜单项File ➤ New Project Wizard…，出现introduction对话框。单击Next，进入Directory，name，Top-Level Entity设置对话框，选择前面创建的工程文件存放路径，输入工程名称和顶层模块名称。点击Next，进入Project Type对话框，选择Empty project。</p>
+</div>
+<div class="paragraph">
+<p>点击Finish，完成工程创建。完成后，Quartus界面如<a href="#fig-1">图 1</a>所示。</p>
+</div>
+<div id="fig-1" class="imageblock">
+<div class="content">
+<img src="_images/L01-image1.png" alt="image">
+</div>
+<div class="title">图 1. Quartus Prime界面</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_配置工程"><a class="anchor" href="#_配置工程"></a>配置工程</h3>
+<div class="sect3">
+<h4 id="_导入设计文件"><a class="anchor" href="#_导入设计文件"></a>导入设计文件</h4>
+<div class="paragraph">
+<p>点击菜单项Project ➤ ADD/Remove Files in Project…，出现category Files对话框。该对话框用来将已存在的设计文件加入到工程中。点击 <code>&#8230;&#8203;</code> 浏览按钮，选择已经拷贝到工程文件夹内的Design Files（<em>LabBoard_TOP.v</em>，<em>GlobalCLK.v</em>，<em>pll.v</em>，<em>WatchChain.sv</em>和<em>JutagScanChain.qxp</em>），添加到工程中。这些文件是虚拟实验系统所需要的基础文件，用户不应该去修改它们，通常也无需理解其中的代码。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_设置顶层模块"><a class="anchor" href="#_设置顶层模块"></a>设置顶层模块</h4>
+<div class="paragraph">
+<p>下拉Project Navigator右边的列表框，选择Files，如<a href="#fig-2">图 2</a>(a)，可以看到已添加到工程中的文件。右键点击<em>LabBoard_TOP.v</em>，在弹出菜单中选择Set as Top-Level Entity，将该文件设置为顶层模块，设置完成后的Hierarchy如<a href="#fig-2">图 2</a>(b)。</p>
+</div>
+<div id="fig-2" class="imageblock">
+<div class="content">
+<img src="_images/L01-image3ab.png" alt="image">
+</div>
+<div class="title">图 2. 设置顶层模块</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+适用于DE2-115开发板的顶层模块文件名为<em>DE2_115_TOP.v</em>。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_设置输出路径"><a class="anchor" href="#_设置输出路径"></a>设置输出路径</h4>
+<div class="paragraph">
+<p>虽然设置输出路径不是必须，但可以使得工程文件夹的文件组织便于管理。点击菜单Assignments ➤ Settings或工具栏相应按钮，在打开的对话框Category栏选择Compillation Process Settings，在右边的设置项中勾选Save project output files in specified directory，在Directory name编辑框内输入“./output”。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_选择硬件描述语言版本"><a class="anchor" href="#_选择硬件描述语言版本"></a>选择硬件描述语言版本</h4>
+<div class="paragraph">
+<p>接着在settings对话框Category栏的Compiler Settings下选择Verilog HDL Input，默认的Verilog版本是Verilog-2001，这里改为SystemVerilog。如果选择Verilog-2001，编译器将根据文件后缀名来决定使用的语言，“.v”是Verilog，“.sv”是SystemVerilog。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_设置器件和引脚选项"><a class="anchor" href="#_设置器件和引脚选项"></a>设置器件和引脚选项</h4>
+<div class="paragraph">
+<p>点击菜单项Assignments ➤ Device…，出现Device对话框，根据使用的实验板在Device Family列表和Available devices列表中找到所用的FPGA器件。 远程实验板和口袋实验板的FPGA型号是Cyclone IV E系列的EP4CE6E22C8，DE2-115开发板的FPGA型号为EP4CE115F29C7。</p>
+</div>
+<div class="paragraph">
+<p>在Device对话框中点击“Device and Pin Options …”按钮出现Device and Pin Options对话框，在对话框左侧Category列表中选择以下设置。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>选中“Programming Files”，勾选Raw Binary File (.rbf)。远程实验板及口袋实验板需要rbf文件作为FPGA编程文件。DE2-115实验板使用JTAG方式编程，无需勾选生成rbf文件。</p>
+</li>
+<li>
+<p>选中“Unused Pins”，设置为“As input tri-stated with weak pull-up”。</p>
+</li>
+<li>
+<p>选中“Dual-Purpose Pins”，将“nCEO”设置为“Use as regular I/O”。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_设置约束条件"><a class="anchor" href="#_设置约束条件"></a>设置约束条件</h4>
+<div class="paragraph">
+<p>约束引脚是将顶层模块（LabBoard_TOP）的输入输出端口指定到FPGA器件的实际引脚。约束引脚有手工约束和导入约束文件两种方法。</p>
+</div>
+<div class="paragraph">
+<p>为了节省时间，本实验采用运行tcl脚本文件的方法导入约束条件，实验材料的<em>LabProject</em>文件夹中提供了<em>RemotePocket.tcl</em>文件，将该文件拷贝到工程文件夹。点击 View ➤ Tcl Console 菜单项打开 “Tcl Console” 子窗口。点击Tools ➤ Tcl Scripts菜单项，在弹出的Tcl Scripts窗口中选择<em>RemotePocket.tcl</em>。
+点击&lt;Run&gt;按钮执行该脚本文件，之后会弹出一个信息框提示“Tcl Script File &#8230;&#8203; executed”。 但是，这并不代表执行成功了，如果出错，会在 “Tcl Console” 子窗口显示红色的错误信息，这也是要打开“Tcl Console” 子窗口的原因。常见的错误原因是工程路径中包含了空格或汉字。也可以手工检查是否执行成功，执行菜单Assignment ➤ Assignment Editor或者Assignment ➤ Pin Planner，打开的窗口内容如果是空的，说明没有执行成功。顺便说明，Assignment Editor和Pin Planner窗口也可以用于手工约束引脚。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>实验材料中还包含了另一个tcl文件<em>create_project_pocket.tcl</em>，这里不要选择该文件。</p>
+</li>
+<li>
+<p>只能运行工程文件夹下的tcl文件，如果Tcl Scripts窗口中没有出现<em>RemotePocket.tcl</em>，请检查该文件是否事先复制到了工程文件夹内。</p>
+</li>
+<li>
+<p>适用于DE2-115开发板的脚本文件为<em>DE2-115.tcl</em>。</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>实际上<em>RemotePocket.tcl</em>脚本文件不仅有引脚定义信息，还包含了前面通过图形界面所做的一些设置。此外，还有一种导入引脚约束的方法是用菜单Assignments ➤ Import Assignments导入qsf或csv等文件，本实验不做练习。</p>
+</div>
+<div class="paragraph">
+<p>需要说明的是，本书的实验采用虚拟实验方式，同学们的设计并不直接使用顶层端口，但是仍然需要进行引脚约束，否则使用虚拟实验调试系统的时候会出现问题。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_保存工程"><a class="anchor" href="#_保存工程"></a>保存工程</h3>
+<div class="paragraph">
+<p>至此新的工程框架才算真正建立完成，从上面的过程可以看出，工程的配置比较繁琐，需要花费一定的时间，而且稍有差错就会导致实验失败。所以要把本实验所建的工程保存好，以便后面的实验继续使用。执行菜单File ➤ Save Project和File ➤ Close Project保存工程后关闭工程。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+如果自己创建的工程在后面的实验中出现问题，可以参阅<a href="L01b-tcl-create-quartus-project.html" class="xref page">“用脚本创建Quartus工程”</a>，自动地创建工程。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_打开工程"><a class="anchor" href="#_打开工程"></a>打开工程</h3>
+<div class="paragraph">
+<p>使用菜单项File ➤ Open Project重新打开前面创建的工程。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_编译错误信息"><a class="anchor" href="#_编译错误信息"></a>编译错误信息</h3>
+<div class="paragraph">
+<p>点击Processing ➤ Start ➤ Start Analysis &amp; Synthesis菜单项或工具栏相应按钮，使用Quartus软件内嵌的分析综合工具Analysis &amp; Synthesis对设计进行逻辑综合。如果综合通过，任务流程区中Analysis &amp; Synthesis步骤前面会显示绿色的勾；如果有语法错误，会显示红色的叉，同时在信息显示区会显示错误信息。</p>
+</div>
+<div class="paragraph">
+<p>查找错误时，应从第一个错误信息看起，因为后面的错误有可能是由前面的错误引起的。应点击Error标签（红叉），翻到第一个错误信息，如<a href="#fig-3">图 3</a>。</p>
+</div>
+<div id="fig-3" class="imageblock">
+<div class="content">
+<img src="_images/L01-image5.png" alt="image">
+</div>
+<div class="title">图 3. Messages窗口的错误提示信息</div>
+</div>
+<div class="paragraph">
+<p>“Error (12006): Node instance "Lab_inst" instantiates undefined entity "VirtualBoard". ”这个错误信息是说编译器没找到“VirtualBoard”这个模块。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+很多初学者不习惯阅读错误信息，实际上学会读懂错误信息是很有用的。可以点鼠标右键将错误信息复制下来，百度看看过来人怎么说，慢慢地就能读懂了。或参阅本项目的<a href="L01a-faq-quartus.html" class="xref page">常见编译错误</a>。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_添加模块"><a class="anchor" href="#_添加模块"></a>添加模块</h3>
+<div class="sect3">
+<h4 id="_添加已有的模块"><a class="anchor" href="#_添加已有的模块"></a>添加已有的模块</h4>
+<div class="paragraph">
+<p>用菜单项Project ➤ Add/Remove Files in Project… 打开添加文件对话框，点击 <code>&#8230;&#8203;</code> 浏览按钮，将实验材料中的<em>VirtualBoard.sv</em>添加到工程。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+如果希望用VHDL，实验材料也提供了<em>VirtualBoard.vhd</em>。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>再次Start Analysis &amp; Synthesis，此时综合应该没有报错了。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_新建模块"><a class="anchor" href="#_新建模块"></a>新建模块</h4>
+<div class="paragraph">
+<p>在以后的实验中，我们还会需要新建模块，这里一起介绍。点击菜单项File ➤ new…，出现新建源文件对话框，可以新建一个SystemVerilog HDL File或者Verilog HDL File等类型的设计文件。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_设计输入"><a class="anchor" href="#_设计输入"></a>设计输入</h3>
+<div class="sect3">
+<h4 id="_输入hdl设计代码"><a class="anchor" href="#_输入hdl设计代码"></a>输入HDL设计代码</h4>
+<div class="paragraph">
+<p>前面的综合虽然没有报错，但实际上VirtualBoard模块并没有设计内容。在编辑器中打开<em>VirtualBoard.sv</em>文件，如<a href="#虚拟实验板模块">例 1</a>所示，可以看到该模块只有端口定义。</p>
+</div>
+<div id="虚拟实验板模块" class="exampleblock">
+<div class="title">例 1. 虚拟实验板模块</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`default_nettype none 
+module VirtualBoard (
+    input  wire   CLOCK,      // 10 MHz Input Clock 
+    input  wire  [19:0] PB,   // 20 Push Buttons, logical 1 when pressed
+    input  wire  [35:0] S,    // 36 Switches
+    output logic [35:0] L,    // 36 LEDs, drive logical 1 to light up
+    output logic  [7:0] SD7,  // 8 common anode Seven-segment Display
+    output logic  [7:0] SD6,
+    output logic  [7:0] SD5,
+    output logic  [7:0] SD4,
+    output logic  [7:0] SD3,
+    output logic  [7:0] SD2,
+    output logic  [7:0] SD1,
+    output logic  [7:0] SD0
+); 
+
+endmodule</code></pre>
+</div>
+</div>
+</div>
+</div>
+<details>
+<summary class="title"><a href="#虚拟实验板模块">例 1</a>的VHDL版本（点击此行展开）</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_unsigned.ALL;
+ENTITY  VirtualBoard IS
+PORT (   
+   CLOCK:in std_logic;                     -- 10MHz Input Clock 
+   PB: in  std_logic_vector(19 downto 0);  -- 20 Push buttons, logical 1 when pressed
+   S:  in  std_logic_vector(35 downto 0);  -- 36 Switches
+   L:  out std_logic_vector(35 downto 0);  -- 36 LEDs, drive logical 1 to light up
+   SD7:out std_logic_vector(7 downto 0);   -- 8 common anode Seven-segment Display
+   SD6:out std_logic_vector(7 downto 0);
+   SD5:out std_logic_vector(7 downto 0);
+   SD4:out std_logic_vector(7 downto 0);
+   SD3:out std_logic_vector(7 downto 0);
+   SD2:out std_logic_vector(7 downto 0);
+   SD1:out std_logic_vector(7 downto 0);
+   SD0:out std_logic_vector(7 downto 0)); 
+END VirtualBoard;
+
+ARCHITECTURE  behav_VB OF  VirtualBoard IS
+
+BEGIN
+
+
+END behav_VB;</code></pre>
+</div>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>这个VirtualBoard模块可以想象成一个实验板，有1个时钟输入CLOCK， 20个按键PB，36个拨动开关S，36个指示灯L，8个七段数码管SD0～SD7。该模块命名为“VirtualBoard”的含义是“虚拟实验板”，在后面验证时我们会看到，“虚拟实验板”模块与实验调试软件的“虚拟面板”是相互对应的。</p>
+</div>
+<div class="paragraph">
+<p>下面给VirtualBoard模块添加设计代码。首先用8个拨动开关S7～S0直接驱动七段数码管SD0的8个段，将下面的代码添加到<a href="#虚拟实验板模块">例 1</a>的 <code>endmodule</code> 之前。</p>
+</div>
+<div id="需添加的代码" class="exampleblock">
+<div class="title">例 2. 需添加的代码</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">   //开关7~0直接驱动数码管SD0的各个段
+   assign SD0 = S[7:0];
+
+   //开关11~8驱动指示灯L11~8的亮灭
+   <i class="conum" data-value="1"></i><b>(1)</b>
+
+   //按键PB0驱动指示灯L18
+   assign L[18] = PB[0];</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>在这里添加Verilog HDL的assign赋值语句，实现S11～S8控制L11～L8的亮灭。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<details>
+<summary class="title"><a href="#需添加的代码">例 2</a>的VHDL版本（点击此行展开）</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">   --开关7~0直接驱动数码管SD0的各个段
+   SD0 &lt;= S(7 downto 0);
+
+   --开关11~8驱动指示灯L11~8的亮灭
+   <i class="conum" data-value="1"></i><b>(1)</b>
+
+   --按键PB0驱动指示灯L18
+   L(18) &lt;= PB(0);</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>在这里添加VHDL的赋值语句，实现S11～S8控制L11～L8的亮灭。</td>
+</tr>
+</table>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>在以后的实验中，自己的设计也都是写在VirtualBoard模块中；前面使用<em>LabProject</em>中的<em>LabBoard_TOP</em>等文件建立的工程框架不需要修改。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_编译整个工程"><a class="anchor" href="#_编译整个工程"></a>编译整个工程</h3>
+<div class="paragraph">
+<p>点击Processing ➤ Start Compilation菜单项或工具栏相应按钮，对设计进行全编译。编译成功后，Tasks任务流程区的各个步骤前显示绿色的勾，Project Navigator工程导航区中显示出模块间的层次结构，如<a href="#fig-6">图 4</a>。</p>
+</div>
+<div id="fig-6" class="imageblock">
+<div class="content">
+<img src="_images/L01-image6.png" alt="image">
+</div>
+<div class="title">图 4. 编译通过</div>
+</div>
+<div class="paragraph">
+<p>在<em>output</em>文件夹下找到生成的“<em>xxx.rbf</em>”文件，其中xxx是在建立工程时输入的工程名称；这个文件在验证时要用。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+有的时候Analysis &amp; Synthesis和Fitter都通过了，但是Assembler或Timing Analysis没有通过，此时只要在任务流程区双击该步骤重做一次，一般都能成功。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_存档整个工程"><a class="anchor" href="#_存档整个工程"></a>存档整个工程</h3>
+<div class="paragraph">
+<p>点击Projec ➤ Archive Projectt菜单项，将整个工程存档，存档文件的扩展名为<em>.qar</em>。以后可以用Projec ➤ Restore Archived Project菜单项恢复存档的工程。当然，也可以用文件压缩工具将工程文件夹打包保存。使用Archive Project的好处是不会遗漏任何源文件，而且存档文件尺寸较小。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_验证"><a class="anchor" href="#_验证"></a>验证</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>通过这个实验熟悉了FPGA设计流程和Quartus设计软件的使用。设计完成后需要验证自己的设计是否正确，实验验证首先要将上面编译生成的编程文件下载到FPGA，然后对实验电路施加输入激励，并读回输出响应进行分析判断。传统实验验证方式使用实验板上的开关等元件施加输入，通过实验板上的指示灯、数码管等观察实验现象；本书使用虚拟实验调试软件进行实验验证，有本地实验和远程实验两种版本的实验软件，对应使用的实验电路板的不同（远程实验使用远程实验板，本地实验使用口袋实验板等），FPGA电路的加载方法也有所不同。请根据所使用的实验板和实验调试软件，阅读后面的实验验证流程。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

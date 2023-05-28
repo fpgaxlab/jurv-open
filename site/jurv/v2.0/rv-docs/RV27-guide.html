@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>支持27条指令的单周期RISC-V :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v2.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">设计工具</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01c-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">验证环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sv-docs/L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023秋</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../v1.0/index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">2023秋</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../../v1.0/index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../v1.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>RISC-V CPU设计实验</li>
+    <li><a href="RV27-guide.html">支持27条指令</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <div class="version-menu">
+    <a class="version is-current" href="RV27-guide.html">2023秋</a>
+    <a class="version" href="../../v1.0/rv-docs/RV27-guide.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">支持27条指令的单周期RISC-V</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>在实现前面23条指令的基础上，实现以下4条指令。</p>
+</div>
+<div class="paragraph">
+<p>（1）U型格式的LUI指令；</p>
+</div>
+<div class="paragraph">
+<p>（2）U型格式的AUIPC指令；</p>
+</div>
+<div class="paragraph">
+<p>（3）J型格式的JAL指令；</p>
+</div>
+<div class="paragraph">
+<p>（4）I型格式的JALR指令。</p>
+</div>
+<div class="paragraph">
+<p>本实验首先在远程虚拟实验平台调试验证设计，成功后再移植到线下实验板实速运行。</p>
+</div>
+<div class="paragraph">
+<p>从开源项目托管网站下载实验材料，下载方法见<a href="../L0-download-resource.html" class="xref page">下载实验材料</a>。
+实验材料的文件组织如下。</p>
+</div>
+<div id="lst-rv27-dirs" class="listingblock">
+<div class="content">
+<pre>📂 riscv
+  📂 RV-27
+    📂 de2-115    <i class="conum" data-value="1"></i><b>(1)</b>
+    📁 diagram    <i class="conum" data-value="2"></i><b>(2)</b>
+    📂 real-speed <i class="conum" data-value="3"></i><b>(3)</b>
+    📁 testbench  <i class="conum" data-value="4"></i><b>(4)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>用于线下实验板的文件</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>用于设计虚拟面板的文件</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>用于实速运行测试的文件</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>用于仿真的testbench文件</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_任务一微架构设计与验证"><a class="anchor" href="#_任务一微架构设计与验证"></a>任务一、微架构设计与验证</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_数据通路设计"><a class="anchor" href="#_数据通路设计"></a>数据通路设计</h3>
+<div class="paragraph">
+<p>通过前面实验的逐步扩展数据通路，已经理解了数据通路与指令之间的关系。本实验不再给定数据通路，而是将设计数据通路作为一个主要的实验任务。</p>
+</div>
+<div class="paragraph">
+<p>通过查阅RISC-V手册了解指令功能，综合分析后确定最优的数据通路，使其简洁、高效。修改后的数据通路不仅能执行新增加的4条指令，也应能执行之前已经完成的23条指令。</p>
+</div>
+<div class="paragraph">
+<p>设计步骤如下。</p>
+</div>
+<div class="paragraph">
+<p>（1）设计数据通路；</p>
+</div>
+<div class="paragraph">
+<p>（2）列出控制信号的输入输出真值表；</p>
+</div>
+<div class="paragraph">
+<p>（3）编写代码实现。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_虚拟面板设计"><a class="anchor" href="#_虚拟面板设计"></a>虚拟面板设计</h3>
+<div class="paragraph">
+<p>根据自己设计的数据通路，绘图作为虚拟面板的背景；添加必要的观察数据和信号，同时在设计代码中添加相应的观察变量。
+所需实验材料如下所示。</p>
+</div>
+<div id="lst-rv27-diagram" class="listingblock">
+<div class="content">
+<pre>📂 riscv
+  📂 RV-27
+    📁 diagram
+      📄 RV-23.drawio
+      📄 RV-27_golden.jvp</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>（1）绘制虚拟面板背景图</p>
+</div>
+<div class="paragraph">
+<p>根据自己设计的数据通路，绘图作为虚拟面板的背景。可使用<a href="../L02-guide-remote.html#设计虚拟面板" class="xref page">远程实验验证流程</a>中推荐的开源软件<a href="https://www.diagrams.net">diagrams.net</a>（又名draw.io）。</p>
+</div>
+<div class="paragraph">
+<p>为了减少绘制背景图的工作量，实验材料<em>diagram</em>文件夹下提供了前面23条指令的单周期数据通路图<em>RV-23.drawio</em>，可在此基础上修改。</p>
+</div>
+<div class="paragraph">
+<p>绘制完成的背景图需导出为PNG格式，具体方法见<a href="../L02-guide-remote.html#设计虚拟面板" class="xref page">远程实验验证流程</a>中的相关说明。
+如果PNG图片在虚拟面板上的显示尺寸过大或过小，可以改变dpi重新导出。</p>
+</div>
+<div class="paragraph">
+<p>（2）打开虚拟面板</p>
+</div>
+<div class="paragraph">
+<p>和逻辑电路实验不同，CPU实验目前尚不支持从空白面板交互式地设计虚拟面板，可以在一个已有面板的基础上进行交互式修改。
+实验材料提供了一个基本的虚拟面板文件，位于<em>diagram</em>文件夹下，在实验系统中打开其中的<em>RV-27_golden.jvp</em>。</p>
+</div>
+<div class="paragraph">
+<p>（3）导入背景图</p>
+</div>
+<div class="paragraph">
+<p>用上面自己绘制的背景图替换虚拟面板的背景图。操作方法可参考<a href="../L02-guide-remote.html#设计虚拟面板" class="xref page">远程实验验证流程</a>中的相关说明。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+替换背景图通常会引起信息流显示（绿线）的错位，实验平台目前还没有交互式定义信息流绿线的功能。为避免错位后影响外观，实验材料中的<em>RV-27_golden.jvp</em>未包含信息流绿线的定义。如果希望自己的虚拟面板也能够显示信息流绿线，需要手工修改jvp文件，可在硬件设计调试成功之后向老师咨询。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>（4）添加数据框和信号框</p>
+</div>
+<div class="paragraph">
+<p>添加必要的观察数据和信号，同时在设计代码中添加相应的观察变量。关于代码与面板元件的对应方法，可参阅<a href="RV01-guide.html" class="xref page">实现ADDI指令</a>。</p>
+</div>
+<div class="paragraph">
+<p><em>RV-27_golden.jvp</em>面板中已经包含了一些数据框和信号框，与其对应的ws和wd结构体定义如下。</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>    //送给调试器的观察信号，需要与虚拟面板的信号框相对应
+    struct packed{
+        logic       WS1 ;   //MemWrite
+        logic       WS0 ;   //RegWrite
+    }ws;
+
+    //送入扫描链的观察数据，需要与虚拟面板的数据框相对应
+    struct packed{
+        logic [31:0] WD3;   //regReadData1
+        logic [4:0]  WD2;   //ra1
+        logic [31:0] WD1;   //instruction
+        logic [31:0] WD0;   //pc
+    }wd;</pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="注意"></i>
+</td>
+<td class="content">
+设计代码中必须包含上面的观察变量，它们将用于电路测试。除此之外，可追加需要的观察变量；提交时无需删除增加的观察变量，它们不会影响电路测试。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_验证"><a class="anchor" href="#_验证"></a>验证</h3>
+<div class="paragraph">
+<p>编写测试程序，在实验平台运行，分析运行结果是否正确。测试程序要求如下。</p>
+</div>
+<div class="paragraph">
+<p>（1）包含本实验新增的4条指令。</p>
+</div>
+<div class="paragraph">
+<p>（2）转移指令需测试向下转移和向上转移两种情况。</p>
+</div>
+<div class="paragraph">
+<p>（3）jalr指令需测试rd和rs1的寄存器号相同的情况，以及计算出的转移地址不为偶数的情况。</p>
+</div>
+<div class="paragraph">
+<p>（4）测试新修改的数据通路能否正确执行前面实验完成的分支指令、访存指令和运算指令。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>在<a href="RV17-guide.html" class="xref page">访存指令</a>的测试程序中，使用了如下两条指令设置数据存储器的基地址。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    addi x3, x0, 0x100
+    slli x3, x3, 20</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在实现了lui指令，用一条指令就可以完成。如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    lui x3, 0x10000</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="线下实验板实速运行"><a class="anchor" href="#线下实验板实速运行"></a>任务二、线下实验板实速运行</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>实速运行是指脱离远程虚拟实验平台的调试环境，在线下实验板运行测试程序，通过板载的拨动开关、LED指示灯、七段数码管等输入程序运行需要的数据、输出运行结果。</p>
+</div>
+<div class="paragraph">
+<p>本课程支持的线下实验板有基于Intel/Altera FPGA的DE2-115和基于AMD/Xilinx FPGA的Nexys4DDR，其他实验板需学员自己适配。下面以DE2-115为例说明移植过程。</p>
+</div>
+<div class="sect2">
+<h3 id="_创建工程"><a class="anchor" href="#_创建工程"></a>创建工程</h3>
+<div class="paragraph">
+<p>Quartus支持在同一个工程中创建多个“修订”（Revision），并且可以复制一个现有的Revision设置，在此基础上创建新的Revision。
+所需实验材料如下。</p>
+</div>
+<div id="lst-rv27-de2115" class="listingblock">
+<div class="content">
+<pre>📂 riscv
+  📂 RV-27
+    📂 de2-115
+      📄 create_revision_rv_DE2115.tcl
+      📄 DE2-115.sdc
+      📄 DE2-115.tcl
+      📄 RV_DE2_115.v
+      📄 用TCL文件自动创建revision.md</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>创建Revision的具体方法见<a href="../L01c-quartus-revision.html" class="xref page">线上线下混合模式的Quartus工程设置</a>，不同之处如下。</p>
+</div>
+<div class="paragraph">
+<p>（1）基础工程不同</p>
+</div>
+<div class="paragraph">
+<p>本实验已有工程是RISC-V工程，并且已有的Rivision名称应为 <em>RV_Pocket</em>，顶层文件为 <em>RV_Pocket.v</em>。</p>
+</div>
+<div class="paragraph">
+<p>（2）顶层文件不同</p>
+</div>
+<div class="paragraph">
+<p>用于DE2-115开发板的CPU实验的顶层文件为 <em>RV_DE2_115.v</em>。</p>
+</div>
+<div class="paragraph">
+<p>（3）脚本文件不同</p>
+</div>
+<div class="paragraph">
+<p>本实验所用脚本文件为 <em>create_revision_rv_DE2115.tcl</em>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+也可参阅实验材料中包含的文档，该文档具体说明了用TCL脚本自动创建Revision的步骤。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_设计代码移植"><a class="anchor" href="#_设计代码移植"></a>设计代码移植</h3>
+<div class="paragraph">
+<p>实速运行脱离调试环境独立运行，设计代码的移植主要是屏蔽片上调试器（On-chip debuger，OCD）模块，将原来经过OCD连接的信号改为直接连接；由于指令存储器原来需要OCD写入，所以实际是RAM，屏蔽OCD之后需要改为ROM，建议用IP核实现指令存储器的ROM模块。此外，存储器的时钟也是一个需要考虑的问题。</p>
+</div>
+<div class="sect3">
+<h4 id="_1存储器的类型和时钟"><a class="anchor" href="#_1存储器的类型和时钟"></a>（1）存储器的类型和时钟</h4>
+<div class="paragraph">
+<p>通过前面的<a href="../ca-docs/L24-memory.html" class="xref page">存储器实验</a>我们已经知道，FPGA内部的存储器有两种类型：同步读和异步读。“同步读”使用FPGA内部的专用RAM资源，不占用逻辑资源，但是锁存地址占用了一个周期，所以需要两个时钟周期才能读出数据。而“异步读”不锁存地址，可以在给出地址的同时读出数据。理论上，单周期CPU应该采用“异步读”存储器与其配合，才能一个周期执行一条指令。但是在调试环境下，OCD采用“同步读”存储器与其配合，为了能够在“单周期”内执行完一条指令，存储器的时钟采用了连续的10MHz时钟，而CPU时钟由OCD提供，仅在用户通过实验软件执行指令时产生一个脉冲；简单来说，存储器采用了比CPU更高频率的时钟，在一个CPU时钟周期内有若干次存储器读出，从而保证了“单周期”执行完一条指令。</p>
+</div>
+<div class="paragraph">
+<p>实速运行时，CPU时钟不再由OCD提供，而是采用10MHz时钟，这时存储器模块就有两种选择。如果仍然采用“同步读”存储器，存储器时钟就要采用更高频率的时钟，以满足“单周期”的要求；或者采用“异步读”存储器，存储器时钟采用与CPU相同的10MHz时钟。</p>
+</div>
+<div class="paragraph">
+<p>前面存储器实验中已经学习了同步读和异步读RAM的Verilog描述方法，而ROM用Verilog描述只能生成异步ROM，同步ROM必须使用IP核<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>。IP核的生成方法见附录。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2soc模块的移植"><a class="anchor" href="#_2soc模块的移植"></a>（2）SoC模块的移植</h4>
+<div class="paragraph">
+<p>首先替换OCD。将JuTAG_CPU模块的实例化注释掉，添加以下代码，替换原来由JuTAG模块产生的信号，以及经过JuTAG_CPU内部连接的信号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    assign cpuReset = RESET;
+    assign cpuClk = CLK;
+    assign memWR = cpuWR;
+    assign memRD = cpuRD;
+    assign memAB = cpuAB;
+    assign memWriteData = cpuWriteData;
+    assign bsc_sw = vSWITCH;
+    assign bsc_btn = vBUTTON;
+    assign JTDO = JTDI;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后添加指令存储器模块。注意时钟的连接，如果采用同步ROM，连接SoC模块CLOCK端口提供的50MHz时钟；如果采用异步ROM，连接和CPU模块相同的10MHz CLK时钟。指令存储器的容量设计为16K×32（64KB），因为指令存储器按字编址，而CPU输出的是字节地址，所以要将CPU输出的地址右移两位送给指令存储器。</p>
+</div>
+<div class="paragraph">
+<p>最后还要修改数据存储器的实例化。前面实验使用的数据存储器是同步读RAM，时钟连接的是10MHz CLK时钟，现在要将它连接到CLOCK端口提供的50MHz时钟。另外，数据存储器的容量也需要加大，以满足后面编写的应用程序和测试程序的需要；建议数据存储器的容量也设置为16K×32（64KB），至少设置为1K×32（4KB），可在实例化时通过参数进行设置。目前设计的CPU尚未支持存储器的字节访问，数据存储器仍然是按字编址，所以地址也要右移两位。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_应用程序设计和实速运行测试"><a class="anchor" href="#_应用程序设计和实速运行测试"></a>应用程序设计和实速运行测试</h3>
+<div class="paragraph">
+<p>遵循从简单到复杂的原则，编写一些包含输入输出的RISC-V汇编语言程序，用来测试移植是否成功以及所设计的CPU能否正确运行。下面通过一个例子说明过程。</p>
+</div>
+<div class="paragraph">
+<p>（1）编写汇编语言程序并用汇编器翻译为机器指令</p>
+</div>
+<div class="paragraph">
+<p><a href="#exa-rv27-test-io">例 1</a>是一个简单的测试程序，读取开关状态输出到LED指示灯和数码管显示。</p>
+</div>
+<div id="exa-rv27-test-io" class="exampleblock">
+<div class="title">例 1. 基本IO测试程序清单</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>00000000:	  80000413            addi s0, x0, -2048 <i class="conum" data-value="1"></i><b>(1)</b>
+00000004:	  00042903    LOOP:   lw   s2, 0x00(s0)  <i class="conum" data-value="2"></i><b>(2)</b>
+00000008:	  01242823            sw   s2, 0x10(s0)  <i class="conum" data-value="3"></i><b>(3)</b>
+0000000C:	  01042983            lw   s3, 0x10(s0)  <i class="conum" data-value="4"></i><b>(4)</b>
+00000010:	  03342023            sw   s3, 0x20(s0)  <i class="conum" data-value="5"></i><b>(5)</b>
+00000014:	  FF1FF0EF            jal  LOOP  </pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>IO基地址0xFFFFF800</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>读开关</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>写LED输出寄存器</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>读LED输出寄存器</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>写数码管输出寄存器</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>（2）将机器指令转换为ROM初始化文件</p>
+</div>
+<div class="paragraph">
+<p>如果指令存储器采用的是IP核，初始化文件格式有两种：Memory Initialization File（.mif）格式和Hexadecimal Intel-Format File（.hex）格式，详见附录介绍。上述程序的mif文件内容如下，该文件在实验材料的real-speed目录下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>WIDTH = 32;
+DEPTH = 16384;
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+CONTENT BEGIN
+00000000:80000413;
+00000001:00042903;
+00000002:01242823;
+00000003:01042983;
+00000004:03342023;
+00000005:FF1FF0EF;
+END;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注意，mif文件中的地址是字地址，是<a href="#exa-rv27-test-io">例 1</a>程序清单中的指令地址除4。</p>
+</div>
+<div class="paragraph">
+<p>如果指令存储器是写代码实现的异步ROM，将指令代码写入一文本文件，文件格式在<a href="../ca-docs/L24-memory.html" class="xref page">存储器实验</a>学习过。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+当程序比较长时，如果从<a href="#exa-rv27-test-io">例 1</a>格式的反汇编清单中逐个复制机器指令到mif文件，不但耗时还容易出错。很多优秀的代码编辑器（如VS CODE）都有列选择和复制功能，能够极大地提高效率。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>上述文件在实验材料中提供，如下所示。</p>
+</div>
+<div id="lst-rv27-real-speed" class="listingblock">
+<div class="content">
+<pre>📂 riscv
+  📂 RV-27
+    📂 real-speed
+      📄 IM.txt
+      📄 test-io_instr.mif
+      📄 test-io.dump</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>（3）编译并运行</p>
+</div>
+<div class="paragraph">
+<p>在Quartus的存储器IP核设置中，指定上述mif文件作为初始内容文件，编译工程，将电路文件加载到DE2-115开发板的FPGA中。有关Quartus软件为DE2-115加载电路的操作说明，见前面“认识虚拟实验”的实验指导《FPGA验证流程（本地版）》。</p>
+</div>
+<div class="paragraph">
+<p>从<a href="#exa-rv27-test-io">例 1</a>可以看出，该程序的功能是读出拨动开关的值，输出到LED指示灯和数码管进行显示。拨动开关，检查指示灯和数码管的显示是否正确。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>指示灯的连接顺序和逻辑电路实验不同。
+在逻辑电路实验的<em>DE2_115_TOP.v</em>中，LED[0]连接到DE2-115开发板的 <code>LEDR[0]</code>，即开关 <code>SW[0]</code> 正上方的红色指示灯；CPU实验框架的<em>RV_DE2_115.v</em>中，LED[0]连接到DE2-115开发板的 <code>LEDG[0]</code>，即最右侧的绿色指示灯。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><a href="#exa-rv27-test-io">例 1</a>涉及的指令很少，仅仅做了最基本的输入输出测试，通过以后，还要再编写一些更复杂的程序，更全面地测试所设计的CPU能否正常工作。可以对前面汇编语言实验做过的程序稍加修改，如斐波那契数列计算程序，可以通过开关输入循环次数，数码管显示计算的结果；再如位操作的程序，在汇编语言实验中是通过控制台显示结果，现在可以改用LED显示输出结果。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_实速运行的调试"><a class="anchor" href="#_实速运行的调试"></a>实速运行的调试</h3>
+<div class="paragraph">
+<p>实速运行出现问题，如何排查呢？假如上面举例的简单程序，加载到FPGA运行时拨动开关没反应，数码管显示全0，可能会让人一筹莫展。其实这类看起来很严重的问题，往往是一些小的疏忽造成的，比如在移植过程中，某些信号连接错了。</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="注意"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>如果加载FPGA后没反应，首先检查SW[17]的位置。由于DE2-115开发板没有专用的复位按键，CPU实验框架临时将SW[17]（最左边一个开关）用作复位；当SW[17]拨向上方时复位，拨向下方时正常运行。之所以没有用按键作为复位按钮，是考虑以后可以将按键扩展为外设。如果在以后的设计中，SW[17]也要作为外设，需要修改<em>RV_DE2_115.v</em>中的下面这行代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    wire rst_btn = SW[17];</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>改为</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    wire rst_btn = 1'b0;</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>通过仔细检查代码，有些错误可以被发现，但还有些错误可能隐藏的比较深，没那么容易看出来。即使解决了小疏忽，基本输入输出正常了，但是更复杂的测试程序出现问题，就难以通过看代码找出问题。</p>
+</div>
+<div class="paragraph">
+<p>在计数器实验中曾经介绍过仿真工具，对于像CPU这样的复杂电路来说，仿真是一种比较高效的调试方法，也是工业界通行的验证方法。<a href="#exa-rv27-testbench">例 2</a>给出了一个testbench代码，可以用它对自己的设计进行仿真。仿真工具的使用方法，可参阅计数器实验中的实验指导<a href="../L03-guide-modelsim.html" class="xref page">ModelSim仿真入门</a>，更多资料可阅读<a href="https://www.intel.cn/content/www/cn/zh/docs/programmable/683870.html">《Intel Quartus Prime用户指南: 第三方仿真》</a>。</p>
+</div>
+<div id="exa-rv27-testbench" class="exampleblock">
+<div class="title">例 2. testbench</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>`timescale 1ns / 100ps
+module tb_soc();
+
+reg rst;
+reg fpga_clk;
+reg sys_clk;
+
+SoC uut(
+    .RESET(rst),
+    .CLOCK(fpga_clk),
+    .CLK(sys_clk)
+);
+
+initial begin 
+	fpga_clk = 0;
+    sys_clk = 0;
+    rst = 1;
+    #10 rst = 0;
+end
+
+initial begin
+	forever #10 fpga_clk = ~fpga_clk;	//50Mhz
+end
+
+initial begin
+	forever #50 sys_clk = ~sys_clk;	//10Mhz
+end
+
+endmodule</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注：本文件在实验材料的testbench文件夹中提供。</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>利用仿真通常可以查出大部分设计中存在的问题，但是仿真毕竟不是在真实FPGA上运行的结果，如果仿真没有发现错误，实际运行又不正确，有没有其他调试工具呢？Quartus 提供了Signal Tap片上逻辑分析仪，可以观察FPGA芯片上的实际运行结果。Signal Tap的具体用法请参阅<a href="https://www.intel.cn/content/www/cn/zh/docs/programmable/683819/19-3/design-debugging-with-the-logic-analyzer-69524.html">《Intel Quartus Prime用户指南: 调试工具》</a>。</p>
+</div>
+<div class="sidebarblock text-center">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. 作者用同步方法描述的ROM，在Quartus环境下编译的结果并未使用专用的RAM块。如果读者找到了描述方法，欢迎交流。
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

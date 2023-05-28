@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>时序逻辑的Verilog HDL描述 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v2.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">设计工具</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01c-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">验证环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023秋</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../v1.0/index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">2023秋</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../../v1.0/index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../v1.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>Verilog与逻辑电路实验</li>
+    <li><a href="sv4-sequential.html">时序逻辑的Verilog HDL描述</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <div class="version-menu">
+    <a class="version is-current" href="sv4-sequential.html">2023秋</a>
+    <a class="version" href="../../v1.0/sv-docs/sv4-sequential.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">时序逻辑的Verilog HDL描述</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>时序逻辑电路的输出，不仅和当前的输入状态有关，而且和原来的电路状态有关，也就是有存储记忆效应。基本的时序电路如D触发器、计数器、移位寄存器。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_触发器"><a class="anchor" href="#_触发器"></a>触发器</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_d触发器"><a class="anchor" href="#_d触发器"></a>D触发器</h3>
+<div class="paragraph">
+<p>触发器（Filp-Flop）是最基本的时序元件。在时钟触发边沿到来时，输出更新为前一时刻输入端的值；其他时间输出保持不变，无论输入是否变化。</p>
+</div>
+<div id="exa-9" class="exampleblock">
+<div class="title">例 1. 上升沿触发的D触发器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module D_FF
+(
+  input D,
+  input Clock,
+  output reg Q
+);
+
+always @ (posedge Clock)
+  Q &lt;= D;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>与描述组合逻辑相比，明显的区别是敏感列表。D触发器的敏感列表是时钟事件，<em>posedge</em> Clock表示时钟上升沿。很容易理解always块描述的是，当时钟上升沿到来时，always块内的表达式被重新计算，即输出Q被更新。特别需要注意的是，输入D一定不能出现在敏感列表中，否则当输入D变化时，即使没有时钟上升沿事件，输出Q也被重新计算，失去了时序电路的记忆特性。</p>
+</div>
+<div class="paragraph">
+<p>如果需要时钟下降沿触发，用关键字<em>negedge</em>代替<em>posedge</em>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_t触发器"><a class="anchor" href="#_t触发器"></a>T触发器</h3>
+<div class="paragraph">
+<p>T触发器的功能是，在时钟触发边沿到来时，若输入T为1，触发器翻转；否则，触发器保持不变。</p>
+</div>
+<div id="exa-10" class="exampleblock">
+<div class="title">例 2. 具有互补输出的T触发器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module T_FF
+(
+  input T,
+  input Clock,
+  output reg Q,
+  output Q_n
+);
+
+always @ (posedge Clock)
+if (T == 1)
+  Q &lt;= ~Q;
+assign Q_n = ~Q;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>本例的T触发器具有反相输出端口Q_n，它和Q是互补输出。和多个assign语句类似，assign语句和always语句也是并发的，它们描述的硬件逻辑是同时工作的。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_同步复位和异步复位"><a class="anchor" href="#_同步复位和异步复位"></a>同步复位和异步复位</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>对于时序电路来说，有一个确定的初始状态是很重要的。也就是说，在系统复位时，触发器应该被赋予一个确定的值。所谓同步复位，是指复位信号到来后，并不会立即产生效果，而是要等到下一个触发沿到来时才有效。而异步复位则是立即生效，和触发沿无关。</p>
+</div>
+<div id="exa-11" class="exampleblock">
+<div class="title">例 3. 具有同步复位的D触发器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module D_FF
+(
+  input D,
+  input Clock,
+  input Reset,
+  output reg Q
+);
+
+always @ (posedge Clock)
+  if (Reset)
+    Q &lt;= 0;
+  else
+    Q &lt;= D;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="exa-12" class="exampleblock">
+<div class="title">例 4. 具有异步复位的D触发器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module D_FF
+(
+  input D,
+  input Clock,
+  input Reset,
+  output reg Q
+);
+
+always @ (posedge Clock or posedge Reset)
+  if (Reset)
+    Q &lt;= 0;
+  else
+    Q &lt;= D;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_门控时钟和时钟使能"><a class="anchor" href="#_门控时钟和时钟使能"></a>门控时钟和时钟使能</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在一个系统中，时钟通常是多个触发器共用的，但是各个触发器往往需要独立地控制，并不希望每个时钟周期都装入数据。简单的办法是用与门控制时钟，代码如下。</p>
+</div>
+<div id="exa-13" class="exampleblock">
+<div class="title">例 5. 门控时钟</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module D_FF
+(
+  input D,
+  input Clock,
+  input Load,
+  output reg Q
+);
+
+wire gateClock;
+assign gateClock = (Load &amp; Clock);
+always @ (posedge gateClock)
+  Q &lt;= D;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>这种方法称为门控时钟（Gated Clock），但是会带来毛刺glitches，增加时钟延迟clock delay、时钟偏差clock skew等不希望的效果。在ASIC设计中，为了避免门控时钟，可以在数据端增加一个多路器，选择数据来自输入端还是当前输出，<a href="#fig-2">图 1</a>(a)；或者采用JK触发器，如<a href="#fig-2">图 1</a>(b)。</p>
+</div>
+<div id="fig-2" class="imageblock">
+<div class="content">
+<img src="_images/sv-image2.png" alt="image" width="552" height="230">
+</div>
+<div class="title">图 1. 避免门控时钟的解决方案</div>
+</div>
+<div class="paragraph">
+<p>FPGA内部的触发器，设计时均考虑了避免门控时钟，只要在Verilog代码中采用恰当的描述方式，综合工具就能够推断出使用时钟使能。如下。</p>
+</div>
+<div id="exa-14" class="exampleblock">
+<div class="title">例 6. 具有时钟使能控制的D触发器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module D_FF
+(
+  input D,
+  input Clock,
+  input Load,
+  output reg Q
+);
+
+always @ (posedge Clock)
+if (Load == 1)
+  Q &lt;= D;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_数据寄存器"><a class="anchor" href="#_数据寄存器"></a>数据寄存器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>寄存器和D触发器可以看作同义词，触发器（flip-flop）侧重于表达逻辑实现，而寄存器（register）侧重于表达功能；在计算机硬件中，寄存器这个术语比触发器更常用。因此，寄存器的逻辑描述和D触发器的逻辑描述是一样的；寄存器通常是多位的，比如8位、16位等，在Verilog中用向量表示。</p>
+</div>
+<div id="exa-15" class="exampleblock">
+<div class="title">例 7. 异步复位的16位数据寄存器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module REG16
+(
+  input [15:0] D,
+  input Clock, Reset,
+  output reg [15:0] Q
+);
+
+always @ (posedge Clock or posedge Reset)
+  if (Reset)
+    Q &lt;= 0;
+  else
+    Q &lt;= Data;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>上面的例子，数据输入和输出是分开的端口（D和Q），下面给出一个双向输入输出端口的数据寄存器的例子，结构如<a href="#fig-3">图 2</a>。</p>
+</div>
+<div id="fig-3" class="imageblock">
+<div class="content">
+<img src="_images/sv-image3.png" alt="20100223212645" width="147" height="115">
+</div>
+<div class="title">图 2. 数据寄存器和三态缓冲器</div>
+</div>
+<div id="exa-16" class="exampleblock">
+<div class="title">例 8. 具有双向输入输出端口的16位寄存器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module Reg16
+(
+  inout [15:0] Data,
+  input Clock, Reset, OE
+);
+
+reg [15:0] Q;
+always @ (posedge Clock or posedge Reset)
+  if (Reset)
+    Q &lt;= 0;
+  else
+    Q &lt;= Data;
+
+assign Data = OE ? Q : 16'bz;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_计数器和移位寄存器"><a class="anchor" href="#_计数器和移位寄存器"></a>计数器和移位寄存器</h2>
+<div class="sectionbody">
+<div id="exa-17" class="exampleblock">
+<div class="title">例 9. 具有使能控制、可异步复位的加法计数器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module CountUp
+(
+  input Clock,
+  input Reset,
+  input Enable,
+  output reg [7:0] Q
+);
+
+always @ (posedge Clock or posedge Reset)
+  if (Reset == 1)
+    Q &lt;= 0;
+  else if (Enable)
+    Q &lt;= Q + 1;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="exa-18" class="exampleblock">
+<div class="title">例 10. 可预置数的移位寄存器（右移）</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module Shifter
+(
+  input Clock, Load,
+  input [7:0] D,
+  output reg [7:0] Q
+);
+
+always @ (posedge Clock)
+  if (Load)
+    Q &lt;= D;
+  else
+    Q &lt;= {1'b0, Q[7:1]};
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_锁存器"><a class="anchor" href="#_锁存器"></a>锁存器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>前面介绍的触发器都是在时钟边沿的作用下更新输出，称为边沿触发。而锁存器（Latch）是在电平的作用下更新输出，称为电平触发。假设高电平触发，在触发信号维持高电平期间，输出跟随输入的变化；否则，输出维持不变，与输入无关。</p>
+</div>
+<div id="exa-19" class="exampleblock">
+<div class="title">例 11. 锁存器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module Latch
+(
+  input D, En,
+  output reg Q
+);
+
+always @ (En or D)
+  if (En)
+    Q &lt;= D;
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>注意敏感列表的形式和触发器不同，没有时钟边沿posedge或negedge的关键字，和组合逻辑的敏感列表形式相同。分析always块内的if-else语句，如果En为1，输出Q等于输入D；因为En和D都出现在敏感列表中，所以D的变化将引起重新计算块内的输出结果，从而使得输出Q跟随输入D变化。if-else语句省略了else分支，相当于En为0时，Q保持不变，表达了锁存器的存储特性。</p>
+</div>
+<div class="paragraph">
+<p>综合工具正是根据Verilog的表达方式，推断设计者的意图是描述组合逻辑，还是触发器或者锁存器，所以采用正确的描述方式是非常重要的。对于组合逻辑的always块，if语句应该有else分支，case语句应该有default，否则可能会造成锁存器推断。如果并不需要else或default情况下的输出，可以赋值为“x”，见下例。</p>
+</div>
+<div id="exa-20" class="exampleblock">
+<div class="title">例 12. 组合逻辑中对不关心的输出赋值为x</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>case (op)
+  2'b00: y = a + b;
+  2'b01: y = a – b;
+  2'b10: y = a ^ b;
+  default: y = 'bx;
+endcase</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_存储器"><a class="anchor" href="#_存储器"></a>存储器</h2>
+<div class="sectionbody">
+<div id="exa-21" class="exampleblock">
+<div class="title">例 13. 存储器</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>module RAM
+(
+  output [7:0] Q,
+  input [7:0] Data,
+  input [3:0] Addr,
+  input WR, Clk
+);
+
+reg [7:0] MEM [0:15];
+always @ (posedge Clk) begin
+  if (WR) mem[Addr] &lt;= Data ;
+end
+assign Q = mem[Addr];
+
+endmodule</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>存储器可以用数组来描述，如果存储容量较大，这样设计将占用大量的逻辑资源。需要说明的是， FPGA器件中都具备一定数量的RAM块，它们可以实现为单端口、双端口存储器、FIFO等，但是不能用作逻辑资源。所以在FPGA设计中应优先使用RAM块作为存储器，以节省宝贵的逻辑资源。</p>
+</div>
+<div class="paragraph">
+<p><a href="#exa-21">例 13</a>的描述是基于触发器的，基于锁存器的存储器描述见后面<a href="#exa-25">[exa-25]</a>。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_阻塞赋值和非阻塞赋值"><a class="anchor" href="#_阻塞赋值和非阻塞赋值"></a>阻塞赋值和非阻塞赋值</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在前面的例子中，已经使用了两种赋值符号“=”和“&lt;=”，分别称为阻塞（Blocking）赋值和非阻塞（Nonblocking）赋值。</p>
+</div>
+<div class="paragraph">
+<p>对于阻塞赋值，Verilog 编译器按照语句出现的顺序计算其值。如果一个变量被阻塞赋值，那么后续语句的计算使用这个变量的新值。这也是“阻塞”的含义，前面的语句阻塞了后面语句的计算。例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>begin
+  a = 1;
+  b = a;
+  c = b;
+end</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其结果是：c=b=a=1。</p>
+</div>
+<div class="paragraph">
+<p>而所有非阻塞赋值语句的计算，是采样输入变量进入过程块时的值。那么某个变量的值对块中所有的语句来说都是同样的。每个赋值语句都是在过程块结束时更新输出值。块内所有的非阻塞赋值都是并行的。例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>begin
+  a &lt;= 1;
+  b &lt;= a;
+  c &lt;= b;
+end</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其结果是：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>a = 1;
+b = a原来的值;
+c = b原来的值。</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通常情况下，组合逻辑电路使用阻塞赋值，时序电路使用非阻塞赋值。但是更多的情况下，一个块中的赋值并不会像上面的例子描述的那样，写在后面的赋值语句的右值表达式使用前面赋值语句的左值，因此阻塞和非阻塞的并没有什么差别。此外应注意一个块内不能混用阻塞和非阻塞赋值。如果一个块内对同一个变量赋值多次，只有最后一个赋值语句是有效的。</p>
+</div>
+<div class="sidebarblock text-center">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

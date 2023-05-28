@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>流密码器实验 :: RISC-V CPU设计实验教程</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">RISC-V CPU设计实验教程</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="http://welab.ujs.edu.cn/new" target="_blank">Home</a>
+
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="https://gitee.com/fpga-lab/jurv-open" target="_blank">openJURV</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="jurv" data-version="v2.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">前言</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../video-links.html">教学视频资源</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验工具和环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../L02-lab-tools.html">实验工具和环境概述</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">实验前的准备工作</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-install-software.html">安装软件</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-download-resource.html">下载实验材料</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-mooc-video.html">登录慕课平台</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">设计工具</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01-guide.html">Quartus FPGA设计流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L01c-quartus-revision.html">线上线下混合模式的工程设置</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">验证环境</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verilog与逻辑电路实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv1-introduction.html">Verilog HDL概述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv2-grammar.html">Verilog HDL语法概要</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L11-tristate_mux.html">三态门和多路器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv3-2-combinational.html">用always过程语句描述组合逻辑</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv5-hierarchical.html">层次化和参数化设计</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L12-decoder.html">译码器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv4-sequential.html">时序逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L13-register_file.html">寄存器堆实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L14-shift_led.html">流水灯与移位寄存器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L15-counter_divider.html">计数器与分频器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sv6-control.html">顺序控制逻辑的Verilog HDL描述</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L16-led_pattern_controller.html">彩灯控制器实验</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="L17-stream_cipher.html">流密码器实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">计算机组成实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L21-add_sub_operation.html">加减运算电路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L22-arithmetic_logic_unit.html">算术逻辑单元实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L23-single_cycle_datapath.html">单周期数据通路实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L24-memory.html">存储器实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L25-hardwire_controller.html">硬布线控制实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L26-riscv_assembly.html">RISC-V汇编语言实验</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ca-docs/L27-riscv_micro_architecture.html">RISC-V微架构实验</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">RISC-V CPU设计实验</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV01-guide.html">实现ADDI指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV15-guide.html">实现整数运算指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV17-guide.html">实现访存指令和简单IO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV23-guide.html">实现分支指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV23PL-guide.html">初步实现流水线</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27-guide.html">支持27条指令</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rv-docs/RV27PL2-guide.html">解决流水线控制冲突</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">RISC-V CPU设计实验教程</span>
+    <span class="version">2023秋</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../teach/index.html">FPGA实验云 ● 教师指南</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../teach/index.html">default</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../v1.0/index.html">RISC-V CPU设计实验教程</a>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../index.html">2023秋</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../../v1.0/index.html">2023春</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../v1.0/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
+    <li>Verilog与逻辑电路实验</li>
+    <li><a href="L17-stream_cipher.html">流密码器实验</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <div class="version-menu">
+    <a class="version is-current" href="L17-stream_cipher.html">2023秋</a>
+    <a class="version" href="../../v1.0/sv-docs/L17-stream_cipher.html">2023春</a>
+  </div>
+</div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="页内目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">流密码器实验</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>本实验为信息安全专业选做实验。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>(1) 了解硬件加密解密的应用。</p>
+</div>
+<div class="paragraph">
+<p>(2) 用HDL语言设计流密码器。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验原理"><a class="anchor" href="#_实验原理"></a>实验原理</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>流密码是将明文划分成字符（如单个字母）或其编码的基本单元（如0, 1数字），逐个与密钥流作用进行加密，接收端使用同样的密钥流解密，属于对称加密技术。流密码强度完全依赖于密钥序列的随机性和不可预测性，其核心问题是密钥流生成器的设计。线性反馈移位寄存器（LFSR，Linear Feedback Shift Register）因其实现简单、速度快、有较为成熟的理论等优点而成为构造密钥流生成器的最重要的部件之一。LFSR可以生成伪随机序列，n级LFSR其输出伪随机序列的周期小于等于2<sup>n</sup>-1，通过选择合适的反馈函数可使序列的周期达到最大值2<sup>n</sup>-1，该序列称为m序列。反馈函数可用一个一元高次多项式表示，称这个多项式为LFSR的特征多项式，其中本原多项式产生的非零序列均是m序列。一般可通过查表的方式得到常用的本原多项式的反馈系数。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_参考设计"><a class="anchor" href="#_参考设计"></a>参考设计</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>虚拟面板如<a href="#fig-19">图 1</a>。</p>
+</div>
+<div id="fig-19" class="imageblock">
+<div class="content">
+<img src="_images/lab-image19.png" alt="image" width="480" height="391">
+</div>
+<div class="title">图 1. 流密码器参考设计的虚拟面板</div>
+</div>
+<div class="paragraph">
+<p><a href="#exa-17-1">例 1</a>给出了参考设计的代码。该代码基本与<a href="#fig-19">图 1</a>一致，但是线性反馈移位寄存器与图中不同。参考设计只是简单的循环右移移位寄存器，并未构成图中的线性反馈网络。</p>
+</div>
+<div id="exa-17-1" class="exampleblock">
+<div class="title">例 1. 流密码器参考设计的代码</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">/****** Replace input ports with internal signals *******/
+wire reset =  PB[0];
+wire clk   =  PB[1];
+wire [11:0] in_reg_d= S[11:0];
+wire [7:0]  lfsr_d  = S[26:19];
+wire in_reg_load    = S[16];
+wire lfsr_load      = S[17];
+wire shift_enable   = S[18];
+
+/************* The logic of this experiment *************/
+wire [11:0] in_reg_q, out_reg_q;
+wire [7:0] lfsr_q;
+wire lfsr_left_in, cipher_stream;
+
+RightShifter #(12) IR (.iClk(clk), .iReset(reset), 
+    .iLoad(in_reg_load), .iEnable(shift_enable), 
+    .iShiftIn(1'b0), .iD(in_reg_d), .oQ(in_reg_q));
+RightShifter #(8) LFSR (.iClk(clk), .iReset(reset), 
+    .iLoad(lfsr_load), .iEnable(shift_enable), 
+    .iShiftIn(lfsr_left_in), .iD(lfsr_d), .oQ(lfsr_q));
+assign lfsr_left_in = lfsr_q[0]/*- TODO：根据反馈系数设计线性反馈移位寄存器 -*/;
+assign cipher_stream = in_reg_q[0] ^ lfsr_q[0];
+RightShifter #(12) OR (.iClk(clk), .iReset(reset), 
+    .iLoad(in_reg_load), .iEnable(shift_enable), 
+    .iShiftIn(cipher_stream), .iD(12'h0), .oQ(out_reg_q));
+
+/***** Internal signals assignment to output ports ******/
+assign L[11:0] = in_reg_q;
+assign L[19:12] = lfsr_q; 
+assign L[31:20] = out_reg_q;
+assign L[32] = in_reg_load;
+assign L[33] = lfsr_load;
+assign L[34] = lfsr_left_in;
+assign L[35] = cipher_stream;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>完整代码可从开源项目托管网站下载，下载方法见<a href="../L0-download-resource.html" class="xref page">下载实验材料</a>。</p>
+</li>
+<li>
+<p>实验材料并未包含RightShifter模块，可使用移位寄存器实验中完成的右移移位寄存器。</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_任务1流密码器"><a class="anchor" href="#_任务1流密码器"></a>任务1：流密码器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>修改<a href="#exa-17-1">例 1</a>参考设计代码中注释了 <code>TODO</code> 的语句，按照特征多项式</p>
+</div>
+<div class="paragraph">
+<p>f(x)=1+x<sup>2</sup>+x<sup>3</sup>+x<sup>4</sup>+x<sup>8</sup></p>
+</div>
+<div class="paragraph">
+<p>构造反馈网络（即<a href="#fig-19">图 1</a>电路），形成8级LSFR。</p>
+</div>
+<div class="paragraph">
+<p>验证测试加密、解密过程。自己拟定多组初始密钥和验证数据，但必须包含以0xEB作为密钥，0xFE0作为明文输入，得到密文后再用密文作为输入得到解密的明文。将实验结果与理论计算进行分析对比，解密还原与原文对比，并得出结论。</p>
+</div>
+<div class="paragraph">
+<p>【拓展】修改反馈网络，重新构造为5级LSFR，观察伪随机序列的周期是否为31。注：可以查反馈系数表，得到本原多项式的特征方程。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_任务2流密码器的控制"><a class="anchor" href="#_任务2流密码器的控制"></a>任务2：流密码器的控制</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在任务1中，用按键产生时钟信号，人工计数12次移位。这个任务用连续的时钟作为移位寄存器的时钟信号，并且用一个计数器控制移位的次数，当移位12次后自动停止移位，用有限状态机设计一个控制逻辑来实现这个过程，其状态图如<a href="#fig-20">图 2</a>。</p>
+</div>
+<div id="fig-20" class="imageblock">
+<div class="content">
+<img src="_images/lab-image20.jpeg" alt="状态图-全自动" width="271" height="256">
+</div>
+<div class="title">图 2. 流密码器的状态图</div>
+</div>
+<div class="paragraph">
+<p>图中start是启动信号，用开关产生。“LOAD IR”状态将开关数据装入输入寄存器；“LOAD LFSR”状态将开关数据装入线性反馈移位寄存器；“SHIFT”状态移位所有的寄存器，移位次数由一个减法计数器控制，当移位12次后进入“DONE”状态；在“DONE”状态，如果start信号尚未撤销，则停留在这个状态，直到start信号撤销再回到空闲状态。</p>
+</div>
+<div class="paragraph">
+<p>将状态机输出填入下表，并用HDL设计实现该状态机。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 32%;">
+<col style="width: 12%;">
+<col style="width: 14%;">
+<col style="width: 14%;">
+<col style="width: 14%;">
+<col style="width: 14%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">IDLE</th>
+<th class="tableblock halign-left valign-top">LOAD IR</th>
+<th class="tableblock halign-left valign-top">LOAD LFSR</th>
+<th class="tableblock halign-left valign-top">SHIFT</th>
+<th class="tableblock halign-left valign-top">DONE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+前面计数器实验中已经完成将10MHz的时钟分频为1Hz时钟的分频器。
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock text-center">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
