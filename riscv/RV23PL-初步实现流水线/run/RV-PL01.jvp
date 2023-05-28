@@ -5,227 +5,227 @@
 	"version": "1.2.4",
 	"components": [
 		{
-			"description": "NextPC",
+			"description": "PC",
 			"index": 0,
 			"key": 0,
-			"position": {
-				"x": -453,
-				"y": -68
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00000004",
-				"isVertical": false,
-				"bitWidth": 32
-			}
-		},
-		{
-			"description": "PC",
-			"index": 1,
-			"key": 1,
 			"position": {
 				"x": -371,
 				"y": -68
 			},
 			"type": "data",
 			"value": {
+				"bitWidth": 32,
 				"color": "gray",
 				"data": "00000000",
-				"isVertical": false,
-				"bitWidth": 32
+				"isVertical": false
 			}
 		},
 		{
 			"description": "Instr_IF",
-			"index": 2,
-			"key": 2,
+			"index": 1,
+			"key": 1,
 			"position": {
-				"x": -208,
-				"y": -68
+				"x": -238,
+				"y": -90
 			},
 			"type": "data",
 			"value": {
+				"bitWidth": 32,
 				"color": "gray",
 				"data": "00000000",
-				"isVertical": false,
-				"bitWidth": 32
-			}
-		},
-		{
-			"description": "RegWA",
-			"index": 3,
-			"key": 3,
-			"position": {
-				"x": 407,
-				"y": -157
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00",
-				"isVertical": false,
-				"bitWidth": 5
-			}
-		},
-		{
-			"description": "RegWD",
-			"index": 4,
-			"key": 4,
-			"position": {
-				"x": 378,
-				"y": -75
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00000000",
-				"isVertical": false,
-				"bitWidth": 32
+				"isVertical": true
 			}
 		},
 		{
 			"description": "RA1",
-			"index": 5,
-			"key": 5,
+			"index": 2,
+			"key": 2,
 			"position": {
 				"x": -136,
 				"y": -143
 			},
 			"type": "data",
 			"value": {
+				"bitWidth": 5,
 				"color": "gray",
 				"data": "00",
-				"isVertical": false,
-				"bitWidth": 5
+				"isVertical": false
 			}
 		},
 		{
-			"description": "RA2",
-			"index": 6,
-			"key": 6,
-			"position": {
-				"x": -136,
-				"y": -53
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00",
-				"isVertical": false,
-				"bitWidth": 5
-			}
-		},
-		{
-			"description": "ALU-X",
-			"index": 7,
-			"key": 7,
-			"position": {
-				"x": 11,
-				"y": -151
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00000000",
-				"isVertical": false,
-				"bitWidth": 32
-			}
-		},
-		{
-			"description": "Imm",
-			"index": 8,
-			"key": 8,
-			"position": {
-				"x": 41,
-				"y": -105
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00000000",
-				"isVertical": false,
-				"bitWidth": 32
-			}
-		},
-		{
-			"description": "ALUOut",
-			"index": 9,
-			"key": 9,
-			"position": {
-				"x": 179,
-				"y": -128
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00000000",
-				"isVertical": false,
-				"bitWidth": 32
-			}
-		},
-		{
-			"description": "Instr_ID",
-			"index": 10,
-			"key": 10,
-			"position": {
-				"x": -237,
-				"y": -90
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00000000",
-				"isVertical": true,
-				"bitWidth": 32
-			}
-		},
-		{
-			"description": "RD1",
-			"index": 11,
-			"key": 11,
+			"description": "RD1-ID",
+			"index": 3,
+			"key": 3,
 			"position": {
 				"x": -21,
 				"y": -167
 			},
 			"type": "data",
 			"value": {
+				"bitWidth": 32,
 				"color": "gray",
 				"data": "00000000",
-				"isVertical": true,
-				"bitWidth": 32
+				"isVertical": true
 			}
 		},
 		{
-			"description": "Imm_ID",
-			"index": 12,
-			"key": 12,
+			"description": "RegWA",
+			"index": 4,
+			"key": 4,
+			"position": {
+				"x": 407,
+				"y": -157
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 5,
+				"color": "gray",
+				"data": "00",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "RegWD",
+			"index": 5,
+			"key": 5,
+			"position": {
+				"x": 378,
+				"y": -75
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "Imm-ID",
+			"index": 6,
+			"key": 6,
 			"position": {
 				"x": -21,
 				"y": -26
 			},
 			"type": "data",
 			"value": {
+				"bitWidth": 32,
 				"color": "gray",
 				"data": "00000000",
-				"isVertical": true,
-				"bitWidth": 32
+				"isVertical": true
 			}
 		},
 		{
-			"description": "ALUOut_EX",
-			"index": 13,
-			"key": 13,
+			"description": "RA2",
+			"index": 7,
+			"key": 7,
+			"position": {
+				"x": -136,
+				"y": -53
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 5,
+				"color": "gray",
+				"data": "00",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "RD2-ID",
+			"index": 8,
+			"key": 8,
+			"position": {
+				"x": -21,
+				"y": -88
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": true
+			}
+		},
+		{
+			"description": "NextPC",
+			"index": 9,
+			"key": 9,
+			"position": {
+				"x": -453,
+				"y": -68
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "ALUOut-EX",
+			"index": 10,
+			"key": 10,
 			"position": {
 				"x": 146,
 				"y": -150
 			},
 			"type": "data",
 			"value": {
+				"bitWidth": 32,
 				"color": "gray",
 				"data": "00000000",
-				"isVertical": true,
-				"bitWidth": 32
+				"isVertical": true
+			}
+		},
+		{
+			"description": "ALU-X",
+			"index": 11,
+			"key": 11,
+			"position": {
+				"x": 11,
+				"y": -151
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "Imm-EX",
+			"index": 12,
+			"key": 12,
+			"position": {
+				"x": 41,
+				"y": -105
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "ALUOut-MEM",
+			"index": 13,
+			"key": 13,
+			"position": {
+				"x": 179,
+				"y": -128
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
 			}
 		},
 		{
@@ -238,10 +238,10 @@
 			},
 			"type": "data",
 			"value": {
+				"bitWidth": 5,
 				"color": "gray",
 				"data": "00",
-				"isVertical": false,
-				"bitWidth": 5
+				"isVertical": false
 			}
 		},
 		{
@@ -254,14 +254,14 @@
 			},
 			"type": "data",
 			"value": {
+				"bitWidth": 5,
 				"color": "gray",
 				"data": "00",
-				"isVertical": false,
-				"bitWidth": 5
+				"isVertical": false
 			}
 		},
 		{
-			"description": "WA-M",
+			"description": "WA-MEM",
 			"index": 16,
 			"key": 16,
 			"position": {
@@ -270,10 +270,10 @@
 			},
 			"type": "data",
 			"value": {
+				"bitWidth": 5,
 				"color": "gray",
 				"data": "00",
-				"isVertical": false,
-				"bitWidth": 5
+				"isVertical": false
 			}
 		},
 		{
@@ -362,59 +362,59 @@
 			}
 		},
 		{
-			"key": 22,
+			"description": "",
 			"index": 0,
-			"type": "pipelineIns",
-			"value": "",
+			"key": 22,
 			"position": {
 				"x": -374,
 				"y": 198
 			},
-			"description": ""
+			"type": "pipelineIns",
+			"value": ""
 		},
 		{
-			"key": 23,
+			"description": "",
 			"index": 1,
-			"type": "pipelineIns",
-			"value": "",
+			"key": 23,
 			"position": {
 				"x": -185,
 				"y": 198
 			},
-			"description": ""
+			"type": "pipelineIns",
+			"value": ""
 		},
 		{
-			"key": 24,
+			"description": "",
 			"index": 2,
-			"type": "pipelineIns",
-			"value": "",
+			"key": 24,
 			"position": {
 				"x": 9,
 				"y": 198
 			},
-			"description": ""
+			"type": "pipelineIns",
+			"value": ""
 		},
 		{
-			"key": 25,
+			"description": "",
 			"index": 3,
-			"type": "pipelineIns",
-			"value": "",
+			"key": 25,
 			"position": {
 				"x": 173,
 				"y": 198
 			},
-			"description": ""
+			"type": "pipelineIns",
+			"value": ""
 		},
 		{
-			"key": 26,
+			"description": "",
 			"index": 4,
-			"type": "pipelineIns",
-			"value": "",
+			"key": 26,
 			"position": {
 				"x": 337,
 				"y": 198
 			},
-			"description": ""
+			"type": "pipelineIns",
+			"value": ""
 		}
 	],
 	"buttonChainLength": 20,
@@ -468,7 +468,7 @@
 			"pathWidth": 7,
 			"tracking": [
 				-1,
-				1
+				0
 			]
 		},
 		"cpuName": "RISC-V PL",

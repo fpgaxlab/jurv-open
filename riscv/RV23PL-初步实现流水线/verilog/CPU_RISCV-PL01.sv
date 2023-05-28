@@ -50,9 +50,11 @@ module CPU
    assign oIM_Addr = pc_if;         // 连接指令存储器的地址端口
    assign instr_if = iIM_Data;      // 连接指令存储器的数据端口
 
+//tag::pr1[]
   // IF-ID pipeline regisetr
-   wire [31:0] instr_id, pc_id;
+   wire [31:0] instr_id;
    DataReg #(32) pr_instr_id(.iD(instr_if), .oQ(instr_id), .Clk(clk), .Load(1'b1), .Reset(reset));
+//end::pr1[]
 /*====================================================*/
 
 /*-------------- ID: Instruction Decode -------------*/
@@ -147,11 +149,11 @@ module CPU
     //送给调试器的观察信号，需要与虚拟面板的信号框相对应
     struct packed{
         /*-TODO 在这里添加观察信号的类型 -*/
-        logic [4:0] WS4;
-        logic       WS3;
-        logic       WS2;
-        logic       WS1;
-        logic       WS0;
+        logic [4:0] WS4;    //Imm_type[4:0]
+        logic       WS3;    //RegWrite_mem
+        logic       WS2;    //RegWrite_ex
+        logic       WS1;    //RegWrite_id
+        logic       WS0;    //RegWrite_wb
     }ws;
     always_comb begin
         /*-【注意】添加观察信号类型后须关联相应变量！-*/
@@ -165,43 +167,43 @@ module CPU
     //送给调试器的观察变量，需要与虚拟面板的数据框相对应
     struct packed{
         /*-TODO 在这里添加观察数据的类型 -*/        
-        logic [4:0]  WD16;
-        logic [4:0]  WD15;
-        logic [4:0]  WD14;
-        logic [31:0] WD13;
-        logic [31:0] WD12;
-        logic [31:0] WD11;
-        logic [31:0] WD10;
-        logic [31:0] WD9;
-        logic [31:0] WD8;
-        logic [31:0] WD7;
-        logic [31:0] WD6;
-        logic [4:0]  WD5;
-        logic [4:0]  WD4;
-        logic [4:0]  WD3;
-        logic [31:0] WD2;
-        logic [31:0] WD1;
-        logic [31:0] WD0;
+        logic [4:0]  WD16;   //wa_mem;
+        logic [4:0]  WD15;   //wa_ex;
+        logic [4:0]  WD14;   //wa_id;
+        logic [31:0] WD13;   //aluOut_mem;     
+        logic [31:0] WD12;   //immData_ex;     
+        logic [31:0] WD11;   //regReadData1_ex;
+        logic [31:0] WD10;   //aluOut_ex;
+        logic [31:0] WD9 ;   //nextPC;
+        logic [31:0] WD8 ;   //regReadData2_id;
+        logic [4:0]  WD7 ;   //ra2;            
+        logic [31:0] WD6 ;   //immData_id;
+        logic [31:0] WD5 ;   //regWriteData_wb;
+        logic [4:0]  WD4 ;   //wa_wb;          
+        logic [31:0] WD3 ;   //regReadData1_id;
+        logic [4:0]  WD2 ;   //ra1;            
+        logic [31:0] WD1 ;   //instr_if;       
+        logic [31:0] WD0 ;   //pc_if;    
     }wd;
     always_comb begin
         /*-【注意】添加观察数据类型后须关联相应变量！-*/        
         wd.WD16 = wa_mem;
         wd.WD15 = wa_ex;
         wd.WD14 = wa_id;
-        wd.WD13 = aluOut_ex;
-        wd.WD12 = immData_id;
-        wd.WD11 = regReadData1_id;
-        wd.WD10 = instr_id;
-        wd.WD9  = aluOut_mem;               
-        wd.WD8  = immData_ex;      
-        wd.WD7  = regReadData1_ex; 
-        wd.WD6  = ra2;             
-        wd.WD5  = ra1;             
-        wd.WD4  = regWriteData_wb;        
-        wd.WD3  = wa_wb;           
-        wd.WD2  = instr_if;        
-        wd.WD1  = pc_if;    
-        wd.WD0  = nextPC;
+        wd.WD13 = aluOut_mem;     
+        wd.WD12 = immData_ex;     
+        wd.WD11 = regReadData1_ex;
+        wd.WD10 = aluOut_ex;
+        wd.WD9  = nextPC;          
+        wd.WD8  = regReadData2_id; 
+        wd.WD7  = ra2;             
+        wd.WD6  = immData_id; 
+        wd.WD5  = regWriteData_wb; 
+        wd.WD4  = wa_wb;                  
+        wd.WD3  = regReadData1_id; 
+        wd.WD2  = ra1;             
+        wd.WD1  = instr_if;       
+        wd.WD0  = pc_if;    
     end
     
     // 调试器部分，请勿修改！

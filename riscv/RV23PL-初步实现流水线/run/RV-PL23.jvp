@@ -5,25 +5,9 @@
 	"version": "1.2.4",
 	"components": [
 		{
-			"description": "NextPC",
+			"description": "PC",
 			"index": 0,
 			"key": 0,
-			"position": {
-				"x": -453,
-				"y": -68
-			},
-			"type": "data",
-			"value": {
-				"bitWidth": 32,
-				"color": "gray",
-				"data": "00000004",
-				"isVertical": false
-			}
-		},
-		{
-			"description": "PC",
-			"index": 1,
-			"key": 1,
 			"position": {
 				"x": -371,
 				"y": -68
@@ -38,8 +22,8 @@
 		},
 		{
 			"description": "Instr_IF",
-			"index": 2,
-			"key": 2,
+			"index": 1,
+			"key": 1,
 			"position": {
 				"x": -237,
 				"y": -90
@@ -53,9 +37,41 @@
 			}
 		},
 		{
-			"description": "RegWA",
+			"description": "RA1",
+			"index": 2,
+			"key": 2,
+			"position": {
+				"x": -136,
+				"y": -143
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 5,
+				"color": "gray",
+				"data": "00",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "RD1-ID",
 			"index": 3,
 			"key": 3,
+			"position": {
+				"x": -21,
+				"y": -167
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": true
+			}
+		},
+		{
+			"description": "RegWA",
+			"index": 4,
+			"key": 4,
 			"position": {
 				"x": 407,
 				"y": -157
@@ -70,8 +86,8 @@
 		},
 		{
 			"description": "RegWD",
-			"index": 4,
-			"key": 4,
+			"index": 5,
+			"key": 5,
 			"position": {
 				"x": 383,
 				"y": -74
@@ -85,25 +101,25 @@
 			}
 		},
 		{
-			"description": "RA1",
-			"index": 5,
-			"key": 5,
+			"description": "Imm-ID",
+			"index": 6,
+			"key": 6,
 			"position": {
-				"x": -136,
-				"y": -143
+				"x": -21,
+				"y": -26
 			},
 			"type": "data",
 			"value": {
-				"bitWidth": 5,
+				"bitWidth": 32,
 				"color": "gray",
-				"data": "00",
-				"isVertical": false
+				"data": "00000000",
+				"isVertical": true
 			}
 		},
 		{
 			"description": "RA2",
-			"index": 6,
-			"key": 6,
+			"index": 7,
+			"key": 7,
 			"position": {
 				"x": -136,
 				"y": -53
@@ -117,67 +133,51 @@
 			}
 		},
 		{
-			"description": "ALU-X",
-			"index": 7,
-			"key": 7,
-			"position": {
-				"x": 11,
-				"y": -151
-			},
-			"type": "data",
-			"value": {
-				"bitWidth": 32,
-				"color": "gray",
-				"data": "00000000",
-				"isVertical": false
-			}
-		},
-		{
-			"description": "RD2-EX",
+			"description": "RD2-ID",
 			"index": 8,
 			"key": 8,
 			"position": {
-				"x": 62,
-				"y": -63
+				"x": -21,
+				"y": -88
 			},
 			"type": "data",
 			"value": {
 				"bitWidth": 32,
 				"color": "gray",
 				"data": "00000000",
-				"isVertical": false
+				"isVertical": true
 			}
 		},
 		{
-			"description": "Imm",
+			"description": "NextPC",
 			"index": 9,
 			"key": 9,
 			"position": {
-				"x": 11,
-				"y": -7
+				"x": -453,
+				"y": -68
 			},
 			"type": "data",
 			"value": {
 				"bitWidth": 32,
 				"color": "gray",
-				"data": "00000000",
+				"data": "00000004",
 				"isVertical": false
 			}
 		},
 		{
-			"description": "ALUOut",
+			"description": "ALUOut-EX",
 			"index": 10,
 			"key": 10,
 			"position": {
-				"x": 178,
-				"y": -128
+				"x": 147,
+				"y": -143
 			},
 			"type": "data",
 			"value": {
 				"bitWidth": 32,
 				"color": "gray",
 				"data": "00000000",
-				"isVertical": false
+				"isVertical": true
 			}
 		},
 		{
@@ -198,9 +198,26 @@
 			}
 		},
 		{
-			"description": "PCjump",
+			"description": "MemWrite",
 			"index": 1,
 			"key": 28,
+			"position": {
+				"x": 267,
+				"y": 67
+			},
+			"type": "signal",
+			"value": {
+				"data": "0",
+				"color": "gray",
+				"isVertical": true,
+				"bitWidth": 1,
+				"placement": "right"
+			}
+		},
+		{
+			"description": "PCjump",
+			"index": 2,
+			"key": 29,
 			"position": {
 				"x": -449,
 				"y": -4
@@ -216,8 +233,8 @@
 		},
 		{
 			"description": "MemToReg",
-			"index": 2,
-			"key": 29,
+			"index": 3,
+			"key": 30,
 			"position": {
 				"x": 380,
 				"y": 54
@@ -233,8 +250,8 @@
 		},
 		{
 			"description": "RegWr-M",
-			"index": 3,
-			"key": 30,
+			"index": 4,
+			"key": 31,
 			"position": {
 				"x": 206,
 				"y": 165
@@ -250,8 +267,8 @@
 		},
 		{
 			"description": "MtoR-Mem",
-			"index": 4,
-			"key": 31,
+			"index": 5,
+			"key": 32,
 			"position": {
 				"x": 207,
 				"y": 151
@@ -261,23 +278,6 @@
 				"data": "0",
 				"color": "gray",
 				"isVertical": false,
-				"bitWidth": 1,
-				"placement": "right"
-			}
-		},
-		{
-			"description": "MemWrite",
-			"index": 5,
-			"key": 32,
-			"position": {
-				"x": 267,
-				"y": 67
-			},
-			"type": "signal",
-			"value": {
-				"data": "0",
-				"color": "gray",
-				"isVertical": true,
 				"bitWidth": 1,
 				"placement": "right"
 			}
@@ -368,26 +368,9 @@
 			}
 		},
 		{
-			"description": "Branch-EX",
+			"description": "RegWr",
 			"index": 11,
 			"key": 38,
-			"position": {
-				"x": 37,
-				"y": 178
-			},
-			"type": "signal",
-			"value": {
-				"data": "0",
-				"color": "gray",
-				"isVertical": false,
-				"bitWidth": 1,
-				"placement": "right"
-			}
-		},
-		{
-			"description": "RegWr",
-			"index": 12,
-			"key": 39,
 			"position": {
 				"x": -72,
 				"y": 165
@@ -403,8 +386,8 @@
 		},
 		{
 			"description": "MtoR",
-			"index": 13,
-			"key": 40,
+			"index": 12,
+			"key": 39,
 			"position": {
 				"x": -68,
 				"y": 152
@@ -420,8 +403,8 @@
 		},
 		{
 			"description": "MemWr",
-			"index": 14,
-			"key": 41,
+			"index": 13,
+			"key": 40,
 			"position": {
 				"x": -72,
 				"y": 137
@@ -437,8 +420,8 @@
 		},
 		{
 			"description": "alu",
-			"index": 15,
-			"key": 42,
+			"index": 14,
+			"key": 41,
 			"position": {
 				"x": -71,
 				"y": 123
@@ -454,8 +437,8 @@
 		},
 		{
 			"description": "JUBSI",
-			"index": 16,
-			"key": 43,
+			"index": 15,
+			"key": 42,
 			"position": {
 				"x": -103,
 				"y": 86
@@ -471,28 +454,11 @@
 		},
 		{
 			"description": "ItoA",
-			"index": 17,
-			"key": 44,
+			"index": 16,
+			"key": 43,
 			"position": {
 				"x": -60,
 				"y": 109
-			},
-			"type": "signal",
-			"value": {
-				"data": "0",
-				"color": "gray",
-				"isVertical": false,
-				"bitWidth": 1,
-				"placement": "right"
-			}
-		},
-		{
-			"description": "Branch",
-			"index": 18,
-			"key": 45,
-			"position": {
-				"x": -65,
-				"y": 179
 			},
 			"type": "signal",
 			"value": {
@@ -576,10 +542,6 @@
 		"x": 32,
 		"y": 32
 	},
-	"pipelineInsSize": {
-		"x": 150,
-		"y": 40
-	},
 	"ledSize": {
 		"x": 16,
 		"y": 16
@@ -588,8 +550,12 @@
 		"x": 20,
 		"y": 30
 	},
-	"textFontSize": 10,
+	"pipelineInsSize": {
+		"x": 150,
+		"y": 40
+	},
 	"textPipeFontSize": 18,
+	"textFontSize": 10,
 	"dataFontSize": 10,
 	"signalFontSize": 10,
 	"panelSize": {
@@ -610,7 +576,7 @@
 			"pathWidth": 7,
 			"tracking": [
 				-1,
-				1
+				0
 			]
 		},
 		"cpuName": "RISC-V PL",
@@ -1478,6 +1444,21 @@
 				"ctlBus": 0,
 				"ctlLine": [
 					[
+						20,
+						21,
+						23,
+						29
+					]
+				],
+				"ctlName": "MemWrite",
+				"key": 1,
+				"node": 0
+			},
+			{
+				"binding": 0,
+				"ctlBus": 0,
+				"ctlLine": [
+					[
 						1,
 						32,
 						33,
@@ -1501,7 +1482,7 @@
 					]
 				],
 				"ctlName": "PCjump",
-				"key": 1,
+				"key": 2,
 				"node": 0
 			},
 			{
@@ -1518,7 +1499,7 @@
 					]
 				],
 				"ctlName": "MemToReg",
-				"key": 2,
+				"key": 3,
 				"node": 0
 			},
 			{
@@ -1530,7 +1511,7 @@
 					]
 				],
 				"ctlName": "RegWr-M",
-				"key": 3,
+				"key": 4,
 				"node": 0
 			},
 			{
@@ -1549,21 +1530,6 @@
 					]
 				],
 				"ctlName": "MtoR-Mem",
-				"key": 4,
-				"node": 0
-			},
-			{
-				"binding": 0,
-				"ctlBus": 0,
-				"ctlLine": [
-					[
-						20,
-						21,
-						23,
-						29
-					]
-				],
-				"ctlName": "MemWrite",
 				"key": 5,
 				"node": 0
 			},
