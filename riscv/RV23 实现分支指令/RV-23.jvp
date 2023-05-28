@@ -5,25 +5,9 @@
 	"version": "1.2.4",
 	"components": [
 		{
-			"description": "NextPC",
+			"description": "PC",
 			"index": 0,
 			"key": 0,
-			"position": {
-				"x": -378,
-				"y": -105
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00000000",
-				"isVertical": false,
-				"bitWidth": 32
-			}
-		},
-		{
-			"description": "PC",
-			"index": 1,
-			"key": 1,
 			"position": {
 				"x": -297,
 				"y": -105
@@ -38,8 +22,8 @@
 		},
 		{
 			"description": "Instruction",
-			"index": 2,
-			"key": 2,
+			"index": 1,
+			"key": 1,
 			"position": {
 				"x": -168,
 				"y": -105
@@ -53,9 +37,41 @@
 			}
 		},
 		{
-			"description": "WA",
+			"description": "RA1",
+			"index": 2,
+			"key": 2,
+			"position": {
+				"x": -100,
+				"y": -79
+			},
+			"type": "data",
+			"value": {
+				"color": "gray",
+				"data": "00",
+				"isVertical": false,
+				"bitWidth": 5
+			}
+		},
+		{
+			"description": "RD1",
 			"index": 3,
 			"key": 3,
+			"position": {
+				"x": 16,
+				"y": -139
+			},
+			"type": "data",
+			"value": {
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false,
+				"bitWidth": 32
+			}
+		},
+		{
+			"description": "WA",
+			"index": 4,
+			"key": 4,
 			"position": {
 				"x": -100,
 				"y": -107
@@ -70,8 +86,8 @@
 		},
 		{
 			"description": "RegWriteData",
-			"index": 4,
-			"key": 4,
+			"index": 5,
+			"key": 5,
 			"position": {
 				"x": 16,
 				"y": -175
@@ -85,25 +101,25 @@
 			}
 		},
 		{
-			"description": "RA1",
-			"index": 5,
-			"key": 5,
+			"description": "Immediate",
+			"index": 6,
+			"key": 6,
 			"position": {
-				"x": -100,
-				"y": -79
+				"x": 1,
+				"y": 6
 			},
 			"type": "data",
 			"value": {
 				"color": "gray",
-				"data": "00",
+				"data": "00000000",
 				"isVertical": false,
-				"bitWidth": 5
+				"bitWidth": 32
 			}
 		},
 		{
 			"description": "RA2",
-			"index": 6,
-			"key": 6,
+			"index": 7,
+			"key": 7,
 			"position": {
 				"x": -100,
 				"y": -51
@@ -117,23 +133,7 @@
 			}
 		},
 		{
-			"description": "RD1",
-			"index": 7,
-			"key": 7,
-			"position": {
-				"x": 16,
-				"y": -139
-			},
-			"type": "data",
-			"value": {
-				"color": "gray",
-				"data": "00000000",
-				"isVertical": false,
-				"bitWidth": 32
-			}
-		},
-		{
-			"description": "RD2/MDI",
+			"description": "RD2",
 			"index": 8,
 			"key": 8,
 			"position": {
@@ -149,12 +149,12 @@
 			}
 		},
 		{
-			"description": "Immediate",
+			"description": "NextPC",
 			"index": 9,
 			"key": 9,
 			"position": {
-				"x": 1,
-				"y": 6
+				"x": -378,
+				"y": -105
 			},
 			"type": "data",
 			"value": {
@@ -181,7 +181,7 @@
 			}
 		},
 		{
-			"description": "MDO",
+			"description": "MemReadData",
 			"index": 11,
 			"key": 11,
 			"position": {
@@ -214,9 +214,26 @@
 			}
 		},
 		{
-			"description": "PCjump",
+			"description": "MemWrite",
 			"index": 1,
 			"key": 14,
+			"position": {
+				"x": 272,
+				"y": 123
+			},
+			"type": "signal",
+			"value": {
+				"data": "0",
+				"color": "gray",
+				"isVertical": false,
+				"bitWidth": 1,
+				"placement": "top"
+			}
+		},
+		{
+			"description": "PCjump",
+			"index": 2,
+			"key": 15,
 			"position": {
 				"x": -453,
 				"y": 122
@@ -232,27 +249,10 @@
 		},
 		{
 			"description": "MemToReg",
-			"index": 2,
-			"key": 15,
-			"position": {
-				"x": 365,
-				"y": 123
-			},
-			"type": "signal",
-			"value": {
-				"data": "0",
-				"color": "gray",
-				"isVertical": false,
-				"bitWidth": 1,
-				"placement": "top"
-			}
-		},
-		{
-			"description": "MemWrite",
 			"index": 3,
 			"key": 16,
 			"position": {
-				"x": 272,
+				"x": 365,
 				"y": 123
 			},
 			"type": "signal",
@@ -373,7 +373,7 @@
 			"pathWidth": 5,
 			"tracking": [
 				-1,
-				1,
+				0,
 				-1
 			]
 		},
@@ -991,6 +991,24 @@
 				"ctlBus": 0,
 				"ctlLine": [
 					[
+						20,
+						21,
+						23,
+						40,
+						38,
+						41,
+						18
+					]
+				],
+				"ctlName": "MemWrite",
+				"key": 1,
+				"node": 0
+			},
+			{
+				"binding": 0,
+				"ctlBus": 0,
+				"ctlLine": [
+					[
 						1,
 						4,
 						5
@@ -1006,7 +1024,7 @@
 					]
 				],
 				"ctlName": "PCjump",
-				"key": 1,
+				"key": 2,
 				"node": 0
 			},
 			{
@@ -1027,24 +1045,6 @@
 					]
 				],
 				"ctlName": "MemToReg",
-				"key": 2,
-				"node": 0
-			},
-			{
-				"binding": 0,
-				"ctlBus": 0,
-				"ctlLine": [
-					[
-						20,
-						21,
-						23,
-						40,
-						38,
-						41,
-						18
-					]
-				],
-				"ctlName": "MemWrite",
 				"key": 3,
 				"node": 0
 			},
