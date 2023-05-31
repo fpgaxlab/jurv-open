@@ -1,14 +1,3 @@
-// --------------------------------------------------------------------
-// 单周期 RISC-V CPU 模块
-// 修订历史 :
-// --------------------------------------------------------------------
-//   版本 | 作者                      | 修改日期    | 所做改变
-//   V1.0 |                          | 2019.02.16  | 初始版本
-//   V1.1 |                          | 2019.12.16  | 整理代码
-//   V1.2 |                          | 2020.06.06  | 修改扫描链
-//   V1.3 |                          | 2021.07.16  | 修改控制器的组织
-//   V2.0 |                          | 2022.08.11  | 更新调试器接口
-// --------------------------------------------------------------------
 `default_nettype none 
 module CPU
 #(
@@ -42,93 +31,87 @@ module CPU
    wire   reset = iCPU_Reset;
 
    // Instruction parts
-   wire [31:0] pc, nextPC;
-   wire [31:0] instruction; // instruction code
-   assign nextPC = pc + 4;   /*-TODO 目前仅支持PC+4，增加分支指令时需修改 -*/
-   // PC
+   wire  [31:0] pc, nextPC;
+   /*-TODO Next PC -*/
+   /* 实例化PC寄存器 */ 
+   //tag::PC[]
    DataReg #(32) pcreg(.iD(nextPC), .oQ(pc), .Clk(clk), .Reset(reset), .Load(1'b1));
-   assign oIM_Addr = pc;         // 连接指令存储器的地址端口
-   assign instruction = iIM_Data;// 连接指令存储器的数据端口
+   //end::PC[]
+   /*-TODO 连接指令存储器的地址端口 -*/
+   /*-TODO 连接指令存储器的数据端口 -*/
 
    // Instruction decode
-   wire [6:0] opcode;
-   wire [2:0] funct3;
-   wire [6:0] funct7;
-   wire [4:0] ra1,ra2,wa;
-   assign funct7 = instruction[31:25];
-   assign ra2    = instruction[24:20];
-   assign ra1    = instruction[19:15]; 
-   assign funct3 = instruction[14:12];
-   assign wa     = instruction[11:7];
-   assign opcode = instruction[6:0];
 
    // Control unit
-   wire cRegWrite;
-   riscv_defs::t_imm cImm_type;
+   /*-TODO 实例化控制器模块
    Controller controller(
       .iOpcode(opcode),
       .iFunct3(funct3),
-      /*-TODO 随着指令的增加，相应添加端口信号 -*/
+      // 随着指令的增加，相应添加端口信号
       .oRegWrite(cRegWrite),
-      .oImm_type(cImm_type)
+      .oImmType(cImmType)
    );
+   -*/
 
    // Immediate data generation 
-   wire [31:0] immData;
+   /*-TODO 实例化立即数生成模块
    ImmGen  immGen(
       .iInstrImm(instruction[31:7]), 
-      .iImm_type(cImm_type), 
+      .iImmType(cImmType), 
       .oImmediate(immData));
+   -*/
 
    // Register file
-   wire [31:0] regWriteData, regReadData1, regReadData2;
-   wire [31:0] aluOut;
+   /*-TODO 实例化寄存器堆模块
    RegisterFile regFile(.Clk(clk), 
       .iWE(cRegWrite), .iWA(wa), .iWD(regWriteData), 
       .iRA1(ra1), .oRD1(regReadData1),
       .iRA2(ra2), .oRD2(regReadData2));
-   assign regWriteData = aluOut; /*-目前仅支持将ALU运算结果写入寄存器堆，
-                                    TODO：增加Load类指令时需修改 -*/
+   -*/
 
    // ALU
-   assign aluOut = regReadData1 + immData; /*-目前仅支持加立即数运算，
-                                    TODO：需用自己设计的ALU模块代替 -*/
+   /*-TODO 目前只需要实现加立即数运算，下一个实验需用自己设计的ALU模块代替。
+   assign aluOut = regReadData1 + immData; 
+   -*/
 
-   /*-TODO 连接数据存储器 -*/
+   // Data Memory
+   /*-目前不使用数据存储器，实现访存指令时需连接数据存储器 -*/
   
 //---------------------- 送给调试器的变量 ------------------------//
 
-    //送给调试器的观察信号
+    //tag::watch[]
+    //送给调试器的观察信号，需要与虚拟面板的信号框相对应
     struct packed{ 
-    //【注意】 成员定义顺序需要与虚拟面板信号框的序号对应
-        logic [4:0] WS1;  //Imm_type
+        logic [4:0] WS1;  //ImmType
         logic       WS0;  //RegWrite
     }ws;
 
-    //送给调试器的观察数据
+    //送给调试器的观察数据，需要与虚拟面板的数据框相对应
     struct packed{
-    //【注意】 成员定义顺序需要与虚拟面板数据框的序号对应
         logic [31:0] WD4; //regWriteData
-        logic [4:0]  WD3; //wa; 5位
+        logic [4:0]  WD3; //wa
         logic [31:0] WD2; //instruction        
         logic [31:0] WD1; //pc         
         logic [31:0] WD0; //nextPC 
     }wd;
+    //end::watch[]
 
+    /*-【注意】定义观察信号后须关联相应变量！
     always_comb begin
-        /*-【注意】定义观察信号后须关联相应变量！-*/
-        ws.WS1[4:0] = cImm_type;
+        ws.WS1[4:0] = cImmType;
         ws.WS0      = cRegWrite;
     end
+    -*/
 
+    /*-【注意】定义观察数据后须关联相应变量！        
     always_comb begin
-        /*-【注意】定义观察数据后须关联相应变量！-*/        
         wd.WD4[31:0]  = regWriteData;
         wd.WD3[4:0]   = wa;
         wd.WD2[31:0]  = instruction; 
         wd.WD1[31:0]  = pc;          
         wd.WD0[31:0]  = nextPC; 
     end
+    -*/
     
     // 以下调试器部分，请勿修改！
     WatchChain #(.DATAWIDTH($bits(wd))) wdChain_inst(

@@ -1,6 +1,6 @@
 `ifndef DEFINITIONS_SVH
 `define DEFINITIONS_SVH
-
+//tag::core[]
 package riscv_defs;
 
     typedef struct packed{
@@ -12,5 +12,5 @@ package riscv_defs;
     } t_imm;
     
 endpackage
-
+//end::core[]
 `endif
