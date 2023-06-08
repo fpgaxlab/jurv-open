@@ -297,48 +297,22 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_实验材料"><a class="anchor" href="#_实验材料"></a>实验材料</h2>
+<h2 id="_实验任务"><a class="anchor" href="#_实验任务"></a>实验任务</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_实现23条指令的简单流水线"><a class="anchor" href="#_1_实现23条指令的简单流水线"></a>1. 实现23条指令的简单流水线</h3>
 <div class="paragraph">
-<p>实验材料下载方法见<a href="../L0-download-resource.html" class="xref page">下载实验材料</a>。
-实验材料的文件组织如下。</p>
+<p>实现支持23条指令的五级流水线RISC-V。23条指令是前面单周期已经实现的，包括：I型运算类指令、R型运算类指令、sw指令、lw指令、分支指令。“简单”流水线是指没有处理冲突。
+参考数据通路如<a href="#fig-8">图 1</a>。</p>
 </div>
-<div id="lst-rv27-dirs" class="listingblock">
+<div id="fig-8" class="imageblock">
 <div class="content">
-<pre>📂 riscv
-  📂 RV-23PL
-    📁 run      <i class="conum" data-value="1"></i><b>(1)</b>
-      📄 RV-PL01.jvp
-      📄 RV-PL23.jvp
-    📁 verilog  <i class="conum" data-value="2"></i><b>(2)</b>
-      📄 CPU_RISCV-PL01.sv</pre>
+<img src="_images/image8.png" alt="RISCV_Pipeline_6e" width="668" height="286">
 </div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>虚拟面板等运行文件</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>参考设计的源文件</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_参考设计addi指令的流水线"><a class="anchor" href="#_参考设计addi指令的流水线"></a>参考设计：addi指令的流水线</h2>
-<div class="sectionbody">
-<div id="fig-7" class="imageblock">
-<div class="content">
-<img src="_images/image7.png" alt="RV-PL01_300dpi" width="718" height="310">
-</div>
-<div class="title">图 1. 仅支持<em>addi rd,rs1,imm</em>指令的数据通路示例</div>
+<div class="title">图 1. 支持23指令的五级流水线数据通路</div>
 </div>
 <div class="paragraph">
-<p><a href="#fig-7">图 1</a>电路是仅支持<em>addi rd,rs1,imm</em>指令的流水线数据通路。和单周期数据通路相比，主要增加了流水线寄存器。<a href="#exa-rv01pl-1">例 1</a>给出了IF-ID流水线寄存器的HDL代码，该流水线寄存器从DataReg模块实例化，Load端口固定连接“1”，即每个时钟上升沿都会更新流水线寄存器。</p>
+<p>和单周期数据通路相比，最明显的变化是增加了流水线寄存器。流水线寄存器可以使用DataReg模块实例化，<a href="#exa-rv01pl-1">例 1</a>给出了IF-ID流水线寄存器的示例代码，Load端口固定连接“1”，即每个时钟上升沿都会更新流水线寄存器。</p>
 </div>
 <div id="exa-rv01pl-1" class="exampleblock">
 <div class="title">例 1. 流水线寄存器示例</div>
@@ -346,42 +320,24 @@
 <div class="listingblock">
 <div class="content">
 <pre>  // IF-ID pipeline regisetr
-   wire [31:0] instr_id;
-   DataReg #(32) pr_instr_id(.iD(instr_if), .oQ(instr_id), .Clk(clk), .Load(1'b1), .Reset(reset));</pre>
+  wire [31:0] instr_id, pc_id;
+  DataReg #(32) pr_instr_id(.iD(instr_if), .oQ(instr_id), .Clk(clk), .Load(1'b1), .Reset(reset));
+  DataReg #(32) pr_pc_id(.iD(pc_if), .oQ(pc_id), .Clk(clk), .Load(1'b1), .Reset(reset));</pre>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>CPU模块的完整代码在实验材料中提供，其他文件与<a href="RV01-guide.html" class="xref page">单周期的addi参考设计</a>相同。单周期addi参考设计中的立即数生成模块有错误，应替换为自己改正过的。</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_实验任务"><a class="anchor" href="#_实验任务"></a>实验任务</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_1_实现23条指令的简单流水线"><a class="anchor" href="#_1_实现23条指令的简单流水线"></a>1. 实现23条指令的简单流水线</h3>
-<div class="paragraph">
-<p>实现支持23条指令的五级流水线RISC-V。23条指令是前面单周期已经实现的，包括：I型运算类指令、R型运算类指令、sw指令、lw指令、分支指令。“简单”流水线是指没有处理冲突。</p>
-</div>
-<div class="paragraph">
-<p>参考数据通路如<a href="#fig-8">图 2</a>。图中分支控制和单周期不尽相同。在单周期数据通路中，指令译码、比较运算和转移地址计算均在一个指令周期内。而在流水线通路中，指令译码在译码阶段，如果比较运算在EX阶段完成，和指令译码不在同一个周期，那么在译码阶段控制器无法产生是否转移的PCjump信号。所以<a href="#fig-8">图 2</a>数据通路增加了一个Branch信号，表示该指令为分支指令，传递到EX阶段后再根据比较结果产生PCjump信号，因此funct3也要传递到EX阶段。</p>
-</div>
-<div id="fig-8" class="imageblock">
-<div class="content">
-<img src="_images/image8.png" alt="RISCV_Pipeline_6e" width="668" height="286">
-</div>
-<div class="title">图 2. 支持23指令的五级流水线数据通路</div>
+<p>和单周期数据通路相比，另一个较大的不同在分支控制上。在单周期数据通路中，指令译码、比较运算和转移地址计算均在一个指令周期内。而在流水线通路中，指令译码在译码阶段，如果比较运算在EX阶段完成，和指令译码不在同一个周期，那么在译码阶段控制器无法产生是否转移的PCjump信号。所以<a href="#fig-8">图 1</a>数据通路增加了一个Branch信号，表示该指令为分支指令，传递到EX阶段后再根据比较结果产生PCjump信号，因此funct3也要传递到EX阶段。</p>
 </div>
 <div class="paragraph">
 <p>实现分支指令的数据通路并不唯一。比如上面提到的比较运算和指令译码不在同一个周期的问题，如果将比较运算安排在译码阶段，就不存在这个问题，可以直接在译码阶段产生PCjump信号，甚至在译码阶段计算转移地址。但是这样一来，译码阶段的工作增加了，传输延时增大，如果成为关键路径，有可能影响到流水线的最高时钟频率；当然在目前的实验阶段，时钟信号手动产生，并不能直观地体会系统的频率特性，在后面进行到实速运行实验时，可以改变时钟频率，衡量系统性能。</p>
 </div>
 <div class="paragraph">
-<p>数据通路不唯一还可以体现在转移地址计算上。<a href="#fig-8">图 2</a>数据通路增加了一个加法器计算转移地址，ALU可用于产生标志位。教学视频中提到的另一种方案是比较运算独立于ALU，将ALU用于转移地址计算，实际上这种方案可能有利于后面扩充到27条指令。</p>
+<p>数据通路不唯一还可以体现在转移地址计算上。<a href="#fig-8">图 1</a>数据通路增加了一个加法器计算转移地址，ALU可用于产生标志位。教学视频中提到的另一种方案是比较运算独立于ALU，将ALU用于转移地址计算，实际上这种方案可能有利于后面扩充到27条指令。</p>
 </div>
 <div class="paragraph">
-<p>读者可以按照自己的想法进行设计，<a href="#fig-8">图 2</a>只是提供一个参考，实验平台的电路测试并不限定必须采用<a href="#fig-8">图 2</a>结构，但如果发生转移则必须在EX阶段，不能在译码阶段或访存阶段发生转移，否则测试成绩会受影响。</p>
+<p>读者可以按照自己的想法进行设计，<a href="#fig-8">图 1</a>只是提供一个参考，实验平台的电路测试并不限定必须采用<a href="#fig-8">图 1</a>结构，但如果发生转移则必须在EX阶段，不能在译码阶段或访存阶段发生转移，否则测试成绩会受影响。</p>
 </div>
 </div>
 <div class="sect2">

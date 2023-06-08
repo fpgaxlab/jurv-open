@@ -297,20 +297,45 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_准备工作"><a class="anchor" href="#_准备工作"></a>准备工作</h2>
+<h2 id="_实验原理"><a class="anchor" href="#_实验原理"></a>实验原理</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>从开源项目托管网站下载实验材料，下载方法见<a href="../L0-download-resource.html" class="xref page">下载实验材料</a>。
-实验材料的文件夹组织如下。</p>
+<p>本项目的目标是实现<em>addi rd,rs1,imm</em>指令，CPU微结构如<a href="#fig-1">图 1</a>所示。</p>
+</div>
+<div id="fig-1" class="imageblock">
+<div class="content">
+<img src="_images/image1.png" alt="SingleCycleRISCV_07_SC0_300dpi" width="555" height="218">
+</div>
+<div class="title">图 1. 仅支持<em>addi rd,rs1,imm</em>指令的CPU微结构</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cpu设计实验的代码框架"><a class="anchor" href="#_cpu设计实验的代码框架"></a>CPU设计实验的代码框架</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CPU实验采用了新的代码框架，和前面逻辑电路实验的代码框架有较大不同。
+首先从开源项目托管网站下载实验材料，下载方法见<a href="../L0-download-resource.html" class="xref page">下载实验材料</a>。
+本项目需要的实验材料的文件夹组织如下。</p>
 </div>
 <div id="lst-rv01-dirs" class="listingblock">
 <div class="content">
 <pre>📂 riscv <i class="conum" data-value="1"></i><b>(1)</b>
-  📂 RV-01 <i class="conum" data-value="2"></i><b>(2)</b>
+  📂 RV-00 <i class="conum" data-value="2"></i><b>(2)</b>
     📂 common <i class="conum" data-value="3"></i><b>(3)</b>
+      📄 RAM_asIM.sv
+      📄 ...
     📁 project <i class="conum" data-value="4"></i><b>(4)</b>
-    📁 run <i class="conum" data-value="5"></i><b>(5)</b>
-    📁 verilog <i class="conum" data-value="6"></i><b>(6)</b></pre>
+      📄 create_project_rv_pocket.tcl
+      📄 RV_Pocket.v
+      📄 ...
+  📂 RV-01 <i class="conum" data-value="5"></i><b>(5)</b>
+    📁 run <i class="conum" data-value="6"></i><b>(6)</b>
+      📄 ...
+    📁 verilog <i class="conum" data-value="7"></i><b>(7)</b>
+      📄 CPU_RISCV-01.sv
+      📄 SoC.v
+      📄 ...</pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -321,7 +346,7 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>本项目实验材料文件夹</td>
+<td>CPU实验的代码框架</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -333,37 +358,22 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>包含用于实验系统的文件</td>
+<td>addi指令的实验材料文件夹</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>包含用于实验系统的文件</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
 <td>包含本项目参考设计的Verilog源文件</td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_实验原理"><a class="anchor" href="#_实验原理"></a>实验原理</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>实验材料中给出了<a href="#fig-1">图 1</a>电路的HDL代码，它仅支持<em>addi rd,rs1,imm</em>指令。</p>
-</div>
-<div id="fig-1" class="imageblock">
-<div class="content">
-<img src="_images/image1.png" alt="SingleCycleRISCV_07_SC0_300dpi" width="555" height="218">
-</div>
-<div class="title">图 1. 仅支持<em>addi rd,rs1,imm</em>指令的数据通路示例</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_实验步骤"><a class="anchor" href="#_实验步骤"></a>实验步骤</h2>
-<div class="sectionbody">
 <div class="sect2">
 <h3 id="_1_创建cpu实验工程"><a class="anchor" href="#_1_创建cpu实验工程"></a>1. 创建CPU实验工程</h3>
 <div class="paragraph">
-<p>CPU实验的工程框架与前面实验不同，实验材料中提供了相关的文件。用Quartus Prime打开project文件夹中的<em>RV_Project.qpf</em>工程文件，该工程已经包含了CPU实验的工程框架的基础文件。如果因为Quartus软件版本不同而无法直接打开该工程文件，<em>project</em>文件夹中包含了一个脚本文件<em>create_project_rv_pocket.tcl</em>，可用该文件自动创建工程，步骤如下。</p>
+<p>用Quartus Prime打开project文件夹中的<em>RV_Project.qpf</em>工程文件，该工程已经包含了CPU实验的工程框架的基础文件。如果因为Quartus软件版本不同而无法直接打开该工程文件，<em>project</em>文件夹中包含了一个脚本文件<em>create_project_rv_pocket.tcl</em>，可用该文件自动创建工程，步骤如下。</p>
 </div>
 <div class="paragraph">
 <p>（1）启动 Quartus Prime，点击 View ➤ Tcl Console 菜单项打开 “Tcl Console” 子窗口，最后一行可以输入 TCL 命令。</p>
@@ -399,37 +409,589 @@
 <div class="sect2">
 <h3 id="_2_添加cpu设计文件"><a class="anchor" href="#_2_添加cpu设计文件"></a>2. 添加CPU设计文件</h3>
 <div class="paragraph">
-<p>将verilog文件夹下的所有源文件添加到工程，这些文件是实现addi指令的参考设计；但是没有提供寄存器堆模块的设计文件，须将前面存储器实验自己设计的三端口寄存器堆模块添加到工程中。注意，<em>definitions.sv</em>要放在文件列表的最上面，Quartus按照列表的顺序编译；或者在引用相关定义的文件中用<em>`include</em> 包含<em>"definitions.sv"</em>。
-添加完成后编译Quartus工程。</p>
+<p>将verilog文件夹下的所有源文件添加到工程。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_3_在实验系统上运行"><a class="anchor" href="#_3_在实验系统上运行"></a>3. 在实验系统上运行</h3>
+<h3 id="_3_编译"><a class="anchor" href="#_3_编译"></a>3. 编译</h3>
 <div class="paragraph">
-<p>将下面的汇编语言程序翻译成机器指令。因为只有三条指令，可以尝试手工翻译；以后的实验中如果测试程序比较长，可以使用RISC-V汇编器进行翻译。</p>
+<p>点击Processing ➤ Start ➤ Start Analysis &amp; Synthesis菜单项或工具栏相应按钮，编译完成后，Project Navigator窗格显示的模块层次关系如<a href="#fig-rv01-01">图 2</a>所示。</p>
+</div>
+<div id="fig-rv01-01" class="imageblock">
+<div class="content">
+<img src="_images/image-rv01-01.png" alt="image rv01 01" width="350">
+</div>
+<div class="title">图 2. CPU框架编译后的Hierarchy视图</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_代码框架解析"><a class="anchor" href="#_4_代码框架解析"></a>4. 代码框架解析</h3>
+<div class="paragraph">
+<p>模块间的层次关系如<a href="#fig-rv01-02">图 3</a>所示。</p>
+</div>
+<div id="fig-rv01-02" class="imageblock">
+<div class="content">
+<img src="_images/image-rv01-02.png" alt="image rv01 02" width="565">
+</div>
+<div class="title">图 3. CPU代码框架的层次关系</div>
+</div>
+<div class="paragraph">
+<p>（1）CPU模块</p>
+</div>
+<div class="paragraph">
+<p>虽然<a href="#fig-rv01-01">图 2</a>编译结果中已经包含CPU模块，但如果打开该模块文件<em>CPU_RISCV-01.sv</em>，会发现该模块中除了一些注释，几乎是空模块。
+CPU模块是本项目的主要设计任务，将在后面具体介绍。</p>
+</div>
+<details>
+<summary class="title">点击此行展开CPU模块代码</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`default_nettype none 
+module CPU
+#(
+   parameter DATAWIDTH = 32,
+   parameter ADDRWIDTH = 32
+)
+(
+   input  wire iCPU_Reset,
+   input  wire iCPU_Clk,
+   // 指令存储器接口
+   output wire [ADDRWIDTH-1:0] oIM_Addr,   //指令存储器地址
+   input  wire [DATAWIDTH-1:0] iIM_Data,   //指令存储器数据
+   // 数据存储器接口
+   input  wire [DATAWIDTH-1:0] iReadData,  //数据存储器读数据
+   output wire [DATAWIDTH-1:0] oWriteData, //数据存储器写数据
+   output wire [ADDRWIDTH-1:0] oAB,        //数据存储器地址
+   output wire oRD, oWR,                   //数据存储器读写使能
+   // 连接调试器的信号
+   output wire [ADDRWIDTH-1:0] oCurrent_PC,
+   output wire oFetch,
+   input  wire iScanClk,
+   input  wire iScanIn,
+   output wire oScanOut1,
+   input  wire [1:0] iScanCtrl1,
+   output wire oScanOut2,
+   input  wire [1:0] iScanCtrl2
+);
+
+   /** The input port is replaced with an internal signal **/
+   wire   clk   = iCPU_Clk;
+   wire   reset = iCPU_Reset;
+
+   // Instruction parts
+   wire  [31:0] pc, nextPC;
+   /*-TODO Next PC -*/
+   /* 实例化PC寄存器 */ 
+   /*-TODO 连接指令存储器的地址端口 -*/
+   /*-TODO 连接指令存储器的数据端口 -*/
+
+   // Instruction decode
+
+   // Control unit
+   /*-TODO 实例化控制器模块
+   Controller controller(
+      .iOpcode(opcode),
+      .iFunct3(funct3),
+      // 随着指令的增加，相应添加端口信号
+      .oRegWrite(cRegWrite),
+      .oImmType(cImmType)
+   );
+   -*/
+
+   // Immediate data generation 
+   /*-TODO 实例化立即数生成模块
+   ImmGen  immGen(
+      .iInstrImm(instruction[31:7]), 
+      .iImmType(cImmType), 
+      .oImmediate(immData));
+   -*/
+
+   // Register file
+   /*-TODO 实例化寄存器堆模块
+   RegisterFile regFile(.Clk(clk), 
+      .iWE(cRegWrite), .iWA(wa), .iWD(regWriteData), 
+      .iRA1(ra1), .oRD1(regReadData1),
+      .iRA2(ra2), .oRD2(regReadData2));
+   -*/
+
+   // ALU
+   /*-TODO 目前只需要实现加立即数运算，下一个实验需用自己设计的ALU模块代替。
+   assign aluOut = regReadData1 + immData; 
+   -*/
+
+   // Data Memory
+   /*-目前不使用数据存储器，实现访存指令时需连接数据存储器 -*/
+  
+//---------------------- 送给调试器的变量 ------------------------//
+
+    //送给调试器的观察信号，需要与虚拟面板的信号框相对应
+    struct packed{ 
+        logic [4:0] WS1;  //ImmType
+        logic       WS0;  //RegWrite
+    }ws;
+
+    //送给调试器的观察数据，需要与虚拟面板的数据框相对应
+    struct packed{
+        logic [31:0] WD4; //regWriteData
+        logic [4:0]  WD3; //wa
+        logic [31:0] WD2; //instruction        
+        logic [31:0] WD1; //pc         
+        logic [31:0] WD0; //nextPC 
+    }wd;
+
+    /*-【注意】定义观察信号后须关联相应变量！
+    always_comb begin
+        ws.WS1[4:0] = cImmType;
+        ws.WS0      = cRegWrite;
+    end
+    -*/
+
+    /*-【注意】定义观察数据后须关联相应变量！        
+    always_comb begin
+        wd.WD4[31:0]  = regWriteData;
+        wd.WD3[4:0]   = wa;
+        wd.WD2[31:0]  = instruction; 
+        wd.WD1[31:0]  = pc;          
+        wd.WD0[31:0]  = nextPC; 
+    end
+    -*/
+    
+    // 以下调试器部分，请勿修改！
+    WatchChain #(.DATAWIDTH($bits(wd))) wdChain_inst(
+        .DataIn(wd), 
+        .ScanIn(iScanIn), 
+        .ScanOut(oScanOut1), 
+        .ShiftDR(iScanCtrl1[1]), 
+        .CaptureDR(iScanCtrl1[0]), 
+        .TCK(iScanClk)
+    );
+    WatchChain #(.DATAWIDTH($bits(ws))) wsChain_inst(
+        .DataIn(ws), 
+        .ScanIn(iScanIn), 
+        .ScanOut(oScanOut2), 
+        .ShiftDR(iScanCtrl2[1]), 
+        .CaptureDR(iScanCtrl2[0]), 
+        .TCK(iScanClk)
+    );
+    assign oCurrent_PC = pc;
+    assign oFetch = 1'b1;
+
+endmodule</code></pre>
+</div>
+</div>
+</div>
+</details>
+<div class="paragraph">
+<p>（2）指令存储器模块</p>
+</div>
+<div class="paragraph">
+<p>指令存储器的内容可以在运行时通过实验平台输入，不需要重新编译，就可以修改指令存储器的内容。所以指令存储器并不像<a href="#fig-1">图 1</a>所示的原理图那样，只能读出、没有写端口，指令存储器采用的是存储器实验中学习的<a href="../ca-docs/L24-memory.html#exa-24-2" class="xref page">同步写、同步读的RAM</a>，在<a href="#fig-rv01-01">图 2</a>中的模块名称是RAM_asIM。从<a href="#fig-rv01-02">图 3</a>可以看出，指令存储器并不是直接与CPU模块相连，中间经过了片上调试器，就是因为实验平台需要读写指令存储器。</p>
+</div>
+<div class="paragraph">
+<p>（3）片上调试器模块</p>
+</div>
+<div class="paragraph">
+<p>片上调试器用于实验系统的调试功能，在<a href="#fig-rv01-01">图 2</a>中的模块名称是JuTAG_CPU。片上调试器在实验材料中以qxp格式的网表文件提供，用户无需修改。</p>
+</div>
+<div class="paragraph">
+<p>（2）SoC模块</p>
+</div>
+<div class="paragraph">
+<p>SoC模块实例化CPU、指令存储器、数据存储器、输入输出接口以及片上调试器，其中数据存储器和输入输出接口将在后面的项目中添加，本项目未包含这两个模块。</p>
+</div>
+<details>
+<summary class="title">点击此行展开SoC模块代码</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">// --------------------------------------------------------------------
+//
+// --------------------------------------------------------------------
+
+`default_nettype none
+module SoC
+#(
+     parameter N_LED = 36,
+     parameter N_SW  = 36,
+     parameter N_BTN = 20,
+     parameter DATAWIDTH = 32,
+     parameter ADDRWIDTH = 32
+)
+(
+    ///////////// CLOCK and RESET ///////////
+    input  wire RESET,  // 板载复位按钮
+    input  wire CLOCK,  // 板载时钟
+    input  wire CLK,    // 系统主时钟
+    
+    //////////// 与IO连接的虚拟元件 //////////
+    input  wire [N_SW-1:0]  vSWITCH, // Virtual Switch
+    input  wire [N_BTN-1:0] vBUTTON, // Virtual Button
+    output wire [N_LED-1:0] vLED,    // Virtual LED    
+    output wire [7:0]  vSSLED0,      //虚拟七段数码管0          
+    output wire [7:0]  vSSLED1,      //虚拟七段数码管1
+    output wire [7:0]  vSSLED2,      //虚拟七段数码管2
+    output wire [7:0]  vSSLED3,      //虚拟七段数码管3
+    output wire [7:0]  vSSLED4,      //虚拟七段数码管4
+    output wire [7:0]  vSSLED5,      //虚拟七段数码管5
+    output wire [7:0]  vSSLED6,      //虚拟七段数码管6
+    output wire [7:0]  vSSLED7,      //虚拟七段数码管7
+     
+    ///////// DEBUG IO ///////////
+    input  wire TCK,
+    input  wire JTMS,
+    input  wire JTDI,
+    output wire JTDO
+);
+
+
+//---------------------------------------------------------------------------//
+
+    wire [N_BTN-1:0] bsc_btn;
+    wire [N_SW-1:0]  bsc_sw;
+
+//---------------------------------------------------------------------------//
+
+    wire cpuReset, cpuClk;
+    wire [ADDRWIDTH-1:0] cpuAB, memAB;
+    wire cpuWR, memWR, cpuRD;
+
+    wire scan_clk, scan_in, scan_out1, scan_out2;
+    wire [1:0] scan_ctrl1, scan_ctrl2; 
+    
+    wire [DATAWIDTH-1:0] cpuWriteData, readData, memWriteData, instruction_code; 
+    wire [ADDRWIDTH - 1: 0] current_pc, instruction_addr;
+    wire fetching;
+    
+    // CPU模块实例化
+    CPU #(.ADDRWIDTH(ADDRWIDTH), .DATAWIDTH(DATAWIDTH)) CPU_RISC (
+        // 连接调试器的信号
+        .oCurrent_PC(current_pc),
+        .oFetch(fetching),
+        .iScanClk(scan_clk),
+        .iScanIn(scan_in),
+        .oScanOut1(scan_out1),
+        .iScanCtrl1(scan_ctrl1),
+        .oScanOut2(scan_out2),
+        .iScanCtrl2(scan_ctrl2),
+        // 指令存储器接口
+        .oIM_Addr(instruction_addr),
+        .iIM_Data(instruction_code),
+        // 数据存储器接口
+        .iReadData(readData),
+        .oWriteData(cpuWriteData),
+        .oAB (cpuAB),
+        .oWR (cpuWR),
+        .oRD (cpuRD),
+        // 时钟和复位
+        .iCPU_Reset(cpuReset),
+        .iCPU_Clk(cpuClk)
+   );
+
+    // 数据存储器模块实例化 
+    //（以后增加）
+
+    // 输入输出接口模块实例化
+    //（以后增加）
+
+    // 指令存储器模块实例化
+    wire imWR;
+    wire [DATAWIDTH-1:0] imWriteData;
+    wire [8:0] imAddr;
+    RAM_asIM #(.ADDRWIDTH(9), .DATAWIDTH(DATAWIDTH)) IM 
+    (
+      .iClk(CLK), 
+      .iWR(imWR),
+      .iAddress(imAddr),
+      .iWriteData(imWriteData),
+      .oReadData(instruction_code)
+    );
+
+//----------------- On-chip Debug -------------------------------------------//
+
+    JuTAG_CPU  #(.ADDRWIDTH(ADDRWIDTH), .DATAWIDTH(DATAWIDTH))  jutag
+    (              
+        .TCK(TCK),
+        .TMS(JTMS),
+        .TDI(JTDI),
+        .TDO(JTDO),
+        // 与IO连接的虚拟元件
+        .iLED(vLED),   
+        .iSWITCH(vSWITCH),
+        .oSW_BSC(bsc_sw),
+        .iBUTTON(vBUTTON),
+        .oKEY_BSC(bsc_btn),
+        .iSSLED0(vSSLED0),          
+        .iSSLED1(vSSLED1),          
+        .iSSLED2(vSSLED2),          
+        .iSSLED3(vSSLED3),          
+        .iSSLED4(vSSLED4),          
+        .iSSLED5(vSSLED5),          
+        .iSSLED6(vSSLED6),          
+        .iSSLED7(vSSLED7), 
+        // 系统总线
+        .iWR(cpuWR),
+        .oWR(memWR),
+        .iRD(cpuRD),
+        .oRD(),
+        .iCpuAB(cpuAB),
+        .oSysAB(memAB),
+        .iCPUWriteData(cpuWriteData),
+        .iMemReadData(readData),
+        .oMemWriteData(memWriteData),
+        // 指令存储器接口
+        .iROM_Addr(instruction_addr[17:2]),
+        .oROM_Addr(imAddr),
+        .iROM_ReadData(instruction_code),
+        .oROM_WriteData(imWriteData),
+        .oROM_WriteEnable(imWR),
+        // 调试与运行控制
+        .iClock(CLK),
+        .oCPU_Reset(cpuReset),
+        .oCPU_Clk(cpuClk),
+        .iCurrent_PC(current_pc),
+        .iFetch(fetching),
+        .oScanClk(scan_clk),
+        .oScanIn(scan_in),
+        .iScanOut2(scan_out2),
+        .oScanCtrl2(scan_ctrl2),
+        .iScanOut1(scan_out1),
+        .oScanCtrl1(scan_ctrl1)
+    );
+
+endmodule</code></pre>
+</div>
+</div>
+</div>
+</details>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+SoC的含义是System on Chip。CPU、存储器和输入输出接口，构成一个完整的计算机系统，这个系统的各个模块都实现在一个FPGA芯片上，是一个“片上系统”。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>（4）顶层模块</p>
+</div>
+<div class="paragraph">
+<p>从<a href="#fig-rv01-02">图 3</a>可以看出，顶层模块仅包含一个SoC模块。之所以没有直接用SoC作顶层，是因为实验设计支持不同的实验板，增加一个层次可以最大程度地减少不同实验板之间的代码移植的工作量。从<a href="#fig-rv01-01">图 2</a>可见，本项目的顶层模块为RV_Pocket，在后面<a href="RV27-guide.html#线下实验板实速运行" class="xref page">支持27条指令的线下实验板实速运行</a>时，将替换顶层模块。关于本课程支持的实验板，见<a href="#L02-lab-tools.adoc" class="xref unresolved">实验工具和环境</a>。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验任务"><a class="anchor" href="#_实验任务"></a>实验任务</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>设计任务主要是CPU模块及其子模块的设计，还包括调试支持。编译通过后在实验系统验证。</p>
+</div>
+<div class="sect2">
+<h3 id="_1_设计指令部件"><a class="anchor" href="#_1_设计指令部件"></a>1. 设计指令部件</h3>
+<div class="paragraph">
+<p>指令部件包括指令存储器、程序计数器PC和Next PC生成。
+PC可用<a href="../sv-docs/L13-register_file.html" class="xref page">寄存器堆实验</a>学习的DataReg模块实例化，代码如下；其中Load端口固定连接“1”，即每个时钟都更新PC。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>	addi x5, x0, 100
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">   DataReg #(32) pcreg(.iD(nextPC), .oQ(pc), .Clk(clk), .Reset(reset), .Load(1'b1));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>指令存储器如上所述已经在SoC模块中实例化，地址和数据接口已经连接到CPU模块的端口 <code>oIM_Addr</code> 和 <code>iIM_Data</code>，需要将它们与CPU数据通路连接。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_设计指令译码和控制单元"><a class="anchor" href="#_2_设计指令译码和控制单元"></a>2. 设计指令译码和控制单元</h3>
+<div class="paragraph">
+<p>addi指令的opcode为0010011，funct3为000；从<a href="#fig-1">图 1</a>可知，需要产生RegWrite和ImmType的控制信号。因此可以得到<a href="#tab-rv01-1">表 1</a>真值表。</p>
+</div>
+<table id="tab-rv01-1" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 1. 实现addi指令的控制逻辑真值表</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top" colspan="2">控制器输入</th>
+<th class="tableblock halign-center valign-top" colspan="2">控制器输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">opcode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">funct3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ImmType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RegWrite</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0010011</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I-type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Controller模块的端口声明如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">module Controller(
+   input  wire  [6:0] iOpcode,
+   input  wire  [2:0] iFunct3,
+   output logic oRegWrite,   
+   output riscv_defs::t_imm oImmType
+);
+
+endmodule</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其中输出端口oImm_type的类型是结构体t_imm，如下所示。它定义在<em>definitions.sv</em>文件的riscv_defs包中，编译前该文件要放在工程文件列表的最上面，Quartus按照列表的顺序编译；或者在<em>Controller.sv</em>等引用该定义的文件中用 <code>`include</code> 语句包含<em>"definitions.sv"</em>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">package riscv_defs;
+
+    typedef struct packed{
+        logic J; 
+        logic U; 
+        logic B; 
+        logic S;
+        logic I;
+    } t_imm;
+    
+endpackage</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>根据<a href="#tab-rv01-1">表 1</a>真值表用<a href="../sv-docs/L12-decoder.html" class="xref page">译码器实验</a>学习过的方法设计指令译码。</p>
+</div>
+<div class="paragraph">
+<p>在CPU模块中实例化Controller模块。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_添加寄存器堆模块"><a class="anchor" href="#_3_添加寄存器堆模块"></a>3. 添加寄存器堆模块</h3>
+<div class="paragraph">
+<p>寄存器堆模块的端口声明如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">module RegisterFile
+(
+	input  wire   Clk,
+	input  wire   iWE,
+	input  wire   [4:0] iWA, iRA1, iRA2,
+    input  wire   [31:0] iWD,
+    output logic  [31:0] oRD1, oRD2
+);
+
+endmodule</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将前面<a href="../ca-docs/L24-memory.html" class="xref page">存储器实验</a>中自己设计的三端口寄存器堆的代码添加到其中。</p>
+</div>
+<div class="paragraph">
+<p>在CPU模块中实例化RegisterFile模块。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_设计立即数生成模块"><a class="anchor" href="#_4_设计立即数生成模块"></a>4. 设计立即数生成模块</h3>
+<div class="paragraph">
+<p>立即数生成模块的端口声明如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">module ImmGen( 
+   input  riscv_defs::t_imm  iImmType,
+   input  wire  [31:7]/*注意起始下标*/ iInstrImm,
+   output logic [31:0] oImmediate
+);
+
+endmodule</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>根据I型指令格式，I型立即数的生成方法如所示。指令的31～20位是立即数的11～0，并且符号扩展至32位。</p>
+</div>
+<div id="fig-rv01-03" class="imageblock">
+<div class="content">
+<img src="_images/image-rv01-03.png" alt="image rv01 03" width="468">
+</div>
+<div class="title">图 4. I型立即数的生成方法</div>
+</div>
+<div class="paragraph">
+<p>在CPU模块中实例化ImmGen模块。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_实现加法运算"><a class="anchor" href="#_5_实现加法运算"></a>5. 实现加法运算</h3>
+<div class="paragraph">
+<p>本项目仅实现addi指令，目前只需要将寄存器堆RD1端口的输出与生成的32位立即数相加。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_连接数据通路"><a class="anchor" href="#_6_连接数据通路"></a>6. 连接数据通路</h3>
+<div class="paragraph">
+<p>根据<a href="#fig-1">图 1</a>结构连接各模块，例如上面相加的结果作为寄存器堆的写数据；控制器的输出也要连接到相关的模块。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_7_调试支持"><a class="anchor" href="#_7_调试支持"></a>7. 调试支持</h3>
+<div class="paragraph">
+<p>为了能够在实验系统中观察到信号和数据的值，需要在设计代码中添加观察信号和观察数据，下面是一个示例。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">    //送给调试器的观察信号，需要与虚拟面板的信号框相对应
+    struct packed{ 
+        logic [4:0] WS1;  //ImmType
+        logic       WS0;  //RegWrite
+    }ws;
+
+    //送给调试器的观察数据，需要与虚拟面板的数据框相对应
+    struct packed{
+        logic [31:0] WD4; //regWriteData
+        logic [4:0]  WD3; //wa
+        logic [31:0] WD2; //instruction        
+        logic [31:0] WD1; //pc         
+        logic [31:0] WD0; //nextPC 
+    }wd;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>结构体成员定义顺序需要与虚拟面板信号框或数据框的序号对应。上例为了便于理解，使用了WS0、WS1，WD0、WD1这些与虚拟元件名称相同的成员变量名，但实际上对应关系并不是通过成员变量的名称决定的，而是通过成员变量在结构体中的书写位置决定的。成员变量并非必须使用WSn、WDn的命名方式，可以使用任意的变量名，例如使用反映其意义的RegWrite、ImmType等名称。</p>
+</div>
+<div class="paragraph">
+<p>有关调试支持请观看教学视频获得更直观的认识。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_8_验证"><a class="anchor" href="#_8_验证"></a>8. 验证</h3>
+<div class="paragraph">
+<p>将下面三条汇编语言指令翻译成机器指令，可以尝试手工翻译；以后的实验中如果测试程序比较长，可以使用RISC-V汇编器进行翻译。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asm hljs" data-lang="asm">	addi x5, x0, 100
 	addi x6, x5, -1
-	addi x7, x6, 0</pre>
+	addi x7, x6, 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>将编译生成的CPU电路文件加载到FPGA，在实验系统上运行上面指令。
-分析运行结果，发现第2条指令的运算结果80000063是错误的。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_4_添加观察信号和观察数据"><a class="anchor" href="#_4_添加观察信号和观察数据"></a>4. 添加观察信号和观察数据</h3>
-<div class="paragraph">
-<p>添加一些观察的数据和控制信号，如rs1寄存器、立即数，控制器输出的立即数类型等等，以便判断引起运算错误的原因。注意，虚拟面板和设计代码要同时添加，具体可观看辅导视频的演示。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_5_找出设计错误并改正"><a class="anchor" href="#_5_找出设计错误并改正"></a>5. 找出设计错误并改正</h3>
-<div class="paragraph">
-<p>重新编译后再次运行，可以看出错误是由立即数引起的。分析立即数生成模块的代码，找出其中的错误，改正后在实验系统上验证。</p>
+如果有错误，可以添加更多的观察信号和数据，找到错误原因，改正后重新编译，再次运行验证，直至正确。</p>
 </div>
 <div class="sidebarblock text-center">
 <div class="content">
