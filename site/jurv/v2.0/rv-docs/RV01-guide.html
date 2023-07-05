@@ -245,12 +245,12 @@
       </ul>
     </li>
     <li class="component is-current">
-      <a class="title" href="../../v1.0/index.html">RISC-V CPU设计实验教程</a>
+      <a class="title" href="../index.html">RISC-V CPU设计实验教程</a>
       <ul class="versions">
-        <li class="version is-current">
+        <li class="version is-current is-latest">
           <a href="../index.html">2023秋</a>
         </li>
-        <li class="version is-latest">
+        <li class="version">
           <a href="../../v1.0/index.html">2023春</a>
         </li>
       </ul>
@@ -263,7 +263,7 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../../v1.0/index.html" class="home-link"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
@@ -328,6 +328,7 @@
     📁 project <i class="conum" data-value="4"></i><b>(4)</b>
       📄 create_project_rv_pocket.tcl
       📄 RV_Pocket.v
+      📄 RV_Project.qpf
       📄 ...
   📂 RV-01 <i class="conum" data-value="5"></i><b>(5)</b>
     📁 run <i class="conum" data-value="6"></i><b>(6)</b>
@@ -371,9 +372,9 @@
 </table>
 </div>
 <div class="sect2">
-<h3 id="_1_创建cpu实验工程"><a class="anchor" href="#_1_创建cpu实验工程"></a>1. 创建CPU实验工程</h3>
+<h3 id="_1_打开或创建cpu实验工程"><a class="anchor" href="#_1_打开或创建cpu实验工程"></a>1. 打开或创建CPU实验工程</h3>
 <div class="paragraph">
-<p>用Quartus Prime打开project文件夹中的<em>RV_Project.qpf</em>工程文件，该工程已经包含了CPU实验的工程框架的基础文件。如果因为Quartus软件版本不同而无法直接打开该工程文件，<em>project</em>文件夹中包含了一个脚本文件<em>create_project_rv_pocket.tcl</em>，可用该文件自动创建工程，步骤如下。</p>
+<p>实验材料的project文件夹中已经有一个创建完成的工程文件<em>RV_Project.qpf</em>，可用Quartus Prime打开，该工程包含了CPU实验的工程框架的基础文件。如果因为Quartus软件版本不同而无法直接打开该工程文件，<em>project</em>文件夹中包含了一个脚本文件<em>create_project_rv_pocket.tcl</em>，可用该文件自动创建工程，步骤如下。</p>
 </div>
 <div class="paragraph">
 <p>（1）启动 Quartus Prime，点击 View ➤ Tcl Console 菜单项打开 “Tcl Console” 子窗口，最后一行可以输入 TCL 命令。</p>
@@ -605,11 +606,7 @@ endmodule</code></pre>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">// --------------------------------------------------------------------
-//
-// --------------------------------------------------------------------
-
-`default_nettype none
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`default_nettype none
 module SoC
 #(
      parameter N_LED = 36,
@@ -780,7 +777,7 @@ SoC的含义是System on Chip。CPU、存储器和输入输出接口，构成一
 <p>（4）顶层模块</p>
 </div>
 <div class="paragraph">
-<p>从<a href="#fig-rv01-02">图 3</a>可以看出，顶层模块仅包含一个SoC模块。之所以没有直接用SoC作顶层，是因为实验设计支持不同的实验板，增加一个层次可以最大程度地减少不同实验板之间的代码移植的工作量。从<a href="#fig-rv01-01">图 2</a>可见，本项目的顶层模块为RV_Pocket，在后面<a href="RV27-guide.html#线下实验板实速运行" class="xref page">支持27条指令的线下实验板实速运行</a>时，将替换顶层模块。关于本课程支持的实验板，见<a href="#L02-lab-tools.adoc" class="xref unresolved">实验工具和环境</a>。</p>
+<p>从<a href="#fig-rv01-02">图 3</a>可以看出，顶层模块仅包含一个SoC模块。之所以没有直接用SoC作顶层，是因为实验设计支持不同的实验板，增加一个层次可以最大程度地减少不同实验板之间的代码移植的工作量。从<a href="#fig-rv01-01">图 2</a>可见，本项目的顶层模块为RV_Pocket，在后面<a href="RV27-guide.html#线下实验板实速运行" class="xref page">支持27条指令的线下实验板实速运行</a>时，将替换顶层模块。关于本课程支持的实验板，见<a href="../L02-lab-tools.html" class="xref page">实验工具和环境</a>。</p>
 </div>
 </div>
 </div>
@@ -856,7 +853,7 @@ endmodule</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>其中输出端口oImm_type的类型是结构体t_imm，如下所示。它定义在<em>definitions.sv</em>文件的riscv_defs包中，编译前该文件要放在工程文件列表的最上面，Quartus按照列表的顺序编译；或者在<em>Controller.sv</em>等引用该定义的文件中用 <code>`include</code> 语句包含<em>"definitions.sv"</em>。</p>
+<p>其中输出端口oImm_type的类型是结构体t_imm，如下所示。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -872,6 +869,9 @@ endmodule</code></pre>
     
 endpackage</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>该结构体定义在<em>definitions.sv</em>文件中，编译时该文件要位于Files列表的最上面，使Quartus首先编译该定义文件；或者在<em>Controller.sv</em>等引用该定义的文件中用 <code>`include</code> 语句包含<em>"definitions.sv"</em>。</p>
 </div>
 <div class="paragraph">
 <p>根据<a href="#tab-rv01-1">表 1</a>真值表用<a href="../sv-docs/L12-decoder.html" class="xref page">译码器实验</a>学习过的方法设计指令译码。</p>
@@ -971,7 +971,28 @@ endmodule</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>结构体成员定义顺序需要与虚拟面板信号框或数据框的序号对应。上例为了便于理解，使用了WS0、WS1，WD0、WD1这些与虚拟元件名称相同的成员变量名，但实际上对应关系并不是通过成员变量的名称决定的，而是通过成员变量在结构体中的书写位置决定的。成员变量并非必须使用WSn、WDn的命名方式，可以使用任意的变量名，例如使用反映其意义的RegWrite、ImmType等名称。</p>
+<p>结构体成员定义顺序需要与虚拟面板信号框或数据框的序号对应。上例为了便于理解，使用了WS0、WS1，WD0、WD1这些与虚拟元件名称相同的成员变量名，但实际上对应关系并不是通过成员变量的名称决定的，而是通过成员变量在结构体中的书写位置决定的。成员变量并非必须使用WSn、WDn的命名方式，可以使用任意的变量名，例如使用反映其意义的RegWrite、ImmType等名称。
+如下所示。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">    struct packed{
+        logic [4:0] ImmType;
+        logic       RegWrite;
+    }ws;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>定义了 <code>ws</code> 和 <code>wd</code> 结构体变量后，还需要对结构体变量赋值。
+以ws结构体变量为例，假设设计代码中对应控制信号的变量名为 <code>cRegWrite</code> 和 <code>cImmType</code>，则赋值语句如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">    always_comb begin
+        ws.WS1[4:0] = cImmType;
+        ws.WS0      = cRegWrite;
+    end</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>有关调试支持请观看教学视频获得更直观的认识。</p>
@@ -980,7 +1001,7 @@ endmodule</code></pre>
 <div class="sect2">
 <h3 id="_8_验证"><a class="anchor" href="#_8_验证"></a>8. 验证</h3>
 <div class="paragraph">
-<p>将下面三条汇编语言指令翻译成机器指令，可以尝试手工翻译；以后的实验中如果测试程序比较长，可以使用RISC-V汇编器进行翻译。</p>
+<p>将下面三条汇编语言指令翻译成机器指令，可以尝试手工翻译；以后的实验中如果测试程序比较长，可以使用<a href="../ca-docs/L26-riscv_assembly.html" class="xref page">RISC-V汇编语言实验</a>介绍的汇编器进行翻译。</p>
 </div>
 <div class="listingblock">
 <div class="content">

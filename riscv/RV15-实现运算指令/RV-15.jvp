@@ -16,25 +16,9 @@
 			"value": "Instruction"
 		},
 		{
-			"description": "NextPC",
+			"description": "PC",
 			"index": 0,
 			"key": 1,
-			"position": {
-				"x": -378,
-				"y": -105
-			},
-			"type": "data",
-			"value": {
-				"bitWidth": 32,
-				"color": "gray",
-				"data": "00000000",
-				"isVertical": false
-			}
-		},
-		{
-			"description": "PC",
-			"index": 1,
-			"key": 2,
 			"position": {
 				"x": -297,
 				"y": -105
@@ -49,8 +33,8 @@
 		},
 		{
 			"description": "Instruction",
-			"index": 2,
-			"key": 3,
+			"index": 1,
+			"key": 2,
 			"position": {
 				"x": -168,
 				"y": -105
@@ -64,9 +48,41 @@
 			}
 		},
 		{
-			"description": "WA",
+			"description": "RA1",
+			"index": 2,
+			"key": 3,
+			"position": {
+				"x": -100,
+				"y": -79
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 5,
+				"color": "gray",
+				"data": "00",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "RD1",
 			"index": 3,
 			"key": 4,
+			"position": {
+				"x": 16,
+				"y": -139
+			},
+			"type": "data",
+			"value": {
+				"bitWidth": 32,
+				"color": "gray",
+				"data": "00000000",
+				"isVertical": false
+			}
+		},
+		{
+			"description": "WA",
+			"index": 4,
+			"key": 5,
 			"position": {
 				"x": -100,
 				"y": -107
@@ -81,8 +97,8 @@
 		},
 		{
 			"description": "RegWriteData",
-			"index": 4,
-			"key": 5,
+			"index": 5,
+			"key": 6,
 			"position": {
 				"x": 16,
 				"y": -176
@@ -96,25 +112,25 @@
 			}
 		},
 		{
-			"description": "RA1",
-			"index": 5,
-			"key": 6,
+			"description": "Immediate",
+			"index": 6,
+			"key": 7,
 			"position": {
-				"x": -100,
-				"y": -79
+				"x": 1,
+				"y": 6
 			},
 			"type": "data",
 			"value": {
-				"bitWidth": 5,
+				"bitWidth": 32,
 				"color": "gray",
-				"data": "00",
+				"data": "00000000",
 				"isVertical": false
 			}
 		},
 		{
 			"description": "RA2",
-			"index": 6,
-			"key": 7,
+			"index": 7,
+			"key": 8,
 			"position": {
 				"x": -100,
 				"y": -51
@@ -124,22 +140,6 @@
 				"bitWidth": 5,
 				"color": "gray",
 				"data": "00",
-				"isVertical": false
-			}
-		},
-		{
-			"description": "RD1",
-			"index": 7,
-			"key": 8,
-			"position": {
-				"x": 16,
-				"y": -139
-			},
-			"type": "data",
-			"value": {
-				"bitWidth": 32,
-				"color": "gray",
-				"data": "00000000",
 				"isVertical": false
 			}
 		},
@@ -160,12 +160,12 @@
 			}
 		},
 		{
-			"description": "Immediate",
+			"description": "NextPC",
 			"index": 9,
 			"key": 10,
 			"position": {
-				"x": 1,
-				"y": 6
+				"x": -378,
+				"y": -105
 			},
 			"type": "data",
 			"value": {
@@ -290,7 +290,7 @@
 			"pathWidth": 5,
 			"tracking": [
 				-1,
-				1,
+				0,
 				-1
 			]
 		},

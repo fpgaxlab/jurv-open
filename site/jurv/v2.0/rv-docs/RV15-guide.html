@@ -245,12 +245,12 @@
       </ul>
     </li>
     <li class="component is-current">
-      <a class="title" href="../../v1.0/index.html">RISC-V CPU设计实验教程</a>
+      <a class="title" href="../index.html">RISC-V CPU设计实验教程</a>
       <ul class="versions">
-        <li class="version is-current">
+        <li class="version is-current is-latest">
           <a href="../index.html">2023秋</a>
         </li>
-        <li class="version is-latest">
+        <li class="version">
           <a href="../../v1.0/index.html">2023春</a>
         </li>
       </ul>
@@ -263,7 +263,7 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../../v1.0/index.html" class="home-link"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
@@ -432,18 +432,18 @@
     }ws;
 
     //送给调试器的观察数据，需要与虚拟面板的数据框相对应
-    struct packed{
-        logic [31:0] WD9;  //immData      
-        logic [31:0] WD8;  //regReadData2
-        logic [31:0] WD7;  //regReadData1
-        logic [4:0]  WD6;  //ra2
-        logic [4:0]  WD5;  //ra1
+    struct packed{        
+        logic [31:0] WD9;   //nextPC
+        logic [31:0] WD8;   //regReadData2
+        logic [4:0]  WD7;   //ra2
+        logic [31:0] WD6;   //immData    
         //以下观察数据用于电路测试，请勿修改！ <i class="conum" data-value="2"></i><b>(2)</b>
-        logic [31:0] WD4;  //regWriteData      
-        logic [4:0]  WD3;  //wa
-        logic [31:0] WD2;  //instruction        
-        logic [31:0] WD1;  //pc 
-        logic [31:0] WD0;  //nextPC
+        logic [31:0] WD5;   //regWriteData
+        logic [4:0]  WD4;   //wa
+        logic [31:0] WD3;   //regReadData1
+        logic [4:0]  WD2;   //ra1
+        logic [31:0] WD1;   //instruction
+        logic [31:0] WD0;   //pc
     }wd;</pre>
 </div>
 </div>
