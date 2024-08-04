@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>支持27条指令的单周期RISC-V :: RISC-V CPU设计实验教程</title>
+    <title>支持27条指令的单周期架构设计 :: RISC-V CPU设计实验教程</title>
     <meta name="generator" content="Antora 3.1.3">
     <link rel="stylesheet" href="../../../_/css/site.css">
   </head>
@@ -215,7 +215,7 @@
     <a class="nav-link" href="RV23PL-guide.html">初步实现流水线</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="RV27-guide.html">支持27条指令</a>
+    <a class="nav-link" href="RV27-guide.html">支持27条指令的单周期架构设计</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="RV27PL1-guide.html">解决流水线数据冲突</a>
@@ -263,7 +263,7 @@
   <ul>
     <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
     <li>RISC-V CPU设计实验</li>
-    <li><a href="RV27-guide.html">支持27条指令</a></li>
+    <li><a href="RV27-guide.html">支持27条指令的单周期架构设计</a></li>
   </ul>
 </nav>
 <div class="page-versions">
@@ -279,11 +279,23 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">支持27条指令的单周期RISC-V</h1>
-<div id="preamble">
+<h1 class="page">支持27条指令的单周期架构设计</h1>
+<div class="sect1">
+<h2 id="_实验目的"><a class="anchor" href="#_实验目的"></a>实验目的</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在实现前面23条指令的基础上，实现以下4条指令。</p>
+<p>（1）理解lui、auipc、jal和jalr指令的功能；</p>
+</div>
+<div class="paragraph">
+<p>（2）深入理解数据通路与指令功能的关联。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_实验任务"><a class="anchor" href="#_实验任务"></a>实验任务</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在前面实现的23条指令单周期数据通路的基础上，扩充以下4条指令，实现单周期架构的27条指令。</p>
 </div>
 <div class="paragraph">
 <p>（1）U型格式的LUI指令；</p>
@@ -299,6 +311,21 @@
 </div>
 <div class="paragraph">
 <p>本实验首先在远程虚拟实验平台调试验证设计，成功后再移植到线下实验板实速运行。</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="注意"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>本项目实现的是 <strong>单周期架构</strong>。
+代码基础是上上个项目“<a href="RV23-guide.html" class="xref page">实现分支指令</a>”，不是上一个“<a href="RV23PL-guide.html" class="xref page">初步实现流水线</a>”项目。</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>从开源项目托管网站下载实验材料，下载方法见<a href="../L0-download-resource.html" class="xref page">下载实验材料</a>。
@@ -335,13 +362,10 @@
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_任务一微架构设计与验证"><a class="anchor" href="#_任务一微架构设计与验证"></a>任务一、微架构设计与验证</h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="_数据通路设计"><a class="anchor" href="#_数据通路设计"></a>数据通路设计</h3>
+<h3 id="_任务一微架构设计与验证"><a class="anchor" href="#_任务一微架构设计与验证"></a>任务一、微架构设计与验证</h3>
+<div class="sect3">
+<h4 id="_1_数据通路设计"><a class="anchor" href="#_1_数据通路设计"></a>1. 数据通路设计</h4>
 <div class="paragraph">
 <p>通过前面实验的逐步扩展数据通路，已经理解了数据通路与指令之间的关系。本实验不再给定数据通路，而是将设计数据通路作为一个主要的实验任务。</p>
 </div>
@@ -361,8 +385,8 @@
 <p>（3）编写代码实现。</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_虚拟面板设计"><a class="anchor" href="#_虚拟面板设计"></a>虚拟面板设计</h3>
+<div class="sect3">
+<h4 id="_2_虚拟面板设计"><a class="anchor" href="#_2_虚拟面板设计"></a>2. 虚拟面板设计</h4>
 <div class="paragraph">
 <p>根据自己设计的数据通路，绘图作为虚拟面板的背景；添加必要的观察数据和信号，同时在设计代码中添加相应的观察变量。
 所需实验材料如下所示。</p>
@@ -457,8 +481,8 @@
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_验证"><a class="anchor" href="#_验证"></a>验证</h3>
+<div class="sect3">
+<h4 id="_3_验证"><a class="anchor" href="#_3_验证"></a>3. 验证</h4>
 <div class="paragraph">
 <p>编写测试程序，在实验平台运行，分析运行结果是否正确。测试程序要求如下。</p>
 </div>
@@ -504,18 +528,16 @@
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="线下实验板实速运行"><a class="anchor" href="#线下实验板实速运行"></a>任务二、线下实验板实速运行</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="线下实验板实速运行"><a class="anchor" href="#线下实验板实速运行"></a>任务二、线下实验板实速运行</h3>
 <div class="paragraph">
 <p>实速运行是指脱离远程虚拟实验平台的调试环境，在线下实验板运行测试程序，通过板载的拨动开关、LED指示灯、七段数码管等输入程序运行需要的数据、输出运行结果。</p>
 </div>
 <div class="paragraph">
 <p>本课程支持的线下实验板有基于Intel/Altera FPGA的DE2-115和基于AMD/Xilinx FPGA的Nexys4DDR，其他实验板需学员自己适配。下面以DE2-115为例说明移植过程。</p>
 </div>
-<div class="sect2">
-<h3 id="_创建工程"><a class="anchor" href="#_创建工程"></a>创建工程</h3>
+<div class="sect3">
+<h4 id="_1_创建工程"><a class="anchor" href="#_1_创建工程"></a>1. 创建工程</h4>
 <div class="paragraph">
 <p>Quartus支持在同一个工程中创建多个“修订”（Revision），并且可以复制一个现有的Revision设置，在此基础上创建新的Revision。
 所需实验材料如下。</p>
@@ -566,13 +588,14 @@
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_设计代码移植"><a class="anchor" href="#_设计代码移植"></a>设计代码移植</h3>
+<div class="sect3">
+<h4 id="_2_设计代码移植"><a class="anchor" href="#_2_设计代码移植"></a>2. 设计代码移植</h4>
 <div class="paragraph">
 <p>实速运行脱离调试环境独立运行，设计代码的移植主要是屏蔽片上调试器（On-chip debuger，OCD）模块，将原来经过OCD连接的信号改为直接连接；由于指令存储器原来需要OCD写入，所以实际是RAM，屏蔽OCD之后需要改为ROM，建议用IP核实现指令存储器的ROM模块。此外，存储器的时钟也是一个需要考虑的问题。</p>
 </div>
-<div class="sect3">
-<h4 id="_1存储器的类型和时钟"><a class="anchor" href="#_1存储器的类型和时钟"></a>（1）存储器的类型和时钟</h4>
+<div class="paragraph">
+<p>（1）存储器的类型和时钟</p>
+</div>
 <div class="paragraph">
 <p>通过前面的<a href="../ca-docs/L24-memory.html" class="xref page">存储器实验</a>我们已经知道，FPGA内部的存储器有两种类型：同步读和异步读。“同步读”使用FPGA内部的专用RAM资源，不占用逻辑资源，但是锁存地址占用了一个周期，所以需要两个时钟周期才能读出数据。而“异步读”不锁存地址，可以在给出地址的同时读出数据。理论上，单周期CPU应该采用“异步读”存储器与其配合，才能一个周期执行一条指令。但是在调试环境下，OCD采用“同步读”存储器与其配合，为了能够在“单周期”内执行完一条指令，存储器的时钟采用了连续的10MHz时钟，而CPU时钟由OCD提供，仅在用户通过实验软件执行指令时产生一个脉冲；简单来说，存储器采用了比CPU更高频率的时钟，在一个CPU时钟周期内有若干次存储器读出，从而保证了“单周期”执行完一条指令。</p>
 </div>
@@ -582,9 +605,9 @@
 <div class="paragraph">
 <p>前面存储器实验中已经学习了同步读和异步读RAM的Verilog描述方法，而ROM用Verilog描述只能生成异步ROM，同步ROM必须使用IP核<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>。IP核的生成方法见附录。</p>
 </div>
+<div class="paragraph">
+<p>（2）SoC模块的移植</p>
 </div>
-<div class="sect3">
-<h4 id="_2soc模块的移植"><a class="anchor" href="#_2soc模块的移植"></a>（2）SoC模块的移植</h4>
 <div class="paragraph">
 <p>首先替换OCD。将JuTAG_CPU模块的实例化注释掉，添加以下代码，替换原来由JuTAG模块产生的信号，以及经过JuTAG_CPU内部连接的信号。</p>
 </div>
@@ -608,9 +631,8 @@
 <p>最后还要修改数据存储器的实例化。前面实验使用的数据存储器是同步读RAM，时钟连接的是10MHz CLK时钟，现在要将它连接到CLOCK端口提供的50MHz时钟。另外，数据存储器的容量也需要加大，以满足后面编写的应用程序和测试程序的需要；建议数据存储器的容量也设置为16K×32（64KB），至少设置为1K×32（4KB），可在实例化时通过参数进行设置。目前设计的CPU尚未支持存储器的字节访问，数据存储器仍然是按字编址，所以地址也要右移两位。</p>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_应用程序设计和实速运行测试"><a class="anchor" href="#_应用程序设计和实速运行测试"></a>应用程序设计和实速运行测试</h3>
+<div class="sect3">
+<h4 id="_3_应用程序设计和实速运行测试"><a class="anchor" href="#_3_应用程序设计和实速运行测试"></a>3. 应用程序设计和实速运行测试</h4>
 <div class="paragraph">
 <p>遵循从简单到复杂的原则，编写一些包含输入输出的RISC-V汇编语言程序，用来测试移植是否成功以及所设计的CPU能否正确运行。下面通过一个例子说明过程。</p>
 </div>
@@ -740,8 +762,8 @@ END;</pre>
 <p><a href="#exa-rv27-test-io">例 1</a>涉及的指令很少，仅仅做了最基本的输入输出测试，通过以后，还要再编写一些更复杂的程序，更全面地测试所设计的CPU能否正常工作。可以对前面汇编语言实验做过的程序稍加修改，如斐波那契数列计算程序，可以通过开关输入循环次数，数码管显示计算的结果；再如位操作的程序，在汇编语言实验中是通过控制台显示结果，现在可以改用LED显示输出结果。</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_实速运行的调试"><a class="anchor" href="#_实速运行的调试"></a>实速运行的调试</h3>
+<div class="sect3">
+<h4 id="_4_实速运行的调试"><a class="anchor" href="#_4_实速运行的调试"></a>4. 实速运行的调试</h4>
 <div class="paragraph">
 <p>实速运行出现问题，如何排查呢？假如上面举例的简单程序，加载到FPGA运行时拨动开关没反应，数码管显示全0，可能会让人一筹莫展。其实这类看起来很严重的问题，往往是一些小的疏忽造成的，比如在移植过程中，某些信号连接错了。</p>
 </div>
@@ -831,6 +853,7 @@ endmodule</pre>
 <div class="paragraph">
 <p>作者：
 肖铁军 &lt;<a href="mailto:xiaotiejun@foxmail.com.cn">xiaotiejun@foxmail.com.cn</a>&gt;</p>
+</div>
 </div>
 </div>
 </div>
