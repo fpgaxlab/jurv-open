@@ -507,9 +507,9 @@ Done:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_3_存储空间划分和loadstroe指令"><a class="anchor" href="#_3_存储空间划分和loadstroe指令"></a>3. 存储空间划分和Load/Stroe指令</h3>
+<h3 id="_3_存储空间划分和loadstore指令"><a class="anchor" href="#_3_存储空间划分和loadstore指令"></a>3. 存储空间划分和Load/Store指令</h3>
 <div class="paragraph">
-<p>虽然RISC-V硬件的存储结构采用指令存储和数据存储分离的哈佛结构，但操作系统通常将指令存储器和数据存储器作为一个统一的存储空间进行管理，用代码段（text segment）和数据段（data segment）区分指令和数据。RISC-V约定预留x3寄存器指向数据段的起始地址，称作全局指针（global pointer），在汇编语言程序中，x3寄存器也可以用别名gp代替。Ripes模拟器在选择处理器的对话框中可以设置x3的值，如<a href="#img-选择处理器界面">图 2</a>的标记③所指的设置表示数据段的起始地址为0x10000000。因此，在使用Load/Stroe指令编写程序时，注意不要访问代码段的存储空间，以免意外修改了指令。</p>
+<p>虽然RISC-V硬件的存储结构采用指令存储和数据存储分离的哈佛结构，但操作系统通常将指令存储器和数据存储器作为一个统一的存储空间进行管理，用代码段（text segment）和数据段（data segment）区分指令和数据。RISC-V约定预留x3寄存器指向数据段的起始地址，称作全局指针（global pointer），在汇编语言程序中，x3寄存器也可以用别名gp代替。Ripes模拟器在选择处理器的对话框中可以设置x3的值，如<a href="#img-选择处理器界面">图 2</a>的标记③所指的设置表示数据段的起始地址为0x10000000。因此，在使用Load/Store指令编写程序时，注意不要访问代码段的存储空间，以免意外修改了指令。</p>
 </div>
 <div class="paragraph">
 <p>要查看存储器内容，可以切换到Memory视图，在底部Go to section下拉列表框中选择要查看的存储器区域。若选择“.data”，则显示自0x10000000开始的数据存储器的内容，如<a href="#img-Memory视图">图 5</a>所示。</p>
