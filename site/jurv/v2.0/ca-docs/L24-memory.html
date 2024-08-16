@@ -215,7 +215,7 @@
     <a class="nav-link" href="../rv-docs/RV23PL-guide.html">初步实现流水线</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../rv-docs/RV27-guide.html">支持27条指令的单周期架构设计</a>
+    <a class="nav-link" href="../rv-docs/RV27-guide.html">支持27条指令（单周期）</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../rv-docs/RV27PL1-guide.html">解决流水线数据冲突</a>
@@ -379,6 +379,21 @@ endmodule</pre>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>对比<a href="#exa-24-1">例 1</a>和<a href="#exa-24-2">例 2</a>的代码，同步读RAM的读地址也经过了时钟的同步，也就是读地址被锁存了，因此比异步读的RAM在读出时慢了一个时钟周期。但是对于FPGA来说，同步读的RAM可以使用FPGA内部专用的RAM块资源，异步读的RAM则需要占用FPGA的逻辑资源。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="提示"></i>
+</td>
+<td class="content">
+有关两种RAM的特性和比较，可观看慕课视频。
+</td>
+</tr>
+</table>
+</div>
 <div id="exa-24-3" class="exampleblock">
 <div class="title">例 3. ROM</div>
 <div class="content">
@@ -395,17 +410,68 @@ endmodule</pre>
     logic [DATAWIDTH-1:0] mem[0:MEMDEPTH-1];
     assign oData = mem[iAddress];
 
-    initial begin
-        $readmemb("init_mem.txt",mem); // 如果文件中的数据是十六进制，用 $readmemh 
-        /* 云编译无法上传txt文件，可采用如下代码代替上面的readmemh
-        mem[n'h00] = n'...;
-        ......                   */
+    initial begin <i class="conum" data-value="1"></i><b>(1)</b>
+        $readmemb("init_mem.txt",mem); <i class="conum" data-value="2"></i><b>(2)</b>
+        // 如果文件中的数据是十六进制，用 $readmemh
+        // 也可采用如下赋值语句进行初始化
+        // mem[n'h00] = n'...; <i class="conum" data-value="3"></i><b>(3)</b>
+        // ......                   
     end
 
 endmodule</pre>
 </div>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>比较RAM和ROM的端口可以发现，ROM作为只读存储器，没有写数据和写入控制端口，甚至也没有时钟端口；
+就像是软件中的“数组”，存储单元的地址是数组的索引，存储单元的内容则是数组元素的值。
+ROM的内容是事先写入的，对于FPGA来说，需要在设计时确定存储器的内容，称为初始化，编译时将初始值固定在电路中。在verilog中，用 <code>initial</code> 块初始化存储器的内容，如<a href="#exa-24-3">例 3</a> ①所示。
+具体有两种方法，一种是用 <code>$readmemb</code> 或 <code>$readmemh</code> 系统函数，如<a href="#exa-24-3">例 3</a> ②所示；另一种是用赋值语句，如<a href="#exa-24-3">例 3</a> ③所示。
+系统函数从一个文本文件读取初始化数据，<a href="#exa-24-4">例 4</a>是初始化文件的一个示例。</p>
+</div>
+<div id="exa-24-4" class="exampleblock">
+<div class="title">例 4. init_mem.txt文件</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>@00 11000000
+@01
+@02
+@03
+@04
+@05
+@06
+@07
+@08
+@09
+@0A
+@0B
+@0C
+@0D
+@0E
+@0F</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <em>init_mem.txt</em> 文件中，紧跟在 <code>@</code> 后面的是地址，然后是至少一个空白字符，再给出该地址单元的值。<a href="#exa-24-4">例 4</a>只有第一行给出了存储单元的数值，下面的各行需要学员自己完成。
+如果使用 <code>$readmemb</code> 函数，编译器按二进制解释给出的存储单元的数值；如果使用 <code>$readmemh</code> 函数，则应以十六进制给出存储单元的数值。但无论哪个函数，地址始终是十六进制表示。
+初始化文件中可以只初始化需要的单元，地址可以是不连续的。
+如果某一行的地址与上一行是连续的，则该行的地址也可以省略不写。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注"></i>
+</td>
+<td class="content">
+如果使用远程实验平台的云编译功能，只能采用赋值语句的方法。目前远程实验平台未提供上传初始化文件的功能。
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -416,7 +482,8 @@ endmodule</pre>
 <dl>
 <dt class="hdlist1">1.用ROM实现七段译码器</dt>
 <dd>
-<p>设计一个16×8的只读存储器，用存储器的4位地址作为七段译码器的数据输入，相应存储单元的8位数据作为译码器的输出。存储单元中固化十六个字符的数码管段码，要求用赋值语句进行初始化。</p>
+<p>设计一个16×8的只读存储器，存储单元中固化十六个字符0～F的数码管段码；用存储器的4位地址作为七段译码器的数据输入，相应存储单元的8位数据作为七段译码器的输出。
+<a href="#exa-24-4">例 4</a>第一行给出了字符“0”的编码，其余字符编码需要自己编写。</p>
 </dd>
 <dt class="hdlist1">2.用RAM实现寄存器堆</dt>
 <dd>

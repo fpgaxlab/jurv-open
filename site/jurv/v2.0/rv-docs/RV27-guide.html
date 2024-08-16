@@ -215,7 +215,7 @@
     <a class="nav-link" href="RV23PL-guide.html">初步实现流水线</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="RV27-guide.html">支持27条指令的单周期架构设计</a>
+    <a class="nav-link" href="RV27-guide.html">支持27条指令（单周期）</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="RV27PL1-guide.html">解决流水线数据冲突</a>
@@ -263,7 +263,7 @@
   <ul>
     <li><a href="../index.html">RISC-V CPU设计实验教程</a></li>
     <li>RISC-V CPU设计实验</li>
-    <li><a href="RV27-guide.html">支持27条指令的单周期架构设计</a></li>
+    <li><a href="RV27-guide.html">支持27条指令（单周期）</a></li>
   </ul>
 </nav>
 <div class="page-versions">
@@ -707,7 +707,7 @@ END;</pre>
 <p>注意，mif文件中的地址是字地址，是<a href="#exa-rv27-test-io">例 1</a>程序清单中的指令地址除4。</p>
 </div>
 <div class="paragraph">
-<p>如果指令存储器是写代码实现的异步ROM，将指令代码写入一文本文件，文件格式在<a href="../ca-docs/L24-memory.html" class="xref page">存储器实验</a>学习过。</p>
+<p>如果指令存储器是写代码实现的异步ROM，将指令编码写入一文本文件作为存储器的初始化文件，文件格式在<a href="../ca-docs/L24-memory.html" class="xref page">存储器实验</a>学习过。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -738,7 +738,7 @@ END;</pre>
 <p>（3）编译并运行</p>
 </div>
 <div class="paragraph">
-<p>在Quartus的存储器IP核设置中，指定上述mif文件作为初始内容文件，编译工程，将电路文件加载到DE2-115开发板的FPGA中。有关Quartus软件为DE2-115加载电路的操作说明，见前面“认识虚拟实验”的实验指导《FPGA验证流程（本地版）》。</p>
+<p>在Quartus的存储器IP核设置中，指定上述mif文件作为初始内容文件，编译工程，将电路文件加载到DE2-115开发板的FPGA中。有关Quartus软件为DE2-115加载电路的操作说明，见“实验工具和环境”中的“<a href="../L02-guide-local-julab.html#Quartus下载sof" class="xref page">本地实验验证流程-JULAB版</a>”。</p>
 </div>
 <div class="paragraph">
 <p>从<a href="#exa-rv27-test-io">例 1</a>可以看出，该程序的功能是读出拨动开关的值，输出到LED指示灯和数码管进行显示。拨动开关，检查指示灯和数码管的显示是否正确。</p>
