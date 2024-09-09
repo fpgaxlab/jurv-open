@@ -3,7 +3,9 @@
 ### 介绍
 RISC-V CPU 实验资源。
 
-配套指导书网址：[https://jurv-open.pages.dev/](https://jurv-open.pages.dev/)（注：2024年5月Gitee Pages暂停服务之前发布在 [http://fpga-lab.gitee.io/jurv-open](http://fpga-lab.gitee.io/jurv-open)）。
+配套指导书阅读网址：[https://jurv-open.pages.dev/](https://jurv-open.pages.dev/)
+或[https://fpgaxlab.github.io/jurv-open/](https://fpgaxlab.github.io/jurv-open/)。
+（注：2024年5月Gitee Pages暂停服务之前发布在 http://fpga-lab.gitee.io/jurv-open）。
 
 授课视频见中国大学MOOC(慕课)开放课程《计算机组成与CPU设计实验》（肖铁军 赵蕙），实验环境使用[FPGA实验云平台](http://welab.ujs.edu.cn/new/)。
 
