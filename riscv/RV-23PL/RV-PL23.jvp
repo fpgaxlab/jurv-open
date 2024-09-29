@@ -579,7 +579,7 @@
 				0
 			]
 		},
-		"cpuName": "RISC-V PL",
+		"cpuName": "RISC-V",
 		"cpuVersion": "1.2.3",
 		"dataPathInfo": [
 			{
@@ -1611,27 +1611,13 @@
 				"ctlBus": 0,
 				"ctlLine": [
 					[
-						30,
-						39,
-						40
-					]
-				],
-				"ctlName": "Branch-EX",
-				"key": 11,
-				"node": 0
-			},
-			{
-				"binding": 0,
-				"ctlBus": 0,
-				"ctlLine": [
-					[
 						47,
 						52,
 						59
 					]
 				],
 				"ctlName": "RegWr",
-				"key": 12,
+				"key": 11,
 				"node": 0
 			},
 			{
@@ -1639,7 +1625,7 @@
 				"ctlBus": 0,
 				"ctlLine": [],
 				"ctlName": "MtoR",
-				"key": 13,
+				"key": 12,
 				"node": 0
 			},
 			{
@@ -1652,7 +1638,7 @@
 					]
 				],
 				"ctlName": "MemWr",
-				"key": 14,
+				"key": 13,
 				"node": 0
 			},
 			{
@@ -1667,7 +1653,7 @@
 					]
 				],
 				"ctlName": "alu",
-				"key": 15,
+				"key": 14,
 				"node": 0
 			},
 			{
@@ -1682,7 +1668,7 @@
 					]
 				],
 				"ctlName": "JUBSI",
-				"key": 16,
+				"key": 15,
 				"node": 0
 			},
 			{
@@ -1696,7 +1682,7 @@
 					[]
 				],
 				"ctlName": "ItoA",
-				"key": 17,
+				"key": 16,
 				"node": 0
 			},
 			{
@@ -1704,6 +1690,20 @@
 				"ctlBus": 0,
 				"ctlLine": [],
 				"ctlName": "Branch",
+				"key": 17,
+				"node": 0
+			},
+			{
+				"binding": 0,
+				"ctlBus": 0,
+				"ctlLine": [
+					[
+						30,
+						39,
+						40
+					]
+				],
+				"ctlName": "Branch-EX",
 				"key": 18,
 				"node": 0
 			}
