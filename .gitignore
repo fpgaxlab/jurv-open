@@ -64,3 +64,6 @@ PLLJ_PLLSPE_INFO.txt
 # !*.svh
 # !*.sdc
 # !*.tcl
+
+# ignore draw.io backup
+.$*
