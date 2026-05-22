@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>算术逻辑单元实验 :: RISC-V CPU设计实验教程</title>
-    <meta name="generator" content="Antora 3.1.3">
+    <link rel="prev" href="L21-add_sub_operation.html">
+    <link rel="next" href="L23-single_cycle_datapath.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
     <link rel="stylesheet" href="../../../_/css/site.css">
   </head>
   <body class="article">
@@ -49,9 +51,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../video-links.html">教学视频资源</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -79,6 +78,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-links.html">相关链接汇总</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,10 +103,16 @@
     <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-prepare.html">本地实验的准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L03-guide-modelsim.html">ModelSim仿真入门</a>
   </li>
 </ul>
   </li>
@@ -233,7 +241,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">RISC-V CPU设计实验教程</span>
-    <span class="version">2023秋</span>
+    <span class="version">v2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -243,7 +251,7 @@
       <div class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">2023秋</a>
+          <a href="../index.html">v2.1</a>
         </li>
         <li class="version">
           <a href="../../v1.0/index.html">2023春</a>
@@ -267,9 +275,9 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="L22-arithmetic_logic_unit.html">2023秋</a>
+    <a class="version is-current" href="L22-arithmetic_logic_unit.html">v2.1</a>
     <a class="version" href="../../v1.0/ca-docs/L22-arithmetic_logic_unit.html">2023春</a>
   </div>
 </div>
@@ -326,7 +334,7 @@
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>localparam N = 4;
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">localparam N = 4;
 logic [N-1:0] A, B, F; 
 logic C0, Cn;
 logic sign, zero, overflow, carryOut;
@@ -344,7 +352,7 @@ begin
       2'b11: {Cn, F} = {1'b0, (X ^ Y)};
       default: {Cn, F} = {(N+1){1'bx}};
    endcase
-end</pre>
+end</code></pre>
 </div>
 </div>
 </div>
@@ -357,7 +365,7 @@ end</pre>
 <div class="paragraph">
 <p>（1）用HDL设计ALU，实现<a href="#tab-6">表 1</a>列出的运算功能。</p>
 </div>
-<table id="tab-6" class="tableblock frame-all grid-all stretch">
+<table id="tab-6" class="tableblock frame-all grid-all center" style="width: 80%;">
 <caption class="title">表 1. ALU运算功能与控制信号</caption>
 <colgroup>
 <col style="width: 20%;">
@@ -522,7 +530,7 @@ SystemVerilog比较运算符根据运算数据的类型自动选择进行带符�
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>`include "definitions.sv"
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`include "definitions.sv"
 module ALU
 #(parameter N=32)
 (
@@ -573,7 +581,7 @@ assign oFlag.zero = ~(|oF);
 assign oFlag.overflow = ~A[N-1] &amp; ~B[N-1] &amp; oF[N-1] | A[N-1] &amp; B[N-1] &amp; ~oF[N-1] ;
 assign oFlag.carryOut = (M0==1'b0) ? Cn : ~Cn;
   
-endmodule</pre>
+endmodule</code></pre>
 </div>
 </div>
 </div>
@@ -586,7 +594,7 @@ endmodule</pre>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>package alu_defs;
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">package alu_defs;
 
    typedef struct packed{
       logic sign; 
@@ -603,7 +611,7 @@ endmodule</pre>
       XOR = 4'b0101
    } aluop;
 
-endpackage</pre>
+endpackage</code></pre>
 </div>
 </div>
 </div>
@@ -620,7 +628,7 @@ endpackage</pre>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>/****** Replace input ports with internal signals *******/
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">/****** Replace input ports with internal signals *******/
 wire [3:0] ALUop = S[12:9];
 wire [3:0] X = S[7:4];
 wire [3:0] Y = S[3:0];
@@ -637,7 +645,7 @@ ALU #(.N(4)) alu(
 
 /***** Internal signals assignment to output ports ******/
 assign L[11:8] = F;
-assign L[15:12] = flag; <i class="conum" data-value="1"></i><b>(1)</b></pre>
+assign L[15:12] = flag; <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
 </div>
@@ -761,15 +769,21 @@ assign L[15:12] = flag; <i class="conum" data-value="1"></i><b>(1)</b></pre>
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="L21-add_sub_operation.html">加减运算电路实验</a></span>
+  <span class="next"><a href="L23-single_cycle_datapath.html">单周期数据通路实验</a></span>
+</nav>
 </article>
   </div>
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the Antora default UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
-</footer>
-<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+  <div class="footer-legal" style="text-align: center;">
+    <p>版权所有 © 2022-2026 肖铁军 [<a href="mailto:xiaotiejun@foxmail.com">xiaotiejun@foxmail.com</a>] </p>
+    <p>除另有说明外，本站文档内容遵循知识共享 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>（<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA</a>）。</p>
+    <p>本站用户界面衍生自 Antora default UI，并根据 MPL-2.0 许可证获得许可。</p>
+  </div>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

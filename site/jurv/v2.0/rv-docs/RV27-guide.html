@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>支持27条指令的单周期架构设计 :: RISC-V CPU设计实验教程</title>
-    <meta name="generator" content="Antora 3.1.3">
+    <link rel="prev" href="RV23PL-guide.html">
+    <link rel="next" href="RV27PL1-guide.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
     <link rel="stylesheet" href="../../../_/css/site.css">
   </head>
   <body class="article">
@@ -49,9 +51,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../video-links.html">教学视频资源</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -79,6 +78,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-links.html">相关链接汇总</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,10 +103,16 @@
     <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-prepare.html">本地实验的准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L03-guide-modelsim.html">ModelSim仿真入门</a>
   </li>
 </ul>
   </li>
@@ -233,7 +241,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">RISC-V CPU设计实验教程</span>
-    <span class="version">2023秋</span>
+    <span class="version">v2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -243,7 +251,7 @@
       <div class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">2023秋</a>
+          <a href="../index.html">v2.1</a>
         </li>
         <li class="version">
           <a href="../../v1.0/index.html">2023春</a>
@@ -267,9 +275,9 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="RV27-guide.html">2023秋</a>
+    <a class="version is-current" href="RV27-guide.html">v2.1</a>
     <a class="version" href="../../v1.0/rv-docs/RV27-guide.html">2023春</a>
   </div>
 </div>
@@ -321,7 +329,7 @@
 <td class="content">
 <div class="paragraph">
 <p>本项目实现的是 <strong>单周期架构</strong>。
-代码基础是上上个项目“<a href="RV23-guide.html" class="xref page">实现分支指令</a>”，不是上一个“<a href="RV23PL-guide.html" class="xref page">初步实现流水线</a>”项目。</p>
+代码基础是上上个项目<a href="RV23-guide.html" class="xref page">实现分支指令</a>，不是上一个<a href="RV23PL-guide.html" class="xref page">初步实现流水线</a>项目。</p>
 </div>
 </td>
 </tr>
@@ -331,14 +339,14 @@
 <p>从开源项目托管网站下载实验材料，下载方法见<a href="../L0-download-resource.html" class="xref page">下载实验材料</a>。
 实验材料的文件组织如下。</p>
 </div>
-<div id="lst-rv27-dirs" class="listingblock">
+<div id="lst-rv27-dirs" class="literalblock">
 <div class="content">
 <pre>📂 riscv
   📂 RV-00
-    📂 project_de2-115 <i class="conum" data-value="1"></i><b>(1)</b>
+    📁 project_de2-115 <i class="conum" data-value="1"></i><b>(1)</b>
   📂 RV-27
     📁 diagram    <i class="conum" data-value="2"></i><b>(2)</b>
-    📂 real-speed <i class="conum" data-value="3"></i><b>(3)</b>
+    📁 real-speed <i class="conum" data-value="3"></i><b>(3)</b>
     📁 testbench  <i class="conum" data-value="4"></i><b>(4)</b></pre>
 </div>
 </div>
@@ -391,11 +399,11 @@
 <p>根据自己设计的数据通路，绘图作为虚拟面板的背景；添加必要的观察数据和信号，同时在设计代码中添加相应的观察变量。
 所需实验材料如下所示。</p>
 </div>
-<div id="lst-rv27-diagram" class="listingblock">
+<div id="lst-rv27-diagram" class="literalblock">
 <div class="content">
 <pre>📂 riscv
   📂 RV-27
-    📁 diagram
+    📂 diagram
       📄 RV-23.drawio
       📄 RV-27_golden.jvp</pre>
 </div>
@@ -404,13 +412,13 @@
 <p>（1）绘制虚拟面板背景图</p>
 </div>
 <div class="paragraph">
-<p>根据自己设计的数据通路，绘图作为虚拟面板的背景。可使用<a href="../L02-guide-remote.html#设计虚拟面板" class="xref page">远程实验验证流程</a>中推荐的开源软件<a href="https://www.diagrams.net">diagrams.net</a>（又名draw.io）。</p>
+<p>根据自己设计的数据通路，绘图作为虚拟面板的背景。可使用<a href="../L02-guide-remote.html" class="xref page">远程实验验证流程</a>推荐的开源软件<a href="https://www.diagrams.net">diagrams.net</a>（又名draw.io）。</p>
 </div>
 <div class="paragraph">
 <p>为了减少绘制背景图的工作量，实验材料<em>diagram</em>文件夹下提供了前面23条指令的单周期数据通路图<em>RV-23.drawio</em>，可在此基础上修改。</p>
 </div>
 <div class="paragraph">
-<p>绘制完成的背景图需导出为PNG格式，具体方法见<a href="../L02-guide-remote.html#设计虚拟面板" class="xref page">远程实验验证流程</a>中的相关说明。
+<p>绘制完成的背景图需导出为PNG格式，具体方法见<a href="../L02-guide-remote.html" class="xref page">远程实验验证流程</a>中<a href="../L02-guide-remote.html#设计虚拟面板" class="xref page">设计虚拟面板</a>的相关说明。
 如果PNG图片在虚拟面板上的显示尺寸过大或过小，可以改变dpi重新导出。</p>
 </div>
 <div class="paragraph">
@@ -424,7 +432,7 @@
 <p>（3）导入背景图</p>
 </div>
 <div class="paragraph">
-<p>用上面自己绘制的背景图替换虚拟面板的背景图。操作方法可参考<a href="../L02-guide-remote.html#设计虚拟面板" class="xref page">远程实验验证流程</a>中的相关说明。</p>
+<p>用上面自己绘制的背景图替换虚拟面板的背景图。操作方法可参考<a href="../L02-guide-remote.html#设计虚拟面板" class="xref page">设计虚拟面板</a>的相关说明。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -451,7 +459,7 @@
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>    //送给调试器的观察信号，需要与虚拟面板的信号框相对应
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">    //送给调试器的观察信号，需要与虚拟面板的信号框相对应
     struct packed{
         logic       WS1 ;   //MemWrite
         logic       WS0 ;   //RegWrite
@@ -463,7 +471,7 @@
         logic [4:0]  WD2;   //ra1
         logic [31:0] WD1;   //instruction
         logic [31:0] WD0;   //pc
-    }wd;</pre>
+    }wd;</code></pre>
 </div>
 </div>
 <div class="admonitionblock caution">
@@ -542,11 +550,11 @@
 <p>Quartus支持在同一个工程中创建多个“修订”（Revision），并且可以复制一个现有的Revision设置，在此基础上创建新的Revision。
 所需实验材料如下。</p>
 </div>
-<div id="lst-rv27-de2115" class="listingblock">
+<div id="lst-rv27-de2115" class="literalblock">
 <div class="content">
 <pre>📂 riscv
   📂 RV-00
-    📁 project_de2-115
+    📂 project_de2-115
       📄 create_revision_rv_DE2115.tcl
       📄 DE2-115.sdc
       📄 DE2-115.tcl
@@ -597,13 +605,13 @@
 <p>（1）存储器的类型和时钟</p>
 </div>
 <div class="paragraph">
-<p>通过前面的<a href="../ca-docs/L24-memory.html" class="xref page">存储器实验</a>我们已经知道，FPGA内部的存储器有两种类型：同步读和异步读。“同步读”使用FPGA内部的专用RAM资源，不占用逻辑资源，但是锁存地址占用了一个周期，所以需要两个时钟周期才能读出数据。而“异步读”不锁存地址，可以在给出地址的同时读出数据。理论上，单周期CPU应该采用“异步读”存储器与其配合，才能一个周期执行一条指令。但是在调试环境下，OCD采用“同步读”存储器与其配合，为了能够在“单周期”内执行完一条指令，存储器的时钟采用了连续的10MHz时钟，而CPU时钟由OCD提供，仅在用户通过实验软件执行指令时产生一个脉冲；简单来说，存储器采用了比CPU更高频率的时钟，在一个CPU时钟周期内有若干次存储器读出，从而保证了“单周期”执行完一条指令。</p>
+<p>通过前面的<a href="../ca-docs/L24-memory.html" class="xref page">存储器</a>实验我们已经知道，FPGA内部的存储器有两种类型：同步读和异步读。“同步读”使用FPGA内部的专用RAM资源，不占用逻辑资源，但是锁存地址占用了一个周期，所以需要两个时钟周期才能读出数据。而“异步读”不锁存地址，可以在给出地址的同时读出数据。理论上，单周期CPU应该采用“异步读”存储器与其配合，才能一个周期执行一条指令。但是在调试环境下，OCD采用“同步读”存储器与其配合，为了能够在“单周期”内执行完一条指令，存储器的时钟采用了连续的10MHz时钟，而CPU时钟由OCD提供，仅在用户通过实验软件执行指令时产生一个脉冲；简单来说，存储器采用了比CPU更高频率的时钟，在一个CPU时钟周期内有若干次存储器读出，从而保证了“单周期”执行完一条指令。</p>
 </div>
 <div class="paragraph">
 <p>实速运行时，CPU时钟不再由OCD提供，而是采用10MHz时钟，这时存储器模块就有两种选择。如果仍然采用“同步读”存储器，存储器时钟就要采用更高频率的时钟，以满足“单周期”的要求；或者采用“异步读”存储器，存储器时钟采用与CPU相同的10MHz时钟。</p>
 </div>
 <div class="paragraph">
-<p>前面存储器实验中已经学习了同步读和异步读RAM的Verilog描述方法，而ROM用Verilog描述只能生成异步ROM，同步ROM必须使用IP核<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>。IP核的生成方法见附录。</p>
+<p>前面存储器实验中已经学习了同步读和异步读RAM的Verilog描述方法，而ROM用Verilog描述只能生成异步ROM，同步ROM必须使用IP核（注：作者尝试用同步方法描述的ROM，但在Quartus环境下编译的结果并未使用专用的RAM块）。IP核的生成方法见附录。</p>
 </div>
 <div class="paragraph">
 <p>（2）SoC模块的移植</p>
@@ -613,7 +621,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    assign cpuReset = RESET;
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">    assign cpuReset = RESET;
     assign cpuClk = CLK;
     assign memWR = cpuWR;
     assign memRD = cpuRD;
@@ -621,7 +629,7 @@
     assign memWriteData = cpuWriteData;
     assign bsc_sw = vSWITCH;
     assign bsc_btn = vBUTTON;
-    assign JTDO = JTDI;</pre>
+    assign JTDO = JTDI;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -707,7 +715,7 @@ END;</pre>
 <p>注意，mif文件中的地址是字地址，是<a href="#exa-rv27-test-io">例 1</a>程序清单中的指令地址除4。</p>
 </div>
 <div class="paragraph">
-<p>如果指令存储器是写代码实现的异步ROM，将指令编码写入一文本文件作为存储器的初始化文件，文件格式在<a href="../ca-docs/L24-memory.html" class="xref page">存储器实验</a>学习过。</p>
+<p>如果指令存储器是写代码实现的异步ROM，将指令编码写入一文本文件作为存储器的初始化文件，文件格式在<a href="../ca-docs/L24-memory.html" class="xref page">存储器</a>实验学习过。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -724,7 +732,7 @@ END;</pre>
 <div class="paragraph">
 <p>上述文件在实验材料中提供，如下所示。</p>
 </div>
-<div id="lst-rv27-real-speed" class="listingblock">
+<div id="lst-rv27-real-speed" class="literalblock">
 <div class="content">
 <pre>📂 riscv
   📂 RV-27
@@ -779,7 +787,7 @@ END;</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    wire rst_btn = SW[17];</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">    wire rst_btn = SW[17];</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -787,7 +795,7 @@ END;</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    wire rst_btn = 1'b0;</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">    wire rst_btn = 1'b0;</code></pre>
 </div>
 </div>
 </td>
@@ -798,14 +806,14 @@ END;</pre>
 <p>通过仔细检查代码，有些错误可以被发现，但还有些错误可能隐藏的比较深，没那么容易看出来。即使解决了小疏忽，基本输入输出正常了，但是更复杂的测试程序出现问题，就难以通过看代码找出问题。</p>
 </div>
 <div class="paragraph">
-<p>在计数器实验中曾经介绍过仿真工具，对于像CPU这样的复杂电路来说，仿真是一种比较高效的调试方法，也是工业界通行的验证方法。<a href="#exa-rv27-testbench">例 2</a>给出了一个testbench代码，可以用它对自己的设计进行仿真。仿真工具的使用方法，可参阅计数器实验中的实验指导<a href="../L03-guide-modelsim.html" class="xref page">ModelSim仿真入门</a>，更多资料可阅读<a href="https://www.intel.cn/content/www/cn/zh/docs/programmable/683870.html">《Intel Quartus Prime用户指南: 第三方仿真》</a>。</p>
+<p>在计数器实验中曾经介绍过仿真工具，对于像CPU这样的复杂电路来说，仿真是一种比较高效的调试方法，也是工业界通行的验证方法。<a href="#exa-rv27-testbench">例 2</a>给出了一个testbench代码，可以用它对自己的设计进行仿真。仿真工具的使用方法，可参阅<a href="../L03-guide-modelsim.html" class="xref page">ModelSim仿真入门</a>，更多资料可阅读<a href="https://www.intel.cn/content/www/cn/zh/docs/programmable/683870.html">《Intel Quartus Prime用户指南: 第三方仿真》</a>。</p>
 </div>
 <div id="exa-rv27-testbench" class="exampleblock">
 <div class="title">例 2. testbench</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>`timescale 1ns / 100ps
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`timescale 1ns / 100ps
 module tb_soc();
 
 reg rst;
@@ -833,7 +841,7 @@ initial begin
 	forever #50 sys_clk = ~sys_clk;	//10Mhz
 end
 
-endmodule</pre>
+endmodule</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -860,21 +868,21 @@ endmodule</pre>
 </div>
 </div>
 </div>
-<div id="footnotes">
-<hr>
-<div class="footnote" id="_footnotedef_1">
-<a href="#_footnoteref_1">1</a>. 作者用同步方法描述的ROM，在Quartus环境下编译的结果并未使用专用的RAM块。如果读者找到了描述方法，欢迎交流。
-</div>
-</div>
+<nav class="pagination">
+  <span class="prev"><a href="RV23PL-guide.html">初步实现流水线</a></span>
+  <span class="next"><a href="RV27PL1-guide.html">解决流水线数据冲突</a></span>
+</nav>
 </article>
   </div>
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the Antora default UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
-</footer>
-<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+  <div class="footer-legal" style="text-align: center;">
+    <p>版权所有 © 2022-2026 肖铁军 [<a href="mailto:xiaotiejun@foxmail.com">xiaotiejun@foxmail.com</a>] </p>
+    <p>除另有说明外，本站文档内容遵循知识共享 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>（<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA</a>）。</p>
+    <p>本站用户界面衍生自 Antora default UI，并根据 MPL-2.0 许可证获得许可。</p>
+  </div>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

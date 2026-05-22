@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>登录远程实验平台 :: RISC-V CPU设计实验教程</title>
-    <meta name="generator" content="Antora 3.1.3">
+    <link rel="prev" href="L0-mooc-video.html">
+    <link rel="next" href="L0-links.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
     <link rel="stylesheet" href="../../_/css/site.css">
   </head>
   <body class="article">
@@ -49,9 +51,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="video-links.html">教学视频资源</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -79,6 +78,9 @@
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-links.html">相关链接汇总</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,10 +103,16 @@
     <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-prepare.html">本地实验的准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L03-guide-modelsim.html">ModelSim仿真入门</a>
   </li>
 </ul>
   </li>
@@ -233,7 +241,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">RISC-V CPU设计实验教程</span>
-    <span class="version">2023秋</span>
+    <span class="version">v2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -243,7 +251,7 @@
       <div class="title"><a href="index.html">RISC-V CPU设计实验教程</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">2023秋</a>
+          <a href="index.html">v2.1</a>
         </li>
         <li class="version">
           <a href="../v1.0/index.html">2023春</a>
@@ -268,9 +276,9 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="L0-welab-login.html">2023秋</a>
+    <a class="version is-current" href="L0-welab-login.html">v2.1</a>
     <a class="version" href="../v1.0/L0-welab-login.html">2023春</a>
   </div>
 </div>
@@ -341,9 +349,6 @@
 <p>自学学员请在首页选择“RISC-V CPU设计实验”课程，进入后在“所属班级”选择“默认班级”，点击“立即报名”。如果还未登录，会显示登录页面；如果尚未注册，点击登录页面右上角的“去注册”。</p>
 </div>
 <div class="paragraph">
-<p>学分课程报名后需要等待教师审核，如果长时间未得到审核，请主动向任课教师反映。共享课程报名后通常不需要等待审核，如果需要审核且超过24小时未得到审核，请加入QQ群121253650反馈。学分课程的学生请勿加入此群。</p>
-</div>
-<div class="paragraph">
 <p>报名成功后在“我的课程”可以看到该课程，在“实验项目”中选择实验项目点击“立即实验”。</p>
 </div>
 </div>
@@ -358,7 +363,8 @@
 <p>学分课程的学生通常由教师后台注册。请咨询任课教师，避免重复注册导致统计成绩出错。</p>
 </div>
 <div class="paragraph">
-<p>自学学员需要自行注册。注册后可能需要等待审核，一般不超过24小时。如果长时间未得到审核或者注册遇到问题，请加入QQ群：121253650 反映。（学分课程的学生请勿加入此群。）</p>
+<p>自学学员需要自行注册。注册后可能需要等待审核，一般不超过24小时。
+视本校教学压力及平台开放能力等因素的限制，平台可能会暂停审核。</p>
 </div>
 </div>
 </div>
@@ -378,15 +384,21 @@
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="L0-mooc-video.html">登录慕课平台</a></span>
+  <span class="next"><a href="L0-links.html">相关链接汇总</a></span>
+</nav>
 </article>
   </div>
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the Antora default UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
-</footer>
-<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+  <div class="footer-legal" style="text-align: center;">
+    <p>版权所有 © 2022-2026 肖铁军 [<a href="mailto:xiaotiejun@foxmail.com">xiaotiejun@foxmail.com</a>] </p>
+    <p>除另有说明外，本站文档内容遵循知识共享 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>（<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA</a>）。</p>
+    <p>本站用户界面衍生自 Antora default UI，并根据 MPL-2.0 许可证获得许可。</p>
+  </div>
+</footer><script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
 <script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

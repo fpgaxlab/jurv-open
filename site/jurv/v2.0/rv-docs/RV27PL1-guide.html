@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>解决流水线数据冲突 :: RISC-V CPU设计实验教程</title>
-    <meta name="generator" content="Antora 3.1.3">
+    <link rel="prev" href="RV27-guide.html">
+    <link rel="next" href="RV27PL2-guide.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
     <link rel="stylesheet" href="../../../_/css/site.css">
   </head>
   <body class="article">
@@ -49,9 +51,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../video-links.html">教学视频资源</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -79,6 +78,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-links.html">相关链接汇总</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,10 +103,16 @@
     <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-prepare.html">本地实验的准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L03-guide-modelsim.html">ModelSim仿真入门</a>
   </li>
 </ul>
   </li>
@@ -233,7 +241,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">RISC-V CPU设计实验教程</span>
-    <span class="version">2023秋</span>
+    <span class="version">v2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -243,7 +251,7 @@
       <div class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">2023秋</a>
+          <a href="../index.html">v2.1</a>
         </li>
         <li class="version">
           <a href="../../v1.0/index.html">2023春</a>
@@ -267,9 +275,9 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="RV27PL1-guide.html">2023秋</a>
+    <a class="version is-current" href="RV27PL1-guide.html">v2.1</a>
     <a class="version" href="../../v1.0/rv-docs/RV27PL1-guide.html">2023春</a>
   </div>
 </div>
@@ -337,8 +345,8 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    add x5,x0,4 <i class="conum" data-value="1"></i><b>(1)</b>
-    add x6,x5,3 <i class="conum" data-value="2"></i><b>(2)</b></pre>
+<pre class="highlightjs highlight"><code class="language-riscv hljs" data-lang="riscv">    add x5,x0,4 <i class="conum" data-value="1"></i><b>(1)</b>
+    add x6,x5,3 <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -355,8 +363,8 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    lw x19,8(x0)    <i class="conum" data-value="1"></i><b>(1)</b>
-    addi x20,x19,3  <i class="conum" data-value="2"></i><b>(2)</b></pre>
+<pre class="highlightjs highlight"><code class="language-riscv hljs" data-lang="riscv">    lw x19,8(x0)    <i class="conum" data-value="1"></i><b>(1)</b>
+    addi x20,x19,3  <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -367,10 +375,10 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    add x4,x1,x1    <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-riscv hljs" data-lang="riscv">    add x4,x1,x1    <i class="conum" data-value="1"></i><b>(1)</b>
     add x4,x2,x2    <i class="conum" data-value="2"></i><b>(2)</b>
     add x4,x3,x3    <i class="conum" data-value="3"></i><b>(3)</b>
-    sub x6,x5,x4    <i class="conum" data-value="4"></i><b>(4)</b></pre>
+    sub x6,x5,x4    <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -400,11 +408,11 @@
 <p>根据自己设计的数据通路，绘图作为虚拟面板的背景；添加必要的观察数据和信号，同时在设计代码中添加相应的观察变量。
 具体步骤可参阅<a href="RV27-guide.html" class="xref page">支持27条指令</a>，但是实验材料有所不同，本实验所需实验材料如下所示。</p>
 </div>
-<div id="lst-rv27-diagram" class="listingblock">
+<div id="lst-rv27pl1-diagram" class="literalblock">
 <div class="content">
 <pre>📂 riscv
   📂 RV-27PL1
-    📁 diagram
+    📂 diagram
       📄 RV-PL23.drawio
       📄 RV-PL27_golden.jvp</pre>
 </div>
@@ -436,15 +444,21 @@
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="RV27-guide.html">支持27条指令（单周期）</a></span>
+  <span class="next"><a href="RV27PL2-guide.html">解决流水线控制冲突</a></span>
+</nav>
 </article>
   </div>
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the Antora default UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
-</footer>
-<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+  <div class="footer-legal" style="text-align: center;">
+    <p>版权所有 © 2022-2026 肖铁军 [<a href="mailto:xiaotiejun@foxmail.com">xiaotiejun@foxmail.com</a>] </p>
+    <p>除另有说明外，本站文档内容遵循知识共享 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>（<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA</a>）。</p>
+    <p>本站用户界面衍生自 Antora default UI，并根据 MPL-2.0 许可证获得许可。</p>
+  </div>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

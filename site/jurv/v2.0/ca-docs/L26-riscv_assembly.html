@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>RISC-V汇编语言实验 :: RISC-V CPU设计实验教程</title>
-    <meta name="generator" content="Antora 3.1.3">
+    <link rel="prev" href="L25-hardwire_controller.html">
+    <link rel="next" href="L27-riscv_micro_architecture.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
     <link rel="stylesheet" href="../../../_/css/site.css">
   </head>
   <body class="article">
@@ -49,9 +51,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../video-links.html">教学视频资源</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -79,6 +78,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-links.html">相关链接汇总</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,10 +103,16 @@
     <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-prepare.html">本地实验的准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L03-guide-modelsim.html">ModelSim仿真入门</a>
   </li>
 </ul>
   </li>
@@ -233,7 +241,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">RISC-V CPU设计实验教程</span>
-    <span class="version">2023秋</span>
+    <span class="version">v2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -243,7 +251,7 @@
       <div class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">2023秋</a>
+          <a href="../index.html">v2.1</a>
         </li>
         <li class="version">
           <a href="../../v1.0/index.html">2023春</a>
@@ -267,9 +275,9 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="L26-riscv_assembly.html">2023秋</a>
+    <a class="version is-current" href="L26-riscv_assembly.html">v2.1</a>
     <a class="version" href="../../v1.0/ca-docs/L26-riscv_assembly.html">2023春</a>
   </div>
 </div>
@@ -313,12 +321,12 @@
 <div class="paragraph">
 <p>即使是同一种指令系统，如果要将不同的编译器/汇编器产生的目标代码连接在一起，也还需要对应用程序二进制接口（Application Binary Interface，ABI）做一些约定，本实验主要涉及过程调用和寄存器约定。RISC-V ABI将寄存器分为四类：临时寄存器、保存寄存器、参数/返回值寄存器，以及特殊寄存器。参数寄存器用于调用者传递参数给被调用者，其中前2个参数寄存器与返回值寄存器共用。在被调用的子程序中使用的寄存器，如果是“保存寄存器”，则使用前须将寄存器值保存到栈中，返回前再恢复；如果是“临时寄存器”，则无需保存。返回地址通过x1寄存器传递给子程序，称为返回地址寄存器；如果子程序又要调用其他的子程序，则需要将返回上级程序的地址事先保存在栈中。RISC-V的栈生长方向是地址减小的方向，用x2寄存器作为栈指针寄存器。为了便于阅读，对32个寄存器根据他们的分类赋予了别名，如<a href="#tab-寄存器约定">表 1</a>所示。更多内容请阅读 <a href="https://github.com/riscv-non-isa/riscv-asm-manual/">RISC-V Assembly Programmer&#8217;s Manual</a>。</p>
 </div>
-<table id="tab-寄存器约定" class="tableblock frame-all grid-all fit-content">
+<table id="tab-寄存器约定" class="tableblock frame-all grid-all center" style="width: 85%;">
 <caption class="title">表 1. RISC-V寄存器约定</caption>
 <colgroup>
-<col>
-<col>
-<col>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
 </colgroup>
 <thead>
 <tr>
@@ -419,15 +427,21 @@
 </div>
 <div class="sect2">
 <h3 id="_1_熟悉编辑器和汇编器的使用"><a class="anchor" href="#_1_熟悉编辑器和汇编器的使用"></a>1. 熟悉编辑器和汇编器的使用</h3>
+<div id="img-编辑器和汇编器界面" class="imageblock">
+<div class="content">
+<img src="_images/L26-img1.png" alt="image" width="714" height="466">
+</div>
+<div class="title">图 1. 编辑器和汇编器界面</div>
+</div>
 <div class="paragraph">
-<p><span class="image"><img src="_images/L26-Editor标签.png" alt="image" width="74" height="53"></span>点击左侧Editor标签，在Source code窗格输入<a href="#code-ex1">例 1</a>汇编语言程序（该程序在实验材料中提供，也可以直接打开），对应的右边Executable code窗格将会显示对应汇编语言的机器指令的十六进制和二进制表示，也可以在右上角切换到Disassembled，显示机器指令及反汇编的结果，如<a href="#img-编辑器和汇编器界面">图 1</a>所示。</p>
+<p>如<a href="#img-编辑器和汇编器界面">图 1</a>所示，在左侧标签页选择面板①中点击Editor标签 ，在Source code窗格②输入<a href="#code-ex1">例 1</a>汇编语言程序（该程序在实验材料中提供，也可以直接打开），对应的右边Executable code窗格③将会显示对应汇编语言的机器指令的十六进制和二进制表示，也可以在右上角切换到Disassembled，显示机器指令及反汇编的结果。</p>
 </div>
 <div id="code-ex1" class="exampleblock">
 <div class="title">例 1. ex1.s</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-asm hljs" data-lang="asm">.data
+<pre class="highlightjs highlight"><code class="language-riscv hljs" data-lang="riscv">.data
     .word 1,3,5,7,9,11
 .text
     lui x3, 0x10000
@@ -450,12 +464,6 @@ Done:
 </div>
 </div>
 </div>
-<div id="img-编辑器和汇编器界面" class="imageblock">
-<div class="content">
-<img src="_images/L26-img1.png" alt="image" width="714" height="466">
-</div>
-<div class="title">图 1. 编辑器和汇编器界面</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_2_用模拟器运行risc_v汇编语言程序"><a class="anchor" href="#_2_用模拟器运行risc_v汇编语言程序"></a>2. 用模拟器运行RISC-V汇编语言程序</h3>
@@ -463,39 +471,40 @@ Done:
 <dl>
 <dt class="hdlist1">（1）选择处理器</dt>
 <dd>
-<p>点击工具条的芯片图标，并在弹出窗口中选择第一个Single Cycle Processor，如<a href="#img-选择处理器界面">图 2</a>。</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/L26-Processor标签.png" alt="image" width="68" height="54"></span>点击左侧的Processor标签，此时可以看到当前执行指令的数据通路图显示，各个寄存器的当前值，以及指令存储器的内容。</p>
-</div>
+<p>点击工具条最左边的芯片按钮（<a href="#img-选择处理器界面">图 2</a>中标记①的图标），并在弹出窗口中选择第一个Single Cycle Processor（<a href="#img-选择处理器界面">图 2</a>中标记②的列表项）。点击「OK」按钮确认。</p>
 <div id="img-选择处理器界面" class="imageblock">
 <div class="content">
 <img src="_images/L26-img2.png" alt="image" width="682" height="410">
 </div>
 <div class="title">图 2. 选择处理器界面</div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">（2）用模拟器运行汇编语言程序，观察分析运行结果。</dt>
-<dd>
-<p><a href="#img-编辑器和汇编器界面">图 1</a>工具条上的仿真工具按钮依次为 ①复位，②撤销一个时钟，③产生一个时钟，④以设定的时间间隔自动产生时钟，⑤快速运行。
-每点击一次工具按钮③，运行一条指令，数据通路图显示正在执行指令，在右侧Resigters窗口可以查看上一条指令执行后各个寄存器的值。 注意观察每条指令执行时，数据通路各个部件有效的控制信号，帮助理解指令的执行；控制信号用颜色表示是否有效，绿点表示有效，红点则表示无效。如<a href="#img-模拟器运行界面">图 3</a>正在执行“beq x0 x0 loop”，Branch模块的Branch taken为绿色，表示将发生转移。</p>
+<div class="paragraph">
+<p>点击左侧标签页选择面板中的Processor标签，此时可以看到当前执行指令的数据通路图显示，各个寄存器的当前值，以及指令存储器的内容。</p>
+</div>
 </dd>
+<dt class="hdlist1">（2）用模拟器运行汇编语言程序，观察分析运行结果。</dt>
 </dl>
+</div>
+<div id="img-l26-ui-toolbar" class="imageblock">
+<div class="content">
+<img src="_images/L26-ui-toolbar.png" alt="L26 ui toolbar" width="231">
+</div>
+<div class="title">图 3. 仿真工具按钮</div>
+</div>
+<div class="paragraph">
+<p>工具条上的仿真工具按钮如<a href="#img-l26-ui-toolbar">图 3</a>所示。从左至右依次为 ①复位，②撤销一个时钟，③产生一个时钟，④以设定的时间间隔自动产生时钟，⑤快速运行。因为前面选择的是单周期处理器，所以每点击一次工具按钮③，运行一条指令；数据通路图显示正在执行指令，在右侧Resigters窗口可以查看上一条指令执行后各个寄存器的值。注意观察每条指令执行时，数据通路各个部件有效的控制信号，帮助理解指令的执行；控制信号用颜色表示是否有效，绿点表示有效，红点则表示无效。如<a href="#img-模拟器运行界面">图 4</a>正在执行 <em>beq x0 x0 loop</em>，Branch模块的Branch taken为绿色，表示将发生转移。</p>
 </div>
 <div id="img-模拟器运行界面" class="imageblock">
 <div class="content">
 <img src="_images/L26-img3.png" alt="image" width="725" height="359">
 </div>
-<div class="title">图 3. 模拟器运行界面</div>
+<div class="title">图 4. 模拟器运行界面</div>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">（3）显示更多的数据，分析数据通路上的信息流动。</dt>
 <dd>
-<p>点击菜单View ➤ Show processor signal values ，数据通路图上可以显示每条路径上的数据，如<a href="#img-显示信号值">图 4</a>所示。</p>
+<p>点击菜单View ➤ Show processor signal values ，数据通路图上可以显示每条路径上的数据，如<a href="#img-显示信号值">图 5</a>所示。</p>
 </dd>
 </dl>
 </div>
@@ -503,7 +512,7 @@ Done:
 <div class="content">
 <img src="_images/L26-img4.png" alt="image" width="751" height="223">
 </div>
-<div class="title">图 4. 显示信号值</div>
+<div class="title">图 5. 显示信号值</div>
 </div>
 </div>
 <div class="sect2">
@@ -512,13 +521,13 @@ Done:
 <p>虽然RISC-V硬件的存储结构采用指令存储和数据存储分离的哈佛结构，但操作系统通常将指令存储器和数据存储器作为一个统一的存储空间进行管理，用代码段（text segment）和数据段（data segment）区分指令和数据。RISC-V约定预留x3寄存器指向数据段的起始地址，称作全局指针（global pointer），在汇编语言程序中，x3寄存器也可以用别名gp代替。Ripes模拟器在选择处理器的对话框中可以设置x3的值，如<a href="#img-选择处理器界面">图 2</a>的标记③所指的设置表示数据段的起始地址为0x10000000。因此，在使用Load/Store指令编写程序时，注意不要访问代码段的存储空间，以免意外修改了指令。</p>
 </div>
 <div class="paragraph">
-<p>要查看存储器内容，可以切换到Memory视图，在底部Go to section下拉列表框中选择要查看的存储器区域。若选择“.data”，则显示自0x10000000开始的数据存储器的内容，如<a href="#img-Memory视图">图 5</a>所示。</p>
+<p>要查看存储器内容，可以切换到Memory视图，在底部Go to section下拉列表框中选择要查看的存储器区域。若选择“.data”，则显示自0x10000000开始的数据存储器的内容，如<a href="#img-Memory视图">图 6</a>所示。</p>
 </div>
 <div id="img-Memory视图" class="imageblock">
 <div class="content">
 <img src="_images/L26-img5.png" alt="image" width="747" height="487">
 </div>
-<div class="title">图 5. Memory视图</div>
+<div class="title">图 6. Memory视图</div>
 </div>
 </div>
 <div class="sect2">
@@ -531,7 +540,7 @@ Done:
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-asm hljs" data-lang="asm">.equ IO_BASE -2048  <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-riscv hljs" data-lang="riscv">.equ IO_BASE -2048  <i class="conum" data-value="1"></i><b>(1)</b>
 .equ SW0_OFFSET 0x00
 .text
     addi x8, x0, IO_BASE    #x8=IO基地址
@@ -565,13 +574,13 @@ Done:
 <p>（2）在“I/O”标签页双击Devices中的Switches，添加一组8个开关。</p>
 </div>
 <div class="paragraph">
-<p>（3）设置开关状态为“11100101”，如<a href="#img-设置开关状态">图 6</a>所示。注意，图中开关的位0在最左边，位7在最右边，和习惯相反。</p>
+<p>（3）设置开关状态为“11100101”，如<a href="#img-设置开关状态">图 7</a>所示。注意，图中开关的位0在最左边，位7在最右边，和习惯相反。</p>
 </div>
 <div id="img-设置开关状态" class="imageblock">
 <div class="content">
 <img src="_images/L26-img6.png" alt="image" width="714" height="466">
 </div>
-<div class="title">图 6. 设置开关状态</div>
+<div class="title">图 7. 设置开关状态</div>
 </div>
 <div class="paragraph">
 <p>（4）控制台输出默认在Processor标签页。如果设置在Editor标签页显示控制台输出，会更方便观察，点击Edit ➤ Settings菜单项，在Editor选项中勾选“Show console in editor tab”。</p>
@@ -589,13 +598,13 @@ Done:
 <p>（1）从开源项目<a href="https://github.com/sifive/freedom-tools/releases/">SiFive Freedom RISC-V Tools</a>下载适合自己平台的预构建的RISC-V工具链<a href="#SFRT">[2]</a>，文件名中带有“elf-toolchain”或者“elf-gcc”的是包含C编译器的工具链，其中文件名中带有“w64-mingw32”的是适合64位Windows平台的。</p>
 </div>
 <div class="paragraph">
-<p>（2）在Ripes中注册（设置）上面的工具链，如<a href="#img-在Ripes中注册工具链">图 7</a>所示。</p>
+<p>（2）在Ripes中注册（设置）上面的工具链，如<a href="#img-在Ripes中注册工具链">图 8</a>所示。</p>
 </div>
 <div id="img-在Ripes中注册工具链" class="imageblock">
 <div class="content">
 <img src="_images/L26-img7.png" alt="image" width="573" height="463">
 </div>
-<div class="title">图 7. 在Ripes中注册（设置）工具链</div>
+<div class="title">图 8. 在Ripes中注册（设置）工具链</div>
 </div>
 <div class="paragraph">
 <p>如果需要进一步了解图中gcc的参数，可参阅<a href="https://www.sifive.com/blog/all-aboard-part-1-compiler-args">RISC-V GCC参数解释</a>。</p>
@@ -726,7 +735,7 @@ void fibon(void)
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-asm hljs" data-lang="asm">.equ IO_BASE -2048
+<pre class="highlightjs highlight"><code class="language-riscv hljs" data-lang="riscv">.equ IO_BASE -2048
 .equ SW0_OFFSET 0
 .equ SW1_OFFSET 4
 .data
@@ -819,28 +828,26 @@ flip_bit:
 </div>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">任务要求</dt>
-<dd>
+<div class="paragraph">
+<p>任务要求如下:</p>
+</div>
+<div class="paragraph">
 <p>（1）读懂<a href="#code-ex3">例 5</a>的主程序和get_bit子程序以及print子程序。
 在Ripes中添加Switches0和Switches1两组开关，设置开关状态后单步运行程序，理解程序功能。
 具体要求见作业。</p>
+</div>
 <div class="paragraph">
 <p>（2）完成clr_bit、set_bit和flip_bit三个子程序，子程序的参数和返回值传递与get_bit相同，控制台的输出形式也与get_bit类似。
 具体要求见作业。</p>
 </div>
 <div class="paragraph">
-<p>假设Switches0和Switches1的状态如<a href="#img-L26-10">图 8</a>所示，Switches1[7:6]=01表示要进行置1操作，Switches1[2:0]=101表示操作的位号为5，操作的数据为Switches0设置的"01001110"，因此执行过程中应调用set_bit子程序，并且返回的结果应为"01101110"。</p>
+<p>假设Switches0和Switches1的状态如<a href="#img-L26-10">图 9</a>所示，Switches1[7:6]=01表示要进行置1操作，Switches1[2:0]=101表示操作的位号为5，操作的数据为Switches0设置的"01001110"，因此执行过程中应调用set_bit子程序，并且返回的结果应为"01101110"。</p>
 </div>
 <div id="img-L26-10" class="imageblock">
 <div class="content">
-<img src="_images/L26-img10.png" alt="image">
+<img src="_images/L26-img10.png" alt="开关设置举例" width="600">
 </div>
-<div class="title">图 8. 开关设置举例</div>
-</div>
-</dd>
-</dl>
+<div class="title">图 9. 开关设置举例</div>
 </div>
 </div>
 </div>
@@ -854,25 +861,25 @@ flip_bit:
 <div class="sect2">
 <h3 id="_1_risc_v_venus_simulator"><a class="anchor" href="#_1_risc_v_venus_simulator"></a>1. RISC-V Venus Simulator</h3>
 <div class="paragraph">
-<p>Venus Simulator是 Stephan Kaminsky在加州大学伯克利分校工作期间利用业余时间开发的RISC-V汇编器和模拟器<a href="#CS61C">[3]</a>。它是一个Visual Studio Code插件，可以在VS CODE中编写汇编语言源程序，然后汇编和运行，效果如<a href="#img-Venus插件界面">图 9</a>。另外也有一个<a href="https://thaumicmekanism.github.io/venus">web版Venus</a>，可以在浏览器中运行，无需安装。</p>
+<p>Venus Simulator是 Stephan Kaminsky在加州大学伯克利分校工作期间利用业余时间开发的RISC-V汇编器和模拟器<a href="#CS61C">[3]</a>。它是一个Visual Studio Code插件，可以在VS CODE中编写汇编语言源程序，然后汇编和运行，效果如<a href="#img-Venus插件界面">图 10</a>。另外也有一个<a href="https://thaumicmekanism.github.io/venus">web版Venus</a>，可以在浏览器中运行，无需安装。</p>
 </div>
 <div id="img-Venus插件界面" class="imageblock">
 <div class="content">
 <img src="_images/L26-img8.png" alt="image" width="720" height="405">
 </div>
-<div class="title">图 9. VS CODE中的Venus</div>
+<div class="title">图 10. VS CODE中的Venus</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_2_c语言程序转换为risc_v汇编语言程序的web版"><a class="anchor" href="#_2_c语言程序转换为risc_v汇编语言程序的web版"></a>2. C语言程序转换为RISC-V汇编语言程序的Web版</h3>
 <div class="paragraph">
-<p>Ripes项目页面介绍了一个C/C++在线编译工具——Godbolt的<a href="https://godbolt.org/Matt">Compiler Explorer</a>。在 Compiler Explorer 中，选择“ RISC-V rv32gc clang (trunk) ”，如<a href="#img-CompilerExplorer">图 10</a>。该选项生成的汇编代码去除了调试符号、程序入口点（没有main函数）等，能够比较直接地了解C语句和汇编语言程序的对应。通过编写简短的C程序，查看生成的汇编指令，有助于理解RISC-V指令的用途。如果要将生成的汇编代码拷贝到Ripes中运行，仍然需要做一些改动，详情见Ripes项目Wiki页面的“Adapting Compiler Explorer generated RISC V assembly code”的说明。</p>
+<p>Ripes项目页面介绍了一个C/C++在线编译工具——Godbolt的<a href="https://godbolt.org/Matt">Compiler Explorer</a>。在 Compiler Explorer 中，选择“ RISC-V rv32gc clang (trunk) ”，如<a href="#img-CompilerExplorer">图 11</a>。该选项生成的汇编代码去除了调试符号、程序入口点（没有main函数）等，能够比较直接地了解C语句和汇编语言程序的对应。通过编写简短的C程序，查看生成的汇编指令，有助于理解RISC-V指令的用途。如果要将生成的汇编代码拷贝到Ripes中运行，仍然需要做一些改动，详情见Ripes项目Wiki页面的“Adapting Compiler Explorer generated RISC V assembly code”的说明。</p>
 </div>
 <div id="img-CompilerExplorer" class="imageblock">
 <div class="content">
 <img src="_images/L26-img9.png" alt="image" width="717" height="419">
 </div>
-<div class="title">图 10. Compiler Explorer</div>
+<div class="title">图 11. Compiler Explorer</div>
 </div>
 </div>
 </div>
@@ -907,15 +914,21 @@ flip_bit:
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="L25-hardwire_controller.html">硬布线控制实验</a></span>
+  <span class="next"><a href="L27-riscv_micro_architecture.html">RISC-V微架构实验</a></span>
+</nav>
 </article>
   </div>
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the Antora default UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
-</footer>
-<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+  <div class="footer-legal" style="text-align: center;">
+    <p>版权所有 © 2022-2026 肖铁军 [<a href="mailto:xiaotiejun@foxmail.com">xiaotiejun@foxmail.com</a>] </p>
+    <p>除另有说明外，本站文档内容遵循知识共享 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>（<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA</a>）。</p>
+    <p>本站用户界面衍生自 Antora default UI，并根据 MPL-2.0 许可证获得许可。</p>
+  </div>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

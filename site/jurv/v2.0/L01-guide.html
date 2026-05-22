@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Quartus FPGA设计流程 :: RISC-V CPU设计实验教程</title>
-    <meta name="generator" content="Antora 3.1.3">
+    <link rel="prev" href="L0-links.html">
+    <link rel="next" href="L01c-quartus-revision.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
     <link rel="stylesheet" href="../../_/css/site.css">
   </head>
   <body class="article">
@@ -49,9 +51,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="brief-of-parts.html">实验内容的组织</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="video-links.html">教学视频资源</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -79,6 +78,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L0-welab-login.html">登录远程实验平台</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L0-links.html">相关链接汇总</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,10 +103,16 @@
     <a class="nav-link" href="L02-guide-remote.html">远程实验验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L02-guide-local-prepare.html">本地实验的准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="L03-guide-modelsim.html">ModelSim仿真入门</a>
   </li>
 </ul>
   </li>
@@ -233,7 +241,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">RISC-V CPU设计实验教程</span>
-    <span class="version">2023秋</span>
+    <span class="version">v2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -243,7 +251,7 @@
       <div class="title"><a href="index.html">RISC-V CPU设计实验教程</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">2023秋</a>
+          <a href="index.html">v2.1</a>
         </li>
         <li class="version">
           <a href="../v1.0/index.html">2023春</a>
@@ -268,9 +276,9 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="L01-guide.html">2023秋</a>
+    <a class="version is-current" href="L01-guide.html">v2.1</a>
     <a class="version" href="../v1.0/L01-guide.html">2023春</a>
   </div>
 </div>
@@ -316,15 +324,15 @@
 <div class="paragraph">
 <p>实验材料的文件夹组织如下。</p>
 </div>
-<div id="lst01-dirs" class="listingblock">
+<div id="lst01-dirs" class="literalblock">
 <div class="content">
 <pre>📂 labs
   📂 L00-framework <i class="conum" data-value="1"></i><b>(1)</b>
-    📂 LabPrj_DE2-115 <i class="conum" data-value="2"></i><b>(2)</b>
+    📁 LabPrj_DE2-115 <i class="conum" data-value="2"></i><b>(2)</b>
     📁 LabPrj_Vivado <i class="conum" data-value="3"></i><b>(3)</b>
     📁 LabProject <i class="conum" data-value="4"></i><b>(4)</b>
     📄 VirtualBoard.sv
-  📁 L01-DesignFlow <i class="conum" data-value="5"></i><b>(5)</b>
+  📂 L01-DesignFlow <i class="conum" data-value="5"></i><b>(5)</b>
     📁 verilog
     📁 vhdl</pre>
 </div>
@@ -341,7 +349,7 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>包含用于Vivado软件和Nexys4DDR_Lab实验板的工程框架文件</td>
+<td>包含用于Vivado软件和Nexys4DDR实验板的工程框架文件</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -361,7 +369,7 @@
 </div>
 <div id="lst01-files-LabProject" class="listingblock">
 <div class="content">
-<pre>    📁 LabProject
+<pre>    📂 LabProject
       📄 create_project_pocket.tcl <i class="conum" data-value="1"></i><b>(1)</b>
       📄 LabBoard_TOP.v <i class="conum" data-value="2"></i><b>(2)</b>
       📄 RemotePocket.sdc <i class="conum" data-value="3"></i><b>(3)</b>
@@ -396,12 +404,12 @@
 <div class="paragraph">
 <p><em>L01-DesignFlow</em>文件夹内的文件说明如下。</p>
 </div>
-<div id="lst01-files-DesignFlow" class="listingblock">
+<div id="lst01-files-DesignFlow" class="literalblock">
 <div class="content">
-<pre>  📁 L01-DesignFlow
-    📁 verilog <i class="conum" data-value="1"></i><b>(1)</b>
+<pre>  📂 L01-DesignFlow
+    📂 verilog <i class="conum" data-value="1"></i><b>(1)</b>
       📄 VirtualBoard.sv
-    📁 vhdl <i class="conum" data-value="2"></i><b>(2)</b>
+    📂 vhdl <i class="conum" data-value="2"></i><b>(2)</b>
       📄 VirtualBoard.vhd</pre>
 </div>
 </div>
@@ -409,9 +417,9 @@
 <p>①<em>verilog</em>文件夹和②<em>vhdl</em>文件夹分别包含了对应语言的VirtualBoard模块文件，这两个文件只需要使用一个。</p>
 </div>
 <div class="paragraph">
-<p>适用于DE2-115开发板的工程框架文件如下，除了<em>create_revision_de2-115.tcl</em>，其余文件与<em>LabProject</em>文件夹的文件一一对应。<em>create_revision_de2-115.tcl</em>用于创建revision，详见<a href="#创建工程版本">创建工程版本</a>。</p>
+<p>适用于DE2-115开发板的工程框架文件如下，除了<em>create_revision_de2-115.tcl</em>，其余文件与<em>LabProject</em>文件夹的文件一一对应。<em>create_revision_de2-115.tcl</em>用于创建revision，详见<a href="#创建工程版本"><em>创建工程版本</em></a>。</p>
 </div>
-<div id="lst01-files-DE2115" class="listingblock">
+<div id="lst01-files-DE2115" class="literalblock">
 <div class="content">
 <pre>    📂 LabPrj_DE2-115
       📄 create_project_de2-115.tcl
@@ -474,7 +482,7 @@
 <div class="sect3">
 <h4 id="_导入设计文件"><a class="anchor" href="#_导入设计文件"></a>导入设计文件</h4>
 <div class="paragraph">
-<p>点击菜单项Project ➤ ADD/Remove Files in Project…，出现category Files对话框。该对话框用来将已存在的设计文件加入到工程中。点击 <code>&#8230;&#8203;</code> 浏览按钮，选择已经拷贝到工程文件夹内的Design Files（<em>LabBoard_TOP.v</em>，<em>GlobalCLK.v</em>，<em>pll.v</em>，<em>WatchChain.sv</em>和<em>JutagScanChain.qxp</em>），添加到工程中。这些文件是虚拟实验系统所需要的基础文件，用户不应该去修改它们，通常也无需理解其中的代码。</p>
+<p>点击菜单项Project ➤ ADD/Remove Files in Project…，出现category Files对话框。该对话框用来将已存在的设计文件加入到工程中。点击「&#8230;&#8203;」浏览按钮，选择已经拷贝到工程文件夹内的Design Files（<em>LabBoard_TOP.v</em>，<em>GlobalCLK.v</em>，<em>pll.v</em>，<em>WatchChain.sv</em>和<em>JutagScanChain.qxp</em>），添加到工程中。这些文件是虚拟实验系统所需要的基础文件，用户不应该去修改它们，通常也无需理解其中的代码。</p>
 </div>
 </div>
 <div class="sect3">
@@ -637,7 +645,7 @@
 <div class="sect3">
 <h4 id="_添加已有的模块"><a class="anchor" href="#_添加已有的模块"></a>添加已有的模块</h4>
 <div class="paragraph">
-<p>用菜单项Project ➤ Add/Remove Files in Project… 打开添加文件对话框，点击 <code>&#8230;&#8203;</code> 浏览按钮，将实验材料<em>L01-DesignFlow\Verilog</em>文件夹中的<em>VirtualBoard.sv</em>添加到工程。</p>
+<p>用菜单项Project ➤ Add/Remove Files in Project… 打开添加文件对话框，点击「&#8230;&#8203;」浏览按钮，将实验材料<em>L01-DesignFlow\Verilog</em>文件夹中的<em>VirtualBoard.sv</em>添加到工程。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -691,10 +699,8 @@ module VirtualBoard (
 endmodule</code></pre>
 </div>
 </div>
-</div>
-</div>
 <details>
-<summary class="title"><a href="#exa-01-1">例 1</a>的VHDL版本（点击此行展开）</summary>
+<summary class="title">（点击此行展开）VHDL版本</summary>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -727,11 +733,13 @@ END behav_VB;</code></pre>
 </div>
 </div>
 </details>
+</div>
+</div>
 <div class="paragraph">
 <p>这个VirtualBoard模块可以想象成一个实验板，有1个时钟输入CLOCK， 20个按键PB0～PB19，36个拨动开关S0～S35，36个指示灯L0～L35，8个七段数码管SD0～SD7。该模块命名为“VirtualBoard”的含义是“虚拟实验板”，在后面验证时我们会看到，“虚拟实验板”模块与实验调试软件的“虚拟面板”是相互对应的。</p>
 </div>
 <div class="paragraph">
-<p>下面给VirtualBoard模块添加设计代码，如<a href="#exa-01-2">例 2</a>所示。语句①用8个拨动开关S7～S0直接驱动七段数码管SD0的8个段；语句②需要自己编写，用S11～S8控制L11～L8的亮灭；语句③用按键PB0驱动指示灯L18。将<a href="#exa-01-2">例 2</a>的代码添加到<a href="#exa-01-1">例 1</a> VirtualBoard模块的 <code>endmodule</code> 之前。</p>
+<p>下面给VirtualBoard模块添加设计代码，如<a href="#exa-01-2">例 2</a>所示。语句①用8个拨动开关S7～S0直接驱动七段数码管SD0的8个段；语句②需要自己编写，用S11～S8控制L11～L8的亮灭；语句③用按键PB0驱动指示灯L18。将<a href="#exa-01-2">例 2</a>的代码添加到<a href="#exa-01-1">例 1</a> VirtualBoard模块的<code>endmodule</code>之前。</p>
 </div>
 <div id="exa-01-2" class="exampleblock">
 <div class="title">例 2. 需添加的代码</div>
@@ -748,10 +756,8 @@ END behav_VB;</code></pre>
    assign L[18] = PB[0]; <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
-</div>
-</div>
 <details>
-<summary class="title"><a href="#exa-01-2">例 2</a>的VHDL版本（点击此行展开）</summary>
+<summary class="title">（点击此行展开）VHDL版本</summary>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -767,6 +773,8 @@ END behav_VB;</code></pre>
 </div>
 </div>
 </details>
+</div>
+</div>
 <div class="paragraph">
 <p>在以后的实验中，自己的设计也都是写在VirtualBoard模块中；前面使用<em>LabProject</em>中的<em>LabBoard_TOP</em>等文件建立的工程框架不需要修改。</p>
 </div>
@@ -801,7 +809,7 @@ END behav_VB;</code></pre>
 <div class="sect2">
 <h3 id="_存档整个工程"><a class="anchor" href="#_存档整个工程"></a>存档整个工程</h3>
 <div class="paragraph">
-<p>点击Projec ➤ Archive Projectt菜单项，将整个工程存档，存档文件的扩展名为<em>.qar</em>。以后可以用Projec ➤ Restore Archived Project菜单项恢复存档的工程。当然，也可以用文件压缩工具将工程文件夹打包保存。使用Archive Project的好处是不会遗漏任何源文件，而且存档文件尺寸较小。</p>
+<p>点击Projec ➤ Archive Project菜单项，将整个工程存档，存档文件的扩展名为<em>.qar</em>。以后可以用Projec ➤ Restore Archived Project菜单项恢复存档的工程。当然，也可以用文件压缩工具将工程文件夹打包保存。使用Archive Project的好处是不会遗漏任何源文件，而且存档文件尺寸较小。</p>
 </div>
 </div>
 </div>
@@ -838,15 +846,21 @@ END behav_VB;</code></pre>
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="L0-links.html">相关链接汇总</a></span>
+  <span class="next"><a href="L01c-quartus-revision.html">线上线下混合模式的工程设置</a></span>
+</nav>
 </article>
   </div>
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the Antora default UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
-</footer>
-<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+  <div class="footer-legal" style="text-align: center;">
+    <p>版权所有 © 2022-2026 肖铁军 [<a href="mailto:xiaotiejun@foxmail.com">xiaotiejun@foxmail.com</a>] </p>
+    <p>除另有说明外，本站文档内容遵循知识共享 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>（<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA</a>）。</p>
+    <p>本站用户界面衍生自 Antora default UI，并根据 MPL-2.0 许可证获得许可。</p>
+  </div>
+</footer><script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
 <script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

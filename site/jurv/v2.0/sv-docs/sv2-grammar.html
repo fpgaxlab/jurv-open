@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Verilog HDL语法概要 :: RISC-V CPU设计实验教程</title>
-    <meta name="generator" content="Antora 3.1.3">
+    <link rel="prev" href="sv1-introduction.html">
+    <link rel="next" href="sv3-1-combinational.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
     <link rel="stylesheet" href="../../../_/css/site.css">
   </head>
   <body class="article">
@@ -49,9 +51,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../video-links.html">教学视频资源</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -79,6 +78,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-links.html">相关链接汇总</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,10 +103,16 @@
     <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-prepare.html">本地实验的准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L03-guide-modelsim.html">ModelSim仿真入门</a>
   </li>
 </ul>
   </li>
@@ -233,7 +241,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">RISC-V CPU设计实验教程</span>
-    <span class="version">2023秋</span>
+    <span class="version">v2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -243,7 +251,7 @@
       <div class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">2023秋</a>
+          <a href="../index.html">v2.1</a>
         </li>
         <li class="version">
           <a href="../../v1.0/index.html">2023春</a>
@@ -267,9 +275,9 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="sv2-grammar.html">2023秋</a>
+    <a class="version is-current" href="sv2-grammar.html">v2.1</a>
     <a class="version" href="../../v1.0/sv-docs/sv2-grammar.html">2023春</a>
   </div>
 </div>
@@ -330,9 +338,9 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>wire w; // wire型标量
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">wire w; // wire型标量
 reg a; // reg型标量
-wire w1, w2; // 声明2个wire型标量</pre>
+wire w1, w2; // 声明2个wire型标量</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -340,10 +348,10 @@ wire w1, w2; // 声明2个wire型标量</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>wire [15:0] busa; // 16位总线
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">wire [15:0] busa; // 16位总线
 reg [3:0] v; // 4位 reg 型向量
 reg [-1:4] b; // 6位reg向量
-reg [4:0] x, y, z; // 声明3个5位reg型向量</pre>
+reg [4:0] x, y, z; // 声明3个5位reg型向量</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -351,8 +359,8 @@ reg [4:0] x, y, z; // 声明3个5位reg型向量</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>reg signed [3:0] signed_reg; // 有符号的4位reg向量，取值范围是-8～+7
-wire signed [7:0] s; // 有符号的8位wire向量</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">reg signed [3:0] signed_reg; // 有符号的4位reg向量，取值范围是-8～+7
+wire signed [7:0] s; // 有符号的8位wire向量</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -363,7 +371,7 @@ wire signed [7:0] s; // 有符号的8位wire向量</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>vect[expr]</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">vect[expr]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -371,7 +379,7 @@ wire signed [7:0] s; // 有符号的8位wire向量</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>vect[msb_expr:lsb_expr]</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">vect[msb_expr:lsb_expr]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -379,8 +387,8 @@ wire signed [7:0] s; // 有符号的8位wire向量</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>[base_expr +: width_expr]
-[base_expr -: width_expr]</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">[base_expr +: width_expr]
+[base_expr -: width_expr]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -388,7 +396,7 @@ wire signed [7:0] s; // 有符号的8位wire向量</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>reg [31: 0] big_vect; //最高位为最大位号
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">reg [31: 0] big_vect; //最高位为最大位号
 reg [0 :31] little_vect; //最高位为最小位号
 reg [63: 0] dword;
 integer sel;
@@ -396,7 +404,7 @@ big_vect[ 0 +: 8] // == big_vect[ 7 : 0]
 big_vect[15 -: 8] // == big_vect[15 : 8]
 little_vect[ 0 +: 8] // == little_vect[0 : 7]
 little_vect[15 -: 8] // == little_vect[8 :15]
-dword[8*sel +: 8] // 具有固定宽度的可变部分选择</pre>
+dword[8*sel +: 8] // 具有固定宽度的可变部分选择</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -420,10 +428,10 @@ dword[8*sel +: 8] // 具有固定宽度的可变部分选择</pre>
 <div class="listingblock">
 <div class="content">
 <pre>4'b1001 // 4位二进制数
-5'D3 // 十进制数表示的3，位宽为5位，即二进制数00011
+5'D3    // 十进制数表示的3，位宽为5位，即二进制数00011
 12'habc // 12位十六进制数
-3'b01x // 3位二进制数，最低位是不确定值
-16'hz // 16位高阻
+3'b01x  // 3位二进制数，最低位是不确定值
+16'hz   // 16位高阻
 4'b10?? // ?和z相同，即4'b10zz</pre>
 </div>
 </div>
@@ -474,11 +482,11 @@ dword[8*sel +: 8] // 具有固定宽度的可变部分选择</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>reg [7:0] mema[0:255]; // 声明一个字长为8位、有256个单元的存储器
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">reg [7:0] mema[0:255]; // 声明一个字长为8位、有256个单元的存储器
 reg arrayb[7:0][0:255]; // 声明一个二维数组，字长1位
 wire w_array[7:0][5:0]; // 声明wire型二维数组
 integer inta[1:64]; // 声明有64个元素的integer型数组
-time chng_hist[1:1000] //声明有1000个元素的time型数组</pre>
+time chng_hist[1:1000] //声明有1000个元素的time型数组</code></pre>
 </div>
 </div>
 </div>
@@ -651,10 +659,10 @@ time chng_hist[1:1000] //声明有1000个元素的time型数组</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>module module_name(a, b, c);
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">module module_name(a, b, c);
   input a, b;
   output c;
-endmodule</pre>
+endmodule</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -662,14 +670,14 @@ endmodule</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>module module_name
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">module module_name
 (
   input a,
   input b,
   output c
 );
 
-endmodule</pre>
+endmodule</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -686,11 +694,11 @@ endmodule</pre>
 <div class="sect2">
 <h3 id="_default_nettype"><a class="anchor" href="#_default_nettype"></a>`default_nettype</h3>
 <div class="paragraph">
-<p>前面<a href="#sec-1-2-1">数据类型及数的表示</a>已经介绍，wire是系统缺省的线网类型，也就是说，如果一个信号没有声明，编译器认为它是wire型标量。这在一定程度上方便了代码编写，但是也带来了一些隐患，比如打字错误会被编译器当作一个新的wire型标识符，再如没有声明的wire型向量会被当作wire型标量，为避免这些问题，可以关闭系统的缺省线网类型，如下。</p>
+<p>前面<a href="#sec-1-2-1"><em>数据类型及数的表示</em></a>已经介绍，wire是系统缺省的线网类型，也就是说，如果一个信号没有声明，编译器认为它是wire型标量。这在一定程度上方便了代码编写，但是也带来了一些隐患，比如打字错误会被编译器当作一个新的wire型标识符，再如没有声明的wire型向量会被当作wire型标量，为避免这些问题，可以关闭系统的缺省线网类型，如下。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>`default_nettype none</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`default_nettype none</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -698,7 +706,7 @@ endmodule</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>`default_nettype wand</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`default_nettype wand</code></pre>
 </div>
 </div>
 </div>
@@ -709,7 +717,7 @@ endmodule</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>`define max(a,b) ((a) &gt; (b) ? (a) : (b))</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`define max(a,b) ((a) &gt; (b) ? (a) : (b))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -717,7 +725,7 @@ endmodule</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>n = `max(p+q, r+s) ;</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">n = `max(p+q, r+s) ;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -725,7 +733,7 @@ endmodule</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>`undef max</pre>
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">`undef max</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -739,7 +747,7 @@ endmodule</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>module and_op
+<pre class="highlightjs highlight"><code class="language-verilog hljs" data-lang="verilog">module and_op
 (
   output a;
   input b, c
@@ -751,7 +759,7 @@ endmodule</pre>
   and a1 (a,b,c);
 `endif
 
-endmodule</pre>
+endmodule</code></pre>
 </div>
 </div>
 </div>
@@ -760,18 +768,36 @@ endmodule</pre>
 <div class="paragraph">
 <p><code>`include</code> 编译指示字用于插入文件的内容。文件既可以用相对路径名定义，也可以用全路径名定义，和C语言的#include用法相当。</p>
 </div>
+<div class="sidebarblock text-center">
+<div class="content">
+<div class="title">许可 | License</div>
+<div class="paragraph">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA：署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></p>
+</div>
+<div class="paragraph">
+<p>作者：
+肖铁军 &lt;<a href="mailto:xiaotiejun@foxmail.com.cn">xiaotiejun@foxmail.com.cn</a>&gt;</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="sv1-introduction.html">Verilog HDL概述</a></span>
+  <span class="next"><a href="sv3-1-combinational.html">用assign持续赋值语句描述组合逻辑</a></span>
+</nav>
 </article>
   </div>
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the Antora default UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
-</footer>
-<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+  <div class="footer-legal" style="text-align: center;">
+    <p>版权所有 © 2022-2026 肖铁军 [<a href="mailto:xiaotiejun@foxmail.com">xiaotiejun@foxmail.com</a>] </p>
+    <p>除另有说明外，本站文档内容遵循知识共享 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>（<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA</a>）。</p>
+    <p>本站用户界面衍生自 Antora default UI，并根据 MPL-2.0 许可证获得许可。</p>
+  </div>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

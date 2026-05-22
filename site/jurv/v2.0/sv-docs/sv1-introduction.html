@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Verilog HDL概述 :: RISC-V CPU设计实验教程</title>
-    <meta name="generator" content="Antora 3.1.3">
+    <link rel="prev" href="../L03-guide-modelsim.html">
+    <link rel="next" href="sv2-grammar.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
     <link rel="stylesheet" href="../../../_/css/site.css">
   </head>
   <body class="article">
@@ -49,9 +51,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../brief-of-parts.html">实验内容的组织</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../video-links.html">教学视频资源</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -79,6 +78,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L0-welab-login.html">登录远程实验平台</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L0-links.html">相关链接汇总</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,10 +103,16 @@
     <a class="nav-link" href="../L02-guide-remote.html">远程实验验证流程</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L02-guide-local-prepare.html">本地实验的准备工作</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-welab.html">本地实验验证流程-WeLab版</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../L02-guide-local-julab.html">本地实验验证流程-JULAB版</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../L03-guide-modelsim.html">ModelSim仿真入门</a>
   </li>
 </ul>
   </li>
@@ -233,7 +241,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">RISC-V CPU设计实验教程</span>
-    <span class="version">2023秋</span>
+    <span class="version">v2.1</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -243,7 +251,7 @@
       <div class="title"><a href="../index.html">RISC-V CPU设计实验教程</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">2023秋</a>
+          <a href="../index.html">v2.1</a>
         </li>
         <li class="version">
           <a href="../../v1.0/index.html">2023春</a>
@@ -267,9 +275,9 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">2023秋</button>
+  <button class="version-menu-toggle" title="Show other versions of page">v2.1</button>
   <div class="version-menu">
-    <a class="version is-current" href="sv1-introduction.html">2023秋</a>
+    <a class="version is-current" href="sv1-introduction.html">v2.1</a>
     <a class="version" href="../../v1.0/sv-docs/sv1-introduction.html">2023春</a>
   </div>
 </div>
@@ -280,6 +288,8 @@
 </aside>
 <article class="doc">
 <h1 class="page">Verilog HDL概述</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>Verilog HDL（简称Verilog）最初是GDA（Gateway Design Automation）公司在1983年开发的一种硬件描述语言（Hardware Description Language），GDA公司随后推出了相应的逻辑仿真器产品Verilog-XL。1987年，Synopsys公司发布了第一个Verilog的逻辑综合工具之后，提高了数字电路的设计效率。1989年，著名EDA公司 Cadence Design Systems并购了GDA公司，并于1990年公开发表了Verilog HDL，成立了OVI（Open Verilog Internation）组织来负责Verilog HDL的发展。在OVI组织的推动下，Verilog HDL于1995年被接受为IEEE标准，即IEEE std 1364-1995，之后在2001年和2005年分别进行了修订，通常简称为Verilog-1995、Verilog-2001和Verilog-2005。Verilog-2001是对Verilog-1995的一个重大改进版本，引入了一些新的特性；Verilog-2005只是对Verilog-2001做了一些细微修正。Verilog-2001是目前Verilog的主流版本，被大多数商业电子设计自动化软件支持，本书以Verilog-2001为主介绍。</p>
 </div>
@@ -328,15 +338,23 @@
 </div>
 </div>
 </div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../L03-guide-modelsim.html">ModelSim仿真入门</a></span>
+  <span class="next"><a href="sv2-grammar.html">Verilog HDL语法概要</a></span>
+</nav>
 </article>
   </div>
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using the Antora default UI.</p>
-  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
-</footer>
-<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+  <div class="footer-legal" style="text-align: center;">
+    <p>版权所有 © 2022-2026 肖铁军 [<a href="mailto:xiaotiejun@foxmail.com">xiaotiejun@foxmail.com</a>] </p>
+    <p>除另有说明外，本站文档内容遵循知识共享 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>（<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA</a>）。</p>
+    <p>本站用户界面衍生自 Antora default UI，并根据 MPL-2.0 许可证获得许可。</p>
+  </div>
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>
   </body>
 </html>
